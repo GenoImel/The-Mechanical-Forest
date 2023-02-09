@@ -2,18 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class MapLoader : MonoBehaviour
 {
     Map map; // Map to generate the tileset for
+
     const float roomSize = 50f; // how large a room will be
     const float hallwaySize = 25f; // how large one section of a hallway will be
+
+    Sprite roomSprite; // Image of the room
+    Sprite hallwaySprite; // Image of the hallway
+    Sprite cursorSprite; // Image of the cursor
+
+    // Delegates for when a room is clicked
+    public delegate void OnRoomClick(DungeonRoom room);
+    public static event OnRoomClick onRoomClick;
 
     // Start is called before the first frame update
     void Start()
     {
         // Load in the map we are using
         map = new Map();
+
+        // Load the images
+        roomSprite = Resources.Load<Sprite>("dungeon_map_room");
+        hallwaySprite = Resources.Load<Sprite>("dungeon_map_hallway");
+        cursorSprite = Resources.Load<Sprite>("dungeon_map_player");
 
         // Create the rooms and hallways 
         mapGeneration();
@@ -54,7 +69,9 @@ public class MapLoader : MonoBehaviour
 
                 // Create the components
                 Button button = child.AddComponent<Button>();
+                button.onClick.AddListener(delegate { validNextRoom(child.name); });
                 Image image = child.AddComponent<Image>();
+                image.sprite = roomSprite;
 
                 // Transform the child
                 child.transform.localPosition = pos;
@@ -81,45 +98,55 @@ public class MapLoader : MonoBehaviour
 
                     // Create the components for it
                     Button button = room.AddComponent<Button>();
+                    button.onClick.AddListener(delegate { validNextRoom(room.name); });
                     Image image = room.AddComponent<Image>();
+                    image.sprite = roomSprite;
 
                     // Create the path between rooms
                     GameObject hallway = new GameObject();
-                    hallway.name = node.getId() + "-" + rooms[i].getId();
                     hallway.transform.SetParent(room.transform);
-                    Image image2 = hallway.AddComponent<Image>();
 
                     // Position the new room and hallway and scale the hallway based off of the direction between rooms
                     switch (directions[i])
                     {
                         // Cardinal direction
                         case 0:
-                            hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
-                            hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+                            // Method that creates less gameobjects but harder to individually configure individual sections
+                            //hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
+                            //hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
 
+                            // Create the segments positive horizontally
+                            createHallwaySegment(hallway, sizes[i], 0, 1, 1, true);
+
+                            // Transform the position of the room
                             pos.x -= hallwaySize * sizes[i] + roomSize;
                             break;
                         case 1:
-                            hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize * sizes[i]);
-                            hallway.transform.localPosition = new Vector3(0, -(hallwaySize * sizes[i] + roomSize) / 2.0f, 0);
+                            // Create the segments negative vertically
+                            createHallwaySegment(hallway, 0, sizes[i], 1, -1, false);
 
+                            // Transform the position of the room
                             pos.y += (float) hallwaySize * sizes[i] + roomSize;
                             break;
                         case 2:
-                            hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
-                            hallway.transform.localPosition = new Vector3(-(hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+                            // Create the segments negative horizontally
+                            createHallwaySegment(hallway, sizes[i], 0, -1, 1, true);
 
+                            // Transform the position of the room
                             pos.x += (float) hallwaySize * sizes[i] + roomSize;
                             break;
                         case 3:
-                            hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize * sizes[i]);
-                            hallway.transform.localPosition = new Vector3(0, (hallwaySize * sizes[i] + roomSize) / 2.0f, 0);
+                            // Create the segments positive vertically
+                            createHallwaySegment(hallway, 0, sizes[i], 1, 1, false);
 
+                            // Transform the posiiton of the room
                             pos.y -= (float) hallwaySize * sizes[i] + roomSize;
                             break;
 
                         // Intermediate direction focused on the y direction
                         case 4:
+
+
                             break;
                         case 5:
                             break;
@@ -138,6 +165,8 @@ public class MapLoader : MonoBehaviour
                         case 11:
                             break;
                     }
+                    // Set the name of the root hallway
+                    hallway.name = node.getId() + "-" + rooms[i].getId();
 
                     // Actually transform and scale the new room
                     room.transform.localPosition = pos;
@@ -150,11 +179,6 @@ public class MapLoader : MonoBehaviour
                     if (gameObject.transform.Find("" + node.getId()).transform.Find(rooms[i].getId() + "-" + node.getId()) == null && 
                         gameObject.transform.Find("" + rooms[i].getId()).transform.Find(node.getId() + "-" + rooms[i].getId()) == null)
                     {
-                        // Should never get in here i think
-                        // But just in case
-                        Debug.Log("MAKE SURE THE LOGIC IN BOTH NODES EXIST BUT NOT THAT PATH BETWEEN THEM WORKS CORRECTLY BECAUSE IT HAPPENED HERE");
-
-
                         // Create the path between rooms
                         GameObject hallway = new GameObject();
                         hallway.name = node.getId() + "-" + rooms[i].getId();
@@ -210,6 +234,83 @@ public class MapLoader : MonoBehaviour
 
             }
         }
+    }
 
+    // Create individual segments in the hallway
+    private void createHallwaySegment(GameObject hallway, int horizontalLength, int verticalLength, int horizontalSign, int verticalSign, bool horizontalFirst)
+    {
+        // PROBABLY WILL NEED TO CHANGE THIS STRUCTURE
+        // If horizontal is the focus
+        if (horizontalFirst)
+        {
+            // Go through all of the horizontal spaces
+            for (int i = 0; i < horizontalLength; i++)
+            {
+                // Create a new section game object
+                GameObject section = new GameObject();
+                section.AddComponent<RectTransform>();
+
+                // Apply the hallway sprite
+                Image image2 = section.AddComponent<Image>();
+                image2.sprite = hallwaySprite;
+
+                // Name, set parent, set size, and position the section
+                section.name = "" + i;
+                section.transform.SetParent(hallway.transform);
+                section.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
+                section.transform.localPosition = new Vector3(hallwaySize * i * horizontalSign, 0, 0);
+
+                // PROBABLY WILL ATTACH HALLWAY SCRIPT HERE
+                
+            }
+            // Set the entire hallway to correct starting position
+            hallway.transform.localPosition += new Vector3(horizontalSign * (roomSize + hallwaySize) / 2.0f, 0, 0);
+        } else
+        // Ditto but for vertically
+        {
+            for (int i = 0; i < verticalLength; i++)
+            {
+                GameObject section = new GameObject();
+                section.AddComponent<RectTransform>();
+                Image image2 = section.AddComponent<Image>();
+                image2.sprite = hallwaySprite;
+                section.name = "" + i;
+                section.transform.SetParent(hallway.transform);
+                section.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
+                section.transform.localPosition = new Vector3(0, hallwaySize * i * verticalSign, 0);
+
+            }
+            hallway.transform.localPosition += new Vector3(0, verticalSign * (roomSize + hallwaySize) / 2.0f, 0);
+        }
+    }
+
+
+    // Given a room id check to see if that room is connected our current one
+    private void validNextRoom(string roomId)
+    {
+        foreach (DungeonRoom currentConnections in map.getCurrentRoom().getConnections().Item1)
+        {
+            if ("" + currentConnections.getId() == roomId)
+            {
+                changeRoom(currentConnections);
+                return;
+            }
+        }
+    }
+
+    // Invoke the event to change rooms for other scripts and disable room clicking checks
+    private void changeRoom(DungeonRoom room)
+    {
+        // Invoke the delegate for the other classes
+        onRoomClick?.Invoke(room);
+
+        // Get all the buttons in the rooms
+        Component[] buttons = GetComponentsInChildren<Button>();
+
+        // Disable each of them
+        foreach (Button button in buttons)
+        {
+            button.enabled = false;
+        }
     }
 }
