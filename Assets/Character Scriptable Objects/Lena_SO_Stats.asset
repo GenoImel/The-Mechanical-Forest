@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7d014025380614c85bb7e26a36411c, type: 3}
-  m_Name: New Airy_Stats
+  m_Script: {fileID: 11500000, guid: 3d3a9dc54ba7fa54394bb63e244cf82b, type: 3}
+  m_Name: Lena_SO_Stats
   m_EditorClassIdentifier: 
+  _level: 23
   _health: 320
+  _strength: 5
+  _defence: 5
+  _inteligence: 5
+  _agility: 5
+  _luck: 5

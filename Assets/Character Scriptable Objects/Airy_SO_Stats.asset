@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9407088acecce2449ad49437614734a8, type: 3}
-  m_Name: New Conrad_Stats
+  m_Script: {fileID: 11500000, guid: 2e7d014025380614c85bb7e26a36411c, type: 3}
+  m_Name: Airy_SO_Stats
   m_EditorClassIdentifier: 
-  _level: 23
   _health: 320
-  _strength: 5
-  _defence: 5
-  _inteligence: 5
-  _agility: 5
-  _luck: 5
