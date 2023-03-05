@@ -5,26 +5,18 @@ public class DungeonRoom
     private int[] hallwaySize; // How long you have to go to reach each room
     private int roomId = 0; // Unique room id
 
-    // FIX: Determine if the hallway is what sets the encounter rate or if the room sets it. If hallway needs to change to array
-    private double randomEventHallwayRate = 0.0; // Chance of encountering an event in the hallway
-    private double randomBattleHallwayRate = 0.0; // Chance of encountering a battle in the hallway
-    
-    private double randomEventRoomChance = 0.0; // Chance of encountering an event in the room
-    private double randomBattleRoomChance = 0.0; // Chance of encountering a battle in the room
+    private int roomState = 0; // State of the room. 0 = unexplored, 1 = unexplored enemy, 2 = unexplored event, 3 = unexplored empty, 4 = rest stop active, 5 = rest stop unactive, -1 = explored
 
     private bool endRoom = false; // Determine if this room is an exit
 
     // Create dungeon room with all the properties
-    public DungeonRoom(DungeonRoom[] adjacentRooms, int[] dir, int[] size, int id, double rehr, double rbhr, double rerc, double rbrc, bool end = false)
+    public DungeonRoom(DungeonRoom[] adjacentRooms, int[] dir, int[] size, int id, int state = 0, bool end = false)
     {
         connections = adjacentRooms;
         connectionDirection = dir;
         hallwaySize = size;
         roomId = id;
-        randomEventHallwayRate = rehr;
-        randomBattleHallwayRate = rbhr;
-        randomEventRoomChance = rerc;
-        randomBattleRoomChance = rbrc;
+        roomState = state;
         endRoom = end;
     }
 
@@ -56,10 +48,29 @@ public class DungeonRoom
         return roomId;
     }
 
+    // Get the state of the room
+    public int getState()
+    {
+        return roomState;
+    }
+
     // Get all the relevant connections for traversal
     public (DungeonRoom[], int[], int[]) getConnections()
     {
         return (connections, connectionDirection, hallwaySize);
+    }
+
+    // Return the index where a connection exists, -1 if it doesn't
+    public int hasConnection(DungeonRoom room)
+    {
+        for (int i = 0; i < connections.Length; i++)
+        {
+            if (room.getId() == connections[i].getId())
+            {
+                return i;
+            }
+        }
+        return -1;
     }
     
 }

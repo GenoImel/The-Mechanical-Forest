@@ -11,13 +11,16 @@ public class MapLoader : MonoBehaviour
     const float roomSize = 50f; // how large a room will be
     const float hallwaySize = 25f; // how large one section of a hallway will be
 
-    Sprite roomSprite; // Image of the room
+    Dictionary<int, Sprite> roomSprite = new Dictionary<int, Sprite>(); // Container for all the room images
     Sprite hallwaySprite; // Image of the hallway
     Sprite cursorSprite; // Image of the cursor
 
     // Delegates for when a room is clicked
-    public delegate void OnRoomClick(DungeonRoom room);
+    public delegate void OnRoomClick(DungeonRoom currentRoom, DungeonRoom room, float roomSize, float hallwaySize);
     public static event OnRoomClick onRoomClick;
+
+    // Delegate for when a room is entered / hallway is left
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +29,29 @@ public class MapLoader : MonoBehaviour
         map = new Map();
 
         // Load the images
-        roomSprite = Resources.Load<Sprite>("dungeon_map_room");
+        roomSprite.Add(0, Resources.Load<Sprite>("dungeon_map_room_unexplored"));
+        roomSprite.Add(1, Resources.Load<Sprite>("dungeon_map_room_battle"));
+        roomSprite.Add(2, Resources.Load<Sprite>("dungeon_map_room_event"));
+        roomSprite.Add(3, Resources.Load<Sprite>("dungeon_map_room_empty"));
+        roomSprite.Add(4, Resources.Load<Sprite>("dungeon_map_room_rest_active"));
+        roomSprite.Add(5, Resources.Load<Sprite>("dungeon_map_room_rest_unactive"));
+        roomSprite.Add(-1, Resources.Load<Sprite>("dungeon_map_room_explored"));
+
         hallwaySprite = Resources.Load<Sprite>("dungeon_map_hallway");
         cursorSprite = Resources.Load<Sprite>("dungeon_map_player");
 
         // Create the rooms and hallways 
         mapGeneration();
+
+        // Create the cursor object and set it up
+        GameObject cursor = new GameObject();
+        cursor.name = "Cursor";
+        cursor.transform.SetParent(gameObject.transform.parent);
+        Image cursorImage = cursor.AddComponent<Image>();
+        cursorImage.GetComponent<Image>().color = new Color32(255, 0, 0, 100);
+        cursorImage.sprite = cursorSprite;
+        cursor.transform.localPosition = new Vector3(-roomSize/2.0f,-roomSize/2.0f,0);
+        cursor.GetComponent<RectTransform>().sizeDelta = new Vector2(roomSize, roomSize);
     }
 
     // Update is called once per frame
@@ -50,7 +70,7 @@ public class MapLoader : MonoBehaviour
         q.Enqueue(map.getCurrentRoom());
 
         // Get the local position in the minimap
-        Vector3 pos = new Vector3(roomSize/-2.0f, roomSize/-2.0f, 0);
+        Vector3 pos = new Vector3(roomSize / -2.0f, roomSize / -2.0f, 0);
 
         // While we still have a room
         while (q.Count > 0)
@@ -71,7 +91,9 @@ public class MapLoader : MonoBehaviour
                 Button button = child.AddComponent<Button>();
                 button.onClick.AddListener(delegate { validNextRoom(child.name); });
                 Image image = child.AddComponent<Image>();
-                image.sprite = roomSprite;
+
+                node.getState();
+                image.sprite = roomSprite[node.getState()];
 
                 // Transform the child
                 child.transform.localPosition = pos;
@@ -100,7 +122,7 @@ public class MapLoader : MonoBehaviour
                     Button button = room.AddComponent<Button>();
                     button.onClick.AddListener(delegate { validNextRoom(room.name); });
                     Image image = room.AddComponent<Image>();
-                    image.sprite = roomSprite;
+                    image.sprite = roomSprite[rooms[i].getState()];
 
                     // Create the path between rooms
                     GameObject hallway = new GameObject();
@@ -126,21 +148,21 @@ public class MapLoader : MonoBehaviour
                             createHallwaySegment(hallway, 0, sizes[i], 1, -1, false);
 
                             // Transform the position of the room
-                            pos.y += (float) hallwaySize * sizes[i] + roomSize;
+                            pos.y += (float)hallwaySize * sizes[i] + roomSize;
                             break;
                         case 2:
                             // Create the segments negative horizontally
                             createHallwaySegment(hallway, sizes[i], 0, -1, 1, true);
 
                             // Transform the position of the room
-                            pos.x += (float) hallwaySize * sizes[i] + roomSize;
+                            pos.x += (float)hallwaySize * sizes[i] + roomSize;
                             break;
                         case 3:
                             // Create the segments positive vertically
                             createHallwaySegment(hallway, 0, sizes[i], 1, 1, false);
 
                             // Transform the posiiton of the room
-                            pos.y -= (float) hallwaySize * sizes[i] + roomSize;
+                            pos.y -= (float)hallwaySize * sizes[i] + roomSize;
                             break;
 
                         // Intermediate direction focused on the y direction
@@ -174,9 +196,11 @@ public class MapLoader : MonoBehaviour
 
                     // Add this room to the queue
                     q.Enqueue(rooms[i]);
-                } else {
+                }
+                else
+                {
                     // Check to see if the path has already been created
-                    if (gameObject.transform.Find("" + node.getId()).transform.Find(rooms[i].getId() + "-" + node.getId()) == null && 
+                    if (gameObject.transform.Find("" + node.getId()).transform.Find(rooms[i].getId() + "-" + node.getId()) == null &&
                         gameObject.transform.Find("" + rooms[i].getId()).transform.Find(node.getId() + "-" + rooms[i].getId()) == null)
                     {
                         // Create the path between rooms
@@ -261,11 +285,12 @@ public class MapLoader : MonoBehaviour
                 section.transform.localPosition = new Vector3(hallwaySize * i * horizontalSign, 0, 0);
 
                 // PROBABLY WILL ATTACH HALLWAY SCRIPT HERE
-                
+
             }
             // Set the entire hallway to correct starting position
             hallway.transform.localPosition += new Vector3(horizontalSign * (roomSize + hallwaySize) / 2.0f, 0, 0);
-        } else
+        }
+        else
         // Ditto but for vertically
         {
             for (int i = 0; i < verticalLength; i++)
@@ -302,7 +327,7 @@ public class MapLoader : MonoBehaviour
     private void changeRoom(DungeonRoom room)
     {
         // Invoke the delegate for the other classes
-        onRoomClick?.Invoke(room);
+        onRoomClick?.Invoke(map.getCurrentRoom(), room, roomSize, hallwaySize);
 
         // Get all the buttons in the rooms
         Component[] buttons = GetComponentsInChildren<Button>();
@@ -312,5 +337,28 @@ public class MapLoader : MonoBehaviour
         {
             button.enabled = false;
         }
+
+        // Class.Delegate += enterRoom(room)
+        // ^ To add function that will call once hallway is exited to a room
+    }
+
+    // Set the current room and enable all buttons once we enter a room
+    // Called from a delegate event
+    private void enterRoom(DungeonRoom room)
+    {
+        map.setCurrentRoom(room);
+
+        // Get all the buttons in the rooms
+        Component[] buttons = GetComponentsInChildren<Button>();
+
+        // Disable each of them
+        foreach (Button button in buttons)
+        {
+            button.enabled = true;
+        }
+
+        // Unsubscribe from the event since we aren't looking for it anymore currently
+        // Class.Delegat -= enterRoom(room)
+
     }
 }
