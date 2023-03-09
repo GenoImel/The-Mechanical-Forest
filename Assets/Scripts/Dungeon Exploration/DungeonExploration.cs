@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DungeonExploration : MonoBehaviour
 {
     GameObject parent;
     bool exploreHallway = false;
-    float exploreSpeed;
+    float exploreSpeed = 0.1f; // Every frame input is pushed, we move this percentage across one hallway segment
     float position;
+
+    // Delegates for when a room is clicked
+    public delegate void OnRoomEnter(DungeonRoom room);
+    public static event OnRoomEnter onRoomEnter;
+
+    // Sprites to load hallway sprites
+    Sprite hallwaySprite;
+    Sprite leftDoorSprite;
+    Sprite rightDoorSprite;
 
 
     // OnEnable is called before Start
@@ -22,6 +33,11 @@ public class DungeonExploration : MonoBehaviour
         // Get the parent of the rooms
         parent = gameObject.transform.GetChild(0).GetChild(0).gameObject;
 
+        // Load the sprites
+        hallwaySprite = Resources.Load<Sprite>("dungeon_hallway");
+        leftDoorSprite = Resources.Load<Sprite>("dungeon_hallway_door_left");
+        rightDoorSprite = Resources.Load<Sprite>("dungeon_hallway_door_right");
+
     }
 
     // Update is called once per frame
@@ -33,11 +49,12 @@ public class DungeonExploration : MonoBehaviour
             float translation = Input.GetAxis("Horizontal");
             translation *= Time.deltaTime;
 
-            position += translation;
+            position += translation * exploreSpeed;
         }
 
     }
 
+    // Called when player transitions from a room into a hallway
     private void enterHallway(DungeonRoom currentRoom, DungeonRoom room, float roomSize, float hallwaySize)
     {
         Debug.Log(currentRoom.getId());
@@ -75,18 +92,13 @@ public class DungeonExploration : MonoBehaviour
             Application.Quit();
         }
 
+        // Get the map position transform object
         Transform mapPosition = gameObject.transform.Find("Canvas").Find("Map Position");
-        Transform cursor = gameObject.transform.Find("Canvas").Find("Cursor");
 
-        if (mapPosition == null)
+        // Determine which direction the map position needs to offset to center the player position
+        switch (currentRoom.getConnections()[currentRoom.hasConnection(room)].getNextDirection())
         {
-            Debug.Log("MAP POSITION NOT FOUND");
-            Application.Quit();
-        }
-
-        switch (currentRoom.getConnections().Item2[currentRoom.hasConnection(room)])
-        {
-            // Direction you go in for each room. 0 = left, 1 = up, 2 = right, 3 = down, 4 up-left, 5 up-right, 6 down-right, 7 down-left, 8 left-up, 9 left-down, 10 right-up, 11 right-down
+            // Direction you go in for each room. 0 = left, 1 = up, 2 = right, 3 = down
             case 0:
                 mapPosition.localPosition = new Vector3(mapPosition.localPosition.x, mapPosition.localPosition.y, 0) + new Vector3(roomSize / 2.0f + hallwaySize / 2.0f, 0, 0);
                 break;
@@ -99,34 +111,55 @@ public class DungeonExploration : MonoBehaviour
             case 3:
                 mapPosition.localPosition = new Vector3(mapPosition.localPosition.x, mapPosition.localPosition.y, 0) + new Vector3(0, roomSize / -2.0f + hallwaySize / -2.0f, 0);
                 break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
-            case 10:
-                break;
-            case 11:
-                break;
 
             default:
                 break;
         }
 
-        cursor.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
+        // Scale the cursor down to match the hallways size
+        gameObject.transform.Find("Canvas").Find("Cursor").GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
 
+        // Notify that we are exploring the hallway to start checking for WASD input
         exploreHallway = true;
+        
+        // Create the background for the main hallway
+        GameObject hallway = new GameObject();
+        hallway.name = "Hallway";
+        hallway.transform.SetParent(gameObject.transform.parent);
+        Image image = hallway.AddComponent<Image>();
+        image.sprite = hallwaySprite;
+        hallway.transform.localPosition = new Vector3(0, 200, 0);
+        hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
+
+        // Create the left exit of the hallway
+        GameObject leftDoor = new GameObject();
+        leftDoor.name = "Left Door";
+        leftDoor.transform.SetParent(hallway.transform);
+        Image leftDoorImage = leftDoor.AddComponent<Image>();
+        leftDoorImage.sprite = leftDoorSprite;
+        leftDoor.transform.localPosition = new Vector3(0, 0, 0);
+        leftDoor.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 5 , Screen.height);
+
+        // Create the right exit of the hallway
+        GameObject rightDoor = new GameObject();
+        rightDoor.name = "Right Door";
+        rightDoor.transform.SetParent(hallway.transform);
+        Image rightDoorImage = rightDoor.AddComponent<Image>();
+        rightDoorImage.sprite = rightDoorSprite;
+        rightDoor.transform.localPosition = new Vector3((Screen.width * 6) - (Screen.width / 5), 0, 0);
+        rightDoor.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 5, Screen.height);
+
+        hallway.transform.SetAsFirstSibling();
     }
 
+    // Calls when player transitions from a hallway into a room
     private void enterRoom(DungeonRoom roomToEnter, DungeonRoom previousRoom, float hallwaySize)
     {
 
+        // PROBABLY MORE OR LESS THE SAME AS THE PREVIOUS FUNCTION
+
+
+        // Invoke the delegate for the other classes
+        onRoomEnter?.Invoke(roomToEnter);
     }
 }

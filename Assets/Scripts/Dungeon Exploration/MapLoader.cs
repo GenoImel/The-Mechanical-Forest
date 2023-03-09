@@ -12,7 +12,7 @@ public class MapLoader : MonoBehaviour
     const float hallwaySize = 25f; // how large one section of a hallway will be
 
     Dictionary<int, Sprite> roomSprite = new Dictionary<int, Sprite>(); // Container for all the room images
-    Sprite hallwaySprite; // Image of the hallway
+    Sprite hallwayMinimapSprite; // Image of the hallway
     Sprite cursorSprite; // Image of the cursor
 
     // Delegates for when a room is clicked
@@ -37,7 +37,7 @@ public class MapLoader : MonoBehaviour
         roomSprite.Add(5, Resources.Load<Sprite>("dungeon_map_room_rest_unactive"));
         roomSprite.Add(-1, Resources.Load<Sprite>("dungeon_map_room_explored"));
 
-        hallwaySprite = Resources.Load<Sprite>("dungeon_map_hallway");
+        hallwayMinimapSprite = Resources.Load<Sprite>("dungeon_map_hallway");
         cursorSprite = Resources.Load<Sprite>("dungeon_map_player");
 
         // Create the rooms and hallways 
@@ -91,8 +91,6 @@ public class MapLoader : MonoBehaviour
                 Button button = child.AddComponent<Button>();
                 button.onClick.AddListener(delegate { validNextRoom(child.name); });
                 Image image = child.AddComponent<Image>();
-
-                node.getState();
                 image.sprite = roomSprite[node.getState()];
 
                 // Transform the child
@@ -102,222 +100,318 @@ public class MapLoader : MonoBehaviour
             }
 
             // Get the connections to the room we are working on
-            (DungeonRoom[], int[], int[]) temp = node.getConnections();
-            DungeonRoom[] rooms = temp.Item1;
-            int[] directions = temp.Item2;
-            int[] sizes = temp.Item3;
+            DoublyLinkedList[] hallways = node.getConnections();
 
             // For each room we have a connection with
-            for (int i = 0; i < rooms.Length; i++)
+            for (int i = 0; i < hallways.Length; i++)
             {
+                // Determine variables regarding whether we work with the head or the tail
+                bool nodeNotCreated = false;
+                DungeonRoom dungeonRoom;
+                bool goForward = false;
+
+                if (hallways[i].getPrev().getRoom() == null) // Starting from the tail
+                {
+                    nodeNotCreated = (hallways[i].getRoom().getId() != node.getId() && gameObject.transform.Find("" + hallways[i].getRoom().getId()) == null) || (hallways[i].getNext().getRoom() != null && hallways[i].getNext().getRoom().getId() != node.getId() && gameObject.transform.Find("" + hallways[i].getNext().getRoom().getId()) == null);
+                    dungeonRoom = hallways[i].getNext().getRoom();
+                } else
+                {
+                    nodeNotCreated = (hallways[i].getRoom().getId() != node.getId() && gameObject.transform.Find("" + hallways[i].getRoom().getId()) == null) || (hallways[i].getPrev().getRoom() != null && hallways[i].getPrev().getRoom().getId() != node.getId() && gameObject.transform.Find("" + hallways[i].getPrev().getRoom().getId()) == null);
+                    dungeonRoom = hallways[i].getPrev().getRoom();
+                    goForward = true;
+                }
+
+                // GET THIS WORKING AFTER I CHANGE HALLWAY SEGMENT CREATION
+
                 // Check to see if the node already has an object created for it
-                if (gameObject.transform.Find("" + rooms[i].getId()) == null)
+                if (nodeNotCreated)
                 {
                     // Create the node and make it a child
                     GameObject room = new GameObject();
-                    room.name = "" + rooms[i].getId();
+                    room.name = "" + dungeonRoom.getId();
                     room.transform.SetParent(gameObject.transform);
 
                     // Create the components for it
                     Button button = room.AddComponent<Button>();
                     button.onClick.AddListener(delegate { validNextRoom(room.name); });
                     Image image = room.AddComponent<Image>();
-                    image.sprite = roomSprite[rooms[i].getState()];
+                    image.sprite = roomSprite[dungeonRoom.getState()];
 
                     // Create the path between rooms
                     GameObject hallway = new GameObject();
                     hallway.transform.SetParent(room.transform);
 
-                    // Position the new room and hallway and scale the hallway based off of the direction between rooms
-                    switch (directions[i])
+                    // Iterate on the segments
+                    DoublyLinkedList iter = hallways[i];
+
+                    // Find the direction to travel
+                    if (goForward)
                     {
-                        // Cardinal direction
+                        iter = iter.getNext();
+                    } else
+                    {
+                        iter = iter.getPrev();
+                    }
+
+                    // Keep track of the segment number for naming purposes
+                    int segmentNum = 0;
+
+                    // Keep track of the local hallway position
+                    Vector3 hallwayPos = new Vector3(0, 0, 0);
+                    
+                    // Get the starting center point
+                    switch (iter.getNextDirection())
+                    {
                         case 0:
-                            // Method that creates less gameobjects but harder to individually configure individual sections
-                            //hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
-                            //hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
-
-                            // Create the segments positive horizontally
-                            createHallwaySegment(hallway, sizes[i], 0, 1, 1, true);
-
-                            // Transform the position of the room
-                            pos.x -= hallwaySize * sizes[i] + roomSize;
+                            hallwayPos = new Vector3((roomSize + hallwaySize) / 2.0f, 0, 0);
+                            pos.x -= roomSize;
                             break;
                         case 1:
-                            // Create the segments negative vertically
-                            createHallwaySegment(hallway, 0, sizes[i], 1, -1, false);
-
-                            // Transform the position of the room
-                            pos.y += (float)hallwaySize * sizes[i] + roomSize;
+                            hallwayPos = new Vector3(0, (roomSize + hallwaySize) / -2.0f, 0);
+                            pos.y += roomSize;
                             break;
                         case 2:
-                            // Create the segments negative horizontally
-                            createHallwaySegment(hallway, sizes[i], 0, -1, 1, true);
-
-                            // Transform the position of the room
-                            pos.x += (float)hallwaySize * sizes[i] + roomSize;
+                            hallwayPos = new Vector3((roomSize + hallwaySize) / -2.0f, 0, 0);
+                            pos.x += roomSize;
                             break;
                         case 3:
-                            // Create the segments positive vertically
-                            createHallwaySegment(hallway, 0, sizes[i], 1, 1, false);
-
-                            // Transform the posiiton of the room
-                            pos.y -= (float)hallwaySize * sizes[i] + roomSize;
-                            break;
-
-                        // Intermediate direction focused on the y direction
-                        case 4:
-
-
-                            break;
-                        case 5:
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-
-                        // Intermediate direction focused on the x direction
-                        case 8:
-                            break;
-                        case 9:
-                            break;
-                        case 10:
-                            break;
-                        case 11:
+                            hallwayPos = new Vector3(0, (roomSize + hallwaySize) / 2.0f, 0);
+                            pos.y -= roomSize;
                             break;
                     }
+
+                    // Iterate until we reach the other side
+                    while (iter.getRoom() == null)
+                    {
+
+                        // Position the new room and hallway and scale the hallway based off of the direction between rooms
+                        switch (iter.getNextDirection())
+                        {
+                            // Cardinal direction
+                            case 0:
+                                // Method that creates less gameobjects but harder to individually configure individual sections
+                                //hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
+                                //hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+
+                                // Create the segments positive horizontally
+                                createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                // Transform the position of the room
+                                pos.x -= hallwaySize;
+                                hallwayPos.x += hallwaySize;
+                                break;
+                            case 1:
+                                // Create the segments negative vertically
+                                createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                // Transform the position of the room
+                                pos.y += hallwaySize;
+                                hallwayPos.y -= hallwaySize;
+                                break;
+                            case 2:
+                                // Create the segments negative horizontally
+                                createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                // Transform the position of the room
+                                pos.x += hallwaySize;
+                                hallwayPos.x -= hallwaySize;
+                                break;
+                            case 3:
+                                // Create the segments positive vertically
+                                createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                // Transform the posiiton of the room
+                                pos.y -= hallwaySize;
+                                hallwayPos.y += hallwaySize;
+                                break;
+                        }
+
+                        // Increate the segement number
+                        segmentNum++;
+
+                        // Go to the next segment
+                        if (goForward)
+                        {
+                            iter = iter.getNext();
+                        } else
+                        {
+                            iter = iter.getPrev();
+                        }
+
+                    }
+
+
+
                     // Set the name of the root hallway
-                    hallway.name = node.getId() + "-" + rooms[i].getId();
+                    hallway.name = node.getId() + "-" + dungeonRoom.getId();
 
                     // Actually transform and scale the new room
                     room.transform.localPosition = pos;
                     room.GetComponent<RectTransform>().sizeDelta = new Vector2(roomSize, roomSize);
 
                     // Add this room to the queue
-                    q.Enqueue(rooms[i]);
+                    q.Enqueue(dungeonRoom);
                 }
                 else
                 {
                     // Check to see if the path has already been created
-                    if (gameObject.transform.Find("" + node.getId()).transform.Find(rooms[i].getId() + "-" + node.getId()) == null &&
-                        gameObject.transform.Find("" + rooms[i].getId()).transform.Find(node.getId() + "-" + rooms[i].getId()) == null)
+                    if (gameObject.transform.Find("" + node.getId()).transform.Find(dungeonRoom.getId() + "-" + node.getId()) == null &&
+                        gameObject.transform.Find("" + dungeonRoom.getId()).transform.Find(node.getId() + "-" + dungeonRoom.getId()) == null)
                     {
                         // Create the path between rooms
                         GameObject hallway = new GameObject();
-                        hallway.name = node.getId() + "-" + rooms[i].getId();
-                        hallway.transform.SetParent(gameObject.transform.Find("" + rooms[i].getId()).transform);
+                        hallway.name = node.getId() + "-" + dungeonRoom.getId();
+                        hallway.transform.SetParent(gameObject.transform.Find("" + dungeonRoom.getId()).transform);
                         Image image2 = hallway.AddComponent<Image>();
 
-                        // Position the new room and hallway and scale the hallway based off of the direction between rooms
-                        switch (directions[i])
+                        // Iterate on the segments
+                        DoublyLinkedList iter = hallways[i];
+
+                        // Find the direction to travel
+                        if (goForward)
                         {
-                            // Cardinal direction
+                            iter = iter.getNext();
+                        }
+                        else
+                        {
+                            iter = iter.getPrev();
+                        }
+
+                        // Keep track of the segment number for naming purposes
+                        int segmentNum = 0;
+
+                        // Keep track of the local hallway position
+                        Vector3 hallwayPos = new Vector3(0, 0, 0);
+
+                        // Get the starting center point
+                        switch (iter.getNextDirection())
+                        {
                             case 0:
-                                hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
-                                hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+                                hallwayPos = new Vector3((roomSize + hallwaySize) / 2.0f, 0, 0);
+                                pos.x -= roomSize;
                                 break;
                             case 1:
-                                hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize * sizes[i]);
-                                hallway.transform.localPosition = new Vector3(0, -(hallwaySize * sizes[i] + roomSize) / 2.0f, 0);
+                                hallwayPos = new Vector3(0, (roomSize + hallwaySize) / -2.0f, 0);
+                                pos.y += roomSize;
                                 break;
                             case 2:
-                                hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
-                                hallway.transform.localPosition = new Vector3(-(hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+                                hallwayPos = new Vector3((roomSize + hallwaySize) / -2.0f, 0, 0);
+                                pos.x += roomSize;
                                 break;
                             case 3:
-                                hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize * sizes[i]);
-                                hallway.transform.localPosition = new Vector3(0, (hallwaySize * sizes[i] + roomSize) / 2.0f, 0);
-                                break;
-
-                            // Intermediate direction focused on the y direction
-                            case 4:
-                                break;
-                            case 5:
-                                break;
-                            case 6:
-                                break;
-                            case 7:
-                                break;
-
-                            // Intermediate direction focused on the x direction
-                            case 8:
-                                break;
-                            case 9:
-                                break;
-                            case 10:
-                                break;
-                            case 11:
+                                hallwayPos = new Vector3(0,  (roomSize + hallwaySize) / 2.0f, 0);
+                                pos.y -= roomSize;
                                 break;
                         }
 
+                        // Iterate until we reach the other side
+                        while (iter.getRoom() == null)
+                        {
+
+                            // Position the new room and hallway and scale the hallway based off of the direction between rooms
+                            switch (iter.getNextDirection())
+                            {
+                                // Cardinal direction
+                                case 0:
+                                    // Method that creates less gameobjects but harder to individually configure individual sections
+                                    //hallway.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize * sizes[i], hallwaySize);
+                                    //hallway.transform.localPosition = new Vector3((hallwaySize * sizes[i] + roomSize) / 2.0f, 0, 0);
+
+                                    // Create the segments positive horizontally
+                                    createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                    // Transform the position of the room
+                                    pos.x -= hallwaySize;
+                                    hallwayPos.x += hallwaySize;
+                                    break;
+                                case 1:
+                                    // Create the segments negative vertically
+                                    createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                    // Transform the position of the room
+                                    pos.y += hallwaySize;
+                                    hallwayPos.y -= hallwaySize;
+                                    break;
+                                case 2:
+                                    // Create the segments negative horizontally
+                                    createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                    // Transform the position of the room
+                                    pos.x += hallwaySize;
+                                    hallwayPos.x -= hallwaySize;
+                                    break;
+                                case 3:
+                                    // Create the segments positive vertically
+                                    createHallwaySegment(hallway, hallwayPos.x, hallwayPos.y, segmentNum);
+
+                                    // Transform the posiiton of the room
+                                    pos.y -= hallwaySize;
+                                    hallwayPos.y += hallwaySize;
+                                    break;
+                            }
+
+                            // Increate the segement number
+                            segmentNum++;
+
+                            // Go to the next segment
+                            if (goForward)
+                            {
+                                iter = iter.getNext();
+                            }
+                            else
+                            {
+                                iter = iter.getPrev();
+                            }
+
+                        }
+
                         // Add the room to the queue
-                        q.Enqueue(rooms[i]);
+                        q.Enqueue(dungeonRoom);
                     }
                 }
-
             }
         }
     }
 
     // Create individual segments in the hallway
-    private void createHallwaySegment(GameObject hallway, int horizontalLength, int verticalLength, int horizontalSign, int verticalSign, bool horizontalFirst)
+    private void createHallwaySegment(GameObject hallway, float xPos, float yPos, int segmentNumber)
     {
-        // PROBABLY WILL NEED TO CHANGE THIS STRUCTURE
-        // If horizontal is the focus
-        if (horizontalFirst)
-        {
-            // Go through all of the horizontal spaces
-            for (int i = 0; i < horizontalLength; i++)
-            {
-                // Create a new section game object
-                GameObject section = new GameObject();
-                section.AddComponent<RectTransform>();
+        // Create a new section game object
+        GameObject section = new GameObject();
+        section.AddComponent<RectTransform>();
 
-                // Apply the hallway sprite
-                Image image2 = section.AddComponent<Image>();
-                image2.sprite = hallwaySprite;
+        // Apply the hallway sprite
+        Image image2 = section.AddComponent<Image>();
+        image2.sprite = hallwayMinimapSprite;
 
-                // Name, set parent, set size, and position the section
-                section.name = "" + i;
-                section.transform.SetParent(hallway.transform);
-                section.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
-                section.transform.localPosition = new Vector3(hallwaySize * i * horizontalSign, 0, 0);
+        // Name, set parent, set size, and position the section
+        section.name = "" + segmentNumber;
+        section.transform.SetParent(hallway.transform);
+        section.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
+        section.transform.localPosition = new Vector3(xPos, yPos);
 
-                // PROBABLY WILL ATTACH HALLWAY SCRIPT HERE
+        // POTENTIAL HALLWAY SCRIPT INSERTION
 
-            }
-            // Set the entire hallway to correct starting position
-            hallway.transform.localPosition += new Vector3(horizontalSign * (roomSize + hallwaySize) / 2.0f, 0, 0);
-        }
-        else
-        // Ditto but for vertically
-        {
-            for (int i = 0; i < verticalLength; i++)
-            {
-                GameObject section = new GameObject();
-                section.AddComponent<RectTransform>();
-                Image image2 = section.AddComponent<Image>();
-                image2.sprite = hallwaySprite;
-                section.name = "" + i;
-                section.transform.SetParent(hallway.transform);
-                section.GetComponent<RectTransform>().sizeDelta = new Vector2(hallwaySize, hallwaySize);
-                section.transform.localPosition = new Vector3(0, hallwaySize * i * verticalSign, 0);
 
-            }
-            hallway.transform.localPosition += new Vector3(0, verticalSign * (roomSize + hallwaySize) / 2.0f, 0);
-        }
     }
 
 
     // Given a room id check to see if that room is connected our current one
     private void validNextRoom(string roomId)
     {
-        foreach (DungeonRoom currentConnections in map.getCurrentRoom().getConnections().Item1)
+        foreach (DoublyLinkedList list in map.getCurrentRoom().getConnections())
         {
-            if ("" + currentConnections.getId() == roomId)
+            if ("" + list.getRoom().getId() == roomId) // Shouldn't enter this one
             {
-                changeRoom(currentConnections);
+                changeRoom(list.getRoom());
+                return;
+            } else if ("" + list.getPrev().getRoom().getId() == roomId)
+            {
+                changeRoom(list.getPrev().getRoom());
+                return;
+            } else if ("" + list.getNext().getRoom().getId() == roomId)
+            {
+                changeRoom(list.getNext().getRoom());
                 return;
             }
         }
@@ -338,7 +432,7 @@ public class MapLoader : MonoBehaviour
             button.enabled = false;
         }
 
-        // Class.Delegate += enterRoom(room)
+        // DungeonExploration.Delegate += enterRoom(room)
         // ^ To add function that will call once hallway is exited to a room
     }
 
@@ -358,7 +452,7 @@ public class MapLoader : MonoBehaviour
         }
 
         // Unsubscribe from the event since we aren't looking for it anymore currently
-        // Class.Delegat -= enterRoom(room)
+        // DungeonExploration.Delegate -= enterRoom(room)
 
     }
 }

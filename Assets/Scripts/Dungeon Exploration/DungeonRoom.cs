@@ -1,20 +1,17 @@
 public class DungeonRoom
 {
-    private DungeonRoom[] connections; // List of rooms you can go to from this one
-    private int[] connectionDirection; // Direction you go in for each room. 0 = left, 1 = up, 2 = right, 3 = down, 4 up-left, 5 up-right, 6 down-right, 7 down-left, 8 left-up, 9 left-down, 10 right-up, 11 right-down
-    private int[] hallwaySize; // How long you have to go to reach each room
     private int roomId = 0; // Unique room id
+
+    private DoublyLinkedList[] hallways; // Contains all hallway paths for this room
 
     private int roomState = 0; // State of the room. 0 = unexplored, 1 = unexplored enemy, 2 = unexplored event, 3 = unexplored empty, 4 = rest stop active, 5 = rest stop unactive, -1 = explored
 
-    private bool endRoom = false; // Determine if this room is an exit
+    private bool endRoom = false; // Determine if this room is an exit to the next floor
 
     // Create dungeon room with all the properties
-    public DungeonRoom(DungeonRoom[] adjacentRooms, int[] dir, int[] size, int id, int state = 0, bool end = false)
+    public DungeonRoom(DoublyLinkedList[] hallway, int id, int state = 0, bool end = false)
     {
-        connections = adjacentRooms;
-        connectionDirection = dir;
-        hallwaySize = size;
+        hallways = hallway;
         roomId = id;
         roomState = state;
         endRoom = end;
@@ -26,20 +23,10 @@ public class DungeonRoom
         // Json file will contain all the information about the current and future dungeonrooms
     }
 
-    // Change the connection to a room and update related information
-    public void changeConnections(DungeonRoom[] rooms, int[] dir, int[] size)
+    // Modify the hallway list
+    public void modifyHallways(DoublyLinkedList[] hallway)
     {
-        connections = rooms;
-        connectionDirection = dir;
-        hallwaySize = size;
-
-        //FIX: Determine if we want to have other dungeon room also update their lists with this addition or just have to call with this one as well
-    }
-
-    // Only change what room goes where, keeps related information
-    public void changeConnections(DungeonRoom[] rooms)
-    {
-        connections = rooms;
+        hallways = hallway;
     }
 
     // Get the unique id of the room
@@ -55,20 +42,21 @@ public class DungeonRoom
     }
 
     // Get all the relevant connections for traversal
-    public (DungeonRoom[], int[], int[]) getConnections()
+    public DoublyLinkedList[] getConnections()
     {
-        return (connections, connectionDirection, hallwaySize);
+        return hallways;
     }
 
     // Return the index where a connection exists, -1 if it doesn't
     public int hasConnection(DungeonRoom room)
     {
-        for (int i = 0; i < connections.Length; i++)
+        for (int i = 0; i < hallways.Length; i++)
         {
-            if (room.getId() == connections[i].getId())
+            if ((hallways[i].getPrev().getRoom() != null && hallways[i].getPrev().getRoom().getId() == room.getId()) || (hallways[i].getNext().getRoom() != null && hallways[i].getNext().getRoom().getId() == room.getId())) // Hallway should always be set up so the rooms are looped to be sequential
             {
                 return i;
             }
+
         }
         return -1;
     }
