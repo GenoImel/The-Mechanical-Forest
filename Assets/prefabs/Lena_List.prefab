@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1196586092571317632}
   m_Layer: 6
-  m_Name: List
+  m_Name: Lena_List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

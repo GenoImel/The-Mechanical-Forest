@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5417260038250468279}
+  - component: {fileID: 8072128332478688098}
+  - component: {fileID: 3867770017542522229}
   m_Layer: 0
   m_Name: Lena_Character_DATA
   m_TagString: Untagged
@@ -31,3 +33,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8072128332478688098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279727932826328730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5787dc27dc6ac6c4fa71de8a511ef763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3867770017542522229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4279727932826328730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3e3dfc47e122042abf3a1919438b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseLevel: 25
+  _baseExp: 0
+  _baseHealth: 380
+  _basePhysicalAttack: 45
+  _baseMagicalAttack: 165
+  _baseAccuracy: 20
+  _baseEvade: 15
+  _basePhysicalDefense: 70
+  _baseMagicalDefense: 100
