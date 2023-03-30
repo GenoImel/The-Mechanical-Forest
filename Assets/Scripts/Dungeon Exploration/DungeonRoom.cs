@@ -60,5 +60,32 @@ public class DungeonRoom
         }
         return -1;
     }
+
+    // Returns the length of the hallway between room at given index
+    public int hallwayLength(int index)
+    {
+        DoublyLinkedList node = hallways[index];
+        int count = 0;
+
+        if (node.isNextRoom())
+        {
+            while (!node.isPrevRoom())
+            {
+                count++;
+                node = node.getPrev();
+            }
+        } else if (node.isPrevRoom())
+        {
+            while (!node.isNextRoom())
+            {
+                count++;
+                node = node.getNext();
+            }
+        } else
+        {
+            // ERROR
+        }
+        return count;
+    }
     
 }

@@ -29,16 +29,16 @@ public class MapLoader : MonoBehaviour
         map = new Map();
 
         // Load the images
-        roomSprite.Add(0, Resources.Load<Sprite>("dungeon_map_room_unexplored"));
-        roomSprite.Add(1, Resources.Load<Sprite>("dungeon_map_room_battle"));
-        roomSprite.Add(2, Resources.Load<Sprite>("dungeon_map_room_event"));
-        roomSprite.Add(3, Resources.Load<Sprite>("dungeon_map_room_empty"));
-        roomSprite.Add(4, Resources.Load<Sprite>("dungeon_map_room_rest_active"));
-        roomSprite.Add(5, Resources.Load<Sprite>("dungeon_map_room_rest_unactive"));
-        roomSprite.Add(-1, Resources.Load<Sprite>("dungeon_map_room_explored"));
+        roomSprite.Add(0, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_unexplored"));
+        roomSprite.Add(1, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_battle"));
+        roomSprite.Add(2, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_event"));
+        roomSprite.Add(3, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_empty"));
+        roomSprite.Add(4, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_rest_active"));
+        roomSprite.Add(5, Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_room_rest_unactive"));
+        roomSprite.Add(-1, Resources.Load<Sprite>("Dungeon Explorationdungeon_map_room_explored"));
 
-        hallwayMinimapSprite = Resources.Load<Sprite>("dungeon_map_hallway");
-        cursorSprite = Resources.Load<Sprite>("dungeon_map_player");
+        hallwayMinimapSprite = Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_hallway");
+        cursorSprite = Resources.Load<Sprite>("Dungeon Exploration/dungeon_map_player");
 
         // Create the rooms and hallways 
         mapGeneration();
@@ -401,15 +401,15 @@ public class MapLoader : MonoBehaviour
     {
         foreach (DoublyLinkedList list in map.getCurrentRoom().getConnections())
         {
-            if ("" + list.getRoom().getId() == roomId) // Shouldn't enter this one
+            if (list.getRoom() != null && "" + list.getRoom().getId() == roomId) // Shouldn't enter this one
             {
                 changeRoom(list.getRoom());
                 return;
-            } else if ("" + list.getPrev().getRoom().getId() == roomId)
+            } else if (list.getPrev().getRoom() != null && "" + list.getPrev().getRoom().getId() == roomId)
             {
                 changeRoom(list.getPrev().getRoom());
                 return;
-            } else if ("" + list.getNext().getRoom().getId() == roomId)
+            } else if (list.getNext().getRoom() != null && "" + list.getNext().getRoom().getId() == roomId)
             {
                 changeRoom(list.getNext().getRoom());
                 return;
@@ -432,8 +432,8 @@ public class MapLoader : MonoBehaviour
             button.enabled = false;
         }
 
-        // DungeonExploration.Delegate += enterRoom(room)
-        // ^ To add function that will call once hallway is exited to a room
+        // Subscribe to the event that will tell us when we enter a room
+        DungeonExploration.onRoomEnter += enterRoom;
     }
 
     // Set the current room and enable all buttons once we enter a room
@@ -452,7 +452,7 @@ public class MapLoader : MonoBehaviour
         }
 
         // Unsubscribe from the event since we aren't looking for it anymore currently
-        // DungeonExploration.Delegate -= enterRoom(room)
+        DungeonExploration.onRoomEnter -= enterRoom;
 
     }
 }
