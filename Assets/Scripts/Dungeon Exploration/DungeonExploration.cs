@@ -241,13 +241,13 @@ public class DungeonExploration : MonoBehaviour
                 offset =  new Vector3(roomSize / 2.0f + hallwaySize / 2.0f, 0, 0) * listGoForward;
                 break;
             case 1:
-                offset = new Vector3(0, roomSize / -2.0f + hallwaySize / 2.0f, 0) * listGoForward;
+                offset = new Vector3(0, roomSize / -1.0f + hallwaySize / 2.0f, 0) * listGoForward;
                 break;
             case 2:
                 offset = new Vector3(roomSize / -2.0f + hallwaySize / -2.0f, 0, 0) * listGoForward;
                 break;
             case 3:
-                offset = new Vector3(0, roomSize / 2.0f + hallwaySize / -2.0f, 0) * listGoForward;
+                offset = new Vector3(0, roomSize / 1.0f + hallwaySize / -2.0f, 0) * listGoForward;
                 break;
 
             default:
