@@ -245,6 +245,10 @@ public class MapLoader : MonoBehaviour
                     // Set the name of the root hallway
                     hallway.name = node.getId() + "-" + dungeonRoom.getId();
 
+                    // Add a canvas group so this and their children won't use the parent room button
+                    hallway.AddComponent<CanvasGroup>();
+                    hallway.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
                     // Actually transform and scale the new room
                     room.transform.localPosition = pos;
                     room.GetComponent<RectTransform>().sizeDelta = new Vector2(roomSize, roomSize);
