@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleSystem.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/SavingTestScene2.unity
+    guid: 8159262e9e2f0c341ac91196ffaca769
+  - enabled: 1
+    path: Assets/Scenes/SavingTestScene.unity
+    guid: 888b92576e63a454d9a6105eabb1f0cb
   m_configObjects: {}

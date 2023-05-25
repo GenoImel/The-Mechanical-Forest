@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
   m_Name: TestPartyMember
   m_EditorClassIdentifier: 
-  baseHealth: 408
-  baseExp: 46
-  baseLevel: 43
-  basePhysicalAttack: 40
-  baseMagicalAttack: 20
-  baseEvade: 30
-  basePhysicalDefense: 12
-  baseMagicalDefense: 23
+  BaseHealth: 453
+  BaseExp: 75
+  BaseLevel: 37
+  BasePhysicalAttack: 24
+  BaseMagicalAttack: 48
+  BaseEvade: 41
+  BasePhysicalDefense: 34
+  BaseMagicalDefense: 66

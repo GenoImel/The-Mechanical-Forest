@@ -9,13 +9,13 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    [HideInInspector] public List<CharacterData> characters;
+    [HideInInspector] public List<CharacterData> Characters;
 
     /*
      * Default values for a new game
      */
     public GameData()
     {
-        characters = new();
+        Characters = new();
     }
 }

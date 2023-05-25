@@ -11,13 +11,13 @@ using System.Text;
 public class XMLFileHandler
 {
     // File paths infomation
-    private string dirPath = "";
-    private string filename = "";
-    private readonly string fileExtension = ".xml";
+    private string _dirPath = "";
+    private string _filename = "";
+    private readonly string _fileExtension = ".xml";
     // Encrpytion data
-    private bool encryptData;
-    private readonly string encryptionKey = "Poggers";
-    private SymmetricAlgorithm key;
+    private bool _encryptData;
+    private readonly string _encryptionKey = "Poggers";
+    private SymmetricAlgorithm _key;
 
     // Create a MD5 hash from a string
     private static byte[] CreateMD5(string input)
@@ -37,19 +37,19 @@ public class XMLFileHandler
      */
     private void InitiazliesEncryptor()
     {
-        key = new DESCryptoServiceProvider();
-        byte[] fullHash = CreateMD5(encryptionKey);
+        _key = new DESCryptoServiceProvider();
+        byte[] fullHash = CreateMD5(_encryptionKey);
         byte[] keyBytes = new byte[8];
         Array.Copy(fullHash, keyBytes, 8);
-        key.Key = keyBytes;
-        key.IV = keyBytes;
+        _key.Key = keyBytes;
+        _key.IV = keyBytes;
     }
 
     public XMLFileHandler(string dirPath, string filename, bool encryptData = true)
     {
-        this.dirPath = dirPath;
-        this.filename = filename;
-        this.encryptData = encryptData;
+        _dirPath = dirPath;
+        _filename = filename;
+        _encryptData = encryptData;
 
         if (encryptData) InitiazliesEncryptor();
     }
@@ -57,9 +57,9 @@ public class XMLFileHandler
     /*
      * Loads a gane data object from an XML file
      */
-    public GameData Load()
+    public GameData Load(string profileID)
     {
-        string path = Path.Combine(Path.Combine(Application.dataPath, dirPath), filename + fileExtension);
+        string path = Path.Combine(Application.dataPath, _dirPath, profileID, _filename + _fileExtension);
         GameData data = null;
         if (File.Exists(path))
         {
@@ -69,7 +69,7 @@ public class XMLFileHandler
                 
                 using (FileStream fileStream = new(path, FileMode.Open))
                 {
-                    if (encryptData) using (CryptoStream stream = new(fileStream, key.CreateDecryptor(), CryptoStreamMode.Read)) { data = (GameData)serializer.Deserialize(stream); }
+                    if (_encryptData) using (CryptoStream stream = new(fileStream, _key.CreateDecryptor(), CryptoStreamMode.Read)) { data = (GameData)serializer.Deserialize(stream); }
                     else data = (GameData)serializer.Deserialize(fileStream);
                 }
 
@@ -85,9 +85,9 @@ public class XMLFileHandler
     /*
      *  Saves a game data object to an XML file
      */
-    public void Save(GameData data)
+    public void Save(GameData data, string profileID)
     {
-        string path = Path.Combine(Path.Combine(Application.dataPath, dirPath), filename + fileExtension);
+        string path = Path.Combine(Application.dataPath, _dirPath, profileID, _filename + _fileExtension);
 
         try
         {
@@ -96,7 +96,7 @@ public class XMLFileHandler
 
             using (FileStream fileStream = new(path, FileMode.Create)) 
             {
-                if (encryptData) using (CryptoStream stream = new(fileStream, key.CreateEncryptor(), CryptoStreamMode.Write)) { serializer.Serialize(stream, data); }
+                if (_encryptData) using (CryptoStream stream = new(fileStream, _key.CreateEncryptor(), CryptoStreamMode.Write)) { serializer.Serialize(stream, data); }
                 else serializer.Serialize(fileStream, data);
 
             }
@@ -104,5 +104,24 @@ public class XMLFileHandler
         {
             Debug.Log("the following error occured saving game data to file: " + path + "\n" + e);
         }
+    }
+
+    public Dictionary<string, GameData> LoadAndGetAllProfiles()
+    {
+        Dictionary<string, GameData> profileDictionary = new();
+
+        IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(Path.Combine(Application.dataPath, _dirPath)).EnumerateDirectories();
+
+        foreach (DirectoryInfo dir in dirInfos)
+        {
+            string profileID = dir.Name;
+            string path = Path.Combine(Application.dataPath, _dirPath, profileID, _filename + _fileExtension);
+            if (!File.Exists(path)) continue;
+            GameData profileData = Load(profileID);
+            if (profileData != null) profileDictionary.Add(profileID, profileData);
+            else Debug.Log("ERROR: Failed Loading ProfileID: " + profileID);
+        }
+
+        return profileDictionary;
     }
 }
