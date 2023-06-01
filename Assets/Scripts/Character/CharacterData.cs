@@ -5,20 +5,20 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterData 
 {
-    public int currentHealth;
-    public int currentExp;
-    public int currentLevel;
-    public int currentPhysicalAttack;
-    public int currentMagicalAttack;
-    public int currentEvade;
-    public int currentPhysicalDefense;
-    public int currentMagicalDefense;
-    public int characterID;
-    public static int characterCount = 0;
+    public int CurrentHealth;
+    public int CurrentExp;
+    public int CurrentLevel;
+    public int CurrentPhysicalAttack;
+    public int CurrentMagicalAttack;
+    public int CurrentEvade;
+    public int CurrentPhysicalDefense;
+    public int CurrentMagicalDefense;
+    public int CharacterID;
+    public static int CharacterCount = 0;
 
     public override string ToString()
     {
-        return "ID: " + characterID + " Current Health: " + currentHealth;
+        return "ID: " + CharacterID + " Current Health: " + CurrentHealth;
     }
     public override bool Equals(object obj)
     {
@@ -29,11 +29,11 @@ public class CharacterData
     }
     public override int GetHashCode()
     {
-        return characterID;
+        return CharacterID;
     }
     public bool Equals(CharacterData other)
     {
         if (other == null) return false;
-        else return (this.characterID.Equals(other.characterID));
+        else return (this.CharacterID.Equals(other.CharacterID));
     }
 }
