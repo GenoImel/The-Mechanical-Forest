@@ -3,6 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /[Ll]ibrary/
+/[Uu]serSettings/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -60,6 +61,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-
-UserSettings/Layouts/default-2021.dwlt
-UserSettings/EditorUserSettings.asset
