@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 [CreateAssetMenu(fileName = "Party Member", menuName = "Party/Member", order = 1)]
-public class PartyMember : ScriptableObject
+internal sealed class PartyMember : ScriptableObject
 {
-    // Base Memebr Stats
     [Header("Health")]
     [Range(0, 999)] public int BaseHealth;
 

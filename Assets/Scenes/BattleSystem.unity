@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 2331916}
   - component: {fileID: 2331915}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: SkillActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,7 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20860877}
   m_Layer: 6
-  m_Name: PC3
+  m_Name: PlayerCharacter3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 65227015}
   - component: {fileID: 65227014}
   m_Layer: 6
-  m_Name: PC4_button
+  m_Name: PlayerCharacterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -360,12 +360,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711750280}
-        m_TargetAssemblyTypeName: DropDown_Group, Assembly-CSharp
+        m_TargetAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownGroup, Assembly-CSharp
         m_MethodName: ToggleMenuOpen
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2147352094}
-          m_ObjectArgumentAssemblyTypeName: DropDown_func, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownFunction,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -385,7 +386,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 617307721}
         m_TargetAssemblyTypeName: skill_menu_manager, Assembly-CSharp
-        m_MethodName: menu_off
+        m_MethodName: MenuOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -464,7 +465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89882364}
   m_Layer: 8
-  m_Name: PC1_menu
+  m_Name: ActionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162579337}
   m_Layer: 5
-  m_Name: Party_UI
+  m_Name: PartyUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +543,7 @@ GameObject:
   - component: {fileID: 174147354}
   - component: {fileID: 174147353}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: DefendActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193298253}
   m_Layer: 8
-  m_Name: actions
+  m_Name: ActionsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,7 +717,7 @@ GameObject:
   - component: {fileID: 204583521}
   - component: {fileID: 204583520}
   m_Layer: 6
-  m_Name: PC2_button
+  m_Name: PlayerCharacterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,12 +768,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711750280}
-        m_TargetAssemblyTypeName: DropDown_Group, Assembly-CSharp
+        m_TargetAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownGroup, Assembly-CSharp
         m_MethodName: ToggleMenuOpen
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1488707863}
-          m_ObjectArgumentAssemblyTypeName: DropDown_func, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownFunction,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -780,7 +782,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 617307721}
         m_TargetAssemblyTypeName: skill_menu_manager, Assembly-CSharp
-        m_MethodName: menu_off
+        m_MethodName: MenuOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -874,7 +876,7 @@ GameObject:
   - component: {fileID: 216536365}
   - component: {fileID: 216536364}
   m_Layer: 8
-  m_Name: Skill_act
+  m_Name: SkillActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,7 +1019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232107250}
   m_Layer: 8
-  m_Name: actions
+  m_Name: ActionsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1055,7 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 254750107}
   m_Layer: 8
-  m_Name: actions
+  m_Name: ActionsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,6 +1090,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 617307720}
     m_Modifications:
     - target: {fileID: 1196586092571317632, guid: 217bb93dfdc799f45a4ee6b2845c384e, type: 3}
@@ -1247,6 +1250,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 217bb93dfdc799f45a4ee6b2845c384e, type: 3}
 --- !u!1 &396717245
 GameObject:
@@ -1258,7 +1264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 396717246}
   m_Layer: 5
-  m_Name: charcters
+  m_Name: Characters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,7 +1308,7 @@ GameObject:
   - component: {fileID: 458152168}
   - component: {fileID: 458152167}
   m_Layer: 8
-  m_Name: Skill_act
+  m_Name: SkillActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1563,9 +1569,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1630,7 +1644,7 @@ GameObject:
   - component: {fileID: 553448801}
   - component: {fileID: 553448800}
   m_Layer: 8
-  m_Name: Skill_act
+  m_Name: SkillActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1775,79 +1789,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553448798}
   m_CullTransparentMesh: 1
---- !u!1 &578943142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 578943145}
-  - component: {fileID: 578943144}
-  - component: {fileID: 578943143}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &578943143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578943142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
---- !u!114 &578943144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578943142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &578943145
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 578943142}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &580158850
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 617307720}
     m_Modifications:
     - target: {fileID: 1196586092571317632, guid: bc1553f2662ee364695a35df09d6aaa9, type: 3}
@@ -2007,6 +1954,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1553f2662ee364695a35df09d6aaa9, type: 3}
 --- !u!1 &617307719
 GameObject:
@@ -2019,7 +1969,7 @@ GameObject:
   - component: {fileID: 617307720}
   - component: {fileID: 617307721}
   m_Layer: 5
-  m_Name: skill_menu_parent
+  m_Name: SkillMenuParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2061,11 +2011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9270f4bc8451b042a68a8d04b25c153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill_Menu_lists:
-  - {fileID: 646198441}
-  - {fileID: 538219024}
-  - {fileID: 1083417537}
-  - {fileID: 1671777223}
+  skillMenuLists: []
 --- !u!1 &646198441 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1196586092571317663, guid: 8e59d5be695c2944b8611b0c48616a54, type: 3}
@@ -2083,7 +2029,7 @@ GameObject:
   - component: {fileID: 726878448}
   - component: {fileID: 726878447}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: PlayerCharacterButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2218,7 +2164,7 @@ GameObject:
   - component: {fileID: 746227315}
   - component: {fileID: 746227314}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: SkillActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2354,7 +2300,7 @@ GameObject:
   - component: {fileID: 866813758}
   - component: {fileID: 866813757}
   m_Layer: 8
-  m_Name: Defend_act
+  m_Name: DefendActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2475,7 +2421,7 @@ GameObject:
   - component: {fileID: 928888796}
   - component: {fileID: 928888795}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: DefendActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2608,7 +2554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 952830130}
   m_Layer: 0
-  m_Name: Character_Data
+  m_Name: CharacterData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2627,7 +2573,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &977996080 stripped
 RectTransform:
@@ -2647,7 +2593,7 @@ GameObject:
   - component: {fileID: 1036816910}
   - component: {fileID: 1036816909}
   m_Layer: 6
-  m_Name: PC3_button
+  m_Name: PlayerCharacterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2698,12 +2644,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711750280}
-        m_TargetAssemblyTypeName: DropDown_Group, Assembly-CSharp
+        m_TargetAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownGroup, Assembly-CSharp
         m_MethodName: ToggleMenuOpen
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1667461225}
-          m_ObjectArgumentAssemblyTypeName: DropDown_func, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownFunction,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2723,7 +2670,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 617307721}
         m_TargetAssemblyTypeName: skill_menu_manager, Assembly-CSharp
-        m_MethodName: menu_off
+        m_MethodName: MenuOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2834,42 +2781,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1165013219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1165013220}
-  m_Layer: 8
-  m_Name: skills
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1165013220
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165013219}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2089416314}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1180359904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2794,7 @@ GameObject:
   - component: {fileID: 1180359907}
   - component: {fileID: 1180359906}
   m_Layer: 6
-  m_Name: PC1_button
+  m_Name: PlayerCharacterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2955,12 +2866,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711750280}
-        m_TargetAssemblyTypeName: DropDown_Group, Assembly-CSharp
+        m_TargetAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownGroup, Assembly-CSharp
         m_MethodName: ToggleMenuOpen
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1827817166}
-          m_ObjectArgumentAssemblyTypeName: DropDown_func, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: Akashic.Runtime.DropDown_Menu.DropDownFunction,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2980,7 +2892,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 617307721}
         m_TargetAssemblyTypeName: skill_menu_manager, Assembly-CSharp
-        m_MethodName: menu_off
+        m_MethodName: MenuOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3038,7 +2950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1241408469}
   m_Layer: 6
-  m_Name: PC2
+  m_Name: PlayerCharacter2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3076,7 +2988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1273515087}
   m_Layer: 8
-  m_Name: PC4_menu
+  m_Name: ActionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3116,7 +3028,7 @@ GameObject:
   - component: {fileID: 1360751787}
   - component: {fileID: 1360751786}
   m_Layer: 8
-  m_Name: Skill_act
+  m_Name: SkillActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3260,7 +3172,7 @@ GameObject:
   - component: {fileID: 1488707862}
   - component: {fileID: 1488707863}
   m_Layer: 6
-  m_Name: DDMenu_obj2
+  m_Name: DropDownMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3299,6 +3211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4da47d95e98864db0cc72314acfff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDownMenu: {fileID: 1488707862}
+  state: 3
+  moveSpeed: 260
   startDest: {x: 0, y: 0}
   endDest: {x: 0, y: -142}
 --- !u!1 &1522026961
@@ -3313,7 +3228,7 @@ GameObject:
   - component: {fileID: 1522026964}
   - component: {fileID: 1522026963}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: PlayerCharacterButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3533,7 +3448,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -3547,7 +3464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532750584}
   m_Layer: 6
-  m_Name: PC1
+  m_Name: PlayerCharacter1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3575,50 +3492,6 @@ RectTransform:
   m_AnchoredPosition: {x: 15.6, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1546212296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1546212297}
-  - component: {fileID: 1546212298}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1546212297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546212296}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1546212298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546212296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d2dfc0cf9cda7b4ab3952e063c6e882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1667461223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3630,7 +3503,7 @@ GameObject:
   - component: {fileID: 1667461224}
   - component: {fileID: 1667461225}
   m_Layer: 6
-  m_Name: DDMenu_obj3
+  m_Name: DropDownMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3669,6 +3542,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4da47d95e98864db0cc72314acfff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDownMenu: {fileID: 1667461224}
+  state: 3
+  moveSpeed: 260
   startDest: {x: 0, y: 0}
   endDest: {x: 0, y: -142}
 --- !u!1 &1671777223 stripped
@@ -3694,7 +3570,7 @@ GameObject:
   - component: {fileID: 1681045015}
   - component: {fileID: 1681045014}
   m_Layer: 8
-  m_Name: Defend_act
+  m_Name: DefendActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3814,7 +3690,7 @@ GameObject:
   - component: {fileID: 1711750279}
   - component: {fileID: 1711750280}
   m_Layer: 5
-  m_Name: DD_menu Tracker
+  m_Name: DropDownMenuTracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3852,6 +3728,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d77b72121c1edf40978245b3cec59b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDownMenus:
+  - {fileID: 1827817166}
+  - {fileID: 1488707863}
+  - {fileID: 1667461225}
+  - {fileID: 2147352094}
+  activeMenu: {fileID: 0}
 --- !u!1 &1765405073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3864,7 +3746,7 @@ GameObject:
   - component: {fileID: 1765405076}
   - component: {fileID: 1765405075}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: PlayerCharacterButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3999,7 +3881,7 @@ GameObject:
   - component: {fileID: 1791197885}
   - component: {fileID: 1791197884}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: SkillActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4133,7 +4015,7 @@ GameObject:
   - component: {fileID: 1827817165}
   - component: {fileID: 1827817166}
   m_Layer: 6
-  m_Name: DDMenu_obj1
+  m_Name: DropDownMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4172,6 +4054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4da47d95e98864db0cc72314acfff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDownMenu: {fileID: 89882364}
+  state: 3
+  moveSpeed: 260
   startDest: {x: 0, y: 0}
   endDest: {x: 0, y: -142}
 --- !u!1 &1855052286
@@ -4184,7 +4069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1855052287}
   m_Layer: 8
-  m_Name: actions
+  m_Name: ActionsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4225,7 +4110,7 @@ GameObject:
   - component: {fileID: 1928534131}
   - component: {fileID: 1928534130}
   m_Layer: 8
-  m_Name: Defend_act
+  m_Name: DefendActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4346,7 +4231,7 @@ GameObject:
   - component: {fileID: 1931331094}
   - component: {fileID: 1931331093}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: DefendActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4482,7 +4367,7 @@ GameObject:
   - component: {fileID: 2039457350}
   - component: {fileID: 2039457349}
   m_Layer: 8
-  m_Name: Defend_act
+  m_Name: DefendActionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4601,7 +4486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2052171082}
   m_Layer: 6
-  m_Name: PC4
+  m_Name: PlayerCharacter4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4774,7 +4659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2089416314}
   m_Layer: 8
-  m_Name: PC3_menu
+  m_Name: ActionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4793,7 +4678,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 193298253}
-  - {fileID: 1165013220}
   m_Father: {fileID: 1667461224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4807,6 +4691,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 617307720}
     m_Modifications:
     - target: {fileID: 1196586092571317632, guid: 0aa9a17224d2b334a9f328d06e499e5a, type: 3}
@@ -4966,6 +4851,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa9a17224d2b334a9f328d06e499e5a, type: 3}
 --- !u!1 &2101491675
 GameObject:
@@ -4979,7 +4867,7 @@ GameObject:
   - component: {fileID: 2101491678}
   - component: {fileID: 2101491677}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: PlayerCharacterButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5112,7 +5000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120666335}
   m_Layer: 8
-  m_Name: PC2_menu
+  m_Name: ActionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5151,7 +5039,7 @@ GameObject:
   - component: {fileID: 2123159345}
   - component: {fileID: 2123159344}
   m_Layer: 8
-  m_Name: Text (TMP)
+  m_Name: DefendActionButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5285,7 +5173,7 @@ GameObject:
   - component: {fileID: 2147352093}
   - component: {fileID: 2147352094}
   m_Layer: 6
-  m_Name: DDMenu_obj4
+  m_Name: DropDownMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5324,6 +5212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4da47d95e98864db0cc72314acfff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDownMenu: {fileID: 2147352093}
+  state: 3
+  moveSpeed: 260
   startDest: {x: 0, y: 0}
   endDest: {x: 0, y: -142}
 --- !u!1001 &1196586092668247216
@@ -5331,6 +5222,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 617307720}
     m_Modifications:
     - target: {fileID: 1196586092571317632, guid: 8e59d5be695c2944b8611b0c48616a54, type: 3}
@@ -5502,4 +5394,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e59d5be695c2944b8611b0c48616a54, type: 3}
