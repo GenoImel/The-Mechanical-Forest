@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Akashic.Runtime.DropDown_Menu
+namespace Akashic.Runtime.DropDownMenu
 {
     internal sealed class DropDownFunction : MonoBehaviour
     {
