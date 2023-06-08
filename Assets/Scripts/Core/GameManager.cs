@@ -9,7 +9,7 @@ namespace Akashic.Core
         private static GameManager instance;
         
         private readonly MessageManager messageManager = new ();
-        private readonly ServiceManager serviceManager = new ();
+        private readonly MonoSystemManager monoSystemManager = new ();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
@@ -48,7 +48,7 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Publishes a message to the services in the game.
+        /// Publishes a message to the monoSystems in the game.
         /// </summary>
         public static void Publish<TMessage>(TMessage message) where TMessage : IMessage
         {
@@ -56,19 +56,19 @@ namespace Akashic.Core
         }
 
         /// <returns>
-        /// Returns an existing service in the game.
+        /// Returns an existing monoSystem in the game.
         /// </returns>
-        public static TService GetService<TService>()
+        public static TMonoSystem GetMonoSystem<TMonoSystem>()
         {
-            return instance.serviceManager.GetService<TService>();
+            return instance.monoSystemManager.GetMonoSystem<TMonoSystem>();
         }
         
         /// <summary>
-        /// Adds a service to the game.
+        /// Adds a monoSystem to the game.
         /// </summary>
-        protected void AddService<TService, TBindTo>(TService service) where TService : IService, TBindTo
+        protected void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem) where TMonoSystem : IMonoSystem, TBindTo
         {
-            serviceManager.AddService<TService, TBindTo>(service);
+            monoSystemManager.AddMonoSystem<TMonoSystem, TBindTo>(monoSystem);
         }
         
         /// <returns>

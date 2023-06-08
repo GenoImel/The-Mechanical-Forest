@@ -1,6 +1,6 @@
 namespace Akashic.Core
 {
-    internal interface IService
+    internal interface IMonoSystem
     {
     }
 }
