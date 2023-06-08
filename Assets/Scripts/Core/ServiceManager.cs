@@ -3,32 +3,32 @@ using System.Collections.Generic;
 
 namespace Akashic.Core
 {
-    internal sealed class ServiceManager
+    internal sealed class MonoSystemManager
     {
-        private readonly IDictionary<Type, IService> services =
-            new Dictionary<Type, IService>();
+        private readonly IDictionary<Type, IMonoSystem> monoSystems =
+            new Dictionary<Type, IMonoSystem>();
 
-        public void AddService<TService, TBindTo>(TService service)
-            where TService : TBindTo, IService
+        public void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem)
+            where TMonoSystem : TBindTo, IMonoSystem
         {
-            if (service == null)
+            if (monoSystem == null)
             {
-                throw new Exception($"{nameof(service)} cannot be null");
+                throw new Exception($"{nameof(monoSystem)} cannot be null");
             }
 
-            var serviceType = typeof(TBindTo);
-            services[serviceType] = service;
+            var monoSystemType = typeof(TBindTo);
+            monoSystems[monoSystemType] = monoSystem;
         }
 
-        public TService GetService<TService>()
+        public TMonoSystem GetMonoSystem<TMonoSystem>()
         {
-            var serviceType = typeof(TService);
-            if (services.TryGetValue(serviceType, out var service))
+            var monoSystemType = typeof(TMonoSystem);
+            if (monoSystems.TryGetValue(monoSystemType, out var monoSystem))
             {
-                return (TService)service;
+                return (TMonoSystem)monoSystem;
             }
 
-            throw new Exception($"Service {serviceType} does not exist");
+            throw new Exception($"MonoSystem {monoSystemType} does not exist");
         }
     }
 }

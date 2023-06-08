@@ -5,13 +5,10 @@ namespace Akashic.Runtime
 {
     internal sealed class AkashicGameManager : GameManager
     {
-        //[Header("Services")] 
-        //[SerializeField] private ExampleService exampleService;
-
         [Header("Management")] 
-        [SerializeField] private Transform controllerParentTransform;
+        [SerializeField] private Transform monoSystemsParentTransform;
         
-        [SerializeField] private Transform servicesParentTransform;
+        [SerializeField] private Transform controllerParentTransform;
 
         protected override string GetApplicationName()
         {
@@ -20,10 +17,8 @@ namespace Akashic.Runtime
 
         protected override void OnInitialized()
         {
-            //AddService<ExampleService, IExampleService>(ExampleService);
-
+            monoSystemsParentTransform.gameObject.SetActive(true);
             controllerParentTransform.gameObject.SetActive(true);
-            servicesParentTransform.gameObject.SetActive(true);
         }
     }
 }
