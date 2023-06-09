@@ -10,6 +10,10 @@ namespace Akashic.Runtime
         
         [SerializeField] private Transform controllerParentTransform;
 
+        [Header("MonoSystem References:")]
+
+        [SerializeField] private SceneManagement sceneManagementMonoSystem;
+
         protected override string GetApplicationName()
         {
             return nameof(AkashicGameManager);
@@ -19,6 +23,8 @@ namespace Akashic.Runtime
         {
             monoSystemsParentTransform.gameObject.SetActive(true);
             controllerParentTransform.gameObject.SetActive(true);
+
+            AddMonoSystem<SceneManagement, ISceneManagement>(sceneManagementMonoSystem);
         }
     }
 }
