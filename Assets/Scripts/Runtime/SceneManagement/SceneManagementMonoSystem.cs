@@ -20,9 +20,9 @@ namespace Akashic.Core
     }
 
     /// <summary>
-    /// Static class that handle's Scene Loading and state management
+    /// Static class that handles Scene Loading and state management
     /// </summary>
-    public class SceneManagement : MonoBehaviour, ISceneManagement
+    internal sealed class SceneManagementMonoSystem : MonoBehaviour, ISceneManagementMonoSystem
     {
         //  Refers to the current type of scene loaded
         //  Defaults to NONE
@@ -53,6 +53,15 @@ namespace Akashic.Core
         public bool IsSceneType(SceneType typeQuery)
         {
             return typeQuery == currentSceneType;
+        }
+
+        // Implements ISceneManagementMonoSystem
+
+        /// <summary>
+        /// Returns the reference to this script (Apart of the ISceneManagementMonoSystem interface)
+        /// </summary>
+        public SceneManagementMonoSystem GetScript() {
+            return this;
         }
     }
 
