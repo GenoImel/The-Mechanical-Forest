@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monoSystemsParentTransform: {fileID: 9133810835039284573}
   controllerParentTransform: {fileID: 6769403196620704062}
+  sceneManagementMonoSystem: {fileID: 1180253609855259221}
 --- !u!1 &3403851422182821397
 GameObject:
   m_ObjectHideFlags: 0
