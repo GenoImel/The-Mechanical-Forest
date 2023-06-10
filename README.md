@@ -5,6 +5,6 @@ Visual Novel Side scrolling Dungeon exploration role-playing game where the play
 
 ## Requirements
 
-- Unity 2021.3.15f1, install via [Unity Hub](https://unity.com/download)
+- Unity 2022.3.0f1, install via [Unity Hub](https://unity.com/download)
 - [Rider IDE](https://www.jetbrains.com/rider/)
 - [Git](https://git-scm.com/downloads)
