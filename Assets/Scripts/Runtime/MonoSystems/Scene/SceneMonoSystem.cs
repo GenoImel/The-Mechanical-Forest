@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Akashic.Runtime.MonoSystems.Scene
 {
-    internal sealed class SceneManagementMonoSystem : MonoBehaviour, ISceneManagementMonoSystem
+    internal sealed class SceneMonoSystem : MonoBehaviour, ISceneMonoSystem
     {
         private string currentScene;
 

@@ -11,9 +11,9 @@ namespace Akashic.Runtime
         [SerializeField] private Transform monoSystemsParentTransform;
         
         [SerializeField] private Transform controllerParentTransform;
-
+        
         [Header("MonoSystems:")]
-        [SerializeField] private SceneManagementMonoSystem sceneManagementMonoSystem;
+        [SerializeField] private SceneMonoSystem sceneMonoSystem;
         
         [SerializeField] private SoundMonoSystem soundMonoSystem;
 
@@ -27,7 +27,7 @@ namespace Akashic.Runtime
             monoSystemsParentTransform.gameObject.SetActive(true);
             controllerParentTransform.gameObject.SetActive(true);
 
-            AddMonoSystem<SceneManagementMonoSystem, ISceneManagementMonoSystem>(sceneManagementMonoSystem);
+            AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
         }
     }

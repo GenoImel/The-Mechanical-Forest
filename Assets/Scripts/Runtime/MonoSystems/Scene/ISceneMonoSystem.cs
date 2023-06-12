@@ -6,7 +6,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
     /// <summary>
     /// Loads a scene in the game.
     /// </summary>
-    internal interface ISceneManagementMonoSystem : IMonoSystem
+    internal interface ISceneMonoSystem : IMonoSystem
     {
         /// <summary>
         /// Loads a scene.
