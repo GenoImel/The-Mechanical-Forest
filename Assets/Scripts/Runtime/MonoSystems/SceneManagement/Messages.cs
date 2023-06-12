@@ -3,20 +3,19 @@ using Akashic.Core;
 namespace Akashic.Runtime.MonoSystems.SceneManagement
 {
     /// <summary>
-    /// Holds Scene Data to be passed onto the built in Message Interface
+    /// Indicates that a scene has been loaded.
     /// </summary>
     internal sealed class SceneLoadedMessage : IMessage
     {
-        // Loaded Scene Type
-        public SceneType SceneSceneType;
-        // Loaded Scene Name
-        public string SceneSceneName;
-
-        // standard constructor for type SceneMessage
+        public SceneType Type { get; }
+        public string SceneName { get; }
+        
+        /// <param name="sceneType">Type of scene loaded.</param>
+        /// <param name="sceneName">Name of the loaded scene.</param>
         public SceneLoadedMessage(SceneType sceneType, string sceneName) 
         {
-            SceneSceneType = sceneType;
-            SceneSceneName = sceneName;
+            Type = sceneType;
+            SceneName = sceneName;
         }
     }
 }
