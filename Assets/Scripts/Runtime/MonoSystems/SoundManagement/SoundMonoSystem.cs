@@ -12,45 +12,29 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
     /// </Summary>
     public class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem 
     {
-
-        private AudioSource genericAudioHandler;
-        private AudioSource musicAudioSource;
+        
+        [Header("Components")]
+        [SerializeField] private AudioSource genericAudioHandler;
+        [SerializeField] private AudioSource musicAudioSource;
 
         [Header("General")]
         public float globalVolume = 1f;
         public float globalMusicVolume = 1f;
 
-        // Action responding to Global sound variable change
-        private Action<UpdateGlobalSoundMessage> OnSettingsChange;
-
         private void Start() 
         {    
-            genericAudioHandler = this.gameObject.AddComponent<AudioSource>();
-
-            // Hooking the music up to a separate AudioSource prevents any overlap
-            // or accidental music cancelling if we wanted to stop all sound effects
-            musicAudioSource = this.gameObject.AddComponent<AudioSource>();
-
-            //  I Don't know how the save system is going to work, but here is just a reference
-            //  to how it could be set up
-            //
-            // float savedGlovalVolume = SaveSystem.GetSavedOptions().globalVolume;
-            // float savedMusicVolume = SaveSystem.GetSavedOptions().globalMusicVolume;
-            // globalVolume = savedGlovalVolume;
-            // globalMusicVolume = savedMusicVolume
             genericAudioHandler.volume = globalVolume;
             musicAudioSource.volume = globalMusicVolume;
-
-            // Listens for the sound event message
-            OnSettingsChange += OnMasterVolumeChange;
-            GameManager.AddListener(OnSettingsChange);
         }
 
-        /// <Summary>
-        /// Responsible for Playing Sound Effects
-        /// NOTE - Has optional parameter "overrideAudio" that will cancel 
-        /// all other sound bytes currently playing
-        /// </Summary>
+        private void OnEnable() {
+            GameManager.AddListener<UpdateGlobalSoundMessage>(OnMasterVolumeChange);
+        }
+
+        private void OnDisable() {
+            GameManager.RemoveListener<UpdateGlobalSoundMessage>(OnMasterVolumeChange);
+        }
+
         public void PlaySound(AudioClip clip, bool overrideAudio = false) 
         {
             // cancels all other audio
@@ -64,20 +48,11 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
             genericAudioHandler.PlayOneShot(clip);
         }
 
-        /// <Summary>
-        /// Stops all Sound Effects Currently Playing
-        /// NOTE - Music should be stopped with the "StopMusic" function
-        /// </Summary>
         public void StopAudio() 
         {
             genericAudioHandler.Stop();
         }
 
-        /// <Summary>
-        /// Plays Music
-        /// NOTE - Has optional parameter "loop" that loops the music
-        /// and is set to 'true' by default
-        /// </Summary>
         public void PlayMusic(AudioClip clip, bool loop = true) 
         {
             musicAudioSource.loop = loop;
@@ -85,9 +60,6 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
             musicAudioSource.Play();
         }
 
-        /// <Summary>
-        /// Stops all music currently playing
-        /// </Summary>
         public void StopMucic() 
         {
             musicAudioSource.Stop();
@@ -104,15 +76,6 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
 
             globalMusicVolume = newSettings.GlobalMusicVolume;
             musicAudioSource.volume = globalMusicVolume;
-        }
-
-        // implements 'ISoundMonoSystem'
-
-        /// <Summary>
-        /// Returns the SoundMonoSystem Component
-        /// </Summary>
-        public SoundMonoSystem GetComponent() {
-            return this;
         }
     }
 }
