@@ -1,6 +1,6 @@
-using UnityEngine;
+using Akashic.Core;
 
-namespace Akashic.Core
+namespace Akashic.Runtime.MonoSystems.SceneManagement
 {
     internal interface ISceneManagementMonoSystem : IMonoSystem
     {
