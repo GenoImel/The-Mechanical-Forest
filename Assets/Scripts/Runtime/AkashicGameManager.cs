@@ -1,5 +1,6 @@
 using Akashic.Core;
-using Akashic.Runtime.MonoSystems.SceneManagement;
+using Akashic.Runtime.MonoSystems.Scene;
+using Akashic.Runtime.MonoSystems.Sound;
 using UnityEngine;
 
 namespace Akashic.Runtime
@@ -10,9 +11,11 @@ namespace Akashic.Runtime
         [SerializeField] private Transform monoSystemsParentTransform;
         
         [SerializeField] private Transform controllerParentTransform;
-
+        
         [Header("MonoSystems:")]
-        [SerializeField] private SceneManagementMonoSystem sceneManagementMonoSystem;
+        [SerializeField] private SceneMonoSystem sceneMonoSystem;
+        
+        [SerializeField] private SoundMonoSystem soundMonoSystem;
 
         protected override string GetApplicationName()
         {
@@ -24,7 +27,8 @@ namespace Akashic.Runtime
             monoSystemsParentTransform.gameObject.SetActive(true);
             controllerParentTransform.gameObject.SetActive(true);
 
-            AddMonoSystem<SceneManagementMonoSystem, ISceneManagementMonoSystem>(sceneManagementMonoSystem);
+            AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
+            AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
         }
     }
 }
