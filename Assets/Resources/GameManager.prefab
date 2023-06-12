@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa20d4ddcdc9443a09dcdc754522027c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newScene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
 --- !u!1 &1299556067596753460
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monoSystemsParentTransform: {fileID: 9133810835039284573}
   controllerParentTransform: {fileID: 6769403196620704062}
-  sceneManagementMonoSystem: {fileID: 1180253609855259221}
+  sceneMonoSystem: {fileID: 1180253609855259221}
   soundMonoSystem: {fileID: 2771502309570232540}
 --- !u!1 &1650268904667393076
 GameObject:
@@ -142,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e8850d5bedf46eab629778b717b9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericAudioHandler: {fileID: 2001718331495542019}
+  genericAudioSource: {fileID: 2001718331495542019}
   musicAudioSource: {fileID: 4200081328204653802}
 --- !u!82 &2001718331495542019
 AudioSource:
