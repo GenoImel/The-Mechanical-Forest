@@ -9,7 +9,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
     internal interface ISceneManagementMonoSystem : IMonoSystem
     {
         /// <summary>
-        /// Loads a scene based on name with an optional parameter of SceneType (defaults to current scene type)
+        /// Loads a scene.
         /// </summary>
         public void LoadScene(SceneAsset scene);
     }
