@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Akashic.Core;
-using System;
+using UnityEngine;
 
-namespace Akashic.Runtime.MonoSystems.SoundManagement 
+namespace Akashic.Runtime.MonoSystems.Sound 
 {
-
-    /// <Summary>
-    /// MonoSystem responsible for handling all sound output
-    /// </Summary>
-    public class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem 
+    internal sealed class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem 
     {
-        
-        [Header("Components")]
+        [Header("Audio Sources")]
         [SerializeField] private AudioSource genericAudioHandler;
+        
         [SerializeField] private AudioSource musicAudioSource;
+        
+        private float globalVolume = 1f;
+        
+        private float globalMusicVolume = 1f;
+        
+        private void OnEnable() 
+        {
+            GameManager.AddListener<UpdateSoundSettingsMessage>(OnUpdateSoundSettingsMessage);
+        }
 
-        [Header("General")]
-        public float globalVolume = 1f;
-        public float globalMusicVolume = 1f;
+        private void OnDisable() 
+        {
+            GameManager.RemoveListener<UpdateSoundSettingsMessage>(OnUpdateSoundSettingsMessage);
+        }
 
         private void Start() 
         {    
@@ -27,17 +30,8 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
             musicAudioSource.volume = globalMusicVolume;
         }
 
-        private void OnEnable() {
-            GameManager.AddListener<UpdateGlobalSoundMessage>(OnMasterVolumeChange);
-        }
-
-        private void OnDisable() {
-            GameManager.RemoveListener<UpdateGlobalSoundMessage>(OnMasterVolumeChange);
-        }
-
         public void PlaySound(AudioClip clip, bool overrideAudio = false) 
         {
-            // cancels all other audio
             if (overrideAudio) 
             {
                 genericAudioHandler.Stop();
@@ -48,7 +42,7 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
             genericAudioHandler.PlayOneShot(clip);
         }
 
-        public void StopAudio() 
+        public void StopSound() 
         {
             genericAudioHandler.Stop();
         }
@@ -60,7 +54,7 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
             musicAudioSource.Play();
         }
 
-        public void StopMucic() 
+        public void StopMusic() 
         {
             musicAudioSource.Stop();
         }
@@ -68,13 +62,12 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
         /// <Summary>
         /// Function that listens for when the Global Volume Settings gets updated
         /// </Summary>
-        private void OnMasterVolumeChange(UpdateGlobalSoundMessage newSettings) 
+        private void OnUpdateSoundSettingsMessage(UpdateSoundSettingsMessage newSettingsMessage) 
         {
-            // updates local values to global settings
-            globalVolume = newSettings.GlobalVolume;
+            globalVolume = newSettingsMessage.SoundEffectsVolume;
             genericAudioHandler.volume = globalVolume;
 
-            globalMusicVolume = newSettings.GlobalMusicVolume;
+            globalMusicVolume = newSettingsMessage.MusicVolume;
             musicAudioSource.volume = globalMusicVolume;
         }
     }
