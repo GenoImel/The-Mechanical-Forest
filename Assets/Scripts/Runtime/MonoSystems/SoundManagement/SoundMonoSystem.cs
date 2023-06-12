@@ -20,22 +20,11 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
         public float globalVolume = 1f;
         public float globalMusicVolume = 1f;
 
-        public static SoundMonoSystem instance;
-
         // Action responding to Global sound variable change
         private Action<UpdateGlobalSoundMessage> OnSettingsChange;
 
         private void Start() 
-        {
-            // sets up a singleton
-            if (instance != null) 
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
-            instance = this;
-            
+        {    
             genericAudioHandler = this.gameObject.AddComponent<AudioSource>();
 
             // Hooking the music up to a separate AudioSource prevents any overlap
@@ -62,26 +51,26 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
         /// NOTE - Has optional parameter "overrideAudio" that will cancel 
         /// all other sound bytes currently playing
         /// </Summary>
-        public static void PlaySound(AudioClip clip, bool overrideAudio = false) 
+        public void PlaySound(AudioClip clip, bool overrideAudio = false) 
         {
             // cancels all other audio
             if (overrideAudio) 
             {
-                instance.genericAudioHandler.Stop();
+                genericAudioHandler.Stop();
 
                 return;
             }
 
-            instance.genericAudioHandler.PlayOneShot(clip);
+            genericAudioHandler.PlayOneShot(clip);
         }
 
         /// <Summary>
         /// Stops all Sound Effects Currently Playing
         /// NOTE - Music should be stopped with the "StopMusic" function
         /// </Summary>
-        public static void StopAudio() 
+        public void StopAudio() 
         {
-            instance.genericAudioHandler.Stop();
+            genericAudioHandler.Stop();
         }
 
         /// <Summary>
@@ -89,19 +78,19 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
         /// NOTE - Has optional parameter "loop" that loops the music
         /// and is set to 'true' by default
         /// </Summary>
-        public static void PlayMusic(AudioClip clip, bool loop = true) 
+        public void PlayMusic(AudioClip clip, bool loop = true) 
         {
-            instance.musicAudioSource.loop = loop;
-            instance.musicAudioSource.clip = clip;
-            instance.musicAudioSource.Play();
+            musicAudioSource.loop = loop;
+            musicAudioSource.clip = clip;
+            musicAudioSource.Play();
         }
 
         /// <Summary>
         /// Stops all music currently playing
         /// </Summary>
-        public static void StopMucic() 
+        public void StopMucic() 
         {
-            instance.musicAudioSource.Stop();
+            musicAudioSource.Stop();
         }
 
         /// <Summary>
@@ -110,10 +99,10 @@ namespace Akashic.Runtime.MonoSystems.SoundManagement
         private void OnMasterVolumeChange(UpdateGlobalSoundMessage newSettings) 
         {
             // updates local values to global settings
-            globalVolume = newSettings.globalVolume;
+            globalVolume = newSettings.GlobalVolume;
             genericAudioHandler.volume = globalVolume;
 
-            globalMusicVolume = newSettings.globalMusicVolume;
+            globalMusicVolume = newSettings.GlobalMusicVolume;
             musicAudioSource.volume = globalMusicVolume;
         }
 
