@@ -19,7 +19,8 @@ namespace Akashic.Runtime.MonoSystems.Sound
         public void StopSound();
 
         /// <Summary>
-        /// Plays music. <paramref name="loop"/> is set to true by default.
+        /// Plays music.
+        /// <paramref name="loop"/> is set to true by default.
         /// </Summary>
         public void PlayMusic(AudioClip clip, bool loop = true);
 

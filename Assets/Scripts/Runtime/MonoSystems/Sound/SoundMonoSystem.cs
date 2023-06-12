@@ -6,7 +6,7 @@ namespace Akashic.Runtime.MonoSystems.Sound
     internal sealed class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem 
     {
         [Header("Audio Sources")]
-        [SerializeField] private AudioSource genericAudioHandler;
+        [SerializeField] private AudioSource genericAudioSource;
         
         [SerializeField] private AudioSource musicAudioSource;
         
@@ -26,7 +26,7 @@ namespace Akashic.Runtime.MonoSystems.Sound
 
         private void Start() 
         {    
-            genericAudioHandler.volume = globalVolume;
+            genericAudioSource.volume = globalVolume;
             musicAudioSource.volume = globalMusicVolume;
         }
 
@@ -34,17 +34,17 @@ namespace Akashic.Runtime.MonoSystems.Sound
         {
             if (overrideAudio) 
             {
-                genericAudioHandler.Stop();
+                genericAudioSource.Stop();
 
                 return;
             }
 
-            genericAudioHandler.PlayOneShot(clip);
+            genericAudioSource.PlayOneShot(clip);
         }
 
         public void StopSound() 
         {
-            genericAudioHandler.Stop();
+            genericAudioSource.Stop();
         }
 
         public void PlayMusic(AudioClip clip, bool loop = true) 
@@ -58,14 +58,11 @@ namespace Akashic.Runtime.MonoSystems.Sound
         {
             musicAudioSource.Stop();
         }
-
-        /// <Summary>
-        /// Function that listens for when the Global Volume Settings gets updated
-        /// </Summary>
+        
         private void OnUpdateSoundSettingsMessage(UpdateSoundSettingsMessage newSettingsMessage) 
         {
             globalVolume = newSettingsMessage.SoundEffectsVolume;
-            genericAudioHandler.volume = globalVolume;
+            genericAudioSource.volume = globalVolume;
 
             globalMusicVolume = newSettingsMessage.MusicVolume;
             musicAudioSource.volume = globalMusicVolume;
