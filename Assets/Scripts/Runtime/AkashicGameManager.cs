@@ -12,7 +12,7 @@ namespace Akashic.Runtime
         
         [SerializeField] private Transform controllerParentTransform;
         
-        [Header("MonoSystems:")]
+        [Header("MonoSystems")]
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
         
         [SerializeField] private SoundMonoSystem soundMonoSystem;
@@ -24,9 +24,14 @@ namespace Akashic.Runtime
 
         protected override void OnInitialized()
         {
+            BootstrapMonoSystems();
+                
             monoSystemsParentTransform.gameObject.SetActive(true);
             controllerParentTransform.gameObject.SetActive(true);
+        }
 
+        private void BootstrapMonoSystems()
+        {
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
         }

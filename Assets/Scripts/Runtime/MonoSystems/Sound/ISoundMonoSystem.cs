@@ -8,25 +8,37 @@ namespace Akashic.Runtime.MonoSystems.Sound
     /// </Summary>
     internal interface ISoundMonoSystem : IMonoSystem 
     {
-    	/// <Summary>
-        /// Plays a sound effect.
-        /// </Summary>
-        public void PlaySound(AudioClip clip, bool overrideAudio = false);
-
-        /// <Summary>
-        /// Stops playing all sound effects.
-        /// </Summary>
-        public void StopSound();
-
-        /// <Summary>
-        /// Plays music.
-        /// <paramref name="loop"/> is set to true by default.
-        /// </Summary>
+        /// <summary>
+        /// Plays a music track. Will loop if <paramref name="loop"/> is true.
+        /// </summary>
         public void PlayMusic(AudioClip clip, bool loop = true);
 
-        /// <Summary>
-        /// Stops the current music from playing.
-        /// </Summary>
-        public void StopMusic(); 
+        /// <summary>
+        /// Stops playing the current music track.
+        /// </summary>
+        public void StopMusic();
+        
+        /// <summary>
+        /// Plays a sound effect. Will interrupt currently playing sound effects if
+        /// <paramref name="overrideAudio"/> is true, and otherwise will play the
+        /// <paramref name="clip"/> concurrently if <paramref name="overrideAudio"/>
+        /// is false.
+        /// </summary>
+        public void PlaySound(AudioClip clip, bool overrideAudio = false);
+
+        /// <summary>
+        /// Stops all currently playing sound effects.
+        /// </summary>
+        public void StopSound();
+
+        /// <summary>
+        /// Sets the volume for the music audio source.
+        /// </summary>
+        public void SetMusicVolume(float volume);
+
+        /// <summary>
+        /// Sets the volume for the sound effects audio source.
+        /// </summary>
+        public void SetEffectsVolume(float volume);
     }
 }
