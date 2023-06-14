@@ -1,4 +1,3 @@
-using Akashic.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,8 +21,6 @@ namespace Akashic.Runtime.MonoSystems.Scene
             }
             
             currentScene = scene.name;
-            
-            GameManager.Publish(new SceneLoadedMessage(scene));
 
             //TO DO: Make this async or coroutine.
             SceneManager.LoadScene(currentScene);

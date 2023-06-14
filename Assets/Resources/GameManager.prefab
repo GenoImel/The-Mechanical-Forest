@@ -141,8 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e8850d5bedf46eab629778b717b9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericAudioSource: {fileID: 2001718331495542019}
+  effectsAudioSource: {fileID: 2001718331495542019}
   musicAudioSource: {fileID: 4200081328204653802}
+  effectsVolume: 0.757
+  musicVolume: 0.753
 --- !u!82 &2001718331495542019
 AudioSource:
   m_ObjectHideFlags: 0
