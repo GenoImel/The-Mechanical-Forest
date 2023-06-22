@@ -40,14 +40,15 @@ namespace Akashic.Runtime.MonoSystems.BattleStates
         {
         	if (state == currentState) 
         	{
-        		Debug.LogWarning($"Game is already in \"{state}\" state.");
+        		Debug.LogWarning($"Battle is already in \"{state}\" state.");
         		return;
         	}
 
         	previousState = currentState;
-        	currentState = state;
 
         	GameManager.Publish(new BattleStateChangeMessage(currentState, previousState));
+        	
+        	currentState = state;
         }
     }
 }

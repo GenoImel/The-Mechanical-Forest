@@ -10,9 +10,10 @@ namespace Akashic.Runtime.MonoSystems.BattleStates
         public BattleState currentState;
         public BattleState previousState;
 
-        public BattleStateChangeMessage(BattleState _currentState, BattleState _previousState) {
-            currentState = _currentState;
-            previousState = _previousState;
+        public BattleStateChangeMessage(BattleState curState, BattleState prevState) 
+        {
+            currentState = curState;
+            previousState = prevState;
         }
     }
 }
