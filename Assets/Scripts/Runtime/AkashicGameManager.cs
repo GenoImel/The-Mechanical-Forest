@@ -1,4 +1,5 @@
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.BattleStates;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Sound;
 using UnityEngine;
@@ -11,8 +12,10 @@ namespace Akashic.Runtime
         [SerializeField] private Transform monoSystemsParentTransform;
         
         [SerializeField] private Transform controllerParentTransform;
-        
+
         [Header("MonoSystems")]
+
+        [SerializeField] private BattleStateMonoSystem battleStateMonoSystem;
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
         
         [SerializeField] private SoundMonoSystem soundMonoSystem;
@@ -32,6 +35,7 @@ namespace Akashic.Runtime
 
         private void BootstrapMonoSystems()
         {
+            AddMonoSystem<BattleStateMonoSystem, IBattleStateMonoSystem>(battleStateMonoSystem);
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
         }

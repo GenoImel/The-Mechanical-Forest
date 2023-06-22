@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monoSystemsParentTransform: {fileID: 9133810835039284573}
   controllerParentTransform: {fileID: 6769403196620704062}
+  battleStateMonoSystem: {fileID: 5744338050339896519}
   sceneMonoSystem: {fileID: 1180253609855259221}
   soundMonoSystem: {fileID: 2771502309570232540}
 --- !u!1 &1650268904667393076
@@ -370,6 +371,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2847772543601168200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6324762246175825733}
+  - component: {fileID: 5744338050339896519}
+  m_Layer: 0
+  m_Name: BattleStateMonoSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6324762246175825733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847772543601168200}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9133810835039284573}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5744338050339896519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847772543601168200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922b7766179e4403883371d589326c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3403851422182821397
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +546,7 @@ Transform:
   - {fileID: 519022806235560926}
   - {fileID: 1858581393955378426}
   - {fileID: 1861951505456072796}
+  - {fileID: 6324762246175825733}
   m_Father: {fileID: 5216820085041679443}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
