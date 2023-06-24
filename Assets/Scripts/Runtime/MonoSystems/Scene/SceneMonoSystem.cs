@@ -22,7 +22,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
             
             currentScene = scene.name;
 
-            //TO DO: Make this async or coroutine.
+            //TO DO: Make this async or coroutine.[ser
             SceneManager.LoadScene(currentScene);
         }
     }
