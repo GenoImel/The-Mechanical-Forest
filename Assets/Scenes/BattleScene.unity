@@ -1725,6 +1725,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2922205747359735960, guid: 21addef470f819a4f976dee18a39e246, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5415478057108837138, guid: 21addef470f819a4f976dee18a39e246, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1786,6 +1790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2164425185643870472, guid: f53b1e5eba88b3e44970e8184235600b, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2870819629011653713, guid: f53b1e5eba88b3e44970e8184235600b, type: 3}
       propertyPath: m_Name
       value: GameOverController
