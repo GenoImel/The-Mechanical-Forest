@@ -7,13 +7,13 @@ namespace Akashic.Runtime.MonoSystems.BattleStates
     /// </summary>
     internal sealed class BattleStateChangeMessage : IMessage
     {
-        public BattleState currentState;
-        public BattleState previousState;
+        public BattleState PreviousState { get; }
+        public BattleState NextState { get; }
 
-        public BattleStateChangeMessage(BattleState curState, BattleState prevState) 
+        public BattleStateChangeMessage(BattleState nextState, BattleState prevState) 
         {
-            currentState = curState;
-            previousState = prevState;
+            NextState = nextState;
+            PreviousState = prevState;
         }
     }
 }
