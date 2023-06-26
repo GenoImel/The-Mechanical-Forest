@@ -1,6 +1,7 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.BattleStates;
 using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.MonoSystems.ExplorationStates;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Sound;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Akashic.Runtime
         [Header("MonoSystems")]
         [SerializeField] private GameStateMonoSystem gameStateMonoSystem;
         [SerializeField] private BattleStateMonoSystem battleStateMonoSystem;
+        [SerializeField] private ExplorationStateMonoSystem explorationStateMonoSystem;
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
         
         [SerializeField] private SoundMonoSystem soundMonoSystem;
@@ -38,6 +40,7 @@ namespace Akashic.Runtime
         {
             AddMonoSystem<GameStateMonoSystem, IGameStateMonoSystem>(gameStateMonoSystem);
             AddMonoSystem<BattleStateMonoSystem, IBattleStateMonoSystem>(battleStateMonoSystem);
+            AddMonoSystem<ExplorationStateMonoSystem, IExplorationStateMonoSystem>(explorationStateMonoSystem);
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
         }
