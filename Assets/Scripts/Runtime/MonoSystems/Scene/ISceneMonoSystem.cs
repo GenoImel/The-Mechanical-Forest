@@ -3,14 +3,21 @@ using UnityEditor;
 
 namespace Akashic.Runtime.MonoSystems.Scene
 {
-    /// <summary>
-    /// Loads a scene in the game.
-    /// </summary>
     internal interface ISceneMonoSystem : IMonoSystem
     {
         /// <summary>
-        /// Loads a scene.
+        /// Loads the Main Menu.
         /// </summary>
-        public void LoadScene(SceneAsset scene);
+        public void LoadMainMenuScene();
+
+        /// <summary>
+        /// Loads the exploration scene.
+        /// </summary>
+        public void LoadExplorationScene();
+
+        /// <summary>
+        /// Loads the battle scene.
+        /// </summary>
+        public void LoadBattleScene();
     }
 }
