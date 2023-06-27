@@ -4,8 +4,11 @@ using NaughtyAttributes;
 using Akashic.Core;
 using Akashic.Runtime.Controllers.LoadingCurtain;
 using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
+
 
 namespace Akashic.Runtime.MonoSystems.Scene
 {
@@ -22,7 +25,11 @@ namespace Akashic.Runtime.MonoSystems.Scene
         [SerializeField] private int battleSceneBuildIndex;
 
         [Header("Curtains")] 
-        [SerializeField] private LoadingCurtainController loadingCurtainController;
+        [SerializeField] private CanvasGroup loadingCanvasGroup;
+        [SerializeField] private CanvasGroup battleCanvasGroup;
+
+        [Header("Settings")] 
+        [SerializeField] private float canvasFadeDurationSeconds;
         
         public bool IsSceneLoading { get; private set; }
         
@@ -47,47 +54,38 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         public void LoadMainMenuScene()
         {
-            BeginLoadingScene(mainMenuSceneBuildIndex, MainMenuSceneLoaded, true);
+            LoadSceneRoutine(mainMenuSceneBuildIndex, loadingCanvasGroup, MainMenuSceneLoaded, true);
         }
 
         public void LoadExplorationScene()
         {
-            BeginLoadingScene(explorationSceneBuildIndex, ExplorationSceneLoaded);
+            LoadSceneRoutine(explorationSceneBuildIndex, loadingCanvasGroup, ExplorationSceneLoaded);
         }
 
         public void LoadBattleScene()
         {
-            BeginLoadingScene(battleSceneBuildIndex, BattleSceneLoaded);
+            LoadSceneRoutine(battleSceneBuildIndex, battleCanvasGroup, BattleSceneLoaded);
         }
 
-        private void BeginLoadingScene(
+        private async void LoadSceneRoutine(
             int index, 
-            Action onLoaded, 
-            bool isPreInitialized = false
-            )
-        {
-            StartCoroutine(LoadSceneRoutine(index, onLoaded));
-        }
-
-        private IEnumerator LoadSceneRoutine(
-            int index, 
+            CanvasGroup canvasGroup, 
             Action onLoaded, 
             bool isPreInitialized = false
             )
         {
             if (IsSceneLoading)
             {
-                yield break;
+                return;
             }
 
             IsSceneLoading = true;
             IsSceneInitialized = isPreInitialized;
 
-            yield return loadingCurtainController.ShowCurtain();
-            yield return new WaitForSeconds(5f);
-            yield return SceneManager.LoadSceneAsync(index);
-            yield return IsSceneInitialized;
-            yield return loadingCurtainController.HideCurtain();
+            await CanvasUtilities.ShowCurtain(canvasGroup, canvasFadeDurationSeconds);
+            await Task.Delay(5000);
+            SceneManager.LoadSceneAsync(index);
+            await CanvasUtilities.HideCurtain(canvasGroup, canvasFadeDurationSeconds);
 
             onLoaded?.Invoke();
 
