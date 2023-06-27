@@ -85,6 +85,12 @@ namespace Akashic.Runtime.MonoSystems.Scene
             await CanvasUtilities.ShowCurtain(canvasGroup, canvasFadeDurationSeconds);
             await Task.Delay(5000);
             SceneManager.LoadSceneAsync(index);
+
+            if (!IsSceneInitialized)
+            {
+              return;
+            }
+            
             await CanvasUtilities.HideCurtain(canvasGroup, canvasFadeDurationSeconds);
 
             onLoaded?.Invoke();
