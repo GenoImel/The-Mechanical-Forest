@@ -36,15 +36,17 @@ namespace Akashic.Runtime.Utilities
 
         private static async Task FadeRoutine(float to, CanvasGroup canvasGroup, float seconds, Action onComplete)
         {
-            float endTime = Time.time + seconds;
+            float realTime = 0;
             float startAlpha = canvasGroup.alpha;
 
-            while (endTime > Time.time) 
+            while (realTime <= seconds) 
             {
-                canvasGroup.alpha = Mathf.Lerp(startAlpha, to, Time.time / endTime);
+                realTime += Time.deltaTime;
+                canvasGroup.alpha = Mathf.Lerp(startAlpha, to, realTime / seconds);
                 await Task.Yield();
             }
 
+            canvasGroup.alpha = to;
             onComplete.Invoke();
         }
     }
