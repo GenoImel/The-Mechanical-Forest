@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using NaughtyAttributes;
 using Akashic.Core;
 using Akashic.Runtime.Controllers.LoadingCurtain;
 using Akashic.Runtime.MonoSystems.GameStates;
-using Akashic.Runtime.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
@@ -25,15 +23,14 @@ namespace Akashic.Runtime.MonoSystems.Scene
         [SerializeField] private int battleSceneBuildIndex;
 
         [Header("Curtains")] 
-        [SerializeField] private CanvasGroup loadingCanvasGroup;
-        [SerializeField] private CanvasGroup battleCanvasGroup;
+        [SerializeField] private LoadingCurtainController loadingCurtainController;
+        [SerializeField] private BattleCurtainController battleCurtainController;
 
-        [Header("Settings")] 
-        [SerializeField] private float canvasFadeDurationSeconds;
-        
-        public bool IsSceneLoading { get; private set; }
-        
-        public bool IsSceneInitialized { get; private set; }
+        private bool isSceneLoading;
+
+        private bool isSceneInitialized;
+
+        private bool sceneInitializationStarted;
 
         private IGameStateMonoSystem gameStateMonoSystem;
 
@@ -54,48 +51,55 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         public void LoadMainMenuScene()
         {
-            LoadSceneRoutine(mainMenuSceneBuildIndex, loadingCanvasGroup, MainMenuSceneLoaded, true);
+            LoadSceneAsync(mainMenuSceneBuildIndex, loadingCurtainController, MainMenuSceneLoaded, true);
         }
 
         public void LoadExplorationScene()
         {
-            LoadSceneRoutine(explorationSceneBuildIndex, loadingCanvasGroup, ExplorationSceneLoaded);
+            LoadSceneAsync(explorationSceneBuildIndex, loadingCurtainController, ExplorationSceneLoaded);
         }
 
         public void LoadBattleScene()
         {
-            LoadSceneRoutine(battleSceneBuildIndex, battleCanvasGroup, BattleSceneLoaded);
+            LoadSceneAsync(battleSceneBuildIndex, battleCurtainController, BattleSceneLoaded);
         }
 
-        private async void LoadSceneRoutine(
+        private async void LoadSceneAsync(
             int index, 
-            CanvasGroup canvasGroup, 
+            CurtainController curtain, 
             Action onLoaded, 
             bool isPreInitialized = false
             )
         {
-            if (IsSceneLoading)
+            if (isSceneLoading)
             {
                 return;
             }
 
-            IsSceneLoading = true;
-            IsSceneInitialized = isPreInitialized;
+            isSceneLoading = true;
+            isSceneInitialized = isPreInitialized;
+            sceneInitializationStarted = isPreInitialized;
 
-            await CanvasUtilities.ShowCurtain(canvasGroup, canvasFadeDurationSeconds);
-            await Task.Delay(5000);
+            await curtain.ShowCurtain();
             SceneManager.LoadSceneAsync(index);
+            await Task.Delay(1000);
 
-            if (!IsSceneInitialized)
+            if (!isSceneInitialized && !sceneInitializationStarted)
             {
-              return;
+                GameManager.Publish(new StartSceneInitializationMessage());
+                sceneInitializationStarted = true;
             }
-            
-            await CanvasUtilities.HideCurtain(canvasGroup, canvasFadeDurationSeconds);
+
+            if (!isSceneInitialized)
+            {
+                return;
+            }
+
+            await curtain.HideCurtain();
 
             onLoaded?.Invoke();
 
-            IsSceneLoading = false;
+            isSceneLoading = false;
         }
 
         private void MainMenuSceneLoaded()
@@ -115,7 +119,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         private void OnSceneInitializedMessage(SceneInitializedMessage message)
         {
-            IsSceneInitialized = true;
+            isSceneInitialized = true;
         }
 
         private void AddListeners()

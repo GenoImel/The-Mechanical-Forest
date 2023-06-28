@@ -32,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6209257828850585865}
-  - {fileID: 5995723535290426363}
+  - {fileID: 711809338549709753}
   - {fileID: 7550473846090603135}
   - {fileID: 1509201022132355286}
   m_Father: {fileID: 6267250677503226693}
@@ -246,7 +246,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1457295255566303249
 MonoBehaviour:
@@ -330,7 +330,7 @@ Transform:
   m_Children:
   - {fileID: 4350606120833654384}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &936321027352500554
 PrefabInstance:
@@ -751,7 +751,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 493a91a228a64384ead364e6b60e8fd4, type: 3}
---- !u!224 &5995723535290426363 stripped
+--- !u!224 &711809338549709753 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6545362052211329091, guid: 493a91a228a64384ead364e6b60e8fd4, type: 3}
   m_PrefabInstance: {fileID: 5995723535290426362}

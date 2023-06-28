@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Scene UI
+    uniqueID: 4028635625
+    locked: 0
+  - name: Core UI
+    uniqueID: 2956679775
+    locked: 0
