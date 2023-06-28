@@ -1,11 +1,12 @@
 using System;
-using System.Collections;
 using NaughtyAttributes;
 using Akashic.Core;
 using Akashic.Runtime.Controllers.LoadingCurtain;
 using Akashic.Runtime.MonoSystems.GameStates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
+
 
 namespace Akashic.Runtime.MonoSystems.Scene
 {
@@ -23,10 +24,13 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         [Header("Curtains")] 
         [SerializeField] private LoadingCurtainController loadingCurtainController;
-        
-        public bool IsSceneLoading { get; private set; }
-        
-        public bool IsSceneInitialized { get; private set; }
+        [SerializeField] private BattleCurtainController battleCurtainController;
+
+        private bool isSceneLoading;
+
+        private bool isSceneInitialized;
+
+        private bool sceneInitializationStarted;
 
         private IGameStateMonoSystem gameStateMonoSystem;
 
@@ -47,51 +51,55 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         public void LoadMainMenuScene()
         {
-            BeginLoadingScene(mainMenuSceneBuildIndex, MainMenuSceneLoaded, true);
+            LoadSceneAsync(mainMenuSceneBuildIndex, loadingCurtainController, MainMenuSceneLoaded, true);
         }
 
         public void LoadExplorationScene()
         {
-            BeginLoadingScene(explorationSceneBuildIndex, ExplorationSceneLoaded);
+            LoadSceneAsync(explorationSceneBuildIndex, loadingCurtainController, ExplorationSceneLoaded);
         }
 
         public void LoadBattleScene()
         {
-            BeginLoadingScene(battleSceneBuildIndex, BattleSceneLoaded);
+            LoadSceneAsync(battleSceneBuildIndex, battleCurtainController, BattleSceneLoaded);
         }
 
-        private void BeginLoadingScene(
+        private async void LoadSceneAsync(
             int index, 
+            CurtainController curtain, 
             Action onLoaded, 
             bool isPreInitialized = false
             )
         {
-            StartCoroutine(LoadSceneRoutine(index, onLoaded));
-        }
-
-        private IEnumerator LoadSceneRoutine(
-            int index, 
-            Action onLoaded, 
-            bool isPreInitialized = false
-            )
-        {
-            if (IsSceneLoading)
+            if (isSceneLoading)
             {
-                yield break;
+                return;
             }
 
-            IsSceneLoading = true;
-            IsSceneInitialized = isPreInitialized;
+            isSceneLoading = true;
+            isSceneInitialized = isPreInitialized;
+            sceneInitializationStarted = isPreInitialized;
 
-            yield return loadingCurtainController.ShowCurtain();
-            yield return new WaitForSeconds(5f);
-            yield return SceneManager.LoadSceneAsync(index);
-            yield return IsSceneInitialized;
-            yield return loadingCurtainController.HideCurtain();
+            await curtain.ShowCurtain();
+            SceneManager.LoadSceneAsync(index);
+            await Task.Delay(1000);
+
+            if (!isSceneInitialized && !sceneInitializationStarted)
+            {
+                GameManager.Publish(new StartSceneInitializationMessage());
+                sceneInitializationStarted = true;
+            }
+
+            if (!isSceneInitialized)
+            {
+                return;
+            }
+
+            await curtain.HideCurtain();
 
             onLoaded?.Invoke();
 
-            IsSceneLoading = false;
+            isSceneLoading = false;
         }
 
         private void MainMenuSceneLoaded()
@@ -111,7 +119,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         private void OnSceneInitializedMessage(SceneInitializedMessage message)
         {
-            IsSceneInitialized = true;
+            isSceneInitialized = true;
         }
 
         private void AddListeners()

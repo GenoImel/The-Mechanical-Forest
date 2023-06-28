@@ -488,7 +488,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &371895511423086586
 MonoBehaviour:
@@ -1229,11 +1229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Size
-      value: 0.16575068
+      value: 0.16575067
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7871387450858413197, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1607,11 +1607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Size
-      value: 0.16575068
+      value: 0.16575067
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7871387450858413197, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2515,11 +2515,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Size
-      value: 0.16575068
+      value: 0.16575067
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7871387450858413197, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3211,11 +3211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Size
-      value: 0.16575068
+      value: 0.16575067
       objectReference: {fileID: 0}
     - target: {fileID: 7063252469798475855, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_Value
-      value: 1.0000001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7871387450858413197, guid: 145c902fa4c5e0447911acb6e934b11f, type: 3}
       propertyPath: m_AnchorMax.y
