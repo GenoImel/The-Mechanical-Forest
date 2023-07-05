@@ -44,7 +44,7 @@
     "com.unity.modules.xr" : "1.0.0",
     "com.dbrizov.naughtyattributes" : "https://github.com/dbrizov/NaughtyAttributes.git#upm",
     "jillejr.newtonsoft.json-for-unity" : "13.0.102",
-	"jillejr.newtonsoft.json-for-unity.converters": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters.git#1.5.1"
+		"jillejr.newtonsoft.json-for-unity.converters": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters.git#1.5.1"
   },
   "scopedRegistries" : [
     {
