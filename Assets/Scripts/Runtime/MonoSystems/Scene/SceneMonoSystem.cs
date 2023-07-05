@@ -92,7 +92,7 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
             if (!isSceneInitialized)
             {
-                return;
+                await Task.Yield();
             }
 
             await curtain.HideCurtain();
