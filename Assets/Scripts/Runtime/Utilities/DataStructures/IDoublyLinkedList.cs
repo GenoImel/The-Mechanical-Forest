@@ -1,4 +1,4 @@
-namespace Akashic.Runtime.Utilities
+namespace Akashic.Runtime.Utilities.DataStructures
 {
     internal interface IDoublyLinkedList
     {

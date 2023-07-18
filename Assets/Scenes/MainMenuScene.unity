@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 777250290}
+    - target: {fileID: 4388258245968864364, guid: 44a9f657a9fd8e84087bc8e73e17188a, type: 3}
+      propertyPath: optionsButton
+      value: 
+      objectReference: {fileID: 8280579061858206769}
     - target: {fileID: 5138692075535670542, guid: 44a9f657a9fd8e84087bc8e73e17188a, type: 3}
       propertyPath: m_Name
       value: MainMenuController
@@ -348,3 +352,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a9f657a9fd8e84087bc8e73e17188a, type: 3}
+--- !u!114 &8280579061858206769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2743315243378318101, guid: 44a9f657a9fd8e84087bc8e73e17188a, type: 3}
+  m_PrefabInstance: {fileID: 8280579061858206768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

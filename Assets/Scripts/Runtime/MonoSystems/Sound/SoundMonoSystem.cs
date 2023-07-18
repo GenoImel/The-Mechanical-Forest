@@ -1,8 +1,11 @@
+using Akashic.Core;
+using Akashic.Runtime.Controllers.OptionsMenu;
+using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Sound 
 {
-    internal sealed class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem 
+     internal sealed class SoundMonoSystem : MonoBehaviour, ISoundMonoSystem
     {
         [Header("Audio Sources")] 
         [SerializeField] private AudioSource effectsAudioSource;
@@ -15,10 +18,22 @@ namespace Akashic.Runtime.MonoSystems.Sound
         
         [Range(0, 1)]
         [SerializeField] private float musicVolume = 0.75f;
+        
+        private IPlayerPreferencesMonoSystem playerPreferencesMonoSystem;
 
-        private void Start()
+        private void Awake()
         {
-            SetAudioSourceVolumeLevels();
+            playerPreferencesMonoSystem = GameManager.GetMonoSystem<IPlayerPreferencesMonoSystem>();
+        }
+
+        private void OnEnable()
+        {
+            AddListeners();
+        }
+        
+        private void OnDisable()
+        {
+            RemoveListeners();
         }
         
         public void PlayMusic(AudioClip clip, bool loop = true) 
@@ -67,8 +82,30 @@ namespace Akashic.Runtime.MonoSystems.Sound
 
         private void SetAudioSourceVolumeLevels()
         {
-            musicAudioSource.volume = musicVolume;
-            effectsAudioSource.volume = effectsVolume;
+            musicAudioSource.volume = playerPreferencesMonoSystem.GetMusicVolume();
+            effectsAudioSource.volume = playerPreferencesMonoSystem.GetEffectsVolume();
+        }
+        
+        private void OnSettingsMenuClosedMessage(OptionsMenuClosedMessage message)
+        {
+            playerPreferencesMonoSystem.UpdateSoundPreferences(musicVolume, effectsVolume);
+        }
+        
+        private void OnPlayerPreferencesLoadedMessage(PlayerPreferencesLoadedMessage message)
+        {
+            SetAudioSourceVolumeLevels();
+        }
+        
+        private void AddListeners()
+        {
+            GameManager.AddListener<OptionsMenuClosedMessage>(OnSettingsMenuClosedMessage);
+            GameManager.AddListener<PlayerPreferencesLoadedMessage>(OnPlayerPreferencesLoadedMessage);
+        }
+        
+        private void RemoveListeners()
+        {
+            GameManager.RemoveListener<OptionsMenuClosedMessage>(OnSettingsMenuClosedMessage);
+            GameManager.RemoveListener<PlayerPreferencesLoadedMessage>(OnPlayerPreferencesLoadedMessage);
         }
     }
 }

@@ -2,6 +2,7 @@ using Akashic.Core;
 using Akashic.Runtime.MonoSystems.BattleStates;
 using Akashic.Runtime.MonoSystems.GameStates;
 using Akashic.Runtime.MonoSystems.ExplorationStates;
+using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Sound;
 using UnityEngine;
@@ -20,8 +21,8 @@ namespace Akashic.Runtime
         [SerializeField] private BattleStateMonoSystem battleStateMonoSystem;
         [SerializeField] private ExplorationStateMonoSystem explorationStateMonoSystem;
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
-        
         [SerializeField] private SoundMonoSystem soundMonoSystem;
+        [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
 
         protected override string GetApplicationName()
         {
@@ -43,6 +44,7 @@ namespace Akashic.Runtime
             AddMonoSystem<ExplorationStateMonoSystem, IExplorationStateMonoSystem>(explorationStateMonoSystem);
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
+            AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
         }
     }
 }

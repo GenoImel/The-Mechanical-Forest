@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Akashic.Runtime.Utilities
+namespace Akashic.Runtime.Utilities.DataStructures
 {
     /// <summary>
     /// Generic Serializable Dictionary for Unity 2020.1 and above.

@@ -1,8 +1,8 @@
-using UnityEngine;
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
-namespace Akashic.Runtime.Utilities
+namespace Akashic.Runtime.Utilities.Canvas
 {
     /// <summary>
     /// 'CanvasUtilities' handles utility functions for loading curtains
