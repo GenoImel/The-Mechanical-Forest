@@ -689,6 +689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newGameButton: {fileID: 1621998888674865051}
+  optionsButton: {fileID: 2743315243378318101}
+  quitButton: {fileID: 2711121616882885682}
 --- !u!1 &5854236666180886019
 GameObject:
   m_ObjectHideFlags: 0

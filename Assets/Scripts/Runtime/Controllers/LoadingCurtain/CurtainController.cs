@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Akashic.Runtime.Utilities;
+using Akashic.Runtime.Utilities.Canvas;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.LoadingCurtain
