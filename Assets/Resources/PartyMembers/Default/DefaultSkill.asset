@@ -16,9 +16,9 @@ MonoBehaviour:
   description: For tesing purposes only.
   skillElement: 0
   apCost: 3
-  baseDamage: 0
-  statusEffect: 6
+  baseDamage: 137
+  statusEffect: 2
   statusEffectChance: 1
-  statusEffectDuration: 0
+  statusEffectDuration: 3
   buttonDescriptionArtwork: {fileID: 0}
   timelineArtwork: {fileID: 0}

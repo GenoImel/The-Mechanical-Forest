@@ -21,4 +21,4 @@ MonoBehaviour:
   baseAccuracy: 0.8
   basePhysicalDefense: 15
   baseMagicalDefense: 8
-  baseEvade: 0.4
+  baseEvade: 0.6
