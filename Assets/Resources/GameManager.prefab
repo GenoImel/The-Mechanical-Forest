@@ -54,6 +54,7 @@ MonoBehaviour:
   explorationStateMonoSystem: {fileID: 7858574160944137729}
   sceneMonoSystem: {fileID: 1180253609855259221}
   soundMonoSystem: {fileID: 2771502309570232540}
+  partyMonoSystem: {fileID: 4792072170638144708}
   playerPreferencesMonoSystem: {fileID: 4089780349662454133}
 --- !u!1 &3403851422182821397
 GameObject:
@@ -2851,6 +2852,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5142540547701393835, guid: 13c187116da80c2489dca95d239db111, type: 3}
   m_PrefabInstance: {fileID: 6812541501851976183}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4792072170638144708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2020953332303377715, guid: 13c187116da80c2489dca95d239db111, type: 3}
+  m_PrefabInstance: {fileID: 6812541501851976183}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9445eaa9ba4859bbf64e7c07d525fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6901376286405899695
 PrefabInstance:
   m_ObjectHideFlags: 0

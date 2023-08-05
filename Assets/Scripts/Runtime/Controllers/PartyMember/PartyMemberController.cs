@@ -6,6 +6,9 @@ namespace Akashic.Runtime.Controllers.PartyMember
 {
     internal sealed class PartyMemberController : MonoBehaviour
     {
+        [Header("Party Member Info")]
+        [SerializeField] private string partyMemberName;
+        
         [Header("Base Data")]
         [SerializeField] private PartyMemberBaseData partyMemberBaseData;
         
@@ -23,5 +26,13 @@ namespace Akashic.Runtime.Controllers.PartyMember
         [SerializeField] private PartyMemberEffectHandler partyMemberEffectHandler;
 
         [SerializeField] private PartyMemberSoundHandler partyMemberSoundHandler;
+
+        public void InitializeNewPartyMemberFromScriptableObject()
+        {
+            partyMemberName = partyMemberBaseData.partyMemberName;
+            
+            partyMemberStatHandler.InitializeNewPartyMemberFromScriptableObject(partyMemberBaseData);
+            partyMemberResourceHandler.InitializeNewPartyMemberFromScriptableObject(partyMemberBaseData);
+        }
     }
 }

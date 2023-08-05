@@ -1,6 +1,6 @@
 using Akashic.Core;
 using Akashic.Runtime.Controllers.OptionsMenu;
-using Akashic.Runtime.MonoSystems.Scene;
+using Akashic.Runtime.Controllers.SaveMenu;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +12,6 @@ namespace Akashic.Runtime.Controllers.MainMenu
         [SerializeField] private Button newGameButton;
         [SerializeField] private Button optionsButton;
         [SerializeField] private Button quitButton;
-        
-        private ISceneMonoSystem sceneMonoSystem;
-
-        private void Awake()
-        {
-            sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
-        }
 
         private void OnEnable()
         {
@@ -32,7 +25,7 @@ namespace Akashic.Runtime.Controllers.MainMenu
         
         private void OnNewGameButtonClicked()
         {
-            sceneMonoSystem.LoadExplorationScene();
+            GameManager.Publish(new ShowSaveMenuMessage());
         }
 
         private void OnOptionsButtonClicked()

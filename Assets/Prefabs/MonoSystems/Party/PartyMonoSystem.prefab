@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5142540547701393835}
+  - component: {fileID: 2020953332303377715}
   m_Layer: 0
   m_Name: PartyMonoSystem
   m_TagString: Untagged
@@ -29,5 +30,21 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020953332303377715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531274086690035499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9445eaa9ba4859bbf64e7c07d525fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  airyPrefab: {fileID: 1740181910015788075, guid: ccdbe0be1ab504b0dbeb68cef63705fc, type: 3}
+  benoitPrefab: {fileID: 1740181910015788075, guid: a5a7c9b90849d4244be1fc92385aee08, type: 3}
+  conradPrefab: {fileID: 1740181910015788075, guid: 6c55685c5e8cc9841b6ea0b7dc290f01, type: 3}
+  lenaPrefab: {fileID: 1740181910015788075, guid: f4ae43299024c373fb4d06ba8e9e518c, type: 3}
