@@ -40,7 +40,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         private void OnBackButtonPressed()
         {
-            
+            Hide();
         }
 
         private void OnShowSaveMenuMessage(ShowSaveMenuMessage message)
