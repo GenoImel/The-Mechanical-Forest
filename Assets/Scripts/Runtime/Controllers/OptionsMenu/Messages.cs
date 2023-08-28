@@ -9,8 +9,4 @@ namespace Akashic.Runtime.Controllers.OptionsMenu
     internal sealed class OptionsMenuClosedMessage : IMessage
     {
     }
-    
-    internal sealed class PlayerPreferencesLoadedMessage : IMessage
-    {
-    }
 }

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Akashic.Runtime.MonoSystems.PlayerPrefs
+namespace Akashic.Runtime.Serializers
 {
     [Serializable]
     internal sealed class PlayerPreferences
