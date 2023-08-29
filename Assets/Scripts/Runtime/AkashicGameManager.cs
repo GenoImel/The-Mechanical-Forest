@@ -1,8 +1,7 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.BattleStates;
-using Akashic.Runtime.MonoSystems.Dialogue;
-using Akashic.Runtime.MonoSystems.ExplorationStates;
 using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.MonoSystems.ExplorationStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using Akashic.Runtime.MonoSystems.Save;
@@ -28,7 +27,6 @@ namespace Akashic.Runtime
         [SerializeField] private PartyMonoSystem partyMonoSystem;
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
         [SerializeField] private SaveMonoSystem saveMonoSystem;
-        [SerializeField] private DialogueMonoSystem dialogueMonoSystem;
 
         protected override string GetApplicationName()
         {
@@ -53,7 +51,6 @@ namespace Akashic.Runtime
             AddMonoSystem<PartyMonoSystem, IPartyMonoSystem>(partyMonoSystem);
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
-            AddMonoSystem<DialogueMonoSystem, IDialogueMonoSystem>(dialogueMonoSystem);
         }
     }
 }
