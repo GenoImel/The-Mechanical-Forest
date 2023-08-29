@@ -274,7 +274,7 @@ When creating a new `MonoSystem`, we must first define an interface for the `Mon
 // All MonoSystems require an interface to be defined.
 //
 // The interface of the MonoSystem resides in a subfolder of the same name within
-// the the "Assets/Runtime/MonoSystems" folder.
+// the "Assets/Runtime/MonoSystems" folder.
 //
 // Defining an interface for our MonoSystem allows for MonoSystems to be generically typed,
 // which enables the bootstrapping of MonoSystems at runtime. Interfaces also allow us
