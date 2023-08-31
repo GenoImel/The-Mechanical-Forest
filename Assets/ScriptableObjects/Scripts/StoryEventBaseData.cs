@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Akashic.Runtime.MonoSystems.Dialogue;
 
 namespace Akashic.ScriptableObjects.Scripts
 {
@@ -9,13 +9,4 @@ namespace Akashic.ScriptableObjects.Scripts
     {
         public List<StoryPoint> storyPoints;
     }
-}
-
-[Serializable]
-public class StoryPoint
-{
-    public string dialogueLine;
-    public Sprite profilePicture;
-    public Sprite backgroundImage;
-    public AudioSource music;
 }
