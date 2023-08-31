@@ -8,17 +8,14 @@ namespace Akashic.ScriptableObjects.Scripts
     internal sealed class StoryEventBaseData : ScriptableObject
     {
         public List<StoryPoint> storyPoints;
-
-        [Serializable]
-        public class StoryPoint
-        {
-            public string dialogueLine;
-
-            public Sprite profilePicture;
-
-            public Sprite backgroundImage;
-
-            public AudioSource music;
-        }
     }
+}
+
+[Serializable]
+public class StoryPoint
+{
+    public string dialogueLine;
+    public Sprite profilePicture;
+    public Sprite backgroundImage;
+    public AudioSource music;
 }
