@@ -1,4 +1,5 @@
 using UnityEngine;
+using Akashic.Core;
 using Akashic.ScriptableObjects.Scripts;
 
 namespace Akashic.Runtime.MonoSystems.Dialogue
@@ -9,7 +10,7 @@ namespace Akashic.Runtime.MonoSystems.Dialogue
 
         private void OnMouseDown()
         {
-            Debug.Log($"{storyEvent.storyPoints[0].dialogueLine}");
+            GameManager.Publish(new DialogueStoryEventMessage(storyEvent));
         }
     }
 }
