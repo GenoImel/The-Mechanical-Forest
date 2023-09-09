@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Akashic.Runtime.MonoSystems.Dialogue;
+using Akashic.Runtime.MonoSystems.Story;
 
 namespace Akashic.ScriptableObjects.Scripts
 {

@@ -57,7 +57,7 @@ MonoBehaviour:
   partyMonoSystem: {fileID: 4792072170638144708}
   playerPreferencesMonoSystem: {fileID: 4089780349662454133}
   saveMonoSystem: {fileID: 8527105544289723711}
-  dialogueMonoSystem: {fileID: 7673398307471678892}
+  storyMonoSystem: {fileID: 6603474244123363811, guid: d7b8d8b1b0521d3408a4357654e2a2ce, type: 3}
 --- !u!1 &3403851422182821397
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,17 +517,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2887407841870119093, guid: d7b8d8b1b0521d3408a4357654e2a2ce, type: 3}
   m_PrefabInstance: {fileID: 3591941538705626191}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7673398307471678892 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6603474244123363811, guid: d7b8d8b1b0521d3408a4357654e2a2ce, type: 3}
-  m_PrefabInstance: {fileID: 3591941538705626191}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778d7001dfe124a11b64d7f898876583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3856616680452018967
 PrefabInstance:
   m_ObjectHideFlags: 0

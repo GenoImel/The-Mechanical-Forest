@@ -1,11 +1,11 @@
 using Akashic.Core;
 
-namespace Akashic.Runtime.MonoSystems.Dialogue
+namespace Akashic.Runtime.MonoSystems.Story
 {
     /// <summary>
     /// Provides dialogue functionality.
     /// </summary>
-    internal interface IDialogueMonoSystem : IMonoSystem
+    internal interface IStoryMonoSystem : IMonoSystem
     {
     }
 }

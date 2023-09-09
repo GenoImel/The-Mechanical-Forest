@@ -2,7 +2,7 @@ using UnityEngine;
 using Akashic.Core;
 using Akashic.ScriptableObjects.Scripts;
 
-namespace Akashic.Runtime.MonoSystems.Dialogue
+namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryEventInjector : MonoBehaviour
     {

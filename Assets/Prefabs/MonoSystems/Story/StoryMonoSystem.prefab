@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2887407841870119093}
   - component: {fileID: 6603474244123363811}
   m_Layer: 0
-  m_Name: DialogueMonoSystem
+  m_Name: StoryMonoSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

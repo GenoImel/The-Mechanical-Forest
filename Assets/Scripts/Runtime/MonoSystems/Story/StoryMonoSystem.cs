@@ -1,9 +1,9 @@
 using UnityEngine;
 using Akashic.Core;
 
-namespace Akashic.Runtime.MonoSystems.Dialogue
+namespace Akashic.Runtime.MonoSystems.Story
 {
-    internal sealed class DialogueMonoSystem : MonoBehaviour, IDialogueMonoSystem
+    internal sealed class StoryMonoSystem : MonoBehaviour, IStoryMonoSystem
     {
         private void OnEnable()
         {
