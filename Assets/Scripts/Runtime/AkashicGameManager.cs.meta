@@ -1,3 +1,22 @@
 fileFormatVersion: 2
 guid: 5da13ed8847e422d85232900ed679508
-timeCreated: 1685843434
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - monoSystemsParentTransform: {instanceID: 0}
+  - controllerParentTransform: {instanceID: 0}
+  - gameStateMonoSystem: {instanceID: 0}
+  - battleStateMonoSystem: {instanceID: 0}
+  - explorationStateMonoSystem: {instanceID: 0}
+  - sceneMonoSystem: {instanceID: 0}
+  - soundMonoSystem: {instanceID: 0}
+  - partyMonoSystem: {instanceID: 0}
+  - playerPreferencesMonoSystem: {instanceID: 0}
+  - saveMonoSystem: {instanceID: 0}
+  - storyMonoSystem: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
