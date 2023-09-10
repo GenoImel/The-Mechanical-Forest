@@ -22,7 +22,7 @@ namespace Akashic.Runtime.MonoSystems.Story
         {
             // pass in one story point to the dialogue controller
             // keep track of which story point in the story event you are on
-            // break everything down once there are no more story points
+            // clean up once there are no more story points
             dialogueController.ShowStoryPointDialogue(message.StoryEvent.storyPoints[0]);
         }
 
