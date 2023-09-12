@@ -475,6 +475,8 @@ MonoBehaviour:
   newGameButton: {fileID: 7152188301989345295}
   saveGameButton: {fileID: 6505667594832349057}
   loadGameButton: {fileID: 1071321573470379468}
+  saveSlotNameText: {fileID: 8332707786477446303}
+  saveSlotFileName: 
 --- !u!1 &4271143512522557650
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +624,7 @@ GameObject:
   - component: {fileID: 156689917277484583}
   - component: {fileID: 8332707786477446303}
   m_Layer: 0
-  m_Name: SaveNameText
+  m_Name: SaveSlotNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

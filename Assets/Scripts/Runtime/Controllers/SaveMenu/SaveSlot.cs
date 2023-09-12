@@ -1,7 +1,9 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
+using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Scene;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,19 +17,38 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [SerializeField] private Button saveGameButton;
         
         [SerializeField] private Button loadGameButton;
+
+        [Header("Text")]
+        [SerializeField] private TMP_Text saveSlotNameText;
+
+        [SerializeField] private string saveSlotFileName;
         
+        [SerializeField] private string defaultEmptySaveSlotText = "No Data";
+
+        private ISaveMonoSystem saveMonoSystem;
         private ISceneMonoSystem sceneMonoSystem;
         private IPartyMonoSystem partyMonoSystem;
         
         private void Awake()
         {
-            sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
-            partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
+            saveMonoSystem = GameManager.GetMonoSystem<ISaveMonoSystem>();
+            
+            // Move these over to the SaveMonoSystem
+            /*sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
+            partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();*/
         }
 
         private void Start()
         {
             NewGameButtonEnabled(true);
+            
+            FindSaveFile();
+        }
+
+        private async void FindSaveFile()
+        {
+            var saveFileName =  await saveMonoSystem.FindSaveFile(saveSlotFileName);
+            SetSaveSlotName(string.IsNullOrEmpty(saveFileName) ? defaultEmptySaveSlotText : saveFileName);
         }
 
         private void OnEnable()
@@ -38,6 +59,11 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         private void OnDisable()
         {
             RemoveListeners();
+        }
+        
+        private void SetSaveSlotName(string saveSlotName)
+        {
+            saveSlotNameText.text = saveSlotName;
         }
 
         private void OnNewGameButtonPressed()
