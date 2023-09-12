@@ -1,14 +1,15 @@
 using UnityEngine;
 using TMPro;
+using Akashic.Runtime.Common;
 using Akashic.Runtime.Utilities.Canvas;
 using Akashic.Runtime.MonoSystems.Story;
 
 namespace Akashic.Runtime.Controllers.Story
 {
-    internal sealed class DialogueController : MonoBehaviour
+    internal sealed class DialogueController : OverlayController
     {
         [Header("UI elements")]
-        [SerializeField] private CanvasGroup dialogueCanvas;
+        // The dialogue panel will eventually have it's own script.
         [SerializeField] private CanvasGroup dialoguePanel;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI dialogueText;
@@ -18,15 +19,16 @@ namespace Akashic.Runtime.Controllers.Story
             Hide();
         }
 
-        private void Hide()
+        // Overriding inherited OverlayController methods until DialoguePanel has its own script.
+        private new void Hide()
         {
-            CanvasUtilities.HideCanvas(dialogueCanvas);
+            CanvasUtilities.HideCanvas(canvasGroup);
             CanvasUtilities.HideCanvas(dialoguePanel);
         }
 
-        private void Show()
+        private new void Show()
         {
-            CanvasUtilities.ShowCanvas(dialogueCanvas);
+            CanvasUtilities.ShowCanvas(canvasGroup);
             CanvasUtilities.ShowCanvas(dialoguePanel);
         }
 
