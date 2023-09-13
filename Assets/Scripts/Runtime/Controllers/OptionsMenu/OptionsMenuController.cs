@@ -1,17 +1,14 @@
-using Akashic.Core;
-using Akashic.Runtime.Utilities.Canvas;
 using UnityEngine;
 using UnityEngine.UI;
+using Akashic.Core;
+using Akashic.Runtime.Common;
 
 namespace Akashic.Runtime.Controllers.OptionsMenu
 {
-    internal sealed class SettingsMenuController : MonoBehaviour
+    internal sealed class SettingsMenuController : OverlayController
     {
         [Header("Buttons")]
         [SerializeField] private Button backButton;
-        
-        [Header("UI")]
-        [SerializeField] private CanvasGroup canvasGroup;
         
         private void OnEnable()
         {
@@ -21,16 +18,6 @@ namespace Akashic.Runtime.Controllers.OptionsMenu
         private void OnDisable()
         {
             RemoveListeners();
-        }
-        
-        private void Hide()
-        {
-            CanvasUtilities.HideCanvas(canvasGroup);
-        }
-        
-        private void Show()
-        {
-            CanvasUtilities.ShowCanvas(canvasGroup);
         }
         
         private void OnBackButtonClicked()

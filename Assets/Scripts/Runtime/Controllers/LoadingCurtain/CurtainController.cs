@@ -1,21 +1,19 @@
-using System.Threading.Tasks;
-using Akashic.Runtime.Utilities;
-using Akashic.Runtime.Utilities.Canvas;
 using UnityEngine;
+using System.Threading.Tasks;
+using Akashic.Runtime.Common;
+using Akashic.Runtime.Utilities.Canvas;
+
 
 namespace Akashic.Runtime.Controllers.LoadingCurtain
 {
-    internal class CurtainController : MonoBehaviour
+    internal class CurtainController : OverlayController
     {
-        [Header("UI Elements")]
-        [SerializeField] protected CanvasGroup canvasGroup;
-
         [Header("Tween Settings")] 
         [SerializeField] protected float fadeDurationSeconds;
 
         protected virtual void Start()
         {
-            CanvasUtilities.HideCanvas(canvasGroup);
+            Hide();
         }
 
         public virtual async Task ShowCurtain()
