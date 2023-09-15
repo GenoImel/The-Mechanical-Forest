@@ -1,9 +1,9 @@
 using UnityEngine;
 using Akashic.Core;
-using Akashic.ScriptableObjects.Scripts;
 using Akashic.ScriptableObjects.Scripts.StoryBase;
+using UnityEngine.EventSystems;
 
-namespace Akashic.Runtime.MonoSystems.Dialogue
+namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryEventInjector : MonoBehaviour
     {
@@ -11,6 +11,10 @@ namespace Akashic.Runtime.MonoSystems.Dialogue
 
         private void OnMouseDown()
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             GameManager.Publish(new DialogueStoryEventMessage(storyEvent));
         }
     }

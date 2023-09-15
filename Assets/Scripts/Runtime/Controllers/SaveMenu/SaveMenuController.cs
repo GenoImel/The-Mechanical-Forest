@@ -1,34 +1,22 @@
-using Akashic.Core;
-using Akashic.Runtime.MonoSystems.GameStates;
-using Akashic.Runtime.Utilities.Canvas;
 using UnityEngine;
 using UnityEngine.UI;
+using Akashic.Core;
+using Akashic.Runtime.Common;
+using Akashic.Runtime.MonoSystems.GameStates;
 
 namespace Akashic.Runtime.Controllers.SaveMenu
 {
-    internal sealed class SaveMenuController : MonoBehaviour
+    internal sealed class SaveMenuController : OverlayController
     {
         [Header("UI elements")]
         [SerializeField] private Button backButton;
 
-        [SerializeField] private CanvasGroup canvasGroup;
-        
         [Header("Panels")]
         [SerializeField] private SaveFileContainer saveFileContainer;
 
         private void Start()
         {
             Hide();
-        }
-
-        private void Hide()
-        {
-            CanvasUtilities.HideCanvas(canvasGroup);
-        }
-
-        private void Show()
-        {
-            CanvasUtilities.ShowCanvas(canvasGroup);
         }
 
         private void OnEnable()
