@@ -31,6 +31,6 @@ namespace Akashic.Runtime.MonoSystems.Save
         /// <summary>
         /// Initializes a new save file.
         /// </summary>
-        public void InitializeNewFile();
+        public void InitializeNewFile(SaveFile saveFile, string saveSlotFileName);
     }
 }

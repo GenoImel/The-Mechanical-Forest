@@ -1,5 +1,6 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.BattleStates;
+using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.Dialogue;
 using Akashic.Runtime.MonoSystems.ExplorationStates;
 using Akashic.Runtime.MonoSystems.GameStates;
@@ -26,6 +27,7 @@ namespace Akashic.Runtime
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
         [SerializeField] private SoundMonoSystem soundMonoSystem;
         [SerializeField] private PartyMonoSystem partyMonoSystem;
+        [SerializeField] private ConfigMonoSystem configMonoSystem;
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
         [SerializeField] private SaveMonoSystem saveMonoSystem;
         [SerializeField] private DialogueMonoSystem dialogueMonoSystem;
@@ -51,6 +53,7 @@ namespace Akashic.Runtime
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
             AddMonoSystem<PartyMonoSystem, IPartyMonoSystem>(partyMonoSystem);
+            AddMonoSystem<ConfigMonoSystem, IConfigMonoSystem>(configMonoSystem);
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
             AddMonoSystem<DialogueMonoSystem, IDialogueMonoSystem>(dialogueMonoSystem);

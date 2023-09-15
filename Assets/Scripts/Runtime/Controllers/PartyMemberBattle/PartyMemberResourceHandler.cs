@@ -1,7 +1,8 @@
 using Akashic.ScriptableObjects.Scripts;
+using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
 using UnityEngine;
 
-namespace Akashic.Runtime.Controllers.PartyMember
+namespace Akashic.Runtime.Controllers.PartyMemberBattle
 {
     internal sealed class PartyMemberResourceHandler : MonoBehaviour
     {
@@ -13,8 +14,8 @@ namespace Akashic.Runtime.Controllers.PartyMember
 
         [SerializeField] public int currentExperience;
 
-        private int maxHealth;
-        private int maxExperience;
+        public int maxHealth;
+        public int maxExperience;
         
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {

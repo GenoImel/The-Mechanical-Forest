@@ -12,6 +12,9 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [SerializeField] private Button backButton;
 
         [SerializeField] private CanvasGroup canvasGroup;
+        
+        [Header("Panels")]
+        [SerializeField] private SaveFileContainer saveFileContainer;
 
         private void Start()
         {
@@ -45,6 +48,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void OnShowSaveMenuMessage(ShowSaveMenuMessage message)
         {
+            saveFileContainer.FindSaveFiles();
             Show();
         }
 
