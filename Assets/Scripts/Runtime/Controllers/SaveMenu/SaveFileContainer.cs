@@ -36,11 +36,14 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         public async void FindSaveFiles()
         {
+            var listFileNames = saveSlotNames.ToList();
+            
             for (var i = 0; i < saveSlots.Count; i++)
             {
-                var fileName = await FindSaveFile(saveSlotNames.ToList()[i]);
+                var fileName = await FindSaveFile(listFileNames[i]);
                 
                 saveSlots[i].SetSaveSlotName(string.IsNullOrEmpty(fileName) ? defaultEmptySaveSlotText : fileName);
+                saveSlots[i].SetSaveSlotFileName(listFileNames[i]);
             }
         }
         

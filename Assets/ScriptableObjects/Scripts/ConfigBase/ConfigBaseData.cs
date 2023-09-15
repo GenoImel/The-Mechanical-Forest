@@ -3,9 +3,11 @@ using UnityEngine;
 
 namespace Akashic.ScriptableObjects.Scripts.ConfigBase
 {
-    [CreateAssetMenu(menuName = "Akashic/Config/New Config File")]
+    [CreateAssetMenu(menuName = "Akashic/Config/New Game Config File")]
     public sealed class ConfigBaseData : ScriptableObject
     {
-        public List<string> saveSlotFileNames = new List<string>(3);
+        public string saveFolderParentName;
+        public List<string> saveSlotFolderNames = new List<string>();
+        public List<string> saveSlotFileNames = new List<string>();
     }
 }

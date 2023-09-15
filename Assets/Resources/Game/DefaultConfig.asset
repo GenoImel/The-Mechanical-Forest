@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0decea961e4aac82f778ae6ab44050, type: 3}
   m_Name: DefaultConfig
   m_EditorClassIdentifier: 
+  saveFolderParentName: SaveData
+  saveSlotFolderNames:
+  - Slot1
+  - Slot2
+  - Slot3
   saveSlotFileNames:
-  - SaveSlot1
-  - SaveSlot2
-  - SaveSlot3
+  - Save1
+  - Save2
+  - Save3

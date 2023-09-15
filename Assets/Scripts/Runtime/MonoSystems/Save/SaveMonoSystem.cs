@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.Serializers;
@@ -15,37 +16,40 @@ namespace Akashic.Runtime.MonoSystems.Save
 {
     internal sealed class SaveMonoSystem : MonoBehaviour, ISaveMonoSystem
     {
-        [Header("Save Data File Path")]
-        [SerializeField] private string saveFolderName;
+        private string saveFolderParentName;
         
-        [SerializeField] private List<string> saveSlotFolderNames = new List<string>();
+        private List<string> saveSlotFolderNames = new List<string>();
         
-        [SerializeField] private string saveFileName;
-        
+        private List<string> saveSlotFileNames = new List<string>();
+
         private string saveFilePath;
 
-        private SaveFile currentSaveFile;
+        private SaveFile currentSaveData;
+        private string currentSaveSlot;
 
         private readonly List<FileStreamer> fileStreamers = new List<FileStreamer>();
         
         private IDictionary<string, FileStreamer> saveFiles = new Dictionary<string, FileStreamer>();
 
         private bool savingInProgress;
-        
+
+        private IConfigMonoSystem configMonoSystem;
         private ISceneMonoSystem sceneMonoSystem;
         private IPartyMonoSystem partyMonoSystem;
 
         private void Awake()
         {
+            configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
             sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
             partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
         }
 
         private void Start()
         {
+            InitializeFileInfoFromConfig();
             IndexSaveFiles();
         }
-        
+
         private void OnEnable()
         { 
             AddListeners();
@@ -72,22 +76,39 @@ namespace Akashic.Runtime.MonoSystems.Save
 
         public List<PartyMember> GetPartyMembers()
         {
-            if (currentSaveFile == null)
+            if (currentSaveData == null)
             {
                 throw new NullReferenceException("Save file is null");
             }
             
-            return currentSaveFile.PartyMembers;
+            return currentSaveData.PartyMembers;
         }
 
         public async void SaveFileAsync()
         {
+            savingInProgress = true;
             
+            var fileStreamer = saveFiles[currentSaveSlot];
+
+            if (savingInProgress)
+            {
+                await Task.Yield();
+            }
+            
+            var preferencesText = JsonConvert.SerializeObject(currentSaveData);
+            await fileStreamer.WriteFileAsync(preferencesText);
+            
+            savingInProgress = false;
         }
 
         public async void LoadFileAsync()
         {
+            var fileStreamer = saveFiles[currentSaveSlot];
             
+            var saveFileText = await fileStreamer.ReadFileAsync();
+            currentSaveData = JsonConvert.DeserializeObject<SaveFile>(saveFileText);
+            
+            GameManager.Publish(new SaveFileLoadedMessage());
         }
         
         public void InitializeNewFile(SaveFile saveFile, string saveSlotFileName)
@@ -101,20 +122,30 @@ namespace Akashic.Runtime.MonoSystems.Save
             {
                 throw new NullReferenceException("Save slot file name is null or empty");
             }
+
+            currentSaveSlot = saveSlotFileName;
+            currentSaveData = saveFile;
             
-            currentSaveFile = saveFile;
+            SaveFileAsync();
+        }
+        
+        private void InitializeFileInfoFromConfig()
+        {
+            saveFolderParentName = configMonoSystem.GetParentSaveFolderName();
+            saveSlotFolderNames = configMonoSystem.GetSaveSlotFolderNames();
+            saveSlotFileNames = configMonoSystem.GetSaveSlotFileNames();
         }
 
         private void IndexSaveFiles()
         {
-            foreach (var slot in saveSlotFolderNames)
+            for (var i = 0; i < saveSlotFolderNames.Count; i++)
             {
-                string path = Path.Combine(Application.persistentDataPath, saveFolderName, slot);
-                FileStreamer fileStreamer = new FileStreamer(path, saveFileName);
+                string path = Path.Combine(Application.persistentDataPath, saveFolderParentName, saveSlotFolderNames[i]);
+                FileStreamer fileStreamer = new FileStreamer(path, saveSlotFileNames[i]);
                 fileStreamers.Add(fileStreamer);
             }
             
-            saveFiles = saveSlotFolderNames.Zip(
+            saveFiles = saveSlotFileNames.Zip(
                 fileStreamers, 
                 (k, v) => new { k, v }
             ).ToDictionary(x => x.k, x => x.v);

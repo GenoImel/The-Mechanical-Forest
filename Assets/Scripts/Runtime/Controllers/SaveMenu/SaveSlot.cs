@@ -51,8 +51,12 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         public void SetSaveSlotName(string saveSlotName)
         {
-            saveSlotFileName = saveSlotName;
             saveSlotNameText.text = saveSlotName;
+        }
+        
+        public void SetSaveSlotFileName(string fileName)
+        {
+            saveSlotFileName = fileName;
         }
 
         private void OnNewGameButtonPressed()
