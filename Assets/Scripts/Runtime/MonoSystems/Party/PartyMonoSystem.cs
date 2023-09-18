@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Controllers.PartyMember;
+using System.Linq;
+using Akashic.Runtime.Controllers.PartyMemberBattle;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Party
@@ -15,7 +16,7 @@ namespace Akashic.Runtime.MonoSystems.Party
         
         [SerializeField]private PartyMemberController lenaPrefab;
         
-        private List<PartyMemberController> partyMembers = new List<PartyMemberController>();
+        private ICollection<PartyMemberController> partyMembers = new List<PartyMemberController>();
 
         public void CreateNewParty()
         {
@@ -23,6 +24,11 @@ namespace Akashic.Runtime.MonoSystems.Party
             CreateNewBenoit();
             CreateNewConrad();
             CreateNewLena();
+        }
+
+        public List<PartyMemberController> GetPartyMembers()
+        {
+            return partyMembers.ToList();
         }
 
         public void LoadPartyFromSaveFile()

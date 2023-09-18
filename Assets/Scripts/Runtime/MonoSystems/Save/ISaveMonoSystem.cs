@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Akashic.Core;
 using Akashic.Runtime.Serializers;
 
@@ -6,6 +7,12 @@ namespace Akashic.Runtime.MonoSystems.Save
 {
     internal interface ISaveMonoSystem : IMonoSystem
     {
+        /// <summary>
+        /// See if a save file exists.
+        /// If it does, return the player defined save file name.
+        /// </summary>
+        public Task<string> FindSaveFile(string saveSlotFileName);
+        
         /// <summary>
         /// Returns the current party members as a list.
         /// </summary>
@@ -24,6 +31,6 @@ namespace Akashic.Runtime.MonoSystems.Save
         /// <summary>
         /// Initializes a new save file.
         /// </summary>
-        public void InitializeNewFile();
+        public void InitializeNewFile(SaveFile saveFile, string saveSlotFileName);
     }
 }

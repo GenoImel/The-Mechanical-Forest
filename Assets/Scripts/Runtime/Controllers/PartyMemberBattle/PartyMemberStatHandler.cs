@@ -1,7 +1,8 @@
 using Akashic.ScriptableObjects.Scripts;
+using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
 using UnityEngine;
 
-namespace Akashic.Runtime.Controllers.PartyMember
+namespace Akashic.Runtime.Controllers.PartyMemberBattle
 {
     internal sealed class PartyMemberStatHandler : MonoBehaviour
     {
@@ -19,13 +20,13 @@ namespace Akashic.Runtime.Controllers.PartyMember
         [SerializeField] public int currentMagicalDefense;
         [SerializeField] public float currentEvade;
         
-        private int basePhysicalAttack;
-        private int baseMagicalAttack;
-        private float baseAccuracy;
+        public int basePhysicalAttack;
+        public int baseMagicalAttack;
+        public float baseAccuracy;
         
-        private int basePhysicalDefense;
-        private int baseMagicalDefense;
-        private float baseEvade;
+        public int basePhysicalDefense;
+        public int baseMagicalDefense;
+        public float baseEvade;
         
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {

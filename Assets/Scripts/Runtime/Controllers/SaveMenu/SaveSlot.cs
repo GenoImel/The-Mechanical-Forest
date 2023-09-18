@@ -1,7 +1,11 @@
+using System.Collections.Generic;
 using Akashic.Core;
+using Akashic.Runtime.Converters;
 using Akashic.Runtime.MonoSystems.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.MonoSystems.Scene;
+using Akashic.Runtime.MonoSystems.Save;
+using Akashic.Runtime.Serializers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,13 +19,18 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [SerializeField] private Button saveGameButton;
         
         [SerializeField] private Button loadGameButton;
-        
-        private ISceneMonoSystem sceneMonoSystem;
+
+        [Header("Text")]
+        [SerializeField] private TMP_Text saveSlotNameText;
+
+        private string saveSlotFileName;
+
+        private ISaveMonoSystem saveMonoSystem;
         private IPartyMonoSystem partyMonoSystem;
         
         private void Awake()
         {
-            sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
+            saveMonoSystem = GameManager.GetMonoSystem<ISaveMonoSystem>();
             partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
         }
 
@@ -39,11 +48,33 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         {
             RemoveListeners();
         }
+        
+        public void SetSaveSlotName(string saveSlotName)
+        {
+            saveSlotNameText.text = saveSlotName;
+        }
+        
+        public void SetSaveSlotFileName(string fileName)
+        {
+            saveSlotFileName = fileName;
+        }
 
         private void OnNewGameButtonPressed()
         {
             partyMonoSystem.CreateNewParty();
-            sceneMonoSystem.LoadExplorationScene();
+
+            var partyMemberControllers = partyMonoSystem.GetPartyMembers();
+            List<PartyMember> partyMembers = new List<PartyMember>();
+
+            foreach (var member in partyMemberControllers)
+            {
+                var convertedPartyMember = PartyMemberConverter.ConvertControllerToPartyMember(member);
+                partyMembers.Add(convertedPartyMember);
+            }
+
+            var saveFile = new SaveFile(saveSlotNameText.text, partyMembers);
+            saveMonoSystem.InitializeNewFile(saveFile,saveSlotFileName);
+            
             GameManager.Publish(new HideSaveMenuMessage());
         }
 

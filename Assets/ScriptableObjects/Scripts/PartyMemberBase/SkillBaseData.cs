@@ -2,7 +2,7 @@ using Akashic.Runtime.Skills;
 using Akashic.Runtime.StatusEffects;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.Scripts
+namespace Akashic.ScriptableObjects.Scripts.PartyMemberBase
 {
     [CreateAssetMenu(menuName = "Akashic/Skills/New Base Skill")]
     internal sealed class SkillBaseData : ScriptableObject

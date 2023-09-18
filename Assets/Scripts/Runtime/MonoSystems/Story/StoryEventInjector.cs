@@ -1,6 +1,6 @@
 using UnityEngine;
 using Akashic.Core;
-using Akashic.ScriptableObjects.Scripts;
+using Akashic.ScriptableObjects.Scripts.StoryBase;
 using UnityEngine.EventSystems;
 
 namespace Akashic.Runtime.MonoSystems.Story
@@ -11,7 +11,6 @@ namespace Akashic.Runtime.MonoSystems.Story
 
         private void OnMouseDown()
         {
-            // Block raycast when canvas is up
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 return;

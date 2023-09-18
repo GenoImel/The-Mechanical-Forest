@@ -1,4 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Akashic.Core;
+using Akashic.Runtime.MonoSystems.Config;
+using Akashic.Runtime.MonoSystems.Save;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.SaveMenu
@@ -8,22 +14,44 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [Header("Settings")]
         [SerializeField] private SaveSlot saveSlot;
 
-        [SerializeField] private int numSlots;
+        [SerializeField] private List<SaveSlot> saveSlots = new List<SaveSlot>();
+        
+        [SerializeField] private string defaultEmptySaveSlotText = "No Data";
 
-        private List<SaveSlot> saveSlots = new List<SaveSlot>();
+        private ICollection<string> saveSlotNames = new List<string>();
+
+        private ISaveMonoSystem saveMonoSystem;
+        private IConfigMonoSystem configMonoSystem;
+
+        private void Awake()
+        {
+            saveMonoSystem = GameManager.GetMonoSystem<ISaveMonoSystem>();
+            configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
+        }
 
         private void Start()
         {
-            CreateSaveSlots();
+            saveSlotNames = configMonoSystem.GetSaveSlotFileNames();
         }
 
-        private void CreateSaveSlots()
+        public async void FindSaveFiles()
         {
-            for (int i = 0; i < numSlots; i++)
+            var listFileNames = saveSlotNames.ToList();
+            
+            for (var i = 0; i < saveSlots.Count; i++)
             {
-                var slot = Instantiate(saveSlot, transform);
-                saveSlots.Add(slot);
+                var fileName = await FindSaveFile(listFileNames[i]);
+                
+                saveSlots[i].SetSaveSlotName(string.IsNullOrEmpty(fileName) ? defaultEmptySaveSlotText : fileName);
+                saveSlots[i].SetSaveSlotFileName(listFileNames[i]);
             }
         }
+        
+        private async Task<string> FindSaveFile(string saveSlotName)
+        {
+            var fileName =  await saveMonoSystem.FindSaveFile(saveSlotName);
+            return fileName;
+        }
+        
     }
 }

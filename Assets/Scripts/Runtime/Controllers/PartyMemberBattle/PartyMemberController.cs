@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using Akashic.ScriptableObjects.Scripts;
+using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
 using UnityEngine;
 
-namespace Akashic.Runtime.Controllers.PartyMember
+namespace Akashic.Runtime.Controllers.PartyMemberBattle
 {
     internal sealed class PartyMemberController : MonoBehaviour
     {
         [Header("Party Member Info")]
-        [SerializeField] private string partyMemberName;
+        [SerializeField] public string partyMemberName;
         
         [Header("Base Data")]
         [SerializeField] private PartyMemberBaseData partyMemberBaseData;
@@ -15,17 +16,17 @@ namespace Akashic.Runtime.Controllers.PartyMember
         [SerializeField] private List<SkillBaseData> skillsBaseData;
         
         [Header("Handlers")]
-        [SerializeField] private PartyMemberStatHandler partyMemberStatHandler;
+        [SerializeField] public PartyMemberStatHandler partyMemberStatHandler;
 
-        [SerializeField] private PartyMemberResourceHandler partyMemberResourceHandler;
+        [SerializeField] public PartyMemberResourceHandler partyMemberResourceHandler;
 
-        [SerializeField] private PartyMemberSkillsHandler partyMemberSkillsHandler;
+        [SerializeField] public PartyMemberSkillsHandler partyMemberSkillsHandler;
 
-        [SerializeField] private PartyMemberAnimationHandler partyMemberAnimationHandler;
+        [SerializeField] public PartyMemberAnimationHandler partyMemberAnimationHandler;
 
-        [SerializeField] private PartyMemberEffectHandler partyMemberEffectHandler;
+        [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
 
-        [SerializeField] private PartyMemberSoundHandler partyMemberSoundHandler;
+        [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
 
         public void InitializeNewPartyMemberFromScriptableObject()
         {
