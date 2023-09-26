@@ -48,6 +48,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 6020297636415312089}
   backButton: {fileID: 3924467148859643702}
   saveFileContainer: {fileID: 4499002787651036807}
+  newFileNameRequestPanel: {fileID: 5889293724288865336, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
 --- !u!1 &5716383805312434156
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,8 +82,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5387166481074144992}
+  - {fileID: 806042922937357085}
   - {fileID: 2578177151418436991}
-  - {fileID: 1599697501734834046}
   m_Father: {fileID: 522768587769307003}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,7 +167,7 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!1001 &629353377499724205
+--- !u!1001 &1560231384718124494
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -204,11 +205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2200199634258507475, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 220
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 2200199634258507475, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 125
+      value: 272
       objectReference: {fileID: 0}
     - target: {fileID: 2200199634258507475, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -260,17 +261,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3928402029861313007, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
       propertyPath: m_Name
-      value: SaveFileNamePanel
+      value: FileNameRequestPanel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
---- !u!224 &1599697501734834046 stripped
+--- !u!224 &806042922937357085 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2200199634258507475, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
-  m_PrefabInstance: {fileID: 629353377499724205}
+  m_PrefabInstance: {fileID: 1560231384718124494}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4527413721444825262
 PrefabInstance:
@@ -283,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 4875017959880755787, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
       propertyPath: m_Name
       value: SaveMenuPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875017959880755787, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7056367434096877637, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
       propertyPath: m_AnchorMax.y
