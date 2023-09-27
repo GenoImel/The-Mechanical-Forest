@@ -510,6 +510,10 @@ PrefabInstance:
       value: StoryMonoSystem
       objectReference: {fileID: 0}
     - target: {fileID: 6603474244123363811, guid: d7b8d8b1b0521d3408a4357654e2a2ce, type: 3}
+      propertyPath: storyController
+      value: 
+      objectReference: {fileID: 4894623329946199443}
+    - target: {fileID: 6603474244123363811, guid: d7b8d8b1b0521d3408a4357654e2a2ce, type: 3}
       propertyPath: dialogueController
       value: 
       objectReference: {fileID: 4894623329946199443}
@@ -841,7 +845,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 321961218470151422, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
       propertyPath: m_Name
-      value: DialogueController
+      value: StoryController
       objectReference: {fileID: 0}
     - target: {fileID: 351409725907147417, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
       propertyPath: m_AnchorMax.x
