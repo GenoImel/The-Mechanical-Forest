@@ -6,7 +6,7 @@ namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryMonoSystem : MonoBehaviour, IStoryMonoSystem
     {
-        [SerializeField] DialogueController dialogueController;
+        [SerializeField] StoryController storyController;
 
         private void OnEnable()
         {
@@ -23,7 +23,7 @@ namespace Akashic.Runtime.MonoSystems.Story
             // pass in one story point to the dialogue controller
             // keep track of which story point in the story event you are on
             // clean up once there are no more story points
-            dialogueController.ShowStoryPointDialogue(message.StoryEvent.storyPoints[0]);
+            storyController.ShowStoryPointDialogue(message.StoryEvent.storyPoints[0]);
         }
 
         private void AddListeners()

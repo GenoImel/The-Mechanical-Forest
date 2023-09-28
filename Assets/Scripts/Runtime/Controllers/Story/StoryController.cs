@@ -6,7 +6,7 @@ using Akashic.Runtime.MonoSystems.Story;
 
 namespace Akashic.Runtime.Controllers.Story
 {
-    internal sealed class DialogueController : OverlayController
+    internal sealed class StoryController : OverlayController
     {
         [Header("UI elements")]
         // The dialogue panel will eventually have it's own script.

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 8720483823637260120}
   - component: {fileID: 8885209029623361617}
   m_Layer: 0
-  m_Name: DialogueController
+  m_Name: StoryController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8802748261372233704}
   m_Direction: 2
   m_Value: 1.0000021
-  m_Size: 0.51726663
+  m_Size: 0.5172666
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -731,7 +731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.0007019043, y: 124.00063}
+  m_AnchoredPosition: {x: -0.0007019043, y: 124.00065}
   m_SizeDelta: {x: -0.14001465, y: 247.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2089274237172935702
@@ -1414,7 +1414,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2437112949521479818}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
