@@ -27,6 +27,8 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private ISaveMonoSystem saveMonoSystem;
         private IPartyMonoSystem partyMonoSystem;
+
+        private bool isAwaitingNewFileName = false;
         
         private void Awake()
         {
@@ -59,8 +61,10 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             saveSlotFileName = fileName;
         }
 
-        private void OnNewGameButtonPressed()
+        private void InitializeNewSaveFile(string saveFileName)
         {
+            SetSaveSlotName(saveFileName);
+            
             partyMonoSystem.CreateNewParty();
 
             var partyMemberControllers = partyMonoSystem.GetPartyMembers();
@@ -78,6 +82,12 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             GameManager.Publish(new HideSaveMenuMessage());
         }
 
+        private void OnNewGameButtonPressed()
+        {
+            isAwaitingNewFileName = true;
+            GameManager.Publish(new RequestNewFileNameMessage());
+        }
+
         private void OnSaveGameButtonPressed()
         {
             
@@ -90,20 +100,23 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void OnGameStateChangedMessage(GameStateChangedMessage message)
         {
-            if (message.NextState == GameState.MainMenu)
-            {
-                NewGameButtonEnabled(true);
-            }
-            else
-            {
-                NewGameButtonEnabled(false);
-            }
+            NewGameButtonEnabled(message.NextState == GameState.MainMenu);
         }
 
         private void NewGameButtonEnabled(bool isEnabled)
         {
             newGameButton.gameObject.SetActive(isEnabled);
             saveGameButton.gameObject.SetActive(!isEnabled);
+        }
+        
+        private void OnNewFileNameConfirmedMessage(NewFileNameConfirmedMessage message)
+        {
+            if (isAwaitingNewFileName)
+            {
+                InitializeNewSaveFile(message.NewFileName);
+            }
+            
+            isAwaitingNewFileName = false;
         }
 
         private void AddListeners()
@@ -113,6 +126,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             loadGameButton.onClick.AddListener(OnLoadGameButtonPressed);
             
             GameManager.AddListener<GameStateChangedMessage>(OnGameStateChangedMessage);
+            GameManager.AddListener<NewFileNameConfirmedMessage>(OnNewFileNameConfirmedMessage);
         }
 
         private void RemoveListeners()
@@ -122,6 +136,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             loadGameButton.onClick.RemoveListener(OnLoadGameButtonPressed);
             
             GameManager.RemoveListener<GameStateChangedMessage>(OnGameStateChangedMessage);
+            GameManager.RemoveListener<NewFileNameConfirmedMessage>(OnNewFileNameConfirmedMessage);
         }
     }
 }
