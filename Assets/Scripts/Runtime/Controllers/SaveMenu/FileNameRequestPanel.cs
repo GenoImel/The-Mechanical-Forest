@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Akashic.Runtime.Controllers.SaveMenu
 {
-    internal sealed class NewFileNameRequestPanel : OverlayController
+    internal sealed class FileNameRequestPanel : OverlayController
     {
         [Header("Buttons")]
         [SerializeField] private Button cancelButton;
@@ -15,7 +15,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [SerializeField] private Button confirmButton;
         
         [Header("Input fields")]
-        [SerializeField] private TMP_Text fileNameInputText;
+        [SerializeField] private TMP_InputField fileNameInputText;
         
         private void Start()
         {
@@ -31,10 +31,22 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         {
             RemoveListeners();
         }
+
+        public override void Hide()
+        {
+            base.Hide();
+            ClearFileNameInputText();
+        }
+
+        private void ClearFileNameInputText()
+        {
+            fileNameInputText.text = null;
+        }
         
         private void OnCancelButtonClicked()
         {
             Hide();
+            ClearFileNameInputText();
         }
         
         private void OnConfirmButtonClicked()

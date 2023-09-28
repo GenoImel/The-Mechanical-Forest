@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 2820941723172722221}
   - component: {fileID: 5889293724288865336}
   m_Layer: 0
-  m_Name: NewFileNameRequestPanel
+  m_Name: FileNameRequestPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +641,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 2820941723172722221}
   cancelButton: {fileID: 2596120114239659851}
   confirmButton: {fileID: 4728704382412813414}
-  fileNameInputText: {fileID: 4075421945251691589}
+  fileNameInputText: {fileID: 6109361935967904833}
 --- !u!1 &4862285786706211963
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 6020297636415312089}
   backButton: {fileID: 3924467148859643702}
   saveFileContainer: {fileID: 4499002787651036807}
-  newFileNameRequestPanel: {fileID: 5889293724288865336, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
+  fileNameRequestPanel: {fileID: 4908351151795532278}
 --- !u!1 &5716383805312434156
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +273,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2200199634258507475, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
   m_PrefabInstance: {fileID: 1560231384718124494}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4908351151795532278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5889293724288865336, guid: 751264f37b473ef40bd8ea1a87194d1f, type: 3}
+  m_PrefabInstance: {fileID: 1560231384718124494}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14fec3d10384026864b7d0688c8d786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4527413721444825262
 PrefabInstance:
   m_ObjectHideFlags: 0
