@@ -9,16 +9,14 @@ using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.SaveMenu
 {
-    internal sealed class SaveFileContainer : MonoBehaviour
+    internal sealed class SaveSlotContainer : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private SaveSlot saveSlot;
-
         [SerializeField] private List<SaveSlot> saveSlots = new List<SaveSlot>();
         
         [SerializeField] private string defaultEmptySaveSlotText = "No Data";
 
-        private ICollection<string> saveSlotNames = new List<string>();
+        private ICollection<string> saveFileNames = new List<string>();
 
         private ISaveMonoSystem saveMonoSystem;
         private IConfigMonoSystem configMonoSystem;
@@ -31,19 +29,19 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void Start()
         {
-            saveSlotNames = configMonoSystem.GetSaveSlotFileNames();
+            saveFileNames = configMonoSystem.GetSaveFileNames();
         }
 
         public async void FindSaveFiles()
         {
-            var listFileNames = saveSlotNames.ToList();
+            var listFileNames = saveFileNames.ToList();
             
             for (var i = 0; i < saveSlots.Count; i++)
             {
                 var fileName = await FindSaveFile(listFileNames[i]);
                 
                 saveSlots[i].SetSaveSlotName(string.IsNullOrEmpty(fileName) ? defaultEmptySaveSlotText : fileName);
-                saveSlots[i].SetSaveSlotFileName(listFileNames[i]);
+                saveSlots[i].SetSaveFileName(listFileNames[i]);
             }
         }
         

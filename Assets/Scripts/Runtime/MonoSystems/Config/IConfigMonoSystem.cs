@@ -3,24 +3,26 @@ using Akashic.Core;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {
+    /// <summary>
+    /// Provides access to configuration data for the game, which is set in a
+    /// ConfigBaseData ScriptableObject.
+    /// </summary>
     internal interface IConfigMonoSystem : IMonoSystem
     {
         /// <summary>
-        /// Retrieves the name of the parent save folder in
-        /// PersistentDataPath from config SO.
+        /// Returns the name of the parent save folder in
+        /// Application.persistentDataPath where all save folders will be stored.
         /// </summary>
         public string GetParentSaveFolderName();
 
         /// <summary>
-        /// Retrieves the name of child folder names in
-        /// PersistentDataPath from config SO.
+        /// Returns the name of child folder names which correlate to an individual save slot.
         /// </summary>
-        public List<string> GetSaveSlotFolderNames();
+        public List<string> GetSaveFolderNames();
 
         /// <summary>
-        /// Retrieves the save file names in
-        /// PersistentDataPath from config SO.
+        /// Returns the name of a save file correlating to an individual save slot.
         /// </summary>
-        public List<string> GetSaveSlotFileNames();
+        public List<string> GetSaveFileNames();
     }
 }

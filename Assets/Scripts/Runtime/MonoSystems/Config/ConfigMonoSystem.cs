@@ -10,17 +10,17 @@ namespace Akashic.Runtime.MonoSystems.Config
 
         public string GetParentSaveFolderName()
         {
-            return configData.saveFolderParentName;
+            return configData.parentSaveFolderName;
         }
         
-        public List<string> GetSaveSlotFolderNames()
+        public List<string> GetSaveFolderNames()
         {
-            return configData.saveSlotFolderNames;
+            return configData.saveFolderNames;
         }
 
-        public List<string> GetSaveSlotFileNames()
+        public List<string> GetSaveFileNames()
         {
-            return configData.saveSlotFileNames;
+            return configData.saveFileNames;
         }
     }
 }

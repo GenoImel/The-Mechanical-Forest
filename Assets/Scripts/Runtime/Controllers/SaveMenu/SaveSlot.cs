@@ -23,12 +23,12 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [Header("Text")]
         [SerializeField] private TMP_Text saveSlotNameText;
 
-        private string saveSlotFileName;
+        private string saveFileName;
 
         private ISaveMonoSystem saveMonoSystem;
         private IPartyMonoSystem partyMonoSystem;
 
-        private bool isAwaitingNewFileName = false;
+        private bool isAwaitingNewSlotName = false;
         
         private void Awake()
         {
@@ -56,14 +56,14 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             saveSlotNameText.text = saveSlotName;
         }
         
-        public void SetSaveSlotFileName(string fileName)
+        public void SetSaveFileName(string fileName)
         {
-            saveSlotFileName = fileName;
+            saveFileName = fileName;
         }
 
-        private void InitializeNewSaveFile(string saveFileName)
+        private void InitializeNewSaveFile(string fileName)
         {
-            SetSaveSlotName(saveFileName);
+            SetSaveSlotName(fileName);
             
             partyMonoSystem.CreateNewParty();
 
@@ -77,14 +77,14 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             }
 
             var saveFile = new SaveFile(saveSlotNameText.text, partyMembers);
-            saveMonoSystem.InitializeNewFile(saveFile,saveSlotFileName);
+            saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
             GameManager.Publish(new HideSaveMenuMessage());
         }
 
         private void OnNewGameButtonPressed()
         {
-            isAwaitingNewFileName = true;
+            isAwaitingNewSlotName = true;
             GameManager.Publish(new RequestNewFileNameMessage());
         }
 
@@ -111,12 +111,12 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         private void OnNewFileNameConfirmedMessage(NewFileNameConfirmedMessage message)
         {
-            if (isAwaitingNewFileName)
+            if (isAwaitingNewSlotName)
             {
                 InitializeNewSaveFile(message.NewFileName);
             }
             
-            isAwaitingNewFileName = false;
+            isAwaitingNewSlotName = false;
         }
 
         private void AddListeners()

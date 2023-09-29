@@ -132,8 +132,8 @@ namespace Akashic.Runtime.MonoSystems.Save
         private void InitializeFileInfoFromConfig()
         {
             saveFolderParentName = configMonoSystem.GetParentSaveFolderName();
-            saveSlotFolderNames = configMonoSystem.GetSaveSlotFolderNames();
-            saveSlotFileNames = configMonoSystem.GetSaveSlotFileNames();
+            saveSlotFolderNames = configMonoSystem.GetSaveFolderNames();
+            saveSlotFileNames = configMonoSystem.GetSaveFileNames();
         }
 
         private void IndexSaveFiles()

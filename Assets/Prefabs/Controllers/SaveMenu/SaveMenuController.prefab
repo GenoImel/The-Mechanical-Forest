@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 6020297636415312089}
   backButton: {fileID: 3924467148859643702}
-  saveFileContainer: {fileID: 4499002787651036807}
+  saveFileContainer: {fileID: 0}
   fileNameRequestPanel: {fileID: 4908351151795532278}
 --- !u!1 &5716383805312434156
 GameObject:
@@ -432,22 +432,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 940786308480614193, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
---- !u!114 &4499002787651036807 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 52690761876774441, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
-  m_PrefabInstance: {fileID: 4527413721444825262}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5174a64c429e436fa0d66c5ec05eac9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5387166481074144992 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8365319302657769038, guid: 051a82f4310e42340b90fabb9314496f, type: 3}
