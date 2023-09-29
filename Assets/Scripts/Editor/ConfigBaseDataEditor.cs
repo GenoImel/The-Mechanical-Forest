@@ -7,8 +7,8 @@ namespace Akashic.Editor
     internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
     {
         private SerializedProperty parentSaveFolderNameProp;
-        SerializedProperty saveFolderNamesProp;
-        SerializedProperty saveFileNamesProp;
+        private SerializedProperty saveFolderNamesProp;
+        private SerializedProperty saveFileNamesProp;
 
         void OnEnable()
         {
