@@ -10,12 +10,18 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] private PartyMemberController partyMemberController;
         
         [Header("Resources")]
-        [SerializeField] public int currentHealth;
+        [SerializeField] private int currentHealth;
 
-        [SerializeField] public int currentExperience;
+        [SerializeField] private int currentExperience;
 
-        public int maxHealth;
-        public int maxExperience;
+        private int maxHealth;
+        private int maxExperience;
+        
+        public int CurrentHealth { get => currentHealth; private set => currentHealth = value; }
+        public int CurrentExperience { get => currentExperience; private set => currentExperience = value; }
+        
+        public int MaxHealth { get => maxHealth; }
+        public int MaxExperience { get => maxExperience; }
         
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {

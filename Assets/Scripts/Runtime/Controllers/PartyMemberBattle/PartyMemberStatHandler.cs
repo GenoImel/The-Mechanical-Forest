@@ -10,26 +10,45 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] private PartyMemberController partyMemberController;
         
         [Header("Stats")]
-        [SerializeField] public int currentLevel;
+        [SerializeField] private int currentLevel;
         
-        [SerializeField] public int currentPhysicalAttack;
-        [SerializeField] public int currentMagicalAttack;
-        [SerializeField] public float currentAccuracy;
+        [SerializeField] private int currentPhysicalAttack;
+        [SerializeField] private int currentMagicalAttack;
+        [SerializeField] private float currentAccuracy;
         
-        [SerializeField] public int currentPhysicalDefense;
-        [SerializeField] public int currentMagicalDefense;
-        [SerializeField] public float currentEvade;
+        [SerializeField] private int currentPhysicalDefense;
+        [SerializeField] private int currentMagicalDefense;
+        [SerializeField] private float currentEvade;
         
-        public int basePhysicalAttack;
-        public int baseMagicalAttack;
-        public float baseAccuracy;
+        [SerializeField] private int basePhysicalAttack;
+        [SerializeField] private int baseMagicalAttack;
+        [SerializeField] private float baseAccuracy;
         
-        public int basePhysicalDefense;
-        public int baseMagicalDefense;
-        public float baseEvade;
+        [SerializeField] private int basePhysicalDefense;
+        [SerializeField] private int baseMagicalDefense;
+        [SerializeField] private float baseEvade;
         
+        public int CurrentLevel { get => currentLevel; private set => currentLevel = value; }
+        public int CurrentPhysicalAttack { get => currentPhysicalAttack; private set => currentPhysicalAttack = value; }
+        public int CurrentMagicalAttack { get => currentMagicalAttack; private set => currentMagicalAttack = value; }
+        public float CurrentAccuracy { get => currentAccuracy; private set => currentAccuracy = value; }
+        
+        public int CurrentPhysicalDefense { get => currentPhysicalDefense; private set => currentPhysicalDefense = value; }
+        public int CurrentMagicalDefense { get => currentMagicalDefense; private set => currentMagicalDefense = value; }
+        public float CurrentEvade { get => currentEvade; private set => currentEvade = value; }
+        
+        public int BasePhysicalAttack { get => basePhysicalAttack; }
+        public int BaseMagicalAttack { get => baseMagicalAttack; }
+        public float BaseAccuracy { get => baseAccuracy; }
+        
+        public int BasePhysicalDefense { get => basePhysicalDefense; }
+        public int BaseMagicalDefense { get => baseMagicalDefense; }
+        public float BaseEvade { get => baseEvade; }
+
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
+            currentLevel = baseData.baseLevel;
+            
             basePhysicalAttack = baseData.basePhysicalAttack;
             baseMagicalAttack = baseData.baseMagicalAttack;
             baseAccuracy = baseData.baseAccuracy;
@@ -37,13 +56,19 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
             basePhysicalDefense = baseData.basePhysicalDefense;
             baseMagicalDefense = baseData.baseMagicalDefense;
             baseEvade = baseData.baseEvade;
-            
-            CalculateCurrentStats();
+                
+            ResetCurrentStatsToBase();
         }
 
-        private void CalculateCurrentStats()
+        private void ResetCurrentStatsToBase()
         {
+            currentPhysicalAttack = basePhysicalAttack;
+            currentMagicalAttack = baseMagicalAttack;
+            currentAccuracy = baseAccuracy;
             
+            currentPhysicalDefense = basePhysicalDefense;
+            currentMagicalDefense = baseMagicalDefense;
+            currentEvade = baseEvade;
         }
     }
 }

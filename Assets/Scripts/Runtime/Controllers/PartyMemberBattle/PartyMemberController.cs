@@ -9,7 +9,7 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
     {
         [Header("Party Member Info")]
         [SerializeField] public string partyMemberName;
-        
+
         [Header("Base Data")]
         [SerializeField] private PartyMemberBaseData partyMemberBaseData;
         

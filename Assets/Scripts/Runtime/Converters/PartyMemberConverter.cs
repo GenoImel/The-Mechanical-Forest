@@ -9,17 +9,17 @@ namespace Akashic.Runtime.Converters
         {
             var partyMember = new PartyMember(
                 partyMemberController.partyMemberName,
-                partyMemberController.partyMemberStatHandler.currentLevel,
-                partyMemberController.partyMemberResourceHandler.currentExperience,
-                partyMemberController.partyMemberResourceHandler.maxExperience,
-                partyMemberController.partyMemberResourceHandler.currentHealth,
-                partyMemberController.partyMemberResourceHandler.maxHealth,
-                partyMemberController.partyMemberStatHandler.basePhysicalAttack,
-                partyMemberController.partyMemberStatHandler.baseMagicalAttack,
-                partyMemberController.partyMemberStatHandler.baseAccuracy,
-                partyMemberController.partyMemberStatHandler.basePhysicalDefense,
-                partyMemberController.partyMemberStatHandler.baseMagicalDefense,
-                partyMemberController.partyMemberStatHandler.baseEvade
+                partyMemberController.partyMemberStatHandler.CurrentLevel,
+                partyMemberController.partyMemberResourceHandler.CurrentExperience,
+                partyMemberController.partyMemberResourceHandler.MaxExperience,
+                partyMemberController.partyMemberResourceHandler.CurrentHealth,
+                partyMemberController.partyMemberResourceHandler.MaxHealth,
+                partyMemberController.partyMemberStatHandler.BasePhysicalAttack,
+                partyMemberController.partyMemberStatHandler.BaseMagicalAttack,
+                partyMemberController.partyMemberStatHandler.BaseAccuracy,
+                partyMemberController.partyMemberStatHandler.BasePhysicalDefense,
+                partyMemberController.partyMemberStatHandler.BaseMagicalDefense,
+                partyMemberController.partyMemberStatHandler.BaseEvade
                 );
 
             return partyMember;
