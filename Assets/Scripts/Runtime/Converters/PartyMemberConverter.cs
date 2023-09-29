@@ -8,7 +8,7 @@ namespace Akashic.Runtime.Converters
         public static PartyMember ConvertControllerToPartyMember(PartyMemberController partyMemberController)
         {
             var partyMember = new PartyMember(
-                partyMemberController.partyMemberName,
+                partyMemberController.PartyMemberName,
                 partyMemberController.partyMemberStatHandler.CurrentLevel,
                 partyMemberController.partyMemberResourceHandler.CurrentExperience,
                 partyMemberController.partyMemberResourceHandler.MaxExperience,

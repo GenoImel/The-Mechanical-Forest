@@ -17,18 +17,18 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         private int maxHealth;
         private int maxExperience;
         
-        public int CurrentHealth { get => currentHealth; private set => currentHealth = value; }
-        public int CurrentExperience { get => currentExperience; private set => currentExperience = value; }
-        
-        public int MaxHealth { get => maxHealth; }
-        public int MaxExperience { get => maxExperience; }
-        
+        public int CurrentHealth => currentHealth;
+        public int CurrentExperience => currentExperience;
+
+        public int MaxHealth => maxHealth;
+        public int MaxExperience => maxExperience;
+
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
             currentHealth = baseData.baseHealth;
-            maxHealth = baseData.baseHealth;
-
             currentExperience = baseData.baseExp;
+            
+            maxHealth = baseData.baseHealth;
         }
     }
 }

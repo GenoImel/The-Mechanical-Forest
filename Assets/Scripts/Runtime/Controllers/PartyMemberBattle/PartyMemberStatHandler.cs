@@ -28,22 +28,22 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] private int baseMagicalDefense;
         [SerializeField] private float baseEvade;
         
-        public int CurrentLevel { get => currentLevel; private set => currentLevel = value; }
-        public int CurrentPhysicalAttack { get => currentPhysicalAttack; private set => currentPhysicalAttack = value; }
-        public int CurrentMagicalAttack { get => currentMagicalAttack; private set => currentMagicalAttack = value; }
-        public float CurrentAccuracy { get => currentAccuracy; private set => currentAccuracy = value; }
-        
-        public int CurrentPhysicalDefense { get => currentPhysicalDefense; private set => currentPhysicalDefense = value; }
-        public int CurrentMagicalDefense { get => currentMagicalDefense; private set => currentMagicalDefense = value; }
-        public float CurrentEvade { get => currentEvade; private set => currentEvade = value; }
-        
-        public int BasePhysicalAttack { get => basePhysicalAttack; }
-        public int BaseMagicalAttack { get => baseMagicalAttack; }
-        public float BaseAccuracy { get => baseAccuracy; }
-        
-        public int BasePhysicalDefense { get => basePhysicalDefense; }
-        public int BaseMagicalDefense { get => baseMagicalDefense; }
-        public float BaseEvade { get => baseEvade; }
+        public int CurrentLevel => currentLevel;
+        public int CurrentPhysicalAttack => currentPhysicalAttack;
+        public int CurrentMagicalAttack => currentMagicalAttack;
+        public float CurrentAccuracy => currentAccuracy;
+
+        public int CurrentPhysicalDefense => currentPhysicalDefense;
+        public int CurrentMagicalDefense => currentMagicalDefense;
+        public float CurrentEvade => currentEvade;
+
+        public int BasePhysicalAttack => basePhysicalAttack;
+        public int BaseMagicalAttack => baseMagicalAttack;
+        public float BaseAccuracy => baseAccuracy;
+
+        public int BasePhysicalDefense => basePhysicalDefense;
+        public int BaseMagicalDefense => baseMagicalDefense;
+        public float BaseEvade => baseEvade;
 
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
