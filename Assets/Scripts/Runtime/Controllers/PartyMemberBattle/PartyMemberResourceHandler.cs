@@ -1,5 +1,4 @@
-using Akashic.ScriptableObjects.Scripts;
-using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMemberBase;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle

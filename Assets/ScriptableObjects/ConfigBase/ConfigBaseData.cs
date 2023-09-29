@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.Scripts.ConfigBase
+namespace Akashic.ScriptableObjects.ConfigBase
 {
     [CreateAssetMenu(menuName = "Akashic/Config/New Game Config File")]
     public sealed class ConfigBaseData : ScriptableObject
