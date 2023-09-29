@@ -17,9 +17,13 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [Header("Input fields")]
         [SerializeField] private TMP_InputField fileNameInputText;
         
+        [Header("Input Settings")]
+        [SerializeField] private int maxSaveSlotNameCharacters = 16;
+        
         private void Start()
         {
             Hide();
+            SetCharacterLimit();
         }
 
         private void OnEnable()
@@ -36,6 +40,11 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         {
             base.Hide();
             ClearFileNameInputText();
+        }
+        
+        private void SetCharacterLimit()
+        {
+            fileNameInputText.characterLimit = maxSaveSlotNameCharacters;
         }
 
         private void ClearFileNameInputText()
