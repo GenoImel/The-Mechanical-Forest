@@ -1,6 +1,8 @@
+using System.Runtime.CompilerServices;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.BattleStates;
 using Akashic.Runtime.MonoSystems.Config;
+using Akashic.Runtime.MonoSystems.Debugger;
 using Akashic.Runtime.MonoSystems.ExplorationStates;
 using Akashic.Runtime.MonoSystems.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
@@ -31,6 +33,7 @@ namespace Akashic.Runtime
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
         [SerializeField] private SaveMonoSystem saveMonoSystem;
         [SerializeField] private StoryMonoSystem storyMonoSystem;
+        [SerializeField] private DebuggerMonoSystem debuggerMonoSystem;
 
         protected override string GetApplicationName()
         {
@@ -57,6 +60,7 @@ namespace Akashic.Runtime
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
             AddMonoSystem<StoryMonoSystem, IStoryMonoSystem>(storyMonoSystem);
+            AddMonoSystem<DebuggerMonoSystem, IDebuggerMonoSystem>(debuggerMonoSystem);
         }
     }
 }
