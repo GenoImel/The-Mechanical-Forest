@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using UnityEngine;
 using Akashic.Runtime.MonoSystems.Story;
+using UnityEngine;
 
-namespace Akashic.ScriptableObjects.Scripts.StoryBase
+namespace Akashic.ScriptableObjects.StoryBase
 {
     [CreateAssetMenu(menuName = "Akashic/Story Event/New Base Story Event")]
     internal sealed class StoryEventBaseData : ScriptableObject

@@ -1,5 +1,5 @@
+using Akashic.ScriptableObjects.ConfigBase;
 using UnityEditor;
-using Akashic.ScriptableObjects.Scripts.ConfigBase;
 
 [CustomEditor(typeof(ConfigBaseData))]
 internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
