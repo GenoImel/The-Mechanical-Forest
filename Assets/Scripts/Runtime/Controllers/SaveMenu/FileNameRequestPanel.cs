@@ -1,6 +1,7 @@
 using System;
 using Akashic.Core;
 using Akashic.Runtime.Common;
+using Akashic.Runtime.MonoSystems.Config;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,10 +17,14 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         [Header("Input fields")]
         [SerializeField] private TMP_InputField fileNameInputText;
-        
-        [Header("Input Settings")]
-        [SerializeField] private int saveSlotNameCharacterLimit = 16;
-        
+
+        private IConfigMonoSystem configMonoSystem;
+
+        private void Awake()
+        {
+            configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
+        }
+
         private void Start()
         {
             Hide();
@@ -44,7 +49,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         private void SetCharacterLimit()
         {
-            fileNameInputText.characterLimit = saveSlotNameCharacterLimit;
+            fileNameInputText.characterLimit = configMonoSystem.GetSaveSlotNameCharacterLimit();
         }
 
         private void ClearFileNameInputText()

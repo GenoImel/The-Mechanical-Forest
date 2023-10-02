@@ -7,12 +7,14 @@ internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
     private SerializedProperty saveFolderParentName;
     SerializedProperty saveSlotFolderNamesProp;
     SerializedProperty saveSlotFileNamesProp;
+    SerializedProperty saveSlotNameCharacterLimit;
 
     void OnEnable()
     {
         saveFolderParentName = serializedObject.FindProperty("saveFolderParentName");
         saveSlotFolderNamesProp = serializedObject.FindProperty("saveSlotFolderNames");
         saveSlotFileNamesProp = serializedObject.FindProperty("saveSlotFileNames");
+        saveSlotNameCharacterLimit = serializedObject.FindProperty("saveSlotNameCharacterLimit");
     }
 
     public override void OnInspectorGUI()
@@ -24,6 +26,7 @@ internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
         EditorGUILayout.PropertyField(saveFolderParentName, true);
         EditorGUILayout.PropertyField(saveSlotFolderNamesProp, true);
         EditorGUILayout.PropertyField(saveSlotFileNamesProp, true);
+        EditorGUILayout.PropertyField(saveSlotNameCharacterLimit, true);
         
         if (EditorGUI.EndChangeCheck())
         {

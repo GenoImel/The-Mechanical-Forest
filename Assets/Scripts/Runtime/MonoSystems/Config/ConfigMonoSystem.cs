@@ -22,5 +22,10 @@ namespace Akashic.Runtime.MonoSystems.Config
         {
             return configData.saveSlotFileNames;
         }
+        
+        public int GetSaveSlotNameCharacterLimit()
+        {
+            return configData.saveSlotNameCharacterLimit;
+        }
     }
 }
