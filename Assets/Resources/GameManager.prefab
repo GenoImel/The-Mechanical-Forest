@@ -1341,6 +1341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1664513336614906561}
+  nameText: {fileID: 5731062770925400145}
+  dialogueText: {fileID: 6252576990400695712}
 --- !u!4 &4730691249935430298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8720483823637260120, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
