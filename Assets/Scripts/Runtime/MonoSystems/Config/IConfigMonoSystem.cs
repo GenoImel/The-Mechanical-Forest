@@ -22,5 +22,10 @@ namespace Akashic.Runtime.MonoSystems.Config
         /// PersistentDataPath from config SO.
         /// </summary>
         public List<string> GetSaveSlotFileNames();
+        
+        /// <summary>
+        /// Retrieves the character limit for save slot names.
+        /// </summary>
+        public int GetSaveSlotNameCharacterLimit();
     }
 }
