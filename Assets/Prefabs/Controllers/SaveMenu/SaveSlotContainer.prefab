@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3229631638808038769}
   - component: {fileID: 4604430915835510303}
-  - component: {fileID: 1923322757801543465}
+  - component: {fileID: 6043658917228213437}
   m_Layer: 0
-  m_Name: SaveFileContainer
+  m_Name: SaveSlotContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1923322757801543465
+--- !u!114 &6043658917228213437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,11 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5174a64c429e436fa0d66c5ec05eac9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveSlot: {fileID: 6775726660663413007, guid: 77e733b0ddc036514a8d98fe41d94acd, type: 3}
   saveSlots:
   - {fileID: 628725765303926850}
   - {fileID: 2187054049073269154}
   - {fileID: 1438883550637038191}
+  defaultEmptySaveSlotText: No Data
 --- !u!1001 &4634711365689999533
 PrefabInstance:
   m_ObjectHideFlags: 0

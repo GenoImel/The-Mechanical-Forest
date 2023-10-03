@@ -6,17 +6,18 @@ namespace Akashic.Editor
     [CustomEditor(typeof(ConfigBaseData))]
     internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
     {
-        private SerializedProperty saveFolderParentName;
-        SerializedProperty saveSlotFolderNamesProp;
-        SerializedProperty saveSlotFileNamesProp;
-        SerializedProperty saveSlotNameCharacterLimit;
+        private SerializedProperty parentSaveFolderNameProp;
+        private SerializedProperty saveFolderNamesProp;
+        private SerializedProperty saveFileNamesProp;        
+        private SerializedProperty saveSlotNameCharacterLimitProp;
+
 
         void OnEnable()
         {
-            saveFolderParentName = serializedObject.FindProperty("saveFolderParentName");
-            saveSlotFolderNamesProp = serializedObject.FindProperty("saveSlotFolderNames");
-            saveSlotFileNamesProp = serializedObject.FindProperty("saveSlotFileNames");
-            saveSlotNameCharacterLimit = serializedObject.FindProperty("saveSlotNameCharacterLimit");
+            parentSaveFolderNameProp = serializedObject.FindProperty("parentSaveFolderName");
+            saveFolderNamesProp = serializedObject.FindProperty("saveFolderNames");
+            saveFileNamesProp = serializedObject.FindProperty("saveFileNames");
+            saveSlotNameCharacterLimitProp = serializedObject.FindProperty("saveSlotNameCharacterLimit");
         }
 
         public override void OnInspectorGUI()
@@ -25,21 +26,21 @@ namespace Akashic.Editor
         
             EditorGUI.BeginChangeCheck();
         
-            EditorGUILayout.PropertyField(saveFolderParentName, true);
-            EditorGUILayout.PropertyField(saveSlotFolderNamesProp, true);
-            EditorGUILayout.PropertyField(saveSlotFileNamesProp, true);
-            EditorGUILayout.PropertyField(saveSlotNameCharacterLimit, true);
+            EditorGUILayout.PropertyField(parentSaveFolderNameProp, true);
+            EditorGUILayout.PropertyField(saveFolderNamesProp, true);
+            EditorGUILayout.PropertyField(saveFileNamesProp, true);
+            EditorGUILayout.PropertyField(saveSlotNameCharacterLimitProp, true);
         
             if (EditorGUI.EndChangeCheck())
             {
-                while (saveSlotFolderNamesProp.arraySize > 3)
+                while (saveFolderNamesProp.arraySize > 3)
                 {
-                    saveSlotFolderNamesProp.DeleteArrayElementAtIndex(saveSlotFolderNamesProp.arraySize - 1);
+                    saveFolderNamesProp.DeleteArrayElementAtIndex(saveFolderNamesProp.arraySize - 1);
                 }
             
-                while (saveSlotFileNamesProp.arraySize > 3)
+                while (saveFileNamesProp.arraySize > 3)
                 {
-                    saveSlotFileNamesProp.DeleteArrayElementAtIndex(saveSlotFileNamesProp.arraySize - 1);
+                    saveFileNamesProp.DeleteArrayElementAtIndex(saveFileNamesProp.arraySize - 1);
                 }
             }
 

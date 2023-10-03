@@ -3,16 +3,30 @@ using UnityEngine;
 
 namespace Akashic.ScriptableObjects.ConfigBase
 {
+    /// <summary>
+    /// Configuration data for the game.
+    /// </summary>
     [CreateAssetMenu(menuName = "Akashic/Config/New Game Config File")]
     public sealed class ConfigBaseData : ScriptableObject
     {
-        [Header("Save File Settings")]
-        public string saveFolderParentName;
+        /// <summary>
+        /// The parent folder in Application.persistentDataPath where all save folders will be stored.
+        /// </summary>
+        public string parentSaveFolderName;
         
-        public List<string> saveSlotFolderNames = new List<string>();
+        /// <summary>
+        /// The name of a folder correlating to an individual save slot.
+        /// </summary>
+        public List<string> saveFolderNames = new List<string>();
         
-        public List<string> saveSlotFileNames = new List<string>();
-        
+        /// <summary>
+        /// The name of a save file correlating to an individual save slot.
+        /// </summary>
+        public List<string> saveFileNames = new List<string>();
+
+        /// <summary>
+        /// Number of characters allowed for a save slot name.
+        /// </summary>
         public int saveSlotNameCharacterLimit = 16;
     }
 }

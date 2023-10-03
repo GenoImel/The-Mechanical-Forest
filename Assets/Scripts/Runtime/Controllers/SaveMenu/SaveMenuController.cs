@@ -12,7 +12,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         [SerializeField] private Button backButton;
 
         [Header("Panels")]
-        [SerializeField] private SaveFileContainer saveFileContainer;
+        [SerializeField] private SaveSlotContainer saveSlotContainer;
         
         [Header("Panels")]
         [SerializeField] private FileNameRequestPanel fileNameRequestPanel;
@@ -40,7 +40,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void OnShowSaveMenuMessage(ShowSaveMenuMessage message)
         {
-            saveFileContainer.FindSaveFiles();
+            saveSlotContainer.FindSaveFiles();
             Show();
         }
 
