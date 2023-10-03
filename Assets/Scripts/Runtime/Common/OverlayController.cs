@@ -11,12 +11,12 @@ namespace Akashic.Runtime.Common
         [Header("Overlay CanvasGroup")]
         [SerializeField] protected CanvasGroup canvasGroup;
 
-        public void Hide()
+        public virtual void Hide()
         {
             CanvasUtilities.HideCanvas(canvasGroup);
         }
 
-        public void Show()
+        public virtual void Show()
         {
             CanvasUtilities.ShowCanvas(canvasGroup);
         }

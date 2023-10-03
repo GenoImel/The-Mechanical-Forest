@@ -13,6 +13,9 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         [Header("Panels")]
         [SerializeField] private SaveFileContainer saveFileContainer;
+        
+        [Header("Panels")]
+        [SerializeField] private FileNameRequestPanel fileNameRequestPanel;
 
         private void Start()
         {
@@ -31,6 +34,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         private void OnBackButtonPressed()
         {
+            fileNameRequestPanel.Hide();
             Hide();
         }
 

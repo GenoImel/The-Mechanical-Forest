@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Akashic.ScriptableObjects.Scripts;
-using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMemberBase;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
@@ -8,8 +7,8 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
     internal sealed class PartyMemberController : MonoBehaviour
     {
         [Header("Party Member Info")]
-        [SerializeField] public string partyMemberName;
-        
+        [SerializeField] private string partyMemberName;
+
         [Header("Base Data")]
         [SerializeField] private PartyMemberBaseData partyMemberBaseData;
         
@@ -27,6 +26,8 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
 
         [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
+        
+        public string PartyMemberName => partyMemberName;
 
         public void InitializeNewPartyMemberFromScriptableObject()
         {
