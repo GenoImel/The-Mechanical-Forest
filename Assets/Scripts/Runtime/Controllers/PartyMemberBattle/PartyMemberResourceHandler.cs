@@ -1,5 +1,4 @@
-using Akashic.ScriptableObjects.Scripts;
-using Akashic.ScriptableObjects.Scripts.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMemberBase;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
@@ -10,19 +9,25 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] private PartyMemberController partyMemberController;
         
         [Header("Resources")]
-        [SerializeField] public int currentHealth;
+        [SerializeField] private int currentHealth;
 
-        [SerializeField] public int currentExperience;
+        [SerializeField] private int currentExperience;
 
-        public int maxHealth;
-        public int maxExperience;
+        private int maxHealth;
+        private int maxExperience;
         
+        public int CurrentHealth => currentHealth;
+        public int CurrentExperience => currentExperience;
+
+        public int MaxHealth => maxHealth;
+        public int MaxExperience => maxExperience;
+
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
             currentHealth = baseData.baseHealth;
-            maxHealth = baseData.baseHealth;
-
             currentExperience = baseData.baseExp;
+            
+            maxHealth = baseData.baseHealth;
         }
     }
 }

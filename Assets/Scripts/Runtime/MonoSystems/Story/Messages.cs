@@ -1,6 +1,5 @@
 using Akashic.Core;
-using Akashic.ScriptableObjects.Scripts;
-using Akashic.ScriptableObjects.Scripts.StoryBase;
+using Akashic.ScriptableObjects.StoryBase;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {

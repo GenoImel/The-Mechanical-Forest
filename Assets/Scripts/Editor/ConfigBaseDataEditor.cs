@@ -1,4 +1,4 @@
-using Akashic.ScriptableObjects.Scripts.ConfigBase;
+using Akashic.ScriptableObjects.ConfigBase;
 using UnityEditor;
 
 namespace Akashic.Editor
@@ -8,13 +8,16 @@ namespace Akashic.Editor
     {
         private SerializedProperty parentSaveFolderNameProp;
         private SerializedProperty saveFolderNamesProp;
-        private SerializedProperty saveFileNamesProp;
+        private SerializedProperty saveFileNamesProp;        
+        private SerializedProperty saveSlotNameCharacterLimitProp;
+
 
         void OnEnable()
         {
             parentSaveFolderNameProp = serializedObject.FindProperty("parentSaveFolderName");
             saveFolderNamesProp = serializedObject.FindProperty("saveFolderNames");
             saveFileNamesProp = serializedObject.FindProperty("saveFileNames");
+            saveSlotNameCharacterLimitProp = serializedObject.FindProperty("saveSlotNameCharacterLimit");
         }
 
         public override void OnInspectorGUI()
@@ -26,6 +29,7 @@ namespace Akashic.Editor
             EditorGUILayout.PropertyField(parentSaveFolderNameProp, true);
             EditorGUILayout.PropertyField(saveFolderNamesProp, true);
             EditorGUILayout.PropertyField(saveFileNamesProp, true);
+            EditorGUILayout.PropertyField(saveSlotNameCharacterLimitProp, true);
         
             if (EditorGUI.EndChangeCheck())
             {

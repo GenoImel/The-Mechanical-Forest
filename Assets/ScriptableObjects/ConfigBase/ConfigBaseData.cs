@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.Scripts.ConfigBase
+namespace Akashic.ScriptableObjects.ConfigBase
 {
     /// <summary>
     /// Configuration data for the game.
@@ -23,5 +23,10 @@ namespace Akashic.ScriptableObjects.Scripts.ConfigBase
         /// The name of a save file correlating to an individual save slot.
         /// </summary>
         public List<string> saveFileNames = new List<string>();
+
+        /// <summary>
+        /// Number of characters allowed for a save slot name.
+        /// </summary>
+        public int saveSlotNameCharacterLimit = 16;
     }
 }

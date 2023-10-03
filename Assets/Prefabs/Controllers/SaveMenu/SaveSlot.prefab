@@ -476,7 +476,6 @@ MonoBehaviour:
   saveGameButton: {fileID: 6505667594832349057}
   loadGameButton: {fileID: 1071321573470379468}
   saveSlotNameText: {fileID: 8332707786477446303}
-  saveSlotFileName: 
 --- !u!1 &4271143512522557650
 GameObject:
   m_ObjectHideFlags: 0

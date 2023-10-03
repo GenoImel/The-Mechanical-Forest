@@ -24,5 +24,10 @@ namespace Akashic.Runtime.MonoSystems.Config
         /// Returns the name of a save file correlating to an individual save slot.
         /// </summary>
         public List<string> GetSaveFileNames();
+
+        /// <summary>
+        /// Retrieves the character limit for save slot names.
+        /// </summary>
+        public int GetSaveSlotNameCharacterLimit();
     }
 }
