@@ -1,16 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Akashic.Core;
-using Akashic.ScriptableObjects.StoryBase;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryMonoSystem : MonoBehaviour, IStoryMonoSystem
     {
-        [SerializeField] private StoryEventInjector activeStoryInjector;
-        private StoryEventBaseData activeStoryEvent;
-        private int storyPointIndex = 0;
-
         private StoryEvent currentStoryEvent;
+        private int storyPointIndex = 0;
         
         private void OnEnable()
         { 
@@ -24,16 +23,29 @@ namespace Akashic.Runtime.MonoSystems.Story
         
         public StoryPoint GetCurrentStoryPoint()
         {
-            /*if (activeStoryEvent == null || !activeStoryEvent.storyPoints.Any())
+            if (currentStoryEvent == null || !currentStoryEvent.storyPoints.Any())
             {
-                activeStoryEvent = activeStoryInjector.GetCurrentStoryEvent();
+                throw new Exception($"{currentStoryEvent} cannot be null or empty.");
             }
             
-            return activeStoryEvent.storyPoints[storyPointIndex];*/
+            var tempStoryPoint = currentStoryEvent.storyPoints[storyPointIndex++];
             
-            return currentStoryEvent.storyPoints[storyPointIndex];
+            HasStoryEventEnded();
+
+            return tempStoryPoint;
         }
 
+        private void HasStoryEventEnded()
+        {
+            if (storyPointIndex >= currentStoryEvent.storyPoints.Count)
+            {
+                currentStoryEvent = new StoryEvent(new List<StoryPoint>());
+                storyPointIndex = 0;
+            }
+            
+            GameManager.Publish(new StoryEventEndedMessage());
+        }
+        
         private void OnNewStoryEventMessage(NewStoryEventMessage message)
         {
             currentStoryEvent = new StoryEvent(message.StoryEventBaseData.storyPoints);
