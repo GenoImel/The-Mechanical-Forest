@@ -1,39 +1,54 @@
-using UnityEngine;
 using Akashic.Core;
-using Akashic.Runtime.Controllers.Story;
+using Akashic.ScriptableObjects.StoryBase;
+using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryMonoSystem : MonoBehaviour, IStoryMonoSystem
     {
-        [SerializeField] StoryController storyController;
+        [SerializeField] private StoryEventInjector activeStoryInjector;
+        private StoryEventBaseData activeStoryEvent;
+        private int storyPointIndex = 0;
 
+        private StoryEvent currentStoryEvent;
+        
         private void OnEnable()
-        {
+        { 
             AddListeners();
         }
-
+        
         private void OnDisable()
         {
             RemoveListeners();
         }
-
-        private void DisplayStoryEventDialogue(DialogueStoryEventMessage message)
+        
+        public StoryPoint GetCurrentStoryPoint()
         {
-            // pass in one story point to the dialogue controller
-            // keep track of which story point in the story event you are on
-            // clean up once there are no more story points
-            storyController.ShowStoryPointDialogue(message.StoryEvent.storyPoints[0]);
+            /*if (activeStoryEvent == null || !activeStoryEvent.storyPoints.Any())
+            {
+                activeStoryEvent = activeStoryInjector.GetCurrentStoryEvent();
+            }
+            
+            return activeStoryEvent.storyPoints[storyPointIndex];*/
+            
+            return currentStoryEvent.storyPoints[storyPointIndex];
         }
 
+        private void OnNewStoryEventMessage(NewStoryEventMessage message)
+        {
+            currentStoryEvent = new StoryEvent(message.StoryEventBaseData.storyPoints);
+            storyPointIndex = 0;
+            GameManager.Publish(new StoryEventAvailableMessage());
+        }
+        
         private void AddListeners()
         {
-            GameManager.AddListener<DialogueStoryEventMessage>(DisplayStoryEventDialogue);
+            GameManager.AddListener<NewStoryEventMessage>(OnNewStoryEventMessage);
         }
-
+        
         private void RemoveListeners()
         {
-            GameManager.RemoveListener<DialogueStoryEventMessage>(DisplayStoryEventDialogue);
+            GameManager.RemoveListener<NewStoryEventMessage>(OnNewStoryEventMessage);
         }
     }
 }

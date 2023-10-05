@@ -3,13 +3,17 @@ using Akashic.ScriptableObjects.StoryBase;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {
-    internal sealed class DialogueStoryEventMessage : IMessage
+    internal sealed class NewStoryEventMessage : IMessage
     {
-        public StoryEventBaseData StoryEvent { get; }
+        public StoryEventBaseData StoryEventBaseData { get; }
 
-        public DialogueStoryEventMessage(StoryEventBaseData storyEvent)
+        public NewStoryEventMessage(StoryEventBaseData storyEventBaseData)
         {
-            StoryEvent = storyEvent;
+            StoryEventBaseData = storyEventBaseData;
         }
+    }
+
+    internal sealed class StoryEventAvailableMessage : IMessage
+    {
     }
 }

@@ -1,4 +1,5 @@
 using Akashic.Runtime.Common;
+using Akashic.Runtime.MonoSystems.Story;
 using TMPro;
 using UnityEngine;
 
@@ -10,15 +11,27 @@ namespace Akashic.Runtime.Controllers.Story
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI dialogueText;
 
-        public void SetCharacterName(string name)
+        public override void Hide()
+        {
+            base.Hide();
+            SetCharacterName(null);
+            SetDialogue(null);
+        }
+
+        public void DisplayDialogueLine(StoryPoint storyPoint)
+        {
+            SetCharacterName(storyPoint.characterName);
+            SetDialogue(storyPoint.dialogueLine);
+        }
+
+        private void SetCharacterName(string name)
         {
             nameText.text = name;
         }
 
-        public void SetDialogue(string dialogue)
+        private void SetDialogue(string dialogue)
         {
             dialogueText.text = dialogue;
         }
-
     }
 }

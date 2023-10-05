@@ -7,7 +7,13 @@ namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryEventInjector : MonoBehaviour
     {
-        public StoryEventBaseData storyEvent;
+        [SerializeField] private StoryEventBaseData storyEventBaseData;
+
+        public StoryEventBaseData GetCurrentStoryEvent()
+        {
+            //var tempStoryEvent = new StoryEvent(storyEventBaseData.storyPoints);
+            return storyEventBaseData;
+        }
 
         private void OnMouseDown()
         {
@@ -15,7 +21,8 @@ namespace Akashic.Runtime.MonoSystems.Story
             {
                 return;
             }
-            GameManager.Publish(new DialogueStoryEventMessage(storyEvent));
+
+            GameManager.Publish(new NewStoryEventMessage(storyEventBaseData));
         }
     }
 }
