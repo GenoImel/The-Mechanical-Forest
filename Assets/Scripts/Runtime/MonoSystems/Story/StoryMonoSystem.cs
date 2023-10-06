@@ -12,7 +12,7 @@ namespace Akashic.Runtime.MonoSystems.Story
         private int storyPointIndex = 0;
         
         private void OnEnable()
-        { 
+        {
             AddListeners();
         }
         
@@ -20,16 +20,16 @@ namespace Akashic.Runtime.MonoSystems.Story
         {
             RemoveListeners();
         }
-        
+
         public StoryPoint GetCurrentStoryPoint()
         {
             if (currentStoryEvent == null || !currentStoryEvent.storyPoints.Any())
             {
                 throw new Exception($"{currentStoryEvent} cannot be null or empty.");
             }
-            
+
             var tempStoryPoint = currentStoryEvent.storyPoints[storyPointIndex++];
-            
+
             HasStoryEventEnded();
 
             return tempStoryPoint;
@@ -42,22 +42,22 @@ namespace Akashic.Runtime.MonoSystems.Story
                 currentStoryEvent = new StoryEvent(new List<StoryPoint>());
                 storyPointIndex = 0;
             }
-            
+
             GameManager.Publish(new StoryEventEndedMessage());
         }
-        
+
         private void OnNewStoryEventMessage(NewStoryEventMessage message)
         {
             currentStoryEvent = new StoryEvent(message.StoryEventBaseData.storyPoints);
             storyPointIndex = 0;
             GameManager.Publish(new StoryEventAvailableMessage());
         }
-        
+
         private void AddListeners()
         {
             GameManager.AddListener<NewStoryEventMessage>(OnNewStoryEventMessage);
         }
-        
+
         private void RemoveListeners()
         {
             GameManager.RemoveListener<NewStoryEventMessage>(OnNewStoryEventMessage);
