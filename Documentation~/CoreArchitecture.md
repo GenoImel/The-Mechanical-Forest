@@ -1,18 +1,54 @@
 # Core Architecture
 
-The core archicture for the game follows the philosophy of limiting the number of singletons in the codebase, and instead using a single `GameManager` singleton to coordinate communication between decoupled `MonoBehaviour` scripts using `Message Events`, as well as enabling code and data sharing between `MonoBehaviours` by providing access to `MonoSystems`. 
+The core architecture for the Akashic game follows the philosophy of limiting the number of singletons in the codebase, and instead using a single `GameManager` singleton to act as a central hub to orchestrate cross game communication while maintaining flexibility, scalability, maintainability- all wrapped in a simplistic API that is intuitive for developers of all skills levels to learn and apply. 
 
-This core architecture was originally created by a colleague that I studied under. I have made a few small modifications and am continuing to find ways to iterate on the architecture. If changes or modifications are needed during the course of this particular project, this document will be updated.
+The Akashic game uses a hybridized core architecture with a foundational philosophy adheres to the following concepts:
+
+- **Embracing Unity's Native Framework:** Prioritizing a `MonoBehaviour`-centric design that respects Unity's `GameObject`-`Component` pattern.
+- **Modular Interfacing:** Implementing specialized `interfaces` like `MonoSystems` to foster seamless data and code interchangeability among decoupled game features. Further extension with `EntitySystems` interfaces provides a streamlined bridge to interact cohesively with architectures rooted in Unity ECS.
+- **Hierarchical State Management:** Using `interfaces` and classes tailored for Hierarchical State Machines (HSMs), underscored by `class`-driven `state` definitions.
+- **Efficient Dependency Management:** Incorporating the service locator pattern to ensure swift and streamlined dependency injection across the board.
+- **Robust Communication Framework:** Ensuring unhindered cross-game communication through `Message Events` relayed via a dedicated `Message Bus`.
+
+While developers are empowered to quickly get started creating `MonoBehaviour` features and core game components by referencing our `CodingStandards.md` documentation, those who are interested in understanding the hybridized core architecture on a deeper level are encouraged to read through the commented version of core scripts below. 
 
 ## Game Manager
 
-Starting from the top of the architecture, let's take a look at the `GameManager` class:
+The GameManager is the central hub through which various game components and systems communicate. Its core tenets are in its "single-`singleton`" design – as it is intended to be the only `singleton` in the game. This design decision emerges from a philosophy of simplifying access points and reducing the complexity of the game's API.
+
+### Distinct characteristics of the `GameManager`:
+- **Singleton By Design:**
+
+    - The uniqueness of the `GameManager` `singleton` ensures that key core components, such as `MonoSystems`, can be easily accessed and used across different features. This also reduces potential issues stemming from multiple instance management.
+
+- **Dynamic Instantiation:**
+
+    - The `GameManager` is dynamically instantiated prior to any scene load. This architecture choice ensures that all core dependencies are automatically incorporated into any active scene. As a result, developers can concentrate on the scenes' specific logic without constantly ensuring that foundational dependencies are integrated. While many enterprise-level games typically use only one or two scenes, having an automatically instantiating `GameManager` opens us up to the use of test scenes for testing new and experimental features outside of our primary game scene.
+
+- **Message Management:**
+
+    - Integrating a `MessageManager`, the `GameManager` offers a decoupled communication methodology. Instead of conventional Unity/C# `actions`, `events`, and `delegates`, it employs `Message Events` to enable flexible communication. The `GameManager` also provides `interfaces` for adding or removing `message listener`s and publishing `Message Events`. These methods streamline and standardize how various game components interact with each other.
+
+
+- **MonoSystem Management and Interaction:**
+
+    - The `MonoSystemManager` manages `MonoSystems` within the game, which facilitates data and code sharing. It also offers methods for retrieving and adding `MonoSystems`, `EntitySystems`, and `States` and encapsulates the management of these core architectural components, ensuring that their usage are consistent.
+
+- **Extensibility:**
+
+    - Being abstract, the GameManager class has been structured to be extensible, and this extensibility is primarily exposed through the `AkashicGameManager`, where various methods are `overriden` in order to tailor the `GameManager`'s behaviour.
+
+Let's start by stepping through the base `GameManager` class to gather a deeper understanding of how we are accomplishing the above concepts:
 
 ```csharp
 using System;
+using Akashic.Core.EntitySystems;
+using Akashic.Core.Messages;
+using Akashic.Core.MonoSystems;
+using Akashic.Core.StateMachines;
 using UnityEngine;
 
-// This script is intended to be the only singleton in the application.
+// This script is intended to be the only singleton in the game.
 // If a need arises for another singleton, we should consider reworking
 // the architecture to fit the new use-case.
 //
@@ -34,7 +70,9 @@ namespace Akashic.Core
         private static GameManager instance; // The GameManager is our only singleton.
         
         private readonly MessageManager messageManager = new (); // Used for managing Message Events
-        private readonly MonoSystemManager MonoSystemManager = new (); // Used for managing MonoSystems.
+        private readonly StateMachineManager stateMachineManager = new(); // Used for managing StateMachines.
+        private readonly MonoSystemManager monoSystemManager = new (); // Used for managing MonoSystems.
+        private readonly EntitySystemManager entitySystemManager = new (); // Used for managing EntitySystems.
 
         // At runtime, prior to any scene being loaded, we instantiate the AkashicGameManager prefab.
         // This is convenient because it means that we can worry less about scenes containing the
@@ -56,7 +94,7 @@ namespace Akashic.Core
 
             // Give the prefab a name. This name will match the name of the script component.
             // For this codebase, that will be AkashicGameManager.
-            gameManager.name = gameManager.GetApplicationName();
+            gameManager.name = gameManager.GetGameName();
             
             // Our GameManager should be persistent between scenes.
             DontDestroyOnLoad(gameManager);
@@ -64,13 +102,13 @@ namespace Akashic.Core
             // Assign the instance to the GameManager we just instantiated.
             instance = gameManager;
 
-            // Call the protected method OnInitialized. This is empty in this abstract script,
+            // Call the protected method OnInitialized(). This is empty in this abstract script,
             // but has some logic in AkashicGameManager, which inherits from GameManager.
             gameManager.OnInitialized();
         }
 
         /// <summary>
-        /// Adds a new message listener.
+        /// Adds a new Message Listener.
         /// </summary>
         public static void AddListener<TMessage>(Action<TMessage> listener) where TMessage : IMessage
         {
@@ -78,7 +116,7 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Removes a message listener.
+        /// Removes a Message Listener.
         /// </summary>
         public static void RemoveListener<TMessage>(Action<TMessage> listener) where TMessage : IMessage
         {
@@ -86,11 +124,28 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Publishes a message to the MonoSystems in the game.
+        /// Publishes a Message Event across the Message Bus.
         /// </summary>
         public static void Publish<TMessage>(TMessage message) where TMessage : IMessage
         {
             instance.messageManager.Publish(message);
+        }
+        
+        /// <returns>
+        /// Returns an existing State Machine in the game.
+        /// </returns>
+        public static TStateMachine GetStateMachine<TStateMachine>()
+        {
+            return instance.stateMachineManager.GetStateMachine<TStateMachine>();
+        }
+        
+        /// <summary>
+        /// Adds a State Machine to the game.
+        /// </summary>
+        protected void AddStateMachine<TStateMachine, TBindTo>(TStateMachine stateMachine) 
+            where TStateMachine : IStateMachine, TBindTo
+        {
+            stateMachineManager.AddStateMachine<TStateMachine, TBindTo>(stateMachine);
         }
 
         /// <returns>
@@ -98,45 +153,90 @@ namespace Akashic.Core
         /// </returns>
         public static TMonoSystem GetMonoSystem<TMonoSystem>()
         {
-            return instance.MonoSystemManager.GetMonoSystem<TMonoSystem>();
+            return instance.monoSystemManager.GetMonoSystem<TMonoSystem>();
         }
-        
+
         /// <summary>
         /// Adds a MonoSystem to the game.
         /// </summary>
-        protected void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem MonoSystem) where TMonoSystem : IMonoSystem, TBindTo
+        protected void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem) 
+            where TMonoSystem : IMonoSystem, TBindTo
         {
-            MonoSystemManager.AddMonoSystem<TMonoSystem, TBindTo>(MonoSystem);
+            monoSystemManager.AddMonoSystem<TMonoSystem, TBindTo>(monoSystem);
+        }
+
+        /// <returns>
+        ///Returns an existing Entity MonoSystem in the game.
+        /// </returns>
+        public static TEntitySystem GetEntitySystem<TEntitySystem>()
+        {
+            return instance.entitySystemManager.GetEntitySystem<TEntitySystem>();
+        }
+
+        /// <summary>
+        /// Adds an Entity MonoSystem to the game.
+        /// </summary>
+        protected void AddEntitySystem<TEntitySystem, TBindTo>(TEntitySystem entitySystem)
+            where TEntitySystem : IEntitySystem, TBindTo
+        {
+            entitySystemManager.AddEntitySystem<TEntitySystem, TBindTo>(entitySystem);
         }
         
         /// <returns>
-        /// Name of the application or game.
+        /// Name of the game or game.
         /// </returns>
-        protected abstract string GetApplicationName();
+        protected abstract string GetGameName();
 
         /// <summary>
         /// Called when the game manager is initialized.
         /// </summary>
         protected abstract void OnInitialized();
+
+        /// <summary>
+        /// Called when bootstrapping game state machines.
+        /// </summary>
+        protected abstract void InitializeGameStateMachines();
+        
+        /// <summary>
+        /// Called when bootstrapping game MonoSystems.
+        /// </summary>
+        protected abstract void InitializeGameMonoSystems();
+        
+        /// <summary>
+        /// Called when bootstrapping game entity MonoSystems.
+        /// </summary>
+        protected abstract void InitializeGameEntitySystems();
+
+        /// <summary>
+        /// Called after bootstrapping complete.
+        /// Sets all parent transforms active.
+        /// </summary>
+        protected abstract void SetParentsActive();
     }
 }
 ```
-## Messages
 
-The following sections describe how `Message Events` work within the core architecture, starting from the interface `IMessage` for generic typing, the creation of a `MessageListener`, and ends at describing the logic behind the `MessageManager`:
+The `GameManager` class serves as a foundational element in the Akashic game's architecture. Through its design, it centralizes management of key components such as `Message Events`, `StateMachines`, `MonoSystems`, and `EntitySystems`. With a systematic initialization process, it ensures that essential dependencies are loaded in every scene. By offering methods for listener management, state machine, and system handling, as well as abstracted methods for initialization and setting up systems, it promotes a modular and organized approach. In essence, this class provides a simplified API for managing and orchestrating core functionalities within the game.
+
+## Message Events
+
+In the Akashic game's architecture, `Message Events` play a pivotal role in facilitating communication between different decoupled features, `StatMachines`, `MonoSystems`, and `EntitySystems`. This section delves into the structural underpinnings of these `Message Events`, covering everything from the foundational `IMessage` interface, the implementation of a `MessageListener`, and to the management of `Message Events` by the `MessageManager`. Each of these elements collectively ensures decoupled and efficient messaging across the game.
 
 ### IMessage
 
-`IMessage` is used for generic typing of all Message Events in the game's codebase:
+At the core of the messaging system within the Akashic game lies the `IMessage` `interface`. Serving as a foundational touch point for all `Message Events`, `IMessage` offers a level of abstraction that ensures consistent typing across the entire codebase. Generic typing makes sure that any `Message Event`, regardless of its unique characteristics, can be incorporated seamlessly into the `MessageListener`. 
 
 ```csharp
-namespace Akashic.Core
+namespace Akashic.Core.Messages
 {
     // The IMessage interface is used to generically type all
     // Message Events so that regardless of the overlying type
     // of the Message Event, they can be added to the Message Listener
     // since they all inherit from the generic type of IMessage.
-    public interface IMessage
+    //
+    // When creating a new Message Event, we will inherit from
+    // this IMessage interface.
+    internal interface IMessage
     {
     }
 }
@@ -144,7 +244,7 @@ namespace Akashic.Core
 
 ### Message Listener
 
-The `MessageListener` class allows other scripts to add, remove listeners for `Message Events` through the `GameManager`, and keeps track of `MessageEvents` of the same type in an `IList`. It also provides a method for publishing `Message Events` over the `Message Bus`:
+The `MessageListener` serves a crucial role within our messaging system. Acting as an intermediary, it tracks and manages `Message Events` using an `IList`. This class allows scripts to register or publish specific `Message Events` via the `Message Bus`. In the details below, we'll break down its structure and the methods.
 
 ```csharp
 using System;
@@ -155,7 +255,7 @@ using UnityEngine;
 // other scripts can listen for by using GameManager.AddListener().
 // The MessageListener also allows scripts to publish Message Events over the
 // Message Bus by using GameManager.Publish().
-namespace Akashic.Core
+namespace Akashic.Core.Messages
 {
     internal sealed class MessageListener<TMessage> : MessageListener where TMessage : IMessage
     {
@@ -164,7 +264,7 @@ namespace Akashic.Core
         // removed from the list during RemoveListener().
         //
         // Multiple scripts may be listening for the same type of IMessage.
-        // So for each type of IMessage, an listener exists which will be
+        // So for each type of IMessage, a listener exists which is
         // stored in an IDictionary<Type, MessageListener> in our MessageManager.
         private readonly IList<Action<TMessage>> listeners = new List<Action<TMessage>>();
 
@@ -192,14 +292,14 @@ namespace Akashic.Core
                 var listener = listeners[index];
                 try
                 {
-                    // If the TMessage : IMessage is found in our IList listeners,
+                    // If the Message Event is found in our IList listeners,
                     // invoke the Message Event.
                     listener.Invoke(message);
                 }
                 catch(Exception exception)
                 {
                     // If the Message Event is not found in our IList listeners
-                    // Log an exception.
+                    // log an exception.
                     Debug.LogException(exception);
                 }
             }
@@ -215,7 +315,7 @@ namespace Akashic.Core
 
 ### Message Manager
 
-The `MessageManager` manages all of our listeners for each type of `IMessage` that scripts are listening for. It provides further logic for `AddListener()`, `RemoveListener()`, and `Publish()`:
+The `MessageManager` is the orchestrator of our `Message Bus`, centralizing the management of all `listeners` for each `IMessage` type. By using a structured `IDictionary`, it keeps track of `MessageListeners` and efficiently directs `Message Event` communication. Let's breakdown the `MessageListener` script to grasp how this manager optimizes the processes of adding, removing, and publishing messages in our architecture.
 
 ```csharp
 using System;
@@ -225,9 +325,9 @@ using System.Collections.Generic;
 // in order to keep track of all MessageListeners of type IMessage
 // that have been added, and remove MessageListeners. It also handles
 // further logic for publishing Message Events via MessageListener.
-namespace Akashic.Core
+namespace Akashic.Core.Messages
 {
-    // This class is internal to the Core namespace, and sealed to prevent 
+    // This class is internal to the Core.Messages namespace, and sealed to prevent 
     // extension through inheritance.
     internal sealed class MessageManager
     {
@@ -256,7 +356,7 @@ namespace Akashic.Core
             else
             {
                 // If the Message Event we are adding does not already have
-                // An existing Message Listener, we create a new MessageListener
+                // an existing Message Listener, we create a new MessageListener
                 // and then add the listener to the new MessageListener.
                 var newMessageListener = new MessageListener<TMessage>();
                 newMessageListener.AddListener(listener);
@@ -322,22 +422,24 @@ namespace Akashic.Core
 
 ## MonoSystems
 
-`MonoSystems` are a key component within the core architecture. They take the place of multipe singletons, allowing for data and code sharing across the game's codebase without having to manage and maintain multiple different singletons. Since the `GameManager` automatically self-instantiates into any scene, there is no need to remember to add multiple different prefab singleton dependencies to create a new scene and ensure it runs correctly. The dependencies for these MonoSystems are directly injected into a class by leveraging the core architecture through `GameManager.GetMonoSystem<TMonoSystem>()`. 
-
-Lets dig into the details on how `MonoSystems` work within the core architecture:
+`MonoSystems` streamline the core architecture by replacing the need for multiple `singletons`, ensuring efficient data and code sharing across the game. Instead of managing various prefab `singleton` dependencies, the `GameManager` centralizes these `MonoSystems`, simplifying our game's overall API. `GameManager.GetMonoSystem<TMonoSystem>()` makes it easy to integrate `MonoSystems` via direct dependency injection. This section delves into the technical details and implementation of `MonoSystems` within our architectural framework.
 
 ### IMonoSystem
 
-The `IMonoSystem` interface allows for generic typing of `MonoSystems`:
+The `IMonoSystem` `interface` serves a crucial role by enabling generic typing for all `MonoSystems` within the core architecture. This approach allows MonoSystems to be be intuitively accessed through the service locator pattern in the `GameManager`. This section delves into the specifics of the `IMonoSystem` `interface` and its role in facilitating efficient and type-safe `MonoSystem` retrieval.
 
 ```csharp
-namespace Akashic.Core
+namespace Akashic.Core.MonoSystems
 {
     // The IMonoSystem interface is used to generically type all
     // MonoSystems so that regardless of the overlying type
     // of the MonoSystem, they can be bootstrapped into the
     // GameManager at runtime.
-    public interface IMonoSystem
+    
+    /// <summary>
+    /// For generic typing of specific MonoSystems.
+    /// </summary>
+    internal interface IMonoSystem
     {
     }
 }
@@ -345,7 +447,7 @@ namespace Akashic.Core
 
 ### MonoSystem Manager
 
-The `MonoSystemManager` provides methods for bootstrapping `MonoSystems` into the game, and providing dependency injection of `MonoSystems` into scripts by calling `GameManager.GetMonoSystem<TMonoSystem>()`:
+The `MonoSystemManager` is an integral component responsible for managing and providing access to the various `MonoSystems` within the game. Through its robust methods, it facilitates the bootstrapping of `MonoSystems` and ensures that dependencies are injected wherever they are needed. By using the service locator pattern, `MonoSystemManager` works within the `GameManager` to provide scripts with the requested `MonoSystems` through `GameManager.GetMonoSystem<TMonoSystem>()`. This section elaborates on the mechanics of the `MonoSystemManager` and how it optimizes `MonoSystem` management and retrieval.
 
 ```csharp
 using System;
@@ -354,18 +456,18 @@ using System.Collections.Generic;
 // The MonoSystem Manager allows us to bootstrap MonoSystems generically typed
 // via IMonoSystem by using the AddMonoSystem method. It also allows us to
 // inject dependencies on MonoSystems in other scripts by using GetMonoSystem.
-namespace Akashic.Core
+namespace Akashic.Core.MonoSystems
 {
-    // This class is internal to the Core namespace, and sealed to prevent 
+    // This class is internal to the Core.MonoSystems namespace, and sealed to prevent 
     // extension through inheritance.
     internal sealed class MonoSystemManager
     {
         // Create an IDictionary to pair each IMonoSystem with its type.
-        private readonly IDictionary<Type, IMonoSystem> MonoSystems =
+        private readonly IDictionary<Type, IMonoSystem> monoSystems =
             new Dictionary<Type, IMonoSystem>();
 
         // Bootstrap a MonoSystem into the game at runtime. This is called in
-        // OnInitialized in the AkashicGameManager.
+        // OnInitialized() in the AkashicGameManager.
         //
         // When bootstrapping a MonoSystem, we grab the MonoSystem's companion
         // MonoBehaviour class as a component from a GameObject.
@@ -375,24 +477,24 @@ namespace Akashic.Core
         //
         // We then bind the TMonoSystem : IMonoSystem to its companion
         // MonoBehaviour class.
-        public void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem MonoSystem)
+        public void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem)
             where TMonoSystem : TBindTo, IMonoSystem
         {
-            // The name of the GameObject that the MonoSystem MonoBehavior component
+            // The GameObject that the MonoSystem MonoBehavior component
             // lives on cannot be null. Throw an exception if it is.
             //
             // If this happens, you probably forgot to add your child MonoSystem
             // GameObject to its serialized field in the GameManager prefab.
-            if (MonoSystem == null)
+            if (monoSystem == null)
             {
-                throw new Exception($"{nameof(MonoSystem)} cannot be null");
+                throw new NullReferenceException($"{nameof(monoSystem)} cannot be null");
             }
 
             // If the GameObject for the MonoSystem isn't null:
             // - Grab the overlying type from the MonoSystem's interface.
             // - Add <Type, IMonoSystem> pair to the IDictionary of MonoSystems.
-            var MonoSystemType = typeof(TBindTo);
-            MonoSystems[MonoSystemType] = MonoSystem;
+            var monoSystemType = typeof(TBindTo);
+            monoSystems[monoSystemType] = monoSystem;
         }
 
         // When getting a MonoSystem from the GameManager singleton, all
@@ -401,23 +503,293 @@ namespace Akashic.Core
         public TMonoSystem GetMonoSystem<TMonoSystem>()
         {
             // First we get the overlying type of the requested MonoSystem.
-            var MonoSystemType = typeof(TMonoSystem);
+            var monoSystemType = typeof(TMonoSystem);
             
             // We then check the IDictionary of MonoSystems for this type of MonoSystem.
-            if (MonoSystems.TryGetValue(MonoSystemType, out var MonoSystem))
+            if (monoSystems.TryGetValue(monoSystemType, out var monoSystem))
             {
                 // If this type of MonoSystem exists in the IDictionary, we return
                 // it as a TMonoSystem : IMonoSystem.
-                return (TMonoSystem)MonoSystem;
+                return (TMonoSystem)monoSystem;
             }
 
             // If the type of MonoSystem was not found in our IDictionary of MonoSystems,
-            // we throw an exception.
+            // we throw an Exception.
             //
-            // Typically when I run into this issue, it is because I forgot to
+            // Typically when we run into this issue, it is because we forgot to
             // drag and drop the child GameObject associated with the MonoSystem into
             // the serialized field on the GameManager prefab.
-            throw new Exception($"MonoSystem {MonoSystemType} does not exist");
+            throw new Exception($"MonoSystem {monoSystemType} does not exist");
+        }
+    }
+}
+```
+
+## State Machines
+
+In the heart of the Akashic core architecture we have `StateMachines`. These constructs are used for orchestrating the distinct phases, behaviors, or operational modes of various game components. Their intricate design allows for a robust and type-safe approach to manage `state` transitions without leaning on less robust methods such as `enums`. Let's take an in-depth look into how `StateMachines` are implemented in our core architecture:
+
+### IState
+
+The `IState` `interface` offers generic typing of specific `state` types, tailored for each individual `StateMachine`. By returning its type, it ensures type-safety and clear differentiation between `states` belonging to specific `StateMachines`.
+
+```csharp
+using System;
+
+namespace Akashic.Core.StateMachines
+{
+    // The IState interface is used to generically type all
+    // States, and is the beginning of our class-based State
+    // definitions for individual StateMachines.
+
+    /// <summary>
+    /// For generic typing of specific state types on a per-State Machine basis.
+    /// Returns the type of IState for type safety.
+    /// </summary>
+    internal interface IState
+    {
+        Type GetFiniteStateType();
+    }
+}
+```
+
+### IFiniteState
+
+In tandem with `IState`, the `IFiniteState` `interface` takes a more granular approach. It is designed to specify `finite states` within an `IState`. Through this `interface`, we eliminate the need for `enums` and instead rely on class-based `state` definitions, again ensuring type-safe operation.
+
+```csharp
+using System;
+
+namespace Akashic.Core.StateMachines
+{
+    // IFiniteStates allow us to define specific finite states within an IState
+    // using class-based definitions for IFiniteStates rather than enums.
+    
+    /// <summary>
+    /// Allows us to define specific finite states within an <see cref="IState"/>.
+    /// This enables us to define state machines without enums.
+    /// Interface returns the type of <see cref="IFiniteState"/> for type safety.
+    /// </summary>
+    internal interface IFiniteState
+    {
+        Type GetStateType();
+    }
+}
+```
+
+### StateChangedMessage
+
+`Message Events` are essential for communicating `state` changes within our individual `StateMachines`. The `StateChangedMessage` serves as a specialized `Message Event` for any `state` changes, and establishes a specific pattern for `state` transitions that is uniform across the game, ensuring clarity and reducing chances unexpected game behaviour.
+
+```csharp
+using Akashic.Core.Messages;
+
+namespace Akashic.Core.StateMachines
+{
+    // When defining a StateChangedMessage Event, we must inherit
+    // from StateChangedMessage class specifically.
+    
+    /// <summary>
+    /// Base Message Event for State Changes.
+    /// Enforces specific state change pattern across the game.
+    /// </summary>
+    internal class StateChangedMessage<TFiniteState> : IMessage where TFiniteState : IFiniteState
+    {
+        // It is very important that we specify the previous and next states
+        // for our StateChangedMessage. Using other states violates our
+        // state change pattern and may lead to unexpected game behaviour.
+        public TFiniteState PrevState { get; protected set; }
+        public TFiniteState NextState { get; protected set; }
+        
+        public StateChangedMessage() { }
+    }
+}
+```
+
+### BaseStateMachine
+
+The `BaseStateMachine` class functions as the backbone for the `MonoBehaviour` companion script for our `StateMachines`. Through it, we manage `state` transitions, establish initial `states`, and propagate messages about these transitions. Its design enforces a specific `state` change pattern, which guarantees that the game responds uniformly to `state` changes.
+
+```csharp
+using System;
+using Akashic.Core.Messages; // We use the Core.Messages namespace to create a StateChangedMessage.
+using UnityEngine;
+
+namespace Akashic.Core.StateMachines
+{
+    // All StateMachines will inherit from our BaseStateMachine abstract class.
+    internal abstract class BaseStateMachine : MonoBehaviour, IStateMachine
+    {
+        // All StateMachines must have fields for the current state and a previous state.
+        private IFiniteState currentState;
+        private IFiniteState prevState;
+        
+        // The SetState(IFiniteState nextState) method is used to enforce adherence 
+        // of a state change pattern within a particular StateMachine. 
+
+        /// <summary>
+        /// Sets the next state of the State Machine and publishes a State Changed Message.
+        /// Used to enforce specific state change pattern across the game.
+        /// </summary>
+        /// <param name="nextState"></param>
+        protected void SetState(IFiniteState nextState)
+        {
+            if (nextState == null)
+            {
+                // If the next state is null, throw an Exception.
+                // If you get this, something has gone wrong.
+                throw new Exception("Next state is null.");
+            }
+
+            if (currentState == nextState)
+            {
+                // If we are already in the next state already, we should log a warning.
+                // This may indicate that something in the game is not behaving as expected.
+                Debug.LogWarning($"State Machine is already in \"{nextState}\" state.");
+                return;
+            }
+            
+            if (currentState != null && currentState.GetStateType() != nextState.GetStateType())
+            {
+                // If we have somehow received a state that is not the same type as the IState 
+                // for a particular StateMachine, we throw an Exception.
+                throw new Exception($"Invalid state transition from \"{currentState}\" to \"{nextState}\".");
+            }
+
+            // Set the previous state to the current state.
+            prevState = currentState;
+            
+            // Create a StateChangedMessage Event and use the previous state and next state as parameters,
+            // then publish the StateChangedMessage Event.
+            var stateChangedMessage = CreateStateChangedMessage(prevState, nextState);
+            GameManager.Publish(stateChangedMessage);
+            
+            // Now that the StateChangedMessage Event has been published, we can
+            // set the current state to the next state.
+            currentState = nextState;
+            
+            // This is only here for console based debugging purposes.
+            Debug.Log($"State Machine is now in \"{nextState}\" state.");
+        }
+        
+        // Additionally, all StateMachines must implement a method for setting the initial state.
+        // This should be called during Awake().
+
+        /// <summary>
+        /// Sets the initial state of the State Machine.
+        /// Must be called during Awake().
+        /// </summary>
+        protected abstract void SetInitialState();
+        
+        // Lastly, all StateMachines must implement a method for creating a StateChangedMessage Event.
+
+        /// <summary>
+        /// Creates a State Changed Message while enforcing adherence of a state change pattern
+        /// that communicates specifically <paramref name="prevState"/> and <paramref name="nextState"/>.
+        /// </summary>
+        protected abstract IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState);
+    }
+}
+```
+
+### IStateMachine
+
+Much like its sibling `interfaces`, the `IStateMachine` `interface` ensures generic typing for specific `StateMachines`. The use of generic typing accomplishes much the same goal as it does for our `MonoSystems` and `EntitySystems` in that it allows us to leverage the service locator pattern to achieve clean dependency injection of a specific `StateMachine` without the need for tight coupling.
+
+```csharp
+namespace Akashic.Core.StateMachines
+{
+    // The IStateMachine interface is used to generically type all
+    // StateMachines so that regardless of the overlying type
+    // of the StateMachine, they can be bootstrapped into the
+    // GameManager at runtime.
+    
+    /// <summary>
+    /// For generic typing of specific state machines.
+    /// Allows us to use the MonoSystem locator pattern in
+    /// the <see cref="GameManager"/> to get a specific state machine.
+    /// </summary>
+    internal interface IStateMachine
+    {
+    }
+}
+```
+
+### State Machine Manager
+
+The `StateMachineManager` plays a pivotal role in the Akashic core architecture by managing `StateMachine` instances, and providing access to them through the service locator pattern for clean dependency injection. It provides methods to add and retrieve `StateMachines`, and much like the `MessageManager` and `MonoSystemManager`, it uses an `IDictionary` to map `StateMachine` types to their instances, simplifying dependency injection and making them freely available throughout our `GameManager`.
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+// The StateMachineManager allows us to bootstrap StateMachines generically typed
+// via IStateMachine by using the AddStateMachine() method. It also allows us to
+// inject dependencies on StateMachines in other scripts by using GetStateMachine().
+namespace Akashic.Core.StateMachines
+{
+    // This class is internal to the Core.MonoSystems namespace, and sealed to prevent 
+    // extension through inheritance.
+    internal sealed class StateMachineManager
+    {
+        // Create an IDictionary to pair each IStateMachine with its type.
+        private readonly IDictionary<Type, IStateMachine> stateMachines =
+            new Dictionary<Type, IStateMachine>();
+
+        // Bootstrap a StateMachine into the game at runtime. This is called in
+        // OnInitialized() in the AkashicGameManager.
+        //
+        // When bootstrapping a StateMachine, we grab the StateMachine's companion
+        // MonoBehaviour class as a component from a GameObject.
+        // The GameObject that the StateMachine MonoBehaviour class resides on
+        // should be parented to the StateMachines child GameObject of our
+        // GameManager prefab (found in resources).
+        //
+        // We then bind the TMonoSystem : IStateMachine to its companion
+        // MonoBehaviour class.
+        public void AddStateMachine<TState, TBindTo>(TState stateMachine)
+            where TState : TBindTo, IStateMachine
+        {
+            // The name of the GameObject that the StateMachine MonoBehavior component
+            // lives on cannot be null. Throw an exception if it is.
+            //
+            // If this happens, you probably forgot to add your child StateMachine
+            // GameObject to its serialized field in the GameManager prefab.
+            if (stateMachine == null)
+            {
+                throw new NullReferenceException($"{nameof(stateMachine)} cannot be null");
+            }
+
+            // If the GameObject for the StateMachine isn't null:
+            // - Grab the overlying type from the StateMachine's interface.
+            // - Add <Type, IStateMachine> pair to the IDictionary of StateMachines.
+            var stateType = typeof(TBindTo);
+            stateMachines[stateType] = stateMachine;
+        }
+
+        // When getting a StateMachine from the GameManager singleton, all
+        // that is required is specifying the type of StateMachine you are
+        // trying to get.
+        public TState GetStateMachine<TState>()
+        {
+            // First we get the overlying type of the requested StateMachine.
+            var stateMachineType = typeof(TState);
+            
+            // We then check the IDictionary of MonoSystems for this type of StateMachine.
+            if (stateMachines.TryGetValue(stateMachineType, out var stateMachine))
+            {
+                // If this type of StateMachine exists in the IDictionary, we return
+                // it as a TStateMachine : IStateMachine.
+                return (TState)stateMachine;
+            }
+
+            // If the type of StateMachine was not found in our IDictionary of StateMachines,
+            // we throw an Exception.
+            //
+            // Typically when we run into this issue, it is because we forgot to
+            // drag and drop the child GameObject associated with the StateMachine into
+            // the serialized field on the GameManager prefab.
+            throw new Exception($"State Machine {stateMachineType} does not exist");
         }
     }
 }
@@ -425,7 +797,7 @@ namespace Akashic.Core
 
 ## Akashic Game Manager
 
-With all of these scripts together, we have formed the basis for our `AkashicGameManager` script. This script is a component of the root `GameObject` in the `GameManager` prefab in "Assets/Resources", and is where the `GameManager` script's `protected override void OnInitialized()` is called, which is where all `MonoSystems` are bootstrapped into the game at runtime. Let's take a closer look at it:
+The `AkashicGameManager` is our final stop in our architectural deep-dive. The `AkashicGameManager` script inherits from our base `GameManager` class and provides a front facing API for developers to use in order to add new `StateMachines`, `MonoSystems`, and `EntitySystems` to the game's bootstrapping routine. All of our core architectural dependencies live on `GameObjects`, and as such the `AkashicGameManager` is added as a script component to the `GameManager` prefab, which lives at the root of our "Resources" folder. Let's take a closer look at the `AkashicGameManager` script and how it is used:
 
 ```csharp
 using Akashic.Core;
@@ -434,53 +806,67 @@ using UnityEngine;
 // The AkashicGameManager script is a component of the root GameObject
 // on the GameManager prefab in Assets/Resources.
 //
-// This script contains references to our MonoSystems parent Transform,
-// and the controllers parent Transform. These parent Transforms are 
-// used for controlling the timing of when their Unity Lifecycle methods
-// are executed, and ensures that no one will attempt to get MonoSystems
-// or broadcast messages before the game has been bootstrapped.
+// This script contains references to the parent Transforms of the StateMachines,
+// MonoSystems, EntitySystems, and Controllers 
+// These parent Transforms are used for controlling the timing of when
+// their Unity Lifecycle methods are executed, and ensures that none of them will
+// attempt to get MonoSystems and so on, or broadcast Message Events prior 
+// to the completion of game bootstrapping.
 namespace Akashic.Runtime
 {
     // This class is internal to the Core namespace and sealed to prevent
     // extension via inheritance.
     //
     // We inherit from GameManager, which takes care of the logic for:
-    // - Instantiating this singleton prior to the scene loading.
-    // - Provides inherited methods for adding/removing/publishing Messages.
-    // - Provides an inherited method for Adding MonoSystems.
-    // - Provides an inherited method for getting MonoSystems for dependency
-    //   injection enabling cross-platform data and code sharing.
-    // - Allows us to override OnInitialized, an empty method called
-    //   in the underlying GameManager script after the singleton is
-    //   instantiated, where we can perform post-instantiation 
-    //   operations for bootstrapping the game, or anything else
-    //   that may be needed.
+    // - Instantiation of this Singleton prior to the scene loading.
+    // - Adding/removing/publishing Message Events.
+    // - Adding/removing/getting StateMachines, MonoSystems, and EntitySystems.
+    // - Giving us access to various overrides related to game bootstrapping.
     internal sealed class AkashicGameManager : GameManager
     {
-        // For every MonoSystem created for the game:
-        // - Create a child GameObject under the MonoSystemsParentTransform
-        // - Serialize a reference to the GameObject's MonoBehaviour MonoSystem
-        //   component into the editor.
-        [Header("MonoSystems")] 
-        [SerializeField] 
-        private ExampleMonoSystem exampleMonoSystem;
+        // All parent transforms used for individual StateMachines, MonoSystems, EntitySystems,
+        // and Controllers are organized under the "Management" header.
+        //
+        // For every StateMachine, MonoSystem, or EntitySystem created for the game:
+        //
+        // - Create a child GameObject under the associated ParentTransform in the prefab
+        // - Serialize a reference to the GameObject's MonoBehaviour StateMachine,
+        //   MonoSystem, or EntitySystem component into the editor.
+        // - Drag and drop the child GameObject to the appropriate serialized field
+        [Header("Management")]
+        [SerializeField] private Transform statesParentTransform;
         
-        // We use the MonoSystemsParentTransform for timing.
-        // This ensures that all MonoSystems Awake() at the same time.
-        [SerializeField] 
-        private Transform MonoSystemsParentTransform;
+        [SerializeField] private Transform monoSystemsParentTransform;
+        
+        [SerializeField] private Transform entitySystemsParentTransform;
 
-        // We use the controllersParentTransform for timing.
-        // This prevents any controllers on the GameManager prefab
-        // from getting a MonoSystem before bootstrapping is complete.
-        [Header("Management")] 
-        [SerializeField] 
-        private Transform controllersParentTransform;
-
-        // We set the name of the instantiated GameManager prefab
-        // to be the same as this script component. In our case,
-        // it will be name AkashicGameManager.
-        protected override string GetApplicationName()
+        // We use the controllersParentTransform purely for timing.
+        // This prevents any Controllers on the GameManager prefab
+        // from interacting with a StateMachine, MonoSystem, or EntitySystem
+        // before bootstrapping is complete.
+        [SerializeField] private Transform controllersParentTransform;
+        
+        // We should keep our StateMachines, MonoSystems, EntitySystems, and Controllers
+        // organized under their own headers.
+        //
+        // Since we are referencing the MonoBehaviour script component from the GameObject
+        // associated with our StateMachines, MonoSystems, and EntitySystems, we
+        // serialize their MonoBehaviour script components into the editor.
+        [Header("State Machines")]
+        [SerializeField] private ExampleStateMachine exampleStateMachine;
+        
+        [Header("MonoSystems")]
+        [SerializeField] private ExampleMonoSystem exampleMonoSystem;
+        
+        [Header("Entity MonoSystems")]
+        [SerializeField] private ExampleEntitySystem exampleEntitySystem;
+        
+        // Note that we do not need to serialize references to individual Controllers.
+        
+        // At runtime and after instantiation, we set the name of the instantiated
+        // GameManager prefab to be the same as this script component.
+        // In our case, it will be name AkashicGameManager.
+        protected override string GetGameName()
         {
             return nameof(AkashicGameManager);
         }
@@ -490,29 +876,62 @@ namespace Akashic.Runtime
         // the bootstrapping happens.
         protected override void OnInitialized()
         {
-            // For every MonoSystem we serialize into the GameManager,
-            // we want to add a line where we use AddMonoSystem to add
-            // the MonoSystem into the core architecture, and make it 
-            // available through GetMonoSystem<TMonoSystem>().
-            AddMonoSystem<ExampleMonoSystem, IExampleSystem>(exampleMonoSystem);
-
-            // Once bootstrapping of MonoSystems is complete, we set the
-            // MonoSystemsParentTransform to active, allowing the MonoSystems
-            // on the child GameObjects to call Awake().
-            MonoSystemsParentTransform.gameObject.SetActive(true);
+            // We separate bootstrapping of individual StateMachines, MonoSystems,
+            // and EntitySystems into their own methods.
+            InitializeGameStateMachines();
+            InitializeGameMonoSystems();
+            InitializeGameEntitySystems();
             
-            // We do the same with the controllersParentTransform
-            // afterwards, so that their Awake() occurs after the
-            // MonoSystems have been set active.
+            // Once bootstrapping is complete, we set the parent GameObjects
+            // of the StateMachines, MonoSystems, EntitySystems, and Controllers 
+            // to active, which allows them to begin executing
+            // their Unity Lifecycle methods.
+            SetParentsActive();
+        }
+
+        // InitializeGameStateMachines() is where we add
+        // StateMachines to the StateMachineManager so that we can
+        // get them from the GameManager by calling 
+        // GameManager.GetStateMachine<T>().
+        protected override void InitializeGameStateMachines()
+        {
+            // When adding a StateMachine, MonoSystem, or EntitySystem to the associated Manager
+            // within the GameManager, we must bind the MonoBehaviour script component
+            // to its associated interface. We also must specify that we are targeting the
+            // GameObject associated with the MonoBehaviour script component.
+            AddStateMachine<GameStateMachine, IGameStateMachine>(gameStateMachine);
+        }
+        
+        // InitializeGameMonoSystems() is where we add
+        // MonoSystems to the MonoSystemManager so that we can
+        // get them from the GameManager by calling 
+        // GameManager.GetMonoSystem<T>().
+        protected override void InitializeGameMonoSystems()
+        {
+            AddMonoSystem<ExampleMonoSystem, IExampleMonoSystem>(exampleMonoSystem);
+        }
+        
+        // InitializeGameEntitySystems() is where we add
+        // EntitySystem to the EntitySystemManager so that we can
+        // get them from the GameManager by calling 
+        // GameManager.GetEntitySystem<T>().
+        protected override void InitializeGameEntitySystems()
+        {
+            AddEntitySystem<ExampleEntitySystem, IExampleEntitySystem>(exampleEntitySystem);
+        }
+
+        // SetParentsActive() is called after bootstrapping is complete.
+        protected override void SetParentsActive()
+        {
+            statesParentTransform.gameObject.SetActive(true);
+            monoSystemsParentTransform.gameObject.SetActive(true);
+            entitySystemsParentTransform.gameObject.SetActive(true);
             controllersParentTransform.gameObject.SetActive(true);
         }
     }
 }
 ```
 
-## Game Manager Prefab Notes
+# Conclusion
 
-It should be noted that one decision I have made regarding the prefab associated with the core architecture is that the `GameManager` prefab contains a child `GameObject` `EventSystem`, which listens for input using the new input system. This is an alternative to requiring every scene to have its own `EventSystem`. Avoid adding any `EventSystems` into any Unity scene throughout the codebase, as this can cause issues and the console in the editor will issue a warning.
-
-![image](https://github.com/mrjeremy3341/ProjectNecro/assets/99087864/e9a315a4-1bf8-4688-ad86-2fb1d1dfec98)
-
+The `CoreArchitecture.md` document lays the technical foundation for building a robust, scalable, and flexible enterprise-level game. By exploring the mechanics behind core components such as `Message Events`, `StateMachines`, `MonoSystems`, `EntitySystems`, and how these are managed by and retrieved from the `GameManager`, developers can gather a greater understanding of how our core architecture works under the hood. This structured approach simplifies navigation and comprehension of the codebase, while fostering an environment that's conducive to collaborative development and rapid feature iteration and implementation. By leveraging the outlined architectural principles, game development can be accelerated, giving developers greater agility and delivering a seamless experience for players.
