@@ -5,9 +5,6 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
 {
     internal sealed class PartyMemberStatHandler : MonoBehaviour
     {
-        [Header("Controller")]
-        [SerializeField] private PartyMemberController partyMemberController;
-        
         [Header("Stats")]
         [SerializeField] private int currentLevel;
         
