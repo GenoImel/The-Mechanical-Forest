@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Akashic.Core;
+using Akashic.Core.MonoSystems;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {

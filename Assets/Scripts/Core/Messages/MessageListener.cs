@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic.Core
+namespace Akashic.Core.Messages
 {
     internal sealed class MessageListener<TMessage> : MessageListener where TMessage : IMessage
     {

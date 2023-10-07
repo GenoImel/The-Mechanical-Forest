@@ -1,4 +1,4 @@
-namespace Akashic.Core
+namespace Akashic.Core.MonoSystems
 {
     internal interface IMonoSystem
     {

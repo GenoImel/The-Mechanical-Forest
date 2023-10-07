@@ -1,4 +1,4 @@
-using Akashic.Core;
+using Akashic.Core.Messages;
 using Akashic.ScriptableObjects.StoryBase;
 
 namespace Akashic.Runtime.MonoSystems.Story

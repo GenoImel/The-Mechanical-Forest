@@ -1,4 +1,4 @@
-namespace Akashic.Core
+namespace Akashic.Core.Messages
 {
     internal interface IMessage
     {

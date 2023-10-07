@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Akashic.Core
+namespace Akashic.Core.MonoSystems
 {
     internal sealed class MonoSystemManager
     {
