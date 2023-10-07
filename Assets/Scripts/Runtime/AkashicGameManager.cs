@@ -1,15 +1,15 @@
 using Akashic.Core;
-using Akashic.Runtime.MonoSystems.BattleStates;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.Debugger;
-using Akashic.Runtime.MonoSystems.ExplorationStates;
-using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.StateMachines.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Sound;
 using Akashic.Runtime.MonoSystems.Story;
+using Akashic.Runtime.StateMachines.BattleStates;
+using Akashic.Runtime.StateMachines.ExplorationStates;
 using UnityEngine;
 
 namespace Akashic.Runtime
@@ -23,12 +23,12 @@ namespace Akashic.Runtime
         
         [SerializeField] private Transform controllersParentTransform;
         
-        //[Header("StateMachines")]
+        [Header("StateMachines")]
+        [SerializeField] private GameStateMachine gameStateMachine;
+        [SerializeField] private BattleStateMachine battleStateMachine;
+        [SerializeField] private ExplorationStateMachine explorationStateMachine;
 
         [Header("MonoSystems")]
-        [SerializeField] private GameStateMonoSystem gameStateMonoSystem;
-        [SerializeField] private BattleStateMonoSystem battleStateMonoSystem;
-        [SerializeField] private ExplorationStateMonoSystem explorationStateMonoSystem;
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
         [SerializeField] private SoundMonoSystem soundMonoSystem;
         [SerializeField] private PartyMonoSystem partyMonoSystem;
@@ -53,13 +53,13 @@ namespace Akashic.Runtime
 
         protected override void InitializeGameStateMachines()
         {
+            AddStateMachine<GameStateMachine, IGameStateMachine>(gameStateMachine);
+            AddStateMachine<BattleStateMachine, IBattleStateMachine>(battleStateMachine);
+            AddStateMachine<ExplorationStateMachine, IExplorationStateMachine>(explorationStateMachine);
         }
         
         protected override void InitializeGameMonoSystems()
         {
-            AddMonoSystem<GameStateMonoSystem, IGameStateMonoSystem>(gameStateMonoSystem);
-            AddMonoSystem<BattleStateMonoSystem, IBattleStateMonoSystem>(battleStateMonoSystem);
-            AddMonoSystem<ExplorationStateMonoSystem, IExplorationStateMonoSystem>(explorationStateMonoSystem);
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
             AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
             AddMonoSystem<PartyMonoSystem, IPartyMonoSystem>(partyMonoSystem);

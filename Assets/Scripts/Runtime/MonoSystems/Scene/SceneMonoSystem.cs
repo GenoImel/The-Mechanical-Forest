@@ -2,7 +2,7 @@ using System;
 using NaughtyAttributes;
 using Akashic.Core;
 using Akashic.Runtime.Controllers.LoadingCurtain;
-using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.StateMachines.GameStates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
@@ -32,11 +32,11 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         private bool sceneInitializationStarted;
 
-        private IGameStateMonoSystem gameStateMonoSystem;
+        private IGameStateMachine gameStateMachine;
 
         private void Awake()
         {
-            gameStateMonoSystem = GameManager.GetMonoSystem<IGameStateMonoSystem>();
+            gameStateMachine = GameManager.GetStateMachine<IGameStateMachine>();
         }
 
         private void OnEnable()
@@ -104,17 +104,17 @@ namespace Akashic.Runtime.MonoSystems.Scene
 
         private void MainMenuSceneLoaded()
         {
-            gameStateMonoSystem.SetMainMenuState();
+            gameStateMachine.SetMainMenuState();
         }
 
         private void ExplorationSceneLoaded()
         {
-            gameStateMonoSystem.SetExplorationState();
+            gameStateMachine.SetExplorationState();
         }
 
         private void BattleSceneLoaded()
         {
-            gameStateMonoSystem.SetBattleState();
+            gameStateMachine.SetBattleState();
         }
 
         private void OnSceneInitializedMessage(SceneInitializedMessage message)

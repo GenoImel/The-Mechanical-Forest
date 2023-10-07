@@ -6,8 +6,8 @@ namespace Akashic.Core.StateMachines
 {
     internal abstract class BaseStateMachine : MonoBehaviour, IStateMachine
     {
-        protected IFiniteState currentState;
-        protected IFiniteState prevState;
+        private IFiniteState currentState;
+        private IFiniteState prevState;
 
         /// <summary>
         /// Sets the next state of the State Machine and publishes a State Changed Message.
