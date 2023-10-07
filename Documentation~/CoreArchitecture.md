@@ -1,8 +1,8 @@
 # Core Architecture
 
-The core architecture for the Akashic game follows the philosophy of limiting the number of singletons in the codebase, and instead using a single `GameManager` singleton to act as a central hub to orchestrate cross game communication while maintaining flexibility, scalability, maintainability- all wrapped in a simplistic API that is intuitive for developers of all skills levels to learn and apply. 
+The core architecture for the game follows the philosophy of limiting the number of singletons in the codebase, and instead using a single `GameManager` singleton to act as a central hub to orchestrate cross game communication while maintaining flexibility, scalability, maintainability- all wrapped in a simplistic API that is intuitive for developers of all skills levels to learn and apply. 
 
-The Akashic game uses a hybridized core architecture with a foundational philosophy adheres to the following concepts:
+The game uses a hybridized core architecture with a foundational philosophy adheres to the following concepts:
 
 - **Embracing Unity's Native Framework:** Prioritizing a `MonoBehaviour`-centric design that respects Unity's `GameObject`-`Component` pattern.
 - **Modular Interfacing:** Implementing specialized `interfaces` like `MonoSystems` to foster seamless data and code interchangeability among decoupled game features.
@@ -192,15 +192,15 @@ namespace Akashic.Core
 }
 ```
 
-The `GameManager` class serves as a foundational element in the Akashic game's architecture. Through its design, it centralizes management of key components such as `Message Events`, `StateMachines`, and `MonoSystems`. With a systematic initialization process, it ensures that essential dependencies are loaded in every scene. By offering methods for listener management, state machine, and system handling, as well as abstracted methods for initialization and setting up systems, it promotes a modular and organized approach. In essence, this class provides a simplified API for managing and orchestrating core functionalities within the game.
+The `GameManager` class serves as a foundational element in the game's architecture. Through its design, it centralizes management of key components such as `Message Events`, `StateMachines`, and `MonoSystems`. With a systematic initialization process, it ensures that essential dependencies are loaded in every scene. By offering methods for listener management, state machine, and system handling, as well as abstracted methods for initialization and setting up systems, it promotes a modular and organized approach. In essence, this class provides a simplified API for managing and orchestrating core functionalities within the game.
 
 ## Message Events
 
-In the Akashic game's architecture, `Message Events` play a pivotal role in facilitating communication between different decoupled features, `StatMachines`, and `MonoSystems`. This section delves into the structural underpinnings of these `Message Events`, covering everything from the foundational `IMessage` interface, the implementation of a `MessageListener`, and to the management of `Message Events` by the `MessageManager`. Each of these elements collectively ensures decoupled and efficient messaging across the game.
+In the game's architecture, `Message Events` play a pivotal role in facilitating communication between different decoupled features, `StatMachines`, and `MonoSystems`. This section delves into the structural underpinnings of these `Message Events`, covering everything from the foundational `IMessage` interface, the implementation of a `MessageListener`, and to the management of `Message Events` by the `MessageManager`. Each of these elements collectively ensures decoupled and efficient messaging across the game.
 
 ### IMessage
 
-At the core of the messaging system within the Akashic game lies the `IMessage` `interface`. Serving as a foundational touch point for all `Message Events`, `IMessage` offers a level of abstraction that ensures consistent typing across the entire codebase. Generic typing makes sure that any `Message Event`, regardless of its unique characteristics, can be incorporated seamlessly into the `MessageListener`. 
+At the core of the messaging system within the game lies the `IMessage` `interface`. Serving as a foundational touch point for all `Message Events`, `IMessage` offers a level of abstraction that ensures consistent typing across the entire codebase. Generic typing makes sure that any `Message Event`, regardless of its unique characteristics, can be incorporated seamlessly into the `MessageListener`. 
 
 ```csharp
 namespace Akashic.Core.Messages
