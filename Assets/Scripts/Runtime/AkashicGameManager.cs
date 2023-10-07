@@ -17,9 +17,13 @@ namespace Akashic.Runtime
     internal sealed class AkashicGameManager : GameManager
     {
         [Header("Management")] 
+        [SerializeField] private Transform stateMachinesParentTransform;
+        
         [SerializeField] private Transform monoSystemsParentTransform;
         
-        [SerializeField] private Transform controllerParentTransform;
+        [SerializeField] private Transform controllersParentTransform;
+        
+        //[Header("StateMachines")]
 
         [Header("MonoSystems")]
         [SerializeField] private GameStateMonoSystem gameStateMonoSystem;
@@ -41,13 +45,17 @@ namespace Akashic.Runtime
 
         protected override void OnInitialized()
         {
-            BootstrapMonoSystems();
+            InitializeGameStateMachines();
+            InitializeGameMonoSystems();
                 
-            monoSystemsParentTransform.gameObject.SetActive(true);
-            controllerParentTransform.gameObject.SetActive(true);
+            SetParentsActive();
         }
 
-        private void BootstrapMonoSystems()
+        protected override void InitializeGameStateMachines()
+        {
+        }
+        
+        protected override void InitializeGameMonoSystems()
         {
             AddMonoSystem<GameStateMonoSystem, IGameStateMonoSystem>(gameStateMonoSystem);
             AddMonoSystem<BattleStateMonoSystem, IBattleStateMonoSystem>(battleStateMonoSystem);
@@ -60,6 +68,13 @@ namespace Akashic.Runtime
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
             AddMonoSystem<StoryMonoSystem, IStoryMonoSystem>(storyMonoSystem);
             AddMonoSystem<DebuggerMonoSystem, IDebuggerMonoSystem>(debuggerMonoSystem);
+        }
+
+        protected override void SetParentsActive()
+        {
+            stateMachinesParentTransform.gameObject.SetActive(true);
+            monoSystemsParentTransform.gameObject.SetActive(true);
+            controllersParentTransform.gameObject.SetActive(true);
         }
     }
 }
