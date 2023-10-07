@@ -5,7 +5,7 @@ The core architecture for the Akashic game follows the philosophy of limiting th
 The Akashic game uses a hybridized core architecture with a foundational philosophy adheres to the following concepts:
 
 - **Embracing Unity's Native Framework:** Prioritizing a `MonoBehaviour`-centric design that respects Unity's `GameObject`-`Component` pattern.
-- **Modular Interfacing:** Implementing specialized `interfaces` like `MonoSystems` to foster seamless data and code interchangeability among decoupled game features. Further extension with `EntitySystems` interfaces provides a streamlined bridge to interact cohesively with architectures rooted in Unity ECS.
+- **Modular Interfacing:** Implementing specialized `interfaces` like `MonoSystems` to foster seamless data and code interchangeability among decoupled game features.
 - **Hierarchical State Management:** Using `interfaces` and classes tailored for Hierarchical State Machines (HSMs), underscored by `class`-driven `state` definitions.
 - **Efficient Dependency Management:** Incorporating the service locator pattern to ensure swift and streamlined dependency injection across the board.
 - **Robust Communication Framework:** Ensuring unhindered cross-game communication through `Message Events` relayed via a dedicated `Message Bus`.
@@ -32,7 +32,7 @@ The GameManager is the central hub through which various game components and sys
 
 - **MonoSystem Management and Interaction:**
 
-    - The `MonoSystemManager` manages `MonoSystems` within the game, which facilitates data and code sharing. It also offers methods for retrieving and adding `MonoSystems`, `EntitySystems`, and `States` and encapsulates the management of these core architectural components, ensuring that their usage are consistent.
+    - The `MonoSystemManager` manages `MonoSystems` within the game, which facilitates data and code sharing. It also offers methods for retrieving and adding `MonoSystems` and `States`, and encapsulates the management of these core architectural components, ensuring that their usage are consistent.
 
 - **Extensibility:**
 
@@ -42,7 +42,6 @@ Let's start by stepping through the base `GameManager` class to gather a deeper 
 
 ```csharp
 using System;
-using Akashic.Core.EntitySystems;
 using Akashic.Core.Messages;
 using Akashic.Core.MonoSystems;
 using Akashic.Core.StateMachines;
@@ -72,7 +71,6 @@ namespace Akashic.Core
         private readonly MessageManager messageManager = new (); // Used for managing Message Events
         private readonly StateMachineManager stateMachineManager = new(); // Used for managing StateMachines.
         private readonly MonoSystemManager monoSystemManager = new (); // Used for managing MonoSystems.
-        private readonly EntitySystemManager entitySystemManager = new (); // Used for managing EntitySystems.
 
         // At runtime, prior to any scene being loaded, we instantiate the AkashicGameManager prefab.
         // This is convenient because it means that we can worry less about scenes containing the
@@ -164,23 +162,6 @@ namespace Akashic.Core
         {
             monoSystemManager.AddMonoSystem<TMonoSystem, TBindTo>(monoSystem);
         }
-
-        /// <returns>
-        ///Returns an existing Entity MonoSystem in the game.
-        /// </returns>
-        public static TEntitySystem GetEntitySystem<TEntitySystem>()
-        {
-            return instance.entitySystemManager.GetEntitySystem<TEntitySystem>();
-        }
-
-        /// <summary>
-        /// Adds an Entity MonoSystem to the game.
-        /// </summary>
-        protected void AddEntitySystem<TEntitySystem, TBindTo>(TEntitySystem entitySystem)
-            where TEntitySystem : IEntitySystem, TBindTo
-        {
-            entitySystemManager.AddEntitySystem<TEntitySystem, TBindTo>(entitySystem);
-        }
         
         /// <returns>
         /// Name of the game or game.
@@ -201,11 +182,6 @@ namespace Akashic.Core
         /// Called when bootstrapping game MonoSystems.
         /// </summary>
         protected abstract void InitializeGameMonoSystems();
-        
-        /// <summary>
-        /// Called when bootstrapping game entity MonoSystems.
-        /// </summary>
-        protected abstract void InitializeGameEntitySystems();
 
         /// <summary>
         /// Called after bootstrapping complete.
@@ -216,11 +192,11 @@ namespace Akashic.Core
 }
 ```
 
-The `GameManager` class serves as a foundational element in the Akashic game's architecture. Through its design, it centralizes management of key components such as `Message Events`, `StateMachines`, `MonoSystems`, and `EntitySystems`. With a systematic initialization process, it ensures that essential dependencies are loaded in every scene. By offering methods for listener management, state machine, and system handling, as well as abstracted methods for initialization and setting up systems, it promotes a modular and organized approach. In essence, this class provides a simplified API for managing and orchestrating core functionalities within the game.
+The `GameManager` class serves as a foundational element in the Akashic game's architecture. Through its design, it centralizes management of key components such as `Message Events`, `StateMachines`, and `MonoSystems`. With a systematic initialization process, it ensures that essential dependencies are loaded in every scene. By offering methods for listener management, state machine, and system handling, as well as abstracted methods for initialization and setting up systems, it promotes a modular and organized approach. In essence, this class provides a simplified API for managing and orchestrating core functionalities within the game.
 
 ## Message Events
 
-In the Akashic game's architecture, `Message Events` play a pivotal role in facilitating communication between different decoupled features, `StatMachines`, `MonoSystems`, and `EntitySystems`. This section delves into the structural underpinnings of these `Message Events`, covering everything from the foundational `IMessage` interface, the implementation of a `MessageListener`, and to the management of `Message Events` by the `MessageManager`. Each of these elements collectively ensures decoupled and efficient messaging across the game.
+In the Akashic game's architecture, `Message Events` play a pivotal role in facilitating communication between different decoupled features, `StatMachines`, and `MonoSystems`. This section delves into the structural underpinnings of these `Message Events`, covering everything from the foundational `IMessage` interface, the implementation of a `MessageListener`, and to the management of `Message Events` by the `MessageManager`. Each of these elements collectively ensures decoupled and efficient messaging across the game.
 
 ### IMessage
 
@@ -694,7 +670,7 @@ namespace Akashic.Core.StateMachines
 
 ### IStateMachine
 
-Much like its sibling `interfaces`, the `IStateMachine` `interface` ensures generic typing for specific `StateMachines`. The use of generic typing accomplishes much the same goal as it does for our `MonoSystems` and `EntitySystems` in that it allows us to leverage the service locator pattern to achieve clean dependency injection of a specific `StateMachine` without the need for tight coupling.
+Much like its sibling `interfaces`, the `IStateMachine` `interface` ensures generic typing for specific `StateMachines`. The use of generic typing accomplishes much the same goal as it does for our `MonoSystems` in that it allows us to leverage the service locator pattern to achieve clean dependency injection of a specific `StateMachine` without the need for tight coupling.
 
 ```csharp
 namespace Akashic.Core.StateMachines
@@ -797,7 +773,7 @@ namespace Akashic.Core.StateMachines
 
 ## Akashic Game Manager
 
-The `AkashicGameManager` is our final stop in our architectural deep-dive. The `AkashicGameManager` script inherits from our base `GameManager` class and provides a front facing API for developers to use in order to add new `StateMachines`, `MonoSystems`, and `EntitySystems` to the game's bootstrapping routine. All of our core architectural dependencies live on `GameObjects`, and as such the `AkashicGameManager` is added as a script component to the `GameManager` prefab, which lives at the root of our "Resources" folder. Let's take a closer look at the `AkashicGameManager` script and how it is used:
+The `AkashicGameManager` is our final stop in our architectural deep-dive. The `AkashicGameManager` script inherits from our base `GameManager` class and provides a front facing API for developers to use in order to add new `StateMachines`, and `MonoSystems` to the game's bootstrapping routine. All of our core architectural dependencies live on `GameObjects`, and as such the `AkashicGameManager` is added as a script component to the `GameManager` prefab, which lives at the root of our "Resources" folder. Let's take a closer look at the `AkashicGameManager` script and how it is used:
 
 ```csharp
 using Akashic.Core;
@@ -807,7 +783,7 @@ using UnityEngine;
 // on the GameManager prefab in Assets/Resources.
 //
 // This script contains references to the parent Transforms of the StateMachines,
-// MonoSystems, EntitySystems, and Controllers 
+// MonoSystems, and Controllers 
 // These parent Transforms are used for controlling the timing of when
 // their Unity Lifecycle methods are executed, and ensures that none of them will
 // attempt to get MonoSystems and so on, or broadcast Message Events prior 
@@ -820,18 +796,18 @@ namespace Akashic.Runtime
     // We inherit from GameManager, which takes care of the logic for:
     // - Instantiation of this Singleton prior to the scene loading.
     // - Adding/removing/publishing Message Events.
-    // - Adding/removing/getting StateMachines, MonoSystems, and EntitySystems.
+    // - Adding/removing/getting StateMachines, and MonoSystems.
     // - Giving us access to various overrides related to game bootstrapping.
     internal sealed class AkashicGameManager : GameManager
     {
-        // All parent transforms used for individual StateMachines, MonoSystems, EntitySystems,
+        // All parent transforms used for individual StateMachines, MonoSystems,
         // and Controllers are organized under the "Management" header.
         //
-        // For every StateMachine, MonoSystem, or EntitySystem created for the game:
+        // For every StateMachine, or MonoSystem created for the game:
         //
         // - Create a child GameObject under the associated ParentTransform in the prefab
         // - Serialize a reference to the GameObject's MonoBehaviour StateMachine,
-        //   MonoSystem, or EntitySystem component into the editor.
+        //   or MonoSystem component into the editor.
         // - Drag and drop the child GameObject to the appropriate serialized field
         [Header("Management")]
         [SerializeField] private Transform statesParentTransform;
@@ -842,24 +818,21 @@ namespace Akashic.Runtime
 
         // We use the controllersParentTransform purely for timing.
         // This prevents any Controllers on the GameManager prefab
-        // from interacting with a StateMachine, MonoSystem, or EntitySystem
+        // from interacting with a StateMachine, or MonoSystem
         // before bootstrapping is complete.
         [SerializeField] private Transform controllersParentTransform;
         
-        // We should keep our StateMachines, MonoSystems, EntitySystems, and Controllers
+        // We should keep our StateMachines, MonoSystems, and Controllers
         // organized under their own headers.
         //
         // Since we are referencing the MonoBehaviour script component from the GameObject
-        // associated with our StateMachines, MonoSystems, and EntitySystems, we
+        // associated with our StateMachines, and MonoSystems, we
         // serialize their MonoBehaviour script components into the editor.
         [Header("State Machines")]
         [SerializeField] private ExampleStateMachine exampleStateMachine;
         
         [Header("MonoSystems")]
         [SerializeField] private ExampleMonoSystem exampleMonoSystem;
-        
-        [Header("Entity MonoSystems")]
-        [SerializeField] private ExampleEntitySystem exampleEntitySystem;
         
         // Note that we do not need to serialize references to individual Controllers.
         
@@ -876,14 +849,13 @@ namespace Akashic.Runtime
         // the bootstrapping happens.
         protected override void OnInitialized()
         {
-            // We separate bootstrapping of individual StateMachines, MonoSystems,
-            // and EntitySystems into their own methods.
+            // We separate bootstrapping of individual StateMachines, and MonoSystems
+            // into their own methods.
             InitializeGameStateMachines();
             InitializeGameMonoSystems();
-            InitializeGameEntitySystems();
             
             // Once bootstrapping is complete, we set the parent GameObjects
-            // of the StateMachines, MonoSystems, EntitySystems, and Controllers 
+            // of the StateMachines, MonoSystems, and Controllers 
             // to active, which allows them to begin executing
             // their Unity Lifecycle methods.
             SetParentsActive();
@@ -895,7 +867,7 @@ namespace Akashic.Runtime
         // GameManager.GetStateMachine<T>().
         protected override void InitializeGameStateMachines()
         {
-            // When adding a StateMachine, MonoSystem, or EntitySystem to the associated Manager
+            // When adding a StateMachine, or MonoSystemto the associated Manager
             // within the GameManager, we must bind the MonoBehaviour script component
             // to its associated interface. We also must specify that we are targeting the
             // GameObject associated with the MonoBehaviour script component.
@@ -909,15 +881,6 @@ namespace Akashic.Runtime
         protected override void InitializeGameMonoSystems()
         {
             AddMonoSystem<ExampleMonoSystem, IExampleMonoSystem>(exampleMonoSystem);
-        }
-        
-        // InitializeGameEntitySystems() is where we add
-        // EntitySystem to the EntitySystemManager so that we can
-        // get them from the GameManager by calling 
-        // GameManager.GetEntitySystem<T>().
-        protected override void InitializeGameEntitySystems()
-        {
-            AddEntitySystem<ExampleEntitySystem, IExampleEntitySystem>(exampleEntitySystem);
         }
 
         // SetParentsActive() is called after bootstrapping is complete.
@@ -934,4 +897,4 @@ namespace Akashic.Runtime
 
 # Conclusion
 
-The `CoreArchitecture.md` document lays the technical foundation for building a robust, scalable, and flexible enterprise-level game. By exploring the mechanics behind core components such as `Message Events`, `StateMachines`, `MonoSystems`, `EntitySystems`, and how these are managed by and retrieved from the `GameManager`, developers can gather a greater understanding of how our core architecture works under the hood. This structured approach simplifies navigation and comprehension of the codebase, while fostering an environment that's conducive to collaborative development and rapid feature iteration and implementation. By leveraging the outlined architectural principles, game development can be accelerated, giving developers greater agility and delivering a seamless experience for players.
+The `CoreArchitecture.md` document lays the technical foundation for building a robust, scalable, and flexible enterprise-level game. By exploring the mechanics behind core components such as `Message Events`, `StateMachines`, `MonoSystems`, and how these are managed by and retrieved from the `GameManager`, developers can gather a greater understanding of how our core architecture works under the hood. This structured approach simplifies navigation and comprehension of the codebase, while fostering an environment that's conducive to collaborative development and rapid feature iteration and implementation. By leveraging the outlined architectural principles, game development can be accelerated, giving developers greater agility and delivering a seamless experience for players.

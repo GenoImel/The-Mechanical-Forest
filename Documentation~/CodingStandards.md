@@ -21,7 +21,6 @@ Assets/Scripts/Runtime
 // Would be segregated into subfolders within the following category folders:
 Assets/Scripts/Runtime/Controllers
 Assets/Scripts/Runtime/MonoSystems
-Assets/Scripts/Runtime/EntitySystems
 Assets/Scripts/Runtime/StateMachines
 
 // Editor scripts which can also reference Runtime scripts live here
@@ -46,7 +45,6 @@ Assets/Resources
 // which mirror how we organize the Runtime folder.
 Assets/Prefabs/Controllers
 Assets/Prefabs/MonoSystems
-Assets/Prefabs/EntitySystems
 Assets/Prefabs/StateMachines
 
 // Plugins folder should only contain third party code and assets
@@ -331,7 +329,7 @@ using Akashic.Core; // Required for any interaction with GameManager
 // If you need access to any Message Events defined in another Controller/MonoSystem/etc. namespace, make sure to add it.
 //
 // Don't abuse this accessibility, however. Using other namespaces to get direct injection of a Controller
-// or feature specific MonoBehaviour is not recommended within MonoSystems, EntitySystems, States, or across other separate features.
+// or feature specific MonoBehaviour is not recommended within MonoSystems, States, or across other separate features.
 // Doing so can lead to ugly instances of tight coupling.
 using Akashic.Runtime.Example;
 
@@ -422,14 +420,6 @@ namespace Akashic.Runtime.MonoSystems.ExampleMonoSystem
 ```
 
 In short, `MonoSystems` are essential components that facilitate the sharing of code and data across `MonBehaviour` `Controllers` and other dynamic scripts, promoting decoupled interactions between individual features. These are bootstrapped into the game at runtime by the `AkashicGameManagerPrefab`, and their creation involves defining specific `interfaces` and companion `MonoBehaviour` classes, ensuring modularity and minimizing direct dependencies in the game's architecture.
-
-## EntitySystems
-
-**Note: Remove this section for any projects that do not use ECS.**
-
-In the hybrid core architecture, `EntitySystems` are intended to provide a clean interface for interacting with `Entities`, `Components`, and `Systems` within an ECS oriented architecture. This keeps much of the architectural headache when dealing with ECS styled code tucked away into a nice, neat corner and allows our game to be `MonoBehaviour` oriented first and foremost, while still allowing us to take advantage of the benefits of ECS. In general, however, `EntitySystems` allow for the same benefits that normal `MonoSystems` do in that they enable code and data sharing across the game without the need for tight coupling. For now, the general format for creating an `EntitySystem` is exactly the same as we would for a regular `MonoSystem`.
-
-In the future, we will likely create a `internal abstract class` that inherits from `MonoBehaviour`, and allows us to enforce implementation of specific methods that are unique to interacting with ECS portions of the architecture. As such, this section is TBD until an opportunity to design an `EntitySystem` arises. Once that happens, this section will be updated with more specific guidance and coding standards for `EntitySystems`.
 
 ## States
 
@@ -764,4 +754,4 @@ namespace Akashic.Runtime.Example
 
 # Conclusion
 
-Adhering to this project's coding standards ensures a cohesive, efficient, and maintainable development environment. A meticulous approach to project organization makes our codebase navigable, which accelerates onboarding and collaborative productivity. Moreover, by leveraging core architectural components like `StateMachines`, `MonoSystems`, `EntitySystems`, and `Message Events`, developers are empowered to craft scalable and modular features, enhancing both performance and flexibility. Abiding by these principles guarantees optimal code quality and robust game behaviour, benefiting both developers and players alike.
+Adhering to this project's coding standards ensures a cohesive, efficient, and maintainable development environment. A meticulous approach to project organization makes our codebase navigable, which accelerates onboarding and collaborative productivity. Moreover, by leveraging core architectural components like `StateMachines`, `MonoSystems`, and `Message Events`, developers are empowered to craft scalable and modular features, enhancing both performance and flexibility. Abiding by these principles guarantees optimal code quality and robust game behaviour, benefiting both developers and players alike.
