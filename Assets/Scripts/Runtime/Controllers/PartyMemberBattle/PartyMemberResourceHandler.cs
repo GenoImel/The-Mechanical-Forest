@@ -5,9 +5,6 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
 {
     internal sealed class PartyMemberResourceHandler : MonoBehaviour
     {
-        [Header("Controller")]
-        [SerializeField] private PartyMemberController partyMemberController;
-        
         [Header("Resources")]
         [SerializeField] private int currentHealth;
 
