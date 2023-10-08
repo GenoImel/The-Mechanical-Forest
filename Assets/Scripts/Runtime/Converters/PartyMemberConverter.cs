@@ -14,12 +14,12 @@ namespace Akashic.Runtime.Converters
                 partyMemberController.partyMemberResourceHandler.MaxExperience,
                 partyMemberController.partyMemberResourceHandler.CurrentHealth,
                 partyMemberController.partyMemberResourceHandler.MaxHealth,
-                partyMemberController.partyMemberStatHandler.BasePhysicalAttack,
-                partyMemberController.partyMemberStatHandler.BaseMagicalAttack,
-                partyMemberController.partyMemberStatHandler.BaseAccuracy,
-                partyMemberController.partyMemberStatHandler.BasePhysicalDefense,
-                partyMemberController.partyMemberStatHandler.BaseMagicalDefense,
-                partyMemberController.partyMemberStatHandler.BaseEvade
+                partyMemberController.partyMemberStatHandler.BaseAttackStats.PhysicalAttack,
+                partyMemberController.partyMemberStatHandler.BaseAttackStats.MagicalAttack,
+                partyMemberController.partyMemberStatHandler.BaseAttackStats.Accuracy,
+                partyMemberController.partyMemberStatHandler.BaseDefenseStats.PhysicalDefense,
+                partyMemberController.partyMemberStatHandler.BaseDefenseStats.MagicalDefense,
+                partyMemberController.partyMemberStatHandler.BaseDefenseStats.Evade
                 );
 
             return partyMember;

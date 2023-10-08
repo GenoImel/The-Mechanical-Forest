@@ -10,18 +10,20 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [Header("Stats")]
         [SerializeField] private int currentLevel;
 
+        [Header("Current Stats")]
         [SerializeField] private AttackStats currentAttackStats;
-        [SerializeField] private AttackStats baseAttackStats;
-
         [SerializeField] private DefenseStats currentDefenseStats;
+
+        [Header("Base Stats")]
+        [SerializeField] private AttackStats baseAttackStats;
         [SerializeField] private DefenseStats baseDefenseStats;
         
         public int CurrentLevel => currentLevel;
 
-        [SerializeField] private AttackStats CurrentAttackStats => currentAttackStats;
-        [SerializeField] private AttackStats BaseAttackStats => baseAttackStats;
-        [SerializeField] private DefenseStats CurrentDefenseStats => currentDefenseStats;
-        [SerializeField] private DefenseStats BaseDefenseStats => baseDefenseStats;
+        public AttackStats CurrentAttackStats => currentAttackStats;
+        public AttackStats BaseAttackStats => baseAttackStats;
+        public DefenseStats CurrentDefenseStats => currentDefenseStats;
+        public DefenseStats BaseDefenseStats => baseDefenseStats;
 
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
