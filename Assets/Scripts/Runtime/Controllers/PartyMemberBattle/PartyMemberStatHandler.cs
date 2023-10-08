@@ -1,4 +1,6 @@
+using Akashic.Runtime.Stats;
 using Akashic.ScriptableObjects.PartyMemberBase;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
@@ -7,64 +9,34 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
     {
         [Header("Stats")]
         [SerializeField] private int currentLevel;
-        
-        [SerializeField] private int currentPhysicalAttack;
-        [SerializeField] private int currentMagicalAttack;
-        [SerializeField] private float currentAccuracy;
-        
-        [SerializeField] private int currentPhysicalDefense;
-        [SerializeField] private int currentMagicalDefense;
-        [SerializeField] private float currentEvade;
-        
-        [SerializeField] private int basePhysicalAttack;
-        [SerializeField] private int baseMagicalAttack;
-        [SerializeField] private float baseAccuracy;
-        
-        [SerializeField] private int basePhysicalDefense;
-        [SerializeField] private int baseMagicalDefense;
-        [SerializeField] private float baseEvade;
+
+        [SerializeField] private AttackStats currentAttackStats;
+        [SerializeField] private AttackStats baseAttackStats;
+
+        [SerializeField] private DefenseStats currentDefenseStats;
+        [SerializeField] private DefenseStats baseDefenseStats;
         
         public int CurrentLevel => currentLevel;
-        public int CurrentPhysicalAttack => currentPhysicalAttack;
-        public int CurrentMagicalAttack => currentMagicalAttack;
-        public float CurrentAccuracy => currentAccuracy;
 
-        public int CurrentPhysicalDefense => currentPhysicalDefense;
-        public int CurrentMagicalDefense => currentMagicalDefense;
-        public float CurrentEvade => currentEvade;
-
-        public int BasePhysicalAttack => basePhysicalAttack;
-        public int BaseMagicalAttack => baseMagicalAttack;
-        public float BaseAccuracy => baseAccuracy;
-
-        public int BasePhysicalDefense => basePhysicalDefense;
-        public int BaseMagicalDefense => baseMagicalDefense;
-        public float BaseEvade => baseEvade;
+        [SerializeField] private AttackStats CurrentAttackStats => currentAttackStats;
+        [SerializeField] private AttackStats BaseAttackStats => baseAttackStats;
+        [SerializeField] private DefenseStats CurrentDefenseStats => currentDefenseStats;
+        [SerializeField] private DefenseStats BaseDefenseStats => baseDefenseStats;
 
         public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
         {
             currentLevel = baseData.baseLevel;
-            
-            basePhysicalAttack = baseData.basePhysicalAttack;
-            baseMagicalAttack = baseData.baseMagicalAttack;
-            baseAccuracy = baseData.baseAccuracy;
 
-            basePhysicalDefense = baseData.basePhysicalDefense;
-            baseMagicalDefense = baseData.baseMagicalDefense;
-            baseEvade = baseData.baseEvade;
+            baseAttackStats = new AttackStats(baseData);
+            baseDefenseStats = new DefenseStats(baseData);
                 
             ResetCurrentStatsToBase();
         }
 
         private void ResetCurrentStatsToBase()
         {
-            currentPhysicalAttack = basePhysicalAttack;
-            currentMagicalAttack = baseMagicalAttack;
-            currentAccuracy = baseAccuracy;
-            
-            currentPhysicalDefense = basePhysicalDefense;
-            currentMagicalDefense = baseMagicalDefense;
-            currentEvade = baseEvade;
+            currentAttackStats = baseAttackStats;
+            currentDefenseStats = baseDefenseStats;
         }
     }
 }
