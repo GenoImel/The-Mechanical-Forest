@@ -1,6 +1,5 @@
 using Akashic.Runtime.Stats;
 using Akashic.ScriptableObjects.PartyMemberBase;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
