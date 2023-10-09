@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.Converters;
-using Akashic.Runtime.MonoSystems.GameStates;
+using Akashic.Runtime.StateMachines.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.Serializers;
@@ -100,7 +100,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void OnGameStateChangedMessage(GameStateChangedMessage message)
         {
-            NewGameButtonEnabled(message.NextState == GameState.MainMenu);
+            NewGameButtonEnabled(message.NextState is GameFiniteState.MainMenu);
         }
 
         private void NewGameButtonEnabled(bool isEnabled)

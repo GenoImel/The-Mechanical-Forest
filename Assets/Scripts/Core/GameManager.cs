@@ -1,4 +1,7 @@
 using System;
+using Akashic.Core.Messages;
+using Akashic.Core.MonoSystems;
+using Akashic.Core.StateMachines;
 using UnityEngine;
 
 namespace Akashic.Core
@@ -9,6 +12,7 @@ namespace Akashic.Core
         private static GameManager instance;
         
         private readonly MessageManager messageManager = new ();
+        private readonly StateMachineManager stateMachineManager = new ();
         private readonly MonoSystemManager monoSystemManager = new ();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -54,6 +58,23 @@ namespace Akashic.Core
         {
             instance.messageManager.Publish(message);
         }
+        
+        /// <returns>
+        /// Returns an existing state in the game.
+        /// </returns>
+        public static TStateMachine GetStateMachine<TStateMachine>()
+        {
+            return instance.stateMachineManager.GetStateMachine<TStateMachine>();
+        }
+        
+        /// <summary>
+        /// Adds a State to the game.
+        /// </summary>
+        protected void AddStateMachine<TStateMachine, TBindTo>(TStateMachine stateMachine) 
+            where TStateMachine : IStateMachine, TBindTo
+        {
+            stateMachineManager.AddStateMachine<TStateMachine, TBindTo>(stateMachine);
+        }
 
         /// <returns>
         /// Returns an existing monoSystem in the game.
@@ -80,5 +101,21 @@ namespace Akashic.Core
         /// Called when the game manager is initialized.
         /// </summary>
         protected abstract void OnInitialized();
+        
+        /// <summary>
+        /// Called when bootstrapping game state machines.
+        /// </summary>
+        protected abstract void InitializeGameStateMachines();
+        
+        /// <summary>
+        /// Called when bootstrapping game services.
+        /// </summary>
+        protected abstract void InitializeGameMonoSystems();
+
+        /// <summary>
+        /// Called after bootstrapping complete.
+        /// Sets all parent transforms active.
+        /// </summary>
+        protected abstract void SetParentsActive();
     }
 }

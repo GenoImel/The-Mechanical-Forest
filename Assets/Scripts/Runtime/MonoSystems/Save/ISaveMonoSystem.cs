@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akashic.Core;
+using Akashic.Core.MonoSystems;
 using Akashic.Runtime.Serializers;
 
 namespace Akashic.Runtime.MonoSystems.Save
