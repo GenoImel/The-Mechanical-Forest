@@ -436,7 +436,7 @@ Provided with the game architecture are core scripts for creating `States`, or f
 using System; 
 using Akashic.Core.StateMachines; 
 
-// The namespace of the any scripts for a State Machine should always match its file/folder location.
+// The namespace of any scripts for a State Machine should always match its file/folder location.
 namespace Akashic.Runtime.States.ExampleStates
 {
     // All State definitions must inherit from the IState interface for type-safety.
