@@ -2,7 +2,7 @@
 
 The core architecture for the game follows the philosophy of limiting the number of singletons in the codebase, and instead using a single `GameManager` singleton to act as a central hub to orchestrate cross game communication while maintaining flexibility, scalability, maintainability- all wrapped in a simplistic API that is intuitive for developers of all skills levels to learn and apply. 
 
-The game uses a hybridized core architecture with a foundational philosophy adheres to the following concepts:
+The game uses a hybridized core architecture with a foundational philosophy that adheres to the following concepts:
 
 - **Embracing Unity's Native Framework:** Prioritizing a `MonoBehaviour`-centric design that respects Unity's `GameObject`-`Component` pattern.
 - **Modular Interfacing:** Implementing specialized `interfaces` like `MonoSystems` to foster seamless data and code interchangeability among decoupled game features.
@@ -619,7 +619,7 @@ namespace Akashic.Core.StateMachines
 
             if (currentState == nextState)
             {
-                // If we are already in the next state already, we should log a warning.
+                // If we are already in the next state, we should log a warning.
                 // This may indicate that something in the game is not behaving as expected.
                 Debug.LogWarning($"State Machine is already in \"{nextState}\" state.");
                 return;

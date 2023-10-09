@@ -374,14 +374,14 @@ namespace Akashic.Runtime.MonoSystems.ExampleMonoSystem
         private void OnEnable()
         {
             // We can Add listeners for messages in our MonoSystems as well.
-        // Make sure to wrap these in AddListeners().
+            // Make sure to wrap these in AddListeners().
             AddListeners();
         }
 
         private void OnDisable()
         {
-        // Make sure to use RemoveListeners() in OnDisable()!
-        RemoveListeners();
+            // Make sure to use RemoveListeners() in OnDisable()!
+            RemoveListeners();
         }
 
         // Summary is inherited from IExampleMonoSystem.
@@ -400,8 +400,8 @@ namespace Akashic.Runtime.MonoSystems.ExampleMonoSystem
             GameManager.Publish(new OtherExampleMessage(isEnabled));
         }
 
-    // Make sure to wrap any listeners in AddListeners()/RemoveListeners()
-    // This keeps our scripts nice and organized.
+        // Make sure to wrap any listeners in AddListeners()/RemoveListeners()
+        // This keeps our scripts nice and organized.
         private void AddListeners()
         {
             GameManager.AddListener<ExampleMessage>(OnExampleMessageReceived);
@@ -412,7 +412,7 @@ namespace Akashic.Runtime.MonoSystems.ExampleMonoSystem
             // If you add listeners for messages broadcast over the message bus
             // remember to remove the same listeners in OnDisable().
             //
-            // Also, if find yourself adding and removing many listeners, wrap these in
+            // Also, if you find yourself adding and removing many listeners, wrap these in
             // methods called AddListeners() and RemoveListeners() to keep the script organized.
             GameManager.RemoveListener<ExampleMessage>(OnExampleMessageReceived);
         }
@@ -426,7 +426,7 @@ In short, `MonoSystems` are essential components that facilitate the sharing of 
 Provided with the game architecture are core scripts for creating `States`, or finite state machines (FSMs). These state machines require the implementation of specific pieces of the core architecture in order to enforce adherence to a specific state change pattern, ensuring that `State Change Events` always happen in a specific order in every single FSM. Let's step through an `ExampleStateMachine` to better illustrate this, lets start by defining an overall `IState` definition specific to our `ExampleStateMachine`:
 
 ```csharp
-// - System is needed to returning the typeof FiniteStates within our State definition.
+// - System is needed for returning the typeof FiniteStates within our State definition.
 //
 // - Akashic.Core.StateMachines is required for inheriting from the IState interface.
 //   This allows us to generically type our different States, enforcing type-safety
@@ -456,7 +456,7 @@ namespace Akashic.Runtime.States.ExampleStates
 Now that we have a parent type defined for our `IFiniteStates`, lets go on to define some class-based finite states for our `ExampleStateMachine`. To do this, create a separate script called `ExampleFiniteStates`:
 
 ```csharp
-// - System is needed to returning the typeof State for an individual FiniteState.
+// - System is needed for returning the typeof State for an individual FiniteState.
 //
 // - Akashic.Core.StateMachines is required for inheriting from the IFiniteState interface.
 //   This allows us to generically type our different IFiniteStates, enforcing type-safety
@@ -464,10 +464,10 @@ Now that we have a parent type defined for our `IFiniteStates`, lets go on to de
 using System;
 using Akashic.Core.StateMachines;
 
-// The namespace of the any scripts for a State Machine should always match its file/folder location.
+// The namespace of any scripts for a State Machine should always match its file/folder location.
 namespace Akashic.Runtime.States.ExampleStates
 {
-    // All State definitions must inherit from the IState interface for type-safety.
+    // All State definitions must inherit from the IFiniteState interface for type-safety.
     // This prevents us from mixing up different States from other State Machines.
     internal abstract class ExampleFiniteStates : IFiniteState
     {
@@ -504,7 +504,7 @@ Now we need to a create a `StateChangedMessage` that is specific to our `State M
 // We need to use the Akashic.Core.StateMachines namespace to inherit from the StateChangedMessage<T> class.
 using Akashic.Core.StateMachines;
 
-// The namespace of the any scripts for a State Machine should always match its file/folder location.
+// The namespace of any scripts for a State Machine should always match its file/folder location.
 // 
 // For our Message Events specifically, all Message Events must be placed in a script called Messages
 // that resides within the namespace where these Message Events are most relevant.
@@ -542,7 +542,7 @@ using Akashic.Core.StateMachines;
 // All State Machines require an interface to be defined.
 //
 // The interface of the State Machines resides in a subfolder of the same name within
-// the the "Assets/Runtime/States" folder.
+// the "Assets/Runtime/States" folder.
 //
 // Defining an interface for our State Machine allows for State Machines to be generically typed,
 // which enables the bootstrapping of State Machines at runtime. Interfaces also allow us
@@ -587,7 +587,7 @@ using Akashic.Core.Messages;
 using Akashic.Core.StateMachines;
 using Akashic.Runtime.States.GameStates; // We can also reference other State Machines.
 
-// The namespace of the any scripts for a State Machine should always match its file/folder location.
+// The namespace of any scripts for a State Machine should always match its file/folder location.
 namespace Akashic.Runtime.States.ExampleStates
 {
     // In general when writing the class definition for a State Machine:
@@ -596,7 +596,7 @@ namespace Akashic.Runtime.States.ExampleStates
     // - Inherit from BaseStateMachine, which contains MonoBehaviour, so that we can add the
     //   State Machine to a GameObject as a component. This also enforces the use of specific abstract
     //   methods that are required for a StateChanged Event to work properly.
-    // - Inherit from the companion interface, in this case IExampleMonoSystem.
+    // - Inherit from the companion interface, in this case IExampleStateMachine.
     internal sealed class ExampleStateMachine : BaseStateMachine, IExampleStateMachine
     {
         // We must use the MonoBehaviour Lifecycle method, Awake(), and use it to set the initial state.
@@ -750,7 +750,7 @@ namespace Akashic.Runtime.Example
 }
 ```
 
-`Message Events` present a structured and efficient way to facilitate communication across various parts of an game, by offering a level of decoupling that enhances code maintainability and readability. `Message Events` are best suited for cross game communication. Note that we should only use Unity/C# `actions`, `events`, and `delegates` within a feature restricted scope (i.e. within the prefab hierarchy of a specific feature/Controller), and all other communication across the game should rely on `Message Events`.
+`Message Events` present a structured and efficient way to facilitate communication across various parts of the game, by offering a level of decoupling that enhances code maintainability and readability. `Message Events` are best suited for cross game communication. Note that we should only use Unity/C# `actions`, `events`, and `delegates` within a feature restricted scope (i.e. within the prefab hierarchy of a specific feature/Controller), and all other communication across the game should rely on `Message Events`.
 
 # Conclusion
 
