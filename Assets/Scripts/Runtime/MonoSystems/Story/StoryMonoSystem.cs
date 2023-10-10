@@ -28,22 +28,28 @@ namespace Akashic.Runtime.MonoSystems.Story
                 throw new Exception($"{currentStoryEvent} cannot be null or empty.");
             }
 
-            var tempStoryPoint = currentStoryEvent.storyPoints[storyPointIndex++];
-
-            HasStoryEventEnded();
-
-            return tempStoryPoint;
+            return currentStoryEvent.storyPoints[storyPointIndex];
         }
 
-        private void HasStoryEventEnded()
+        public void AdvanceStoryPoint()
+        {
+            storyPointIndex++;
+            if (HasStoryEventEnded() == false)
+            {
+                GameManager.Publish(new StoryEventAvailableMessage());
+            };
+        }
+
+        private bool HasStoryEventEnded()
         {
             if (storyPointIndex >= currentStoryEvent.storyPoints.Count)
             {
                 currentStoryEvent = new StoryEvent(new List<StoryPoint>());
                 storyPointIndex = 0;
+                GameManager.Publish(new StoryEventEndedMessage());
+                return true;
             }
-
-            GameManager.Publish(new StoryEventEndedMessage());
+            return false;
         }
 
         private void OnNewStoryEventMessage(NewStoryEventMessage message)
