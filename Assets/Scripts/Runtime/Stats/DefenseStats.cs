@@ -15,11 +15,15 @@ namespace Akashic.Runtime.Stats
         public int MagicalDefense => magicalDefense;
         public float Evade => evade;
 
-        public DefenseStats(int physicalDefense, int magicalDefense, float evade)
+        /// <summary>Initializes the defense stats</summary>
+        /// <param name="physDefense">Physical Defense</param>
+        /// <param name="magDefense">Magical Defense</param>
+        /// <param name="ev">Evade</param>
+        public DefenseStats(int physDefense, int magDefense, float ev)
         {
-            this.physicalDefense = physicalDefense;
-            this.magicalDefense = magicalDefense;
-            this.evade = evade;
+            physicalDefense = physDefense;
+            magicalDefense = magDefense;
+            evade = ev;
         }
 
         public DefenseStats(PartyMemberBaseData baseData)

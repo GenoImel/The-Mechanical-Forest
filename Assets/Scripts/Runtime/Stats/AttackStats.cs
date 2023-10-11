@@ -15,11 +15,15 @@ namespace Akashic.Runtime.Stats
         public int MagicalAttack => magicalAttack;
         public float Accuracy => accuracy;
 
-        public AttackStats(int physicalAttack, int magicalAttack, float accuracy)
+        /// <summary>Initializes the attack stats</summary>
+        /// <param name="physAttack">Physical Attack</param>
+        /// <param name="magAttack">Magical Attack</param>
+        /// <param name="acc">Accuracy</param>
+        public AttackStats(int physAttack, int magAttack, float acc)
         {
-            this.physicalAttack = physicalAttack;
-            this.magicalAttack = magicalAttack;
-            this.accuracy = accuracy;
+            physicalAttack = physAttack;
+            magicalAttack = magAttack;
+            accuracy = acc;
         }
 
         public AttackStats(PartyMemberBaseData baseData)
