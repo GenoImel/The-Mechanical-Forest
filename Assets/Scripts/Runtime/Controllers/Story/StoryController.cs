@@ -2,6 +2,7 @@ using Akashic.Core;
 using UnityEngine;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
+using System;
 
 namespace Akashic.Runtime.Controllers.Story
 {
@@ -48,14 +49,29 @@ namespace Akashic.Runtime.Controllers.Story
             ShowStoryPointDialogue(currentStoryPoint);
         }
 
+        private void OnStoryEventEndedMessage(StoryEventEndedMessage message)
+        {
+            Hide();
+            dialoguePanel.Hide();
+        }
+
+        private void ProgressDialogue(object sender, EventArgs e)
+        {
+            storyMonoSystem.AdvanceStoryPoint();
+        }
+
         private void AddListeners()
         {
             GameManager.AddListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
+            GameManager.AddListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
+            dialoguePanel.OnDialoguePanelClicked += ProgressDialogue;
         }
 
         private void RemoveListeners()
         {
             GameManager.RemoveListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
+            GameManager.RemoveListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
+            dialoguePanel.OnDialoguePanelClicked -= ProgressDialogue;
         }
     }
 }
