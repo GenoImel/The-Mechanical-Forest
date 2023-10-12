@@ -48,3 +48,18 @@ TagManager:
   - name: Core UI
     uniqueID: 2956679775
     locked: 0
+  - name: BACKGROUND
+    uniqueID: 1675891611
+    locked: 0
+  - name: SKYGROUND
+    uniqueID: 3050234867
+    locked: 0
+  - name: MIDGROUND_L1
+    uniqueID: 1300541719
+    locked: 0
+  - name: MIDGROUND_L2
+    uniqueID: 2645017931
+    locked: 0
+  - name: FOREGROUND
+    uniqueID: 1710363285
+    locked: 0
