@@ -40,6 +40,7 @@ namespace Akashic.Runtime.Controllers.Story
                 entry.transform.SetParent(dialogueEntryParent.transform, false);
             }
             Show();
+            GameManager.Publish(new StoryEventLogOpened());
         }
 
         public void AddDialogueEntry(DialogueEntryAvailableMessage message)
@@ -62,6 +63,7 @@ namespace Akashic.Runtime.Controllers.Story
         private void OnBackButtonClicked()
         {
             Hide();
+            GameManager.Publish(new StoryEventLogClosed());
         }
 
         private void AddListeners()

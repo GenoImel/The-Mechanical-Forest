@@ -1,3 +1,4 @@
+using Akashic.Core;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
 using System;
@@ -64,14 +65,43 @@ namespace Akashic.Runtime.Controllers.Story
             onLogButtonClickedEvent?.Invoke();
         }
 
+        private void OnToggleEventLog(ToggleEventLog message)
+        {
+            logButton.gameObject.SetActive(message.allowLog);
+        }
+
+        /// <summary>
+        /// Ensures that the DialoguePanel cannot be clicked when the StoryEventLog is open.
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnStoryEventLogOpened(StoryEventLogOpened message)
+        {
+            canvasGroup.blocksRaycasts = false;
+        }
+
+        /// <summary>
+        /// Allows the DialoguePanel to be clicked.
+        /// </summary>
+        /// <param name="message"></param>
+        private void OnStoryEventLogClosed(StoryEventLogClosed message)
+        {
+            canvasGroup.blocksRaycasts = true;
+        }
+
         private void AddListeners()
         {
             logButton.onClick.AddListener(OnLogButtonClicked);
+            GameManager.AddListener<ToggleEventLog>(OnToggleEventLog);
+            GameManager.AddListener<StoryEventLogOpened>(OnStoryEventLogOpened);
+            GameManager.AddListener<StoryEventLogClosed>(OnStoryEventLogClosed);
         }
 
         private void RemoveListeners()
         {
             logButton.onClick.RemoveListener(OnLogButtonClicked);
+            GameManager.RemoveListener<ToggleEventLog>(OnToggleEventLog);
+            GameManager.RemoveListener<StoryEventLogOpened>(OnStoryEventLogOpened);
+            GameManager.RemoveListener<StoryEventLogClosed>(OnStoryEventLogClosed);
         }
     }
 }

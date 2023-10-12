@@ -21,6 +21,24 @@ namespace Akashic.Runtime.MonoSystems.Story
     {
     }
 
+    internal sealed class ToggleEventLog : IMessage
+    {
+        public bool allowLog { get; }
+
+        public ToggleEventLog(bool log)
+        {
+            allowLog = log;
+        }
+    }
+
+    internal sealed class StoryEventLogOpened : IMessage
+    {
+    }
+
+    internal sealed class StoryEventLogClosed : IMessage
+    {
+    }
+
     internal sealed class DialogueEntryAvailableMessage: IMessage
     {
         public StoryPoint StoryPoint { get; }

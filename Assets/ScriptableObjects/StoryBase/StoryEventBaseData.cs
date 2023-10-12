@@ -7,6 +7,7 @@ namespace Akashic.ScriptableObjects.StoryBase
     [CreateAssetMenu(menuName = "Akashic/Story Event/New Base Story Event")]
     internal sealed class StoryEventBaseData : ScriptableObject
     {
+        public bool allowLog = false;
         public List<StoryPoint> storyPoints;
     }
 }
