@@ -10,6 +10,7 @@ namespace Akashic.Runtime.Controllers.Story
     {
         [Header("Panels")]
         [SerializeField] private DialoguePanel dialoguePanel;
+        [SerializeField] private StoryEventLogPanel storyEventLogPanel;
 
         private StoryPoint currentStoryPoint;
 
@@ -19,7 +20,7 @@ namespace Akashic.Runtime.Controllers.Story
         {
             storyMonoSystem = GameManager.GetMonoSystem<IStoryMonoSystem>();
         }
-        
+
         private void OnEnable()
         {
             AddListeners();
@@ -42,7 +43,12 @@ namespace Akashic.Runtime.Controllers.Story
             Show();
             dialoguePanel.Show();
         }
-        
+
+        public void ShowStoryEventLog()
+        {
+            storyEventLogPanel.ShowStoryEventLog();
+        }
+
         private void OnStoryEventAvailableMessage(StoryEventAvailableMessage message)
         {
             currentStoryPoint = storyMonoSystem.GetCurrentStoryPoint();
@@ -64,14 +70,16 @@ namespace Akashic.Runtime.Controllers.Story
         {
             GameManager.AddListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
             GameManager.AddListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
-            dialoguePanel.OnDialoguePanelClicked += ProgressDialogue;
+            dialoguePanel.onDialoguePanelClickedEvent += ProgressDialogue;
+            dialoguePanel.onLogButtonClickedEvent.AddListener(ShowStoryEventLog);
         }
 
         private void RemoveListeners()
         {
             GameManager.RemoveListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
             GameManager.RemoveListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
-            dialoguePanel.OnDialoguePanelClicked -= ProgressDialogue;
+            dialoguePanel.onDialoguePanelClickedEvent -= ProgressDialogue;
+            dialoguePanel.onLogButtonClickedEvent.RemoveListener(ShowStoryEventLog);
         }
     }
 }

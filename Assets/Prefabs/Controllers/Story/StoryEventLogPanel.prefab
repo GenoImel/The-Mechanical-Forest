@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 5607882418376041808}
   - component: {fileID: 1210433085880416144}
   - component: {fileID: 7035320124033330326}
+  - component: {fileID: 1609728304559384273}
   m_Layer: 0
   m_Name: StoryEventLogPanel
   m_TagString: Untagged
@@ -777,6 +778,21 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1609728304559384273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919209685359992854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ef5e79a8671a5479e48360027ff09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 7035320124033330326}
+  backButton: {fileID: 6942700543109603502}
+  dialogueEntryPrefab: {fileID: 6520765842074659465, guid: 5b6e649e27dbc7e4ab102e7d9421e716, type: 3}
 --- !u!1 &2118082932102657971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,9 +1028,9 @@ RectTransform:
   m_Father: {fileID: 5890264287732737547}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 97.1118, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 97.1118, y: -60.210003}
   m_SizeDelta: {x: 184.2236, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6732520335162662483
@@ -1092,9 +1108,9 @@ RectTransform:
   m_Father: {fileID: 5890264287732737547}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 97.1118, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 97.1118, y: -83.35}
   m_SizeDelta: {x: 184.2236, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5978509909943923305
@@ -1723,9 +1739,9 @@ RectTransform:
   m_Father: {fileID: 5890264287732737547}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 97.1118, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 97.1118, y: -27.87}
   m_SizeDelta: {x: 184.2236, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023074686481168784

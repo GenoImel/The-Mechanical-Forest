@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 8547402661868562107}
   - component: {fileID: 3402400282313510488}
   - component: {fileID: 5550364016642421909}
+  - component: {fileID: -7691612419131896092}
   m_Layer: 0
   m_Name: DialoguePanel
   m_TagString: Untagged
@@ -897,3 +898,23 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &-7691612419131896092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993211511489032739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c114d64317a246a4c8e358adc04338e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 5550364016642421909}
+  nameText: {fileID: 1555856905752636933}
+  dialogueText: {fileID: 926278073821516788}
+  logButton: {fileID: 3728127733762180196}
+  storyController: {fileID: 8885209029623361617, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
+  onLogButtonClickedEvent:
+    m_PersistentCalls:
+      m_Calls: []

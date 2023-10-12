@@ -3,17 +3,33 @@ using Akashic.Runtime.MonoSystems.Story;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Akashic.Runtime.Controllers.Story
 {
     internal sealed class DialoguePanel : OverlayController, IPointerClickHandler
     {
-        [Header("UI Elements")]
+        [Header("Text Elements")]
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI dialogueText;
 
-        public event EventHandler OnDialoguePanelClicked;
+        [Header("Buttons")]
+        [SerializeField] private Button logButton;
+
+        public event EventHandler onDialoguePanelClickedEvent;
+        public UnityEvent onLogButtonClickedEvent;
+
+        private void OnEnable()
+        {
+            AddListeners();
+        }
+
+        private void OnDisable()
+        {
+            RemoveListeners();
+        }
 
         public override void Hide()
         {
@@ -40,7 +56,22 @@ namespace Akashic.Runtime.Controllers.Story
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnDialoguePanelClicked?.Invoke(this, EventArgs.Empty);
+            onDialoguePanelClickedEvent?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnLogButtonClicked()
+        {
+            onLogButtonClickedEvent?.Invoke();
+        }
+
+        private void AddListeners()
+        {
+            logButton.onClick.AddListener(OnLogButtonClicked);
+        }
+
+        private void RemoveListeners()
+        {
+            logButton.onClick.RemoveListener(OnLogButtonClicked);
         }
     }
 }
