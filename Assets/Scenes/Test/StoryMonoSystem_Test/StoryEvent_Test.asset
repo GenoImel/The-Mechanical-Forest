@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b1e0403999a4de48de71f968bfb1da, type: 3}
   m_Name: StoryEvent_Test
   m_EditorClassIdentifier: 
+  allowLog: 1
   storyPoints:
   - characterName: RedPanda
     dialogueLine: Hello, thanks for clicking!

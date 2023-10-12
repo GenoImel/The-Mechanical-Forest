@@ -35,17 +35,13 @@ namespace Akashic.Runtime.Controllers.Story
 
         public void ShowStoryEventLog()
         {
-            foreach (DialogueEntry entry in dialogueEntries)
-            {
-                entry.transform.SetParent(dialogueEntryParent.transform, false);
-            }
             Show();
             GameManager.Publish(new StoryEventLogOpened());
         }
 
         public void AddDialogueEntry(DialogueEntryAvailableMessage message)
         {
-            DialogueEntry newDialogueEntry = Instantiate(dialogueEntryPrefab);
+            DialogueEntry newDialogueEntry = Instantiate(dialogueEntryPrefab, dialogueEntryParent.transform);
             newDialogueEntry.name = $"DialogueEntry{dialogueEntries.Count}";
             newDialogueEntry.SetText($"{message.StoryPoint.characterName}:", message.StoryPoint.dialogueLine);
             dialogueEntries.Add(newDialogueEntry);
