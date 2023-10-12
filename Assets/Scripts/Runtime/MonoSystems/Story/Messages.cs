@@ -20,4 +20,14 @@ namespace Akashic.Runtime.MonoSystems.Story
     internal sealed class StoryEventEndedMessage : IMessage
     {
     }
+
+    internal sealed class DialogueEntryAvailableMessage: IMessage
+    {
+        public StoryPoint StoryPoint { get; }
+
+        public DialogueEntryAvailableMessage(StoryPoint storyPoint)
+        {
+            StoryPoint = storyPoint;
+        }
+    }
 }

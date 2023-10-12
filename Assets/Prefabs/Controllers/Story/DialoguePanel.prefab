@@ -914,7 +914,6 @@ MonoBehaviour:
   nameText: {fileID: 1555856905752636933}
   dialogueText: {fileID: 926278073821516788}
   logButton: {fileID: 3728127733762180196}
-  storyController: {fileID: 8885209029623361617, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
   onLogButtonClickedEvent:
     m_PersistentCalls:
       m_Calls: []

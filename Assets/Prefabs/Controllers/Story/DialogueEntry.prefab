@@ -93,6 +93,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2157307491af6bb4d8140a800c132bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterNameText: {fileID: 5165982611689861321}
+  characterDialogueText: {fileID: 307622860597544496}
 --- !u!1 &5627664187925979606
 GameObject:
   m_ObjectHideFlags: 0

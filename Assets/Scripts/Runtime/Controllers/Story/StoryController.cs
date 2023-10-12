@@ -59,6 +59,7 @@ namespace Akashic.Runtime.Controllers.Story
         {
             Hide();
             dialoguePanel.Hide();
+            storyEventLogPanel.DestroyDialogueEntries();
         }
 
         private void ProgressDialogue(object sender, EventArgs e)

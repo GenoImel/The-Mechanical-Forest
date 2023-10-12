@@ -3,6 +3,7 @@ using UnityEngine;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
 using UnityEngine.UI;
+using Akashic.Core;
 
 namespace Akashic.Runtime.Controllers.Story
 {
@@ -13,6 +14,7 @@ namespace Akashic.Runtime.Controllers.Story
 
         [Header("Prefab")]
         [SerializeField] private DialogueEntry dialogueEntryPrefab;
+        [SerializeField] private GameObject dialogueEntryParent;
 
         private List<DialogueEntry> dialogueEntries = new List<DialogueEntry>();
 
@@ -33,12 +35,28 @@ namespace Akashic.Runtime.Controllers.Story
 
         public void ShowStoryEventLog()
         {
+            foreach (DialogueEntry entry in dialogueEntries)
+            {
+                entry.transform.SetParent(dialogueEntryParent.transform, false);
+            }
             Show();
         }
 
-        public void AddNewLine(StoryPoint storyPoint)
+        public void AddDialogueEntry(DialogueEntryAvailableMessage message)
         {
+            DialogueEntry newDialogueEntry = Instantiate(dialogueEntryPrefab);
+            newDialogueEntry.name = $"DialogueEntry{dialogueEntries.Count}";
+            newDialogueEntry.SetText($"{message.StoryPoint.characterName}:", message.StoryPoint.dialogueLine);
+            dialogueEntries.Add(newDialogueEntry);
+        }
 
+        public void DestroyDialogueEntries()
+        {
+            foreach (DialogueEntry entry in dialogueEntries)
+            {
+                Destroy(entry.gameObject);
+            }
+            dialogueEntries.Clear();
         }
 
         private void OnBackButtonClicked()
@@ -49,6 +67,7 @@ namespace Akashic.Runtime.Controllers.Story
         private void AddListeners()
         {
             backButton.onClick.AddListener(OnBackButtonClicked);
+            GameManager.AddListener<DialogueEntryAvailableMessage>(AddDialogueEntry);
         }
 
         private void RemoveListeners()

@@ -963,6 +963,10 @@ PrefabInstance:
       value: StoryController
       objectReference: {fileID: 0}
     - target: {fileID: 4290817324951705783, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
+      propertyPath: logButton
+      value: 
+      objectReference: {fileID: 7612113401844423216}
+    - target: {fileID: 4290817324951705783, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
       propertyPath: onLogButtonClickedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1053,6 +1057,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41f8593fcb7394a51961226ec42f00eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7612113401844423216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5836669222757732338, guid: 4156161d05bc3104ea805347006b3dd2, type: 3}
+  m_PrefabInstance: {fileID: 4081294206444983746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4097723696237071263

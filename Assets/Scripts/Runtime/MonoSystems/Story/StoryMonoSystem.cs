@@ -28,6 +28,8 @@ namespace Akashic.Runtime.MonoSystems.Story
                 throw new Exception($"{currentStoryEvent} cannot be null or empty.");
             }
 
+            GameManager.Publish(new DialogueEntryAvailableMessage(currentStoryEvent.storyPoints[storyPointIndex]));
+
             return currentStoryEvent.storyPoints[storyPointIndex];
         }
 
