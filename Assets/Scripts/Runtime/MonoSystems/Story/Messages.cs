@@ -13,7 +13,7 @@ namespace Akashic.Runtime.MonoSystems.Story
         }
     }
 
-    internal sealed class StoryEventAvailableMessage : IMessage
+    internal sealed class StoryPointAvailableMessage : IMessage
     {
     }
 

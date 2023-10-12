@@ -38,7 +38,7 @@ namespace Akashic.Runtime.MonoSystems.Story
             storyPointIndex++;
             if (HasStoryEventEnded() == false)
             {
-                GameManager.Publish(new StoryEventAvailableMessage());
+                GameManager.Publish(new StoryPointAvailableMessage());
             };
         }
 
@@ -60,7 +60,7 @@ namespace Akashic.Runtime.MonoSystems.Story
                 message.StoryEventBaseData.storyPoints, message.StoryEventBaseData.allowLog);
             storyPointIndex = 0;
             GameManager.Publish(new ToggleEventLog(message.StoryEventBaseData.allowLog));
-            GameManager.Publish(new StoryEventAvailableMessage());
+            GameManager.Publish(new StoryPointAvailableMessage());
         }
 
         private void AddListeners()
