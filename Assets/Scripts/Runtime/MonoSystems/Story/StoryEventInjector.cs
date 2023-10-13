@@ -9,7 +9,7 @@ namespace Akashic.Runtime.MonoSystems.Story
     {
         [SerializeField] private StoryEventBaseData storyEventBaseData;
 
-        private void OnMouseDown()
+        private void OnMouseUp()
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {

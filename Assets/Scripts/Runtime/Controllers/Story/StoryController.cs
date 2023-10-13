@@ -10,6 +10,7 @@ namespace Akashic.Runtime.Controllers.Story
     {
         [Header("Panels")]
         [SerializeField] private DialoguePanel dialoguePanel;
+        [SerializeField] private StoryEventLogPanel storyEventLogPanel;
 
         private StoryPoint currentStoryPoint;
 
@@ -19,7 +20,7 @@ namespace Akashic.Runtime.Controllers.Story
         {
             storyMonoSystem = GameManager.GetMonoSystem<IStoryMonoSystem>();
         }
-        
+
         private void OnEnable()
         {
             AddListeners();
@@ -42,8 +43,13 @@ namespace Akashic.Runtime.Controllers.Story
             Show();
             dialoguePanel.Show();
         }
-        
-        private void OnStoryEventAvailableMessage(StoryEventAvailableMessage message)
+
+        public void ShowStoryEventLog()
+        {
+            storyEventLogPanel.ShowStoryEventLog();
+        }
+
+        private void OnStoryPointAvailableMessage(StoryPointAvailableMessage message)
         {
             currentStoryPoint = storyMonoSystem.GetCurrentStoryPoint();
             ShowStoryPointDialogue(currentStoryPoint);
@@ -53,6 +59,7 @@ namespace Akashic.Runtime.Controllers.Story
         {
             Hide();
             dialoguePanel.Hide();
+            storyEventLogPanel.DestroyDialogueEntries();
         }
 
         private void ProgressDialogue(object sender, EventArgs e)
@@ -62,16 +69,18 @@ namespace Akashic.Runtime.Controllers.Story
 
         private void AddListeners()
         {
-            GameManager.AddListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
+            GameManager.AddListener<StoryPointAvailableMessage>(OnStoryPointAvailableMessage);
             GameManager.AddListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
-            dialoguePanel.OnDialoguePanelClicked += ProgressDialogue;
+            dialoguePanel.onDialoguePanelClickedEvent += ProgressDialogue;
+            dialoguePanel.onLogButtonClickedEvent.AddListener(ShowStoryEventLog);
         }
 
         private void RemoveListeners()
         {
-            GameManager.RemoveListener<StoryEventAvailableMessage>(OnStoryEventAvailableMessage);
+            GameManager.RemoveListener<StoryPointAvailableMessage>(OnStoryPointAvailableMessage);
             GameManager.RemoveListener<StoryEventEndedMessage>(OnStoryEventEndedMessage);
-            dialoguePanel.OnDialoguePanelClicked -= ProgressDialogue;
+            dialoguePanel.onDialoguePanelClickedEvent -= ProgressDialogue;
+            dialoguePanel.onLogButtonClickedEvent.RemoveListener(ShowStoryEventLog);
         }
     }
 }

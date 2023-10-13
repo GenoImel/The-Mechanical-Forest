@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b1e0403999a4de48de71f968bfb1da, type: 3}
   m_Name: StoryEvent_Test
   m_EditorClassIdentifier: 
+  allowLog: 1
   storyPoints:
   - characterName: RedPanda
     dialogueLine: Hello, thanks for clicking!
@@ -20,6 +21,16 @@ MonoBehaviour:
     music: {fileID: 1665128519740578463, guid: 8e7ac382c385d45cba29d92ac71d0db9, type: 3}
   - characterName: RegularPanda
     dialogueLine: No problem!
+    profilePicture: {fileID: 21300000, guid: 7c5eaefa57a019b4ab4eed4b97ef5234, type: 3}
+    backgroundImage: {fileID: 21300000, guid: 478c8f1e68ba348418c3f6c9f601f01d, type: 3}
+    music: {fileID: 1665128519740578463, guid: 8e7ac382c385d45cba29d92ac71d0db9, type: 3}
+  - characterName: RedPanda
+    dialogueLine: So, uh, what's for dinner?
+    profilePicture: {fileID: 21300000, guid: 7c5eaefa57a019b4ab4eed4b97ef5234, type: 3}
+    backgroundImage: {fileID: 21300000, guid: 478c8f1e68ba348418c3f6c9f601f01d, type: 3}
+    music: {fileID: 1665128519740578463, guid: 8e7ac382c385d45cba29d92ac71d0db9, type: 3}
+  - characterName: RegularPanda
+    dialogueLine: Bamboo.
     profilePicture: {fileID: 21300000, guid: 7c5eaefa57a019b4ab4eed4b97ef5234, type: 3}
     backgroundImage: {fileID: 21300000, guid: 478c8f1e68ba348418c3f6c9f601f01d, type: 3}
     music: {fileID: 1665128519740578463, guid: 8e7ac382c385d45cba29d92ac71d0db9, type: 3}
