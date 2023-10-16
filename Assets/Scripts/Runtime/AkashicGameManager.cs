@@ -8,6 +8,7 @@ using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Sound;
 using Akashic.Runtime.MonoSystems.Story;
+using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.StateMachines.BattleStates;
 using Akashic.Runtime.StateMachines.ExplorationStates;
 using UnityEngine;
@@ -36,9 +37,10 @@ namespace Akashic.Runtime
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
         [SerializeField] private SaveMonoSystem saveMonoSystem;
         [SerializeField] private StoryMonoSystem storyMonoSystem;
-        [SerializeField] private DebuggerMonoSystem debuggerMonoSystem;
+		[SerializeField] private DebuggerMonoSystem debuggerMonoSystem;
+		[SerializeField] private InventoryMonoSystem inventoryMonoSystem;
 
-        protected override string GetApplicationName()
+		protected override string GetApplicationName()
         {
             return nameof(AkashicGameManager);
         }
@@ -67,8 +69,9 @@ namespace Akashic.Runtime
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
             AddMonoSystem<StoryMonoSystem, IStoryMonoSystem>(storyMonoSystem);
-            AddMonoSystem<DebuggerMonoSystem, IDebuggerMonoSystem>(debuggerMonoSystem);
-        }
+			AddMonoSystem<DebuggerMonoSystem, IDebuggerMonoSystem>(debuggerMonoSystem);
+			AddMonoSystem<InventoryMonoSystem, IInventoryMonoSystem>(inventoryMonoSystem);
+		}
 
         protected override void SetParentsActive()
         {
