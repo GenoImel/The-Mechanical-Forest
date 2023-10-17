@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f253ba66096e95d4a8e751c955a8078a, type: 3}
   m_Name: InvisibleHandBuzzerBaseData
   m_EditorClassIdentifier: 
-  itemName: Invisible Hand Buzzer
+  itemId: invisiblehandbuzzer
+  itemDisplayName: Invisible Hand Buzzer
   description: On hit of the attack ability of the attacking character, theres a
     5% to inflict an attack down debuff.
   icon: {fileID: 0}

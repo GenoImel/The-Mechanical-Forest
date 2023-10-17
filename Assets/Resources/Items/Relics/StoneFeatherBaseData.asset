@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f253ba66096e95d4a8e751c955a8078a, type: 3}
   m_Name: StoneFeatherBaseData
   m_EditorClassIdentifier: 
-  itemName: Stone Feather
+  itemId: stonefeather
+  itemDisplayName: Stone Feather
   description: Increase Accuracy by 10% but decreases evade by 10%.
   icon: {fileID: 0}

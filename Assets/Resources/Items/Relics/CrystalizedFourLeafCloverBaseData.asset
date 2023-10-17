@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f253ba66096e95d4a8e751c955a8078a, type: 3}
   m_Name: CrystalizedFourLeafCloverBaseData
   m_EditorClassIdentifier: 
-  itemName: Crystalized Four Leaf Clover
+  itemId: crystalizedfourleafclover
+  itemDisplayName: Crystalized Four Leaf Clover
   description: Has the chance 25% to decrease the AP of one of the abilities of the
     character equiping this by 1 or 2 AP.
   icon: {fileID: 0}
