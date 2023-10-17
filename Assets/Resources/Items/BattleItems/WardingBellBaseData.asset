@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: WardingBellBaseData
   m_EditorClassIdentifier: 
   itemName: Warding Bell
-  description: Reduces encounters for up to three minutes while exploring. (note
-    that it won't wear off while in any of the menus)
+  description: Reduces encounters for up to three minutes while exploring.
   icon: {fileID: 0}

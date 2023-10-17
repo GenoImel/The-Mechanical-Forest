@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SweetDewBaseData
   m_EditorClassIdentifier: 
   itemName: Sweet Dew
-  description: 'Reduces AP cost for all skills for the entire party for the first
-    turn by half. (Can only be used outside of battle, limited Item) '
+  description: Reduces AP cost for all skills for the entire party for the first
+    turn by half.
   icon: {fileID: 0}

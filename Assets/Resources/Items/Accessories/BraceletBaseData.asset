@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: BraceletBaseData
   m_EditorClassIdentifier: 
   itemName: Bracelet
-  description: Crit Rate increase/HP increase/Evade Increase/Accuracy Increase) 
-    [1/4 chance of each options]
+  description: 
   icon: {fileID: 0}

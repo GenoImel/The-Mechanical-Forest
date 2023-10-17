@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NecklaceBaseData
   m_EditorClassIdentifier: 
   itemName: Necklace
-  description: Physical and Magical Defense increase(%)
+  description: 
   icon: {fileID: 0}

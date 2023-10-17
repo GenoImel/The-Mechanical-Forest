@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CrystalizedFourLeafCloverBaseData
   m_EditorClassIdentifier: 
   itemName: Crystalized Four Leaf Clover
-  description: Hhas the chance 25% to decrease the AP of one of the abilities of
-    the character equiping this by 1 or 2 AP. (Does not stack with Sweet Dew)
+  description: Has the chance 25% to decrease the AP of one of the abilities of the
+    character equiping this by 1 or 2 AP.
   icon: {fileID: 0}

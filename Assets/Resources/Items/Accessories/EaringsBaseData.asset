@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: EaringsBaseData
   m_EditorClassIdentifier: 
   itemName: Earings
-  description: Physical Attack Increase(percentage)/Magical Attack Increase(percentage)/Physical
-    Attack Increase and Magical attack increase(Percentage) (50/50 chance for either)
+  description: 
   icon: {fileID: 0}
