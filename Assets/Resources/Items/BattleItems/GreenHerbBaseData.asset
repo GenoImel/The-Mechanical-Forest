@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cea429feed461646a36a0e817165022, type: 3}
   m_Name: GreenHerbBaseData
   m_EditorClassIdentifier: 
-  itemName: Green Herb
+  itemId: greenherb
+  itemDisplayName: Green Herb
   description: Heals 30% of the member's total HP.
   icon: {fileID: 0}

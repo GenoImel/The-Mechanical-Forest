@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cea429feed461646a36a0e817165022, type: 3}
   m_Name: SweetDewBaseData
   m_EditorClassIdentifier: 
-  itemName: Sweet Dew
+  itemId: sweetdew
+  itemDisplayName: Sweet Dew
   description: Reduces AP cost for all skills for the entire party for the first
     turn by half.
   icon: {fileID: 0}

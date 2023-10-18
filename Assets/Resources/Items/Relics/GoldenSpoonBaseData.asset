@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f253ba66096e95d4a8e751c955a8078a, type: 3}
   m_Name: GoldenSpoonBaseData
   m_EditorClassIdentifier: 
-  itemName: Golden Spoon
+  itemId: goldenspoon
+  itemDisplayName: Golden Spoon
   description: Healing output is increased by 5%.
   icon: {fileID: 0}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1026fd2480ace184aba8e2cab2543014, type: 3}
   m_Name: NecklaceBaseData
   m_EditorClassIdentifier: 
-  itemName: Necklace
+  itemId: necklace
+  itemDisplayName: Necklace
   description: 
   icon: {fileID: 0}

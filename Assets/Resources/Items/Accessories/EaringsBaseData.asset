@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1026fd2480ace184aba8e2cab2543014, type: 3}
   m_Name: EaringsBaseData
   m_EditorClassIdentifier: 
-  itemName: Earings
+  itemId: earings
+  itemDisplayName: Earings
   description: 
   icon: {fileID: 0}

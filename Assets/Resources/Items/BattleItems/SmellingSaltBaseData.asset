@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cea429feed461646a36a0e817165022, type: 3}
   m_Name: SmellingSaltBaseData
   m_EditorClassIdentifier: 
-  itemName: Smelling Salt
+  itemId: smellingsalt
+  itemDisplayName: Smelling Salt
   description: Revives a knocked-out ally upon use.
   icon: {fileID: 0}
