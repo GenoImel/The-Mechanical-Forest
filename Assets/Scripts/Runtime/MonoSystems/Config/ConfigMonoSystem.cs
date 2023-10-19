@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Akashic.Assets.Scripts.Runtime.MonoSystems.Config.DefaultConfigData;
 using Akashic.ScriptableObjects.ConfigBase;
 using UnityEngine;
 
@@ -8,24 +9,21 @@ namespace Akashic.Runtime.MonoSystems.Config
     {
         [SerializeField] private ConfigBaseData configData;
 
-        public string GetParentSaveFolderName()
+        private SaveConfigSettings saveConfigSettings;
+
+        void Awake()
         {
-            return configData.parentSaveFolderName;
-        }
-        
-        public List<string> GetSaveFolderNames()
-        {
-            return configData.saveFolderNames;
+            InitializeConfigSettings();
         }
 
-        public List<string> GetSaveFileNames()
+        public SaveConfigSettings GetSaveConfigSettings()
         {
-            return configData.saveFileNames;
+            return saveConfigSettings;
         }
-        
-        public int GetSaveSlotNameCharacterLimit()
+
+        private void InitializeConfigSettings()
         {
-            return configData.saveSlotNameCharacterLimit;
+            saveConfigSettings = new SaveConfigSettings(configData);
         }
     }
 }

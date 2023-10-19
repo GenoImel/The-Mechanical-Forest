@@ -49,7 +49,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         
         private void SetCharacterLimit()
         {
-            fileNameInputText.characterLimit = configMonoSystem.GetSaveSlotNameCharacterLimit();
+            fileNameInputText.characterLimit = configMonoSystem.GetSaveConfigSettings().saveSlotNameCharacterLimit;
         }
 
         private void ClearFileNameInputText()
