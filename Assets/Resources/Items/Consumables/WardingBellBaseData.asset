@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cea429feed461646a36a0e817165022, type: 3}
+  m_Script: {fileID: 11500000, guid: 1abf9dbe9bb6ccb4ca9c2661772c84d8, type: 3}
   m_Name: WardingBellBaseData
   m_EditorClassIdentifier: 
+  itemName: Warding Bell
   itemId: wardingbell
-  itemDisplayName: Warding Bell
   description: Reduces encounters for up to three minutes while exploring.
   icon: {fileID: 0}
