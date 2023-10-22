@@ -4,6 +4,7 @@ using Akashic.Runtime.Converters;
 using Akashic.Runtime.StateMachines.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Save;
+using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.Serializers;
 using TMPro;
 using UnityEngine;
@@ -26,15 +27,17 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         private string saveFileName;
 
         private ISaveMonoSystem saveMonoSystem;
-        private IPartyMonoSystem partyMonoSystem;
+		private IPartyMonoSystem partyMonoSystem;
+		private IInventoryMonoSystem inventoryMonoSystem;
 
-        private bool isAwaitingNewSlotName = false;
+		private bool isAwaitingNewSlotName = false;
         
         private void Awake()
         {
             saveMonoSystem = GameManager.GetMonoSystem<ISaveMonoSystem>();
-            partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
-        }
+			partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
+			inventoryMonoSystem = GameManager.GetMonoSystem<IInventoryMonoSystem>();
+		}
 
         private void Start()
         {
@@ -76,7 +79,8 @@ namespace Akashic.Runtime.Controllers.SaveMenu
                 partyMembers.Add(convertedPartyMember);
             }
 
-            var saveFile = new SaveFile(saveSlotNameText.text, partyMembers);
+			//TODO FIX ITEM DATA
+			var saveFile = new SaveFile(saveSlotNameText.text, partyMembers, new PartyInventory(new List<InventoryItem>()));
             saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
             GameManager.Publish(new HideSaveMenuMessage());
