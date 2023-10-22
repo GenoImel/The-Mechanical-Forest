@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1026fd2480ace184aba8e2cab2543014, type: 3}
+  m_Script: {fileID: 11500000, guid: cd1864c19e5670044b0b889ddb97d33f, type: 3}
   m_Name: NecklaceBaseData
   m_EditorClassIdentifier: 
+  itemName: Necklace
   itemId: necklace
-  itemDisplayName: Necklace
   description: 
   icon: {fileID: 0}
