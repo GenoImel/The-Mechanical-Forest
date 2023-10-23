@@ -79,7 +79,8 @@ namespace Akashic.Runtime.Controllers.SaveMenu
                 partyMembers.Add(convertedPartyMember);
             }
 
-			//TODO FIX ITEM DATA
+            inventoryMonoSystem.CreateNewInventory();
+
 			var saveFile = new SaveFile(saveSlotNameText.text, partyMembers, new PartyInventory(new List<InventoryItem>()));
             saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
