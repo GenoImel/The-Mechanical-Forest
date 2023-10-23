@@ -1,4 +1,3 @@
-using Akashic.Runtime.Controllers.PartyMemberBattle;
 using Akashic.Runtime.Serializers;
 using System.Collections.Generic;
 using UnityEngine;
