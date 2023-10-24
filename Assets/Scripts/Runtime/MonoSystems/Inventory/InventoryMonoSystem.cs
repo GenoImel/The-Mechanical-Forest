@@ -6,16 +6,16 @@ namespace Akashic.Runtime.MonoSystems.Inventory
 {
 	internal sealed class InventoryMonoSystem : MonoBehaviour, IInventoryMonoSystem
 	{
-		private PartyInventory inventory;
+		private PartyInventory currentInventory;
 
 		public void CreateNewInventory()
 		{
-			inventory = new PartyInventory(new List<InventoryItem>());
+			currentInventory = new PartyInventory(new List<InventoryItem>());
 		}
 
 		public PartyInventory GetInventory()
 		{
-			return inventory;
+			return currentInventory;
 		}
 	}
 }

@@ -81,7 +81,10 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
             inventoryMonoSystem.CreateNewInventory();
 
-			var saveFile = new SaveFile(saveSlotNameText.text, partyMembers, new PartyInventory(new List<InventoryItem>()));
+			var saveFile = new SaveFile(
+				saveSlotNameText.text,
+				partyMembers,
+				new PartyInventory(new List<InventoryItem>()));
             saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
             GameManager.Publish(new HideSaveMenuMessage());

@@ -15,7 +15,7 @@ namespace Akashic.Runtime.MonoSystems.Inventory
 		public void CreateNewInventory();
 
 		/// <summary>
-		/// Returns the party inventory.
+		/// Returns the current <see cref="PartyInventory"/>.
 		/// </summary>
 		public PartyInventory GetInventory();
 	}
