@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Akashic.Assets.Scripts.Runtime.MonoSystems.Config.DefaultConfigData;
+using Akashic.Runtime.MonoSystems.Config.Settings;
 using Akashic.ScriptableObjects.ConfigBase;
 using UnityEngine;
 

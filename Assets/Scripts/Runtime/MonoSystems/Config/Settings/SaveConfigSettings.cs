@@ -1,13 +1,14 @@
-﻿using Akashic.ScriptableObjects.ConfigBase;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Akashic.ScriptableObjects.ConfigBase;
 
-namespace Akashic.Assets.Scripts.Runtime.MonoSystems.Config.DefaultConfigData
+namespace Akashic.Runtime.MonoSystems.Config.Settings
 {
     internal struct SaveConfigSettings
     {
-        public string parentSaveFolderName;
-        public List<string> saveFolderNames, saveFileNames;
-        public int saveSlotNameCharacterLimit;
+        public readonly string parentSaveFolderName;
+        public readonly List<string> saveFolderNames;
+        public readonly List<string> saveFileNames;
+        public readonly int saveSlotNameCharacterLimit;
 
         public SaveConfigSettings(ConfigBaseData config)
         {

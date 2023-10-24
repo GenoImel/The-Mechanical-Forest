@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Akashic.Assets.Scripts.Runtime.MonoSystems.Config.DefaultConfigData;
 using Akashic.Core;
 using Akashic.Core.MonoSystems;
+using Akashic.Runtime.MonoSystems.Config.Settings;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {
