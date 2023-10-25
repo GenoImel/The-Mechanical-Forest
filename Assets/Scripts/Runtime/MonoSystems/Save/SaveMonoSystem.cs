@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Config;
+using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.Serializers;
@@ -35,14 +36,16 @@ namespace Akashic.Runtime.MonoSystems.Save
 
         private IConfigMonoSystem configMonoSystem;
         private ISceneMonoSystem sceneMonoSystem;
-        private IPartyMonoSystem partyMonoSystem;
+		private IPartyMonoSystem partyMonoSystem;
+		private IInventoryMonoSystem inventoryMonoSystem;
 
-        private void Awake()
+		private void Awake()
         {
             configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
             sceneMonoSystem = GameManager.GetMonoSystem<ISceneMonoSystem>();
-            partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
-        }
+			partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
+			inventoryMonoSystem = GameManager.GetMonoSystem<IInventoryMonoSystem>();
+		}
 
         private void Start()
         {
@@ -72,19 +75,29 @@ namespace Akashic.Runtime.MonoSystems.Save
             var saveFile = JsonConvert.DeserializeObject<SaveFile>(saveFileText);
 
             return saveFile.SaveFileName;
-        }
+		}
 
-        public List<PartyMember> GetPartyMembers()
-        {
-            if (currentSaveData == null)
-            {
-                throw new NullReferenceException("Save file is null");
-            }
-            
-            return currentSaveData.PartyMembers;
-        }
+		public List<PartyMember> GetPartyMembers()
+		{
+			if (currentSaveData == null)
+			{
+				throw new NullReferenceException("Save file is null");
+			}
 
-        public async void SaveFileAsync()
+			return currentSaveData.PartyMembers;
+		}
+
+		public PartyInventory GetPartyInventory()
+		{
+			if (currentSaveData == null)
+			{
+				throw new NullReferenceException("Save file is null");
+			}
+
+			return currentSaveData.PartyInventory;
+		}
+
+		public async void SaveFileAsync()
         {
             savingInProgress = true;
             
