@@ -1,5 +1,5 @@
 ﻿using System;
-using Akashic.ScriptableObjects.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Stats
@@ -26,11 +26,11 @@ namespace Akashic.Runtime.Stats
             accuracy = acc;
         }
 
-        public AttackStats(PartyMemberBaseData baseData)
+        public AttackStats(PartyMemberData partyMemberData)
         {
-            physicalAttack = baseData.basePhysicalAttack;
-            magicalAttack = baseData.baseMagicalAttack;
-            accuracy = baseData.baseAccuracy;
+            physicalAttack = partyMemberData.basePhysicalAttack;
+            magicalAttack = partyMemberData.baseMagicalAttack;
+            accuracy = partyMemberData.baseAccuracy;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Akashic.ScriptableObjects.ConfigBase;
+using Akashic.ScriptableObjects.Config;
 
 namespace Akashic.Runtime.MonoSystems.Config.Settings
 {
@@ -10,7 +10,7 @@ namespace Akashic.Runtime.MonoSystems.Config.Settings
         public readonly List<string> saveFileNames;
         public readonly int saveSlotNameCharacterLimit;
 
-        public SaveConfigSettings(ConfigBaseData config)
+        public SaveConfigSettings(ConfigData config)
         {
             parentSaveFolderName = config.parentSaveFolderName;
             saveFolderNames = config.saveFolderNames;

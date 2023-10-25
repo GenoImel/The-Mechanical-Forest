@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.ItemBase
+namespace Akashic.ScriptableObjects.Inventory
 {
     /// <summary>
 	/// Abstract class containg the base item data
     /// </summary>
-    public abstract class BaseItemData : ScriptableObject
+    public abstract class ItemBaseData : ScriptableObject
 	{
 		/// <summary>
 		/// Item name displayed to the player

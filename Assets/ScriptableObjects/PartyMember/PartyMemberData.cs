@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.PartyMemberBase
+namespace Akashic.ScriptableObjects.PartyMember
 {
-    [CreateAssetMenu(menuName = "Akashic/Party Member/New Base Party Member")]
-    internal sealed class PartyMemberBaseData : ScriptableObject
+    [CreateAssetMenu(menuName = "Akashic/Party Member/New Party Member")]
+    internal sealed class PartyMemberData : ScriptableObject
     {
         [Header("Info")] 
         public string partyMemberName;
