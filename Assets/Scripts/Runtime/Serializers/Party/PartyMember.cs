@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Akashic.Runtime.Serializers
@@ -8,8 +9,17 @@ namespace Akashic.Runtime.Serializers
     {
         [JsonProperty("partyMemberName")] 
         public string PartyMemberName { private set; get; }
-        
-        [JsonProperty("level")]
+
+		[JsonProperty("skills")]
+		public List<string> Skills { private set; get; }
+
+		[JsonProperty("accessory")]
+		public AccessoryItem Accessory { private set; get; }
+
+		[JsonProperty("relic")]
+		public RelicItem Relic { private set; get; }
+
+		[JsonProperty("level")]
         public int Level { private set; get; }
         
         [JsonProperty("currentExperience")]
@@ -42,10 +52,13 @@ namespace Akashic.Runtime.Serializers
         [JsonProperty("baseEvade")]
         public float BaseEvade { private set; get; }
 
-        [JsonConstructor]
+		[JsonConstructor]
         public PartyMember(
-            [JsonProperty("partyMemberName")] string partyMemberName,
-            [JsonProperty("level")] int level,
+			[JsonProperty("partyMemberName")] string partyMemberName,
+			[JsonProperty("skills")] List<string> skills,
+			[JsonProperty("accessory")] AccessoryItem accessory,
+			[JsonProperty("Relic")] RelicItem relic,
+			[JsonProperty("level")] int level,
             [JsonProperty("currentExperience")] int currentExperience,
             [JsonProperty("maxExperience")] int maxExperience,
             [JsonProperty("currentHealth")] int currentHealth,
@@ -57,9 +70,12 @@ namespace Akashic.Runtime.Serializers
             [JsonProperty("baseMagicalDefense")] int baseMagicalDefense,
             [JsonProperty("baseEvade")] float baseEvade
         )
-        {
-            PartyMemberName = partyMemberName;
-            Level = level;
+		{
+			PartyMemberName = partyMemberName;
+			Skills = skills;
+			Accessory = accessory;
+			Relic = relic;
+			Level = level;
             CurrentExperience = currentExperience;
             MaxExperience = maxExperience;
             CurrentHealth = currentHealth;

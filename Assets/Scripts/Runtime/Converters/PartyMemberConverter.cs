@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Akashic.Runtime.Controllers.PartyMemberBattle;
 using Akashic.Runtime.Serializers;
 
@@ -9,7 +10,10 @@ namespace Akashic.Runtime.Converters
         {
             var partyMember = new PartyMember(
                 partyMemberController.PartyMemberName,
-                partyMemberController.partyMemberStatHandler.CurrentLevel,
+				new List<string>(),
+                null,
+                null,
+				partyMemberController.partyMemberStatHandler.CurrentLevel,
                 partyMemberController.partyMemberResourceHandler.CurrentExperience,
                 partyMemberController.partyMemberResourceHandler.MaxExperience,
                 partyMemberController.partyMemberResourceHandler.CurrentHealth,

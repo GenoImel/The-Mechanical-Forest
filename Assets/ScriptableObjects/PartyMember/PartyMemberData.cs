@@ -1,3 +1,5 @@
+using Akashic.ScriptableObjects.Inventory;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Akashic.ScriptableObjects.PartyMember
@@ -24,5 +26,13 @@ namespace Akashic.ScriptableObjects.PartyMember
         [Range(0, 99)] public int basePhysicalDefense;
         [Range(0, 99)] public int baseMagicalDefense;
         [Range(0, 10)] public float baseEvade;
-    }
+
+		[Header("Skills")]
+		public List<SkillData> skills;
+
+		[Header("Items")]
+		public RelicData relic;
+		public AccessoryData Accessory;
+
+	}
 }

@@ -22,3 +22,6 @@ MonoBehaviour:
   basePhysicalDefense: 5
   baseMagicalDefense: 5
   baseEvade: 0.5
+  skills: []
+  relic: {fileID: 0}
+  Accessory: {fileID: 0}

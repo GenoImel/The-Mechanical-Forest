@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Akashic.ScriptableObjects.Inventory;
 using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
@@ -11,10 +12,8 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
 
         [Header("Base Data")]
         [SerializeField] private PartyMemberData partyMemberData;
-        
-        [SerializeField] private List<SkillData> skillsData;
-        
-        [Header("Handlers")]
+
+		[Header("Handlers")]
         [SerializeField] public PartyMemberStatHandler partyMemberStatHandler;
 
         [SerializeField] public PartyMemberResourceHandler partyMemberResourceHandler;
@@ -26,10 +25,10 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
 
         [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
-        
-        public string PartyMemberName => partyMemberName;
 
-        public void InitializeNewPartyMemberFromScriptableObject()
+		public string PartyMemberName => partyMemberName;
+
+		public void InitializeNewPartyMemberFromScriptableObject()
         {
             partyMemberName = partyMemberData.partyMemberName;
             

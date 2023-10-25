@@ -7,8 +7,9 @@ namespace Akashic.ScriptableObjects.PartyMember
     [CreateAssetMenu(menuName = "Akashic/Skills/New Skill")]
     internal sealed class SkillData : ScriptableObject
     {
-        [Header("Info")] 
-        public string skillName;
+        [Header("Info")]
+		public string skillId;
+		public string skillName;
         public string description;
         public SkillElement skillElement;
 
