@@ -29,7 +29,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
         private void Start()
         {
-            saveFileNames = configMonoSystem.GetSaveFileNames();
+            saveFileNames = configMonoSystem.GetSaveConfigSettings().saveFileNames;
         }
 
         public async void FindSaveFiles()

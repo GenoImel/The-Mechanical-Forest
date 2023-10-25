@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Core.MonoSystems;
+using Akashic.Runtime.MonoSystems.Config.Settings;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {
@@ -10,25 +11,6 @@ namespace Akashic.Runtime.MonoSystems.Config
     /// </summary>
     internal interface IConfigMonoSystem : IMonoSystem
     {
-        /// <summary>
-        /// Returns the name of the parent save folder in
-        /// Application.persistentDataPath where all save folders will be stored.
-        /// </summary>
-        public string GetParentSaveFolderName();
-
-        /// <summary>
-        /// Returns the name of child folder names which correlate to an individual save slot.
-        /// </summary>
-        public List<string> GetSaveFolderNames();
-
-        /// <summary>
-        /// Returns the name of a save file correlating to an individual save slot.
-        /// </summary>
-        public List<string> GetSaveFileNames();
-
-        /// <summary>
-        /// Retrieves the character limit for save slot names.
-        /// </summary>
-        public int GetSaveSlotNameCharacterLimit();
+        public SaveConfigSettings GetSaveConfigSettings();
     }
 }
