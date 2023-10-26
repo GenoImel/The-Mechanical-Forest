@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Akashic.Runtime.Controllers.PartyMemberBattle;
+using Akashic.Runtime.Serializers;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Party
@@ -26,9 +26,9 @@ namespace Akashic.Runtime.MonoSystems.Party
             CreateNewLena();
         }
 
-        public List<PartyMemberController> GetPartyMembers()
+        public List<PartyMember> GetPartyMembers()
         {
-            return partyMembers.ToList();
+            return new List<PartyMember>();
         }
 
         public void LoadPartyFromSaveFile()

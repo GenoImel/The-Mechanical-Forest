@@ -12,8 +12,10 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
 
         [Header("Base Data")]
         [SerializeField] private PartyMemberData partyMemberData;
-
-		[Header("Handlers")]
+        
+        [SerializeField] private List<SkillData> skillsData;
+        
+        [Header("Handlers")]
         [SerializeField] public PartyMemberStatHandler partyMemberStatHandler;
 
         [SerializeField] public PartyMemberResourceHandler partyMemberResourceHandler;
@@ -25,10 +27,10 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
 
         [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
+        
+        public string PartyMemberName => partyMemberName;
 
-		public string PartyMemberName => partyMemberName;
-
-		public void InitializeNewPartyMemberFromScriptableObject()
+        public void InitializeNewPartyMemberFromScriptableObject()
         {
             partyMemberName = partyMemberData.partyMemberName;
             

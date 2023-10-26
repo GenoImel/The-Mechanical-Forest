@@ -70,21 +70,12 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             
             partyMonoSystem.CreateNewParty();
 
-            var partyMemberControllers = partyMonoSystem.GetPartyMembers();
-            List<PartyMember> partyMembers = new List<PartyMember>();
-
-            foreach (var member in partyMemberControllers)
-            {
-                var convertedPartyMember = PartyMemberConverter.ConvertControllerToPartyMember(member);
-                partyMembers.Add(convertedPartyMember);
-            }
-
             inventoryMonoSystem.CreateNewInventory();
 
 			var saveFile = new SaveFile(
 				saveSlotNameText.text,
-				partyMembers,
-				new PartyInventory(new List<InventoryItem>()));
+				partyMonoSystem.GetPartyMembers(),
+				inventoryMonoSystem.GetInventory());
             saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
             GameManager.Publish(new HideSaveMenuMessage());

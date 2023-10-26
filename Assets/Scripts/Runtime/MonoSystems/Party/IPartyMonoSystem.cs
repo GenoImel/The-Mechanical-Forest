@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Akashic.Core;
 using Akashic.Core.MonoSystems;
-using Akashic.Runtime.Controllers.PartyMemberBattle;
+using Akashic.Runtime.Serializers;
 
 namespace Akashic.Runtime.MonoSystems.Party
 {
@@ -12,10 +11,10 @@ namespace Akashic.Runtime.MonoSystems.Party
         /// specified by the scriptable objects.
         /// </summary>
         public void CreateNewParty();
-        
-        /// <summary>
-        /// Returns a list of the party members.
-        /// </summary>
-        public List<PartyMemberController> GetPartyMembers();
+
+		/// <summary>
+		/// Returns a list of <see cref="PartyMember"/>.
+		/// </summary>
+		public List<PartyMember> GetPartyMembers();
     }
 }
