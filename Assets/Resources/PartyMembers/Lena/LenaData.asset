@@ -10,18 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
-  m_Name: AiryBaseData
+  m_Name: LenaData
   m_EditorClassIdentifier: 
-  partyMemberName: Airy
-  baseHealth: 190
-  baseLevel: 0
-  baseExp: 21
+  partyMemberName: Lena
+  baseHealth: 210
+  baseLevel: 22
+  baseExp: 0
   basePhysicalAttack: 5
   baseMagicalAttack: 5
   baseAccuracy: 1
   basePhysicalDefense: 5
   baseMagicalDefense: 5
-  baseEvade: 0.5
-  skills: []
-  relic: {fileID: 0}
-  Accessory: {fileID: 0}
+  baseEvade: 0.4

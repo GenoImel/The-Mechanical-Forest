@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3d5b4ec276004b4c9548a6fe36f9aea, type: 3}
-  m_Name: InvisibleHandBuzzerBaseData
+  m_Name: InvisibleHandBuzzerData
   m_EditorClassIdentifier: 
   itemName: Invisible Hand Buzzer
   itemId: invisiblehandbuzzer

@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3d5b4ec276004b4c9548a6fe36f9aea, type: 3}
-  m_Name: CrystalizedFourLeafCloverBaseData
+  m_Name: StoneFeatherData
   m_EditorClassIdentifier: 
-  itemName: Crystalized Four Leaf Clover
-  itemId: crystalizedfourleafclover
-  description: Has the chance 25% to decrease the AP of one of the abilities of the
-    character equiping this by 1 or 2 AP.
+  itemName: Stone Feather
+  itemId: stonefeather
+  description: Increase Accuracy by 10% but decreases evade by 10%.
   icon: {fileID: 0}
