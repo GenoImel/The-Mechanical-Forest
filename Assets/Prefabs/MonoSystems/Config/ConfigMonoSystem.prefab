@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configData: {fileID: 11400000, guid: 4a361950d1c87be47a0c590d293771cb, type: 2}
+  inventoryData: {fileID: 11400000, guid: 3add62a54773d584bb25db3f074f6de2, type: 2}
+  partyData: {fileID: 11400000, guid: 2211ebc6f2ae0df44b0beb77bc4c429a, type: 2}

@@ -72,7 +72,10 @@ namespace Akashic.Runtime.MonoSystems.Save
             }
 
             var saveFileText = await file.ReadFileAsync();
-            var saveFile = JsonConvert.DeserializeObject<SaveFile>(saveFileText);
+            var saveFile = JsonConvert.DeserializeObject<SaveFile>(saveFileText, new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.All
+			});
 
             return saveFile.SaveFileName;
 		}
@@ -108,7 +111,10 @@ namespace Akashic.Runtime.MonoSystems.Save
                 await Task.Yield();
             }
             
-            var preferencesText = JsonConvert.SerializeObject(currentSaveData);
+            var preferencesText = JsonConvert.SerializeObject(currentSaveData, new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.All
+			}); ;
             await fileStreamer.WriteFileAsync(preferencesText);
             
             savingInProgress = false;
@@ -119,7 +125,10 @@ namespace Akashic.Runtime.MonoSystems.Save
             var fileStreamer = saveFiles[currentSaveSlot];
             
             var saveFileText = await fileStreamer.ReadFileAsync();
-            currentSaveData = JsonConvert.DeserializeObject<SaveFile>(saveFileText);
+            currentSaveData = JsonConvert.DeserializeObject<SaveFile>(saveFileText, new JsonSerializerSettings
+			{
+				TypeNameHandling = TypeNameHandling.All
+			}); ;
             
             GameManager.Publish(new SaveFileLoadedMessage());
         }

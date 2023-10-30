@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using Akashic.Core;
 using Akashic.Runtime.Controllers.PartyMemberBattle;
+using Akashic.Runtime.Converters;
+using Akashic.Runtime.MonoSystems.Config;
+using Akashic.Runtime.MonoSystems.Debugger;
 using Akashic.Runtime.Serializers;
 using UnityEngine;
 
@@ -15,20 +19,26 @@ namespace Akashic.Runtime.MonoSystems.Party
         [SerializeField]private PartyMemberController conradPrefab;
         
         [SerializeField]private PartyMemberController lenaPrefab;
-        
-        private ICollection<PartyMemberController> partyMembers = new List<PartyMemberController>();
+        		
+        private List<PartyMember> partyMembers = new List<PartyMember>();
 
-        public void CreateNewParty()
-        {
-            CreateNewAiry();
-            CreateNewBenoit();
-            CreateNewConrad();
-            CreateNewLena();
-        }
+		private IConfigMonoSystem configMonoSystem;
+		private IDebuggerMonoSystem debuggerMonoSystem;
+
+		private void Awake()
+		{
+			configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
+			debuggerMonoSystem = GameManager.GetMonoSystem<IDebuggerMonoSystem>();
+		}
+
+		public void CreateNewParty()
+		{
+            partyMembers = new List<PartyMember>();
+		}
 
         public List<PartyMember> GetPartyMembers()
         {
-            return new List<PartyMember>();
+            return partyMembers;
         }
 
         public void LoadPartyFromSaveFile()
@@ -36,31 +46,5 @@ namespace Akashic.Runtime.MonoSystems.Party
             
         }
 
-        private void AddNewPartyMember(PartyMemberController partyMemberControllerPrefab)
-        {
-            var partyMember = Instantiate(partyMemberControllerPrefab, transform);
-            partyMember.InitializeNewPartyMemberFromScriptableObject();
-            partyMembers.Add(partyMember);
-        }
-
-        private void CreateNewAiry()
-        {
-            AddNewPartyMember(airyPrefab);
-        }
-
-        private void CreateNewBenoit()
-        {
-            AddNewPartyMember(benoitPrefab);
-        }
-
-        private void CreateNewConrad()
-        {
-            AddNewPartyMember(conradPrefab);
-        }
-
-        private void CreateNewLena()
-        {
-            AddNewPartyMember(lenaPrefab);
-        }
     }
 }
