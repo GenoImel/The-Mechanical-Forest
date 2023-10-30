@@ -1,9 +1,9 @@
-using Akashic.ScriptableObjects.ConfigBase;
+using Akashic.ScriptableObjects.Config;
 using UnityEditor;
 
 namespace Akashic.Editor
 {
-    [CustomEditor(typeof(ConfigBaseData))]
+    [CustomEditor(typeof(ConfigData))]
     internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
     {
         private SerializedProperty parentSaveFolderNameProp;

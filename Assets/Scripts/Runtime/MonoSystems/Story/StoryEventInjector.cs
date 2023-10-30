@@ -1,13 +1,13 @@
 using UnityEngine;
 using Akashic.Core;
-using Akashic.ScriptableObjects.StoryBase;
+using Akashic.ScriptableObjects.Story;
 using UnityEngine.EventSystems;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class StoryEventInjector : MonoBehaviour
     {
-        [SerializeField] private StoryEventBaseData storyEventBaseData;
+        [SerializeField] private StoryEventData storyEventData;
 
         private void OnMouseUp()
         {
@@ -16,7 +16,7 @@ namespace Akashic.Runtime.MonoSystems.Story
                 return;
             }
 
-            GameManager.Publish(new NewStoryEventMessage(storyEventBaseData));
+            GameManager.Publish(new NewStoryEventMessage(storyEventData));
         }
     }
 }

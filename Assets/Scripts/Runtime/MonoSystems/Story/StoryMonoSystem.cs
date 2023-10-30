@@ -57,9 +57,9 @@ namespace Akashic.Runtime.MonoSystems.Story
         private void OnNewStoryEventMessage(NewStoryEventMessage message)
         {
             currentStoryEvent = new StoryEvent(
-                message.StoryEventBaseData.storyPoints, message.StoryEventBaseData.allowLog);
+                message.StoryEventData.storyPoints, message.StoryEventData.allowLog);
             storyPointIndex = 0;
-            GameManager.Publish(new ToggleEventLog(message.StoryEventBaseData.allowLog));
+            GameManager.Publish(new ToggleEventLog(message.StoryEventData.allowLog));
             GameManager.Publish(new StoryPointAvailableMessage());
         }
 

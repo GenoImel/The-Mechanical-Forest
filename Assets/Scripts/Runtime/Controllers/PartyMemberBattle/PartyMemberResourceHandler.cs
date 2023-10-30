@@ -1,4 +1,4 @@
-using Akashic.ScriptableObjects.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
@@ -19,12 +19,12 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         public int MaxHealth => maxHealth;
         public int MaxExperience => maxExperience;
 
-        public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
+        public void InitializeNewPartyMemberFromScriptableObject(PartyMemberData partymemberData)
         {
-            currentHealth = baseData.baseHealth;
-            currentExperience = baseData.baseExp;
+            currentHealth = partymemberData.baseHealth;
+            currentExperience = partymemberData.baseExp;
             
-            maxHealth = baseData.baseHealth;
+            maxHealth = partymemberData.baseHealth;
         }
     }
 }

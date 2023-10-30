@@ -1,4 +1,4 @@
-﻿using Akashic.ScriptableObjects.PartyMemberBase;
+﻿using Akashic.ScriptableObjects.PartyMember;
 using System;
 using UnityEngine;
 
@@ -26,11 +26,11 @@ namespace Akashic.Runtime.Stats
             evade = ev;
         }
 
-        public DefenseStats(PartyMemberBaseData baseData)
+        public DefenseStats(PartyMemberData partyMemberData)
         {
-            physicalDefense = baseData.basePhysicalDefense;
-            magicalDefense = baseData.baseMagicalDefense;
-            evade = baseData.baseEvade;
+            physicalDefense = partyMemberData.basePhysicalDefense;
+            magicalDefense = partyMemberData.baseMagicalDefense;
+            evade = partyMemberData.baseEvade;
         }
     }
 }

@@ -1,9 +1,11 @@
+using Akashic.ScriptableObjects.Inventory;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.PartyMemberBase
+namespace Akashic.ScriptableObjects.PartyMember
 {
-    [CreateAssetMenu(menuName = "Akashic/Party Member/New Base Party Member")]
-    internal sealed class PartyMemberBaseData : ScriptableObject
+    [CreateAssetMenu(menuName = "Akashic/Party Member/New Party Member")]
+    internal sealed class PartyMemberData : ScriptableObject
     {
         [Header("Info")] 
         public string partyMemberName;
@@ -24,5 +26,13 @@ namespace Akashic.ScriptableObjects.PartyMemberBase
         [Range(0, 99)] public int basePhysicalDefense;
         [Range(0, 99)] public int baseMagicalDefense;
         [Range(0, 10)] public float baseEvade;
-    }
+
+		[Header("Skills")]
+		public List<SkillData> skills;
+
+		[Header("Items")]
+		public RelicData relic;
+		public AccessoryData Accessory;
+
+	}
 }

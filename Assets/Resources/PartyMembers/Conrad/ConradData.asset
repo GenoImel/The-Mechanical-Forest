@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
-  m_Name: BenoitBaseData
+  m_Name: ConradData
   m_EditorClassIdentifier: 
-  partyMemberName: Benoit
-  baseHealth: 200
+  partyMemberName: Conrad
+  baseHealth: 240
   baseLevel: 0
-  baseExp: 22
+  baseExp: 21
   basePhysicalAttack: 5
   baseMagicalAttack: 5
   baseAccuracy: 1.2
   basePhysicalDefense: 5
   baseMagicalDefense: 5
-  baseEvade: 0.7
+  baseEvade: 0.4

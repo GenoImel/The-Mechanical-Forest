@@ -1,15 +1,15 @@
 using Akashic.Core.Messages;
-using Akashic.ScriptableObjects.StoryBase;
+using Akashic.ScriptableObjects.Story;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {
     internal sealed class NewStoryEventMessage : IMessage
     {
-        public StoryEventBaseData StoryEventBaseData { get; }
+        public StoryEventData StoryEventData { get; }
 
-        public NewStoryEventMessage(StoryEventBaseData storyEventBaseData)
+        public NewStoryEventMessage(StoryEventData storyEventData)
         {
-            StoryEventBaseData = storyEventBaseData;
+            StoryEventData = storyEventData;
         }
     }
 

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1abf9dbe9bb6ccb4ca9c2661772c84d8, type: 3}
-  m_Name: GreenHerbBaseData
+  m_Name: SmellingSaltData
   m_EditorClassIdentifier: 
-  itemName: Green Herb
-  itemId: greenherb
-  description: Heals 30% of the member's total HP.
+  itemName: Smelling Salt
+  itemId: smellingsalt
+  description: Revives a knocked-out ally upon use.
   icon: {fileID: 0}

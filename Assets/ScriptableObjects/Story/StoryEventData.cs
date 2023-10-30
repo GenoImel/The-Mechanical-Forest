@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using Akashic.Runtime.MonoSystems.Story;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.StoryBase
+namespace Akashic.ScriptableObjects.Story
 {
-    [CreateAssetMenu(menuName = "Akashic/Story Event/New Base Story Event")]
-    internal sealed class StoryEventBaseData : ScriptableObject
+    [CreateAssetMenu(menuName = "Akashic/Story Event/New Story Event")]
+    internal sealed class StoryEventData : ScriptableObject
     {
         public bool allowLog = false;
         public List<StoryPoint> storyPoints;

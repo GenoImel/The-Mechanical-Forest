@@ -2,13 +2,14 @@ using Akashic.Runtime.Skills;
 using Akashic.Runtime.StatusEffects;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.PartyMemberBase
+namespace Akashic.ScriptableObjects.PartyMember
 {
-    [CreateAssetMenu(menuName = "Akashic/Skills/New Base Skill")]
-    internal sealed class SkillBaseData : ScriptableObject
+    [CreateAssetMenu(menuName = "Akashic/Skills/New Skill")]
+    internal sealed class SkillData : ScriptableObject
     {
-        [Header("Info")] 
-        public string skillName;
+        [Header("Info")]
+		public string skillId;
+		public string skillName;
         public string description;
         public SkillElement skillElement;
 

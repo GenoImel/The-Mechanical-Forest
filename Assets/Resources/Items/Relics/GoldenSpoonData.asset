@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1864c19e5670044b0b889ddb97d33f, type: 3}
-  m_Name: BraceletBaseData
+  m_Script: {fileID: 11500000, guid: a3d5b4ec276004b4c9548a6fe36f9aea, type: 3}
+  m_Name: GoldenSpoonData
   m_EditorClassIdentifier: 
-  itemId: bracelet
-  itemName: Bracelet
-  description: 
+  itemName: Golden Spoon
+  itemId: goldenspoon
+  description: Healing output is increased by 5%.
   icon: {fileID: 0}

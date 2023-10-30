@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1abf9dbe9bb6ccb4ca9c2661772c84d8, type: 3}
-  m_Name: SweetDewBaseData
+  m_Name: GreenHerbData
   m_EditorClassIdentifier: 
-  itemName: Sweet Dew
-  itemId: sweetdew
-  description: Reduces AP cost for all skills for the entire party for the first
-    turn by half.
+  itemName: Green Herb
+  itemId: greenherb
+  description: Heals 30% of the member's total HP.
   icon: {fileID: 0}

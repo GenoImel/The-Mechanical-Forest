@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.ConfigBase
+namespace Akashic.ScriptableObjects.Config
 {
     /// <summary>
     /// Configuration data for the game.
     /// </summary>
     [CreateAssetMenu(menuName = "Akashic/Config/New Game Config File")]
-    public sealed class ConfigBaseData : ScriptableObject
+    public sealed class ConfigData : ScriptableObject
     {
         /// <summary>
         /// The parent folder in Application.persistentDataPath where all save folders will be stored.

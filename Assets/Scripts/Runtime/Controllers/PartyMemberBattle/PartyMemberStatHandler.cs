@@ -1,5 +1,5 @@
 using Akashic.Runtime.Stats;
-using Akashic.ScriptableObjects.PartyMemberBase;
+using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.PartyMemberBattle
@@ -24,12 +24,12 @@ namespace Akashic.Runtime.Controllers.PartyMemberBattle
         public DefenseStats CurrentDefenseStats => currentDefenseStats;
         public DefenseStats BaseDefenseStats => baseDefenseStats;
 
-        public void InitializeNewPartyMemberFromScriptableObject(PartyMemberBaseData baseData)
+        public void InitializeNewPartyMemberFromScriptableObject(PartyMemberData partyMemberData)
         {
-            currentLevel = baseData.baseLevel;
+            currentLevel = partyMemberData.baseLevel;
 
-            baseAttackStats = new AttackStats(baseData);
-            baseDefenseStats = new DefenseStats(baseData);
+            baseAttackStats = new AttackStats(partyMemberData);
+            baseDefenseStats = new DefenseStats(partyMemberData);
                 
             ResetCurrentStatsToBase();
         }

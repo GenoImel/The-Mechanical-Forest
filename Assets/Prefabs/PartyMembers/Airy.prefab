@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a75edc7ab769499cb9a4dc3594ea4db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyMemberController: {fileID: 0}
   currentHealth: 0
   currentExperience: 0
 --- !u!1 &6263332429382931411
@@ -223,20 +222,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009af11e64f843a89ff122d6d4d7c01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyMemberController: {fileID: 0}
   currentLevel: 0
-  currentPhysicalAttack: 0
-  currentMagicalAttack: 0
-  currentAccuracy: 0
-  currentPhysicalDefense: 0
-  currentMagicalDefense: 0
-  currentEvade: 0
-  basePhysicalAttack: 0
-  baseMagicalAttack: 0
-  baseAccuracy: 0
-  basePhysicalDefense: 0
-  baseMagicalDefense: 0
-  baseEvade: 0
+  currentAttackStats:
+    physicalAttack: 0
+    magicalAttack: 0
+    accuracy: 0
+  currentDefenseStats:
+    physicalDefense: 0
+    magicalDefense: 0
+    evade: 0
+  baseAttackStats:
+    physicalAttack: 0
+    magicalAttack: 0
+    accuracy: 0
+  baseDefenseStats:
+    physicalDefense: 0
+    magicalDefense: 0
+    evade: 0
 --- !u!1 &8117522616937594149
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,9 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyMemberName: 
-  partyMemberBaseData: {fileID: 11400000, guid: 8a46d87ba6122c6c28033e68c244aa58, type: 2}
-  skillsBaseData:
-  - {fileID: 11400000, guid: 1bff835b8c1acf40c8a6d56bf88e5608, type: 2}
+  partyMemberData: {fileID: 11400000, guid: 8a46d87ba6122c6c28033e68c244aa58, type: 2}
   partyMemberStatHandler: {fileID: 1646642117294325227}
   partyMemberResourceHandler: {fileID: 3013546384611830898}
   partyMemberSkillsHandler: {fileID: 3995190719666274534}

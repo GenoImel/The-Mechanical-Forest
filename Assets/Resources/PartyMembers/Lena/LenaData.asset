@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
-  m_Name: DefaultPartyMemberBaseData
+  m_Name: LenaData
   m_EditorClassIdentifier: 
-  partyMemberName: DefaultMember
-  baseHealth: 150
-  baseLevel: 7
+  partyMemberName: Lena
+  baseHealth: 210
+  baseLevel: 22
   baseExp: 0
-  basePhysicalAttack: 15
-  baseMagicalAttack: 7
-  baseAccuracy: 0.8
-  basePhysicalDefense: 15
-  baseMagicalDefense: 8
-  baseEvade: 0.6
+  basePhysicalAttack: 5
+  baseMagicalAttack: 5
+  baseAccuracy: 1
+  basePhysicalDefense: 5
+  baseMagicalDefense: 5
+  baseEvade: 0.4
