@@ -14,10 +14,10 @@ namespace Akashic.Runtime.Serializers
 		public List<string> Skills { private set; get; }
 
 		[JsonProperty("accessory")]
-		public AccessoryItem Accessory { private set; get; }
+		public string Accessory { private set; get; }
 
 		[JsonProperty("relic")]
-		public RelicItem Relic { private set; get; }
+		public string Relic { private set; get; }
 
 		[JsonProperty("level")]
         public int Level { private set; get; }
@@ -56,8 +56,8 @@ namespace Akashic.Runtime.Serializers
         public PartyMember(
 			[JsonProperty("partyMemberName")] string partyMemberName,
 			[JsonProperty("skills")] List<string> skills,
-			[JsonProperty("accessory")] AccessoryItem accessory,
-			[JsonProperty("Relic")] RelicItem relic,
+			[JsonProperty("accessory")] string accessory,
+			[JsonProperty("Relic")] string relic,
 			[JsonProperty("level")] int level,
             [JsonProperty("currentExperience")] int currentExperience,
             [JsonProperty("maxExperience")] int maxExperience,

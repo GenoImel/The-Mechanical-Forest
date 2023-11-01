@@ -9,6 +9,7 @@ using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.Serializers;
+using Akashic.Runtime.Serializers.Settings;
 using Akashic.Runtime.Utilities.FileStream;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -71,11 +72,14 @@ namespace Akashic.Runtime.MonoSystems.Save
                 return null;
             }
 
-            var saveFileText = await file.ReadFileAsync();
-            var saveFile = JsonConvert.DeserializeObject<SaveFile>(saveFileText, new JsonSerializerSettings
+			var settings = new JsonSerializerSettings
 			{
-				TypeNameHandling = TypeNameHandling.All
-			});
+				TypeNameHandling = TypeNameHandling.All,
+				Formatting = Formatting.Indented,
+			};
+
+			var saveFileText = await file.ReadFileAsync();
+            var saveFile = JsonConvert.DeserializeObject<SaveFile>(saveFileText, settings);
 
             return saveFile.SaveFileName;
 		}
@@ -110,11 +114,14 @@ namespace Akashic.Runtime.MonoSystems.Save
             {
                 await Task.Yield();
             }
-            
-            var preferencesText = JsonConvert.SerializeObject(currentSaveData, new JsonSerializerSettings
+
+			var settings = new JsonSerializerSettings
 			{
-				TypeNameHandling = TypeNameHandling.All
-			}); ;
+				TypeNameHandling = TypeNameHandling.All,
+				Formatting = Formatting.Indented,
+			};
+
+			var preferencesText = JsonConvert.SerializeObject(currentSaveData, settings);
             await fileStreamer.WriteFileAsync(preferencesText);
             
             savingInProgress = false;
@@ -125,12 +132,17 @@ namespace Akashic.Runtime.MonoSystems.Save
             var fileStreamer = saveFiles[currentSaveSlot];
             
             var saveFileText = await fileStreamer.ReadFileAsync();
-            currentSaveData = JsonConvert.DeserializeObject<SaveFile>(saveFileText, new JsonSerializerSettings
+
+			var settings = new JsonSerializerSettings
 			{
-				TypeNameHandling = TypeNameHandling.All
-			}); ;
-            
-            GameManager.Publish(new SaveFileLoadedMessage());
+				TypeNameHandling = TypeNameHandling.All,
+				SerializationBinder = new SaveFileSerializationBinder(),
+                Formatting = Formatting.Indented,
+			};
+
+			currentSaveData = JsonConvert.DeserializeObject<SaveFile>(saveFileText, settings);
+
+			GameManager.Publish(new SaveFileLoadedMessage());
         }
         
         public void InitializeNewFile(SaveFile saveFile, string saveSlotFileName)

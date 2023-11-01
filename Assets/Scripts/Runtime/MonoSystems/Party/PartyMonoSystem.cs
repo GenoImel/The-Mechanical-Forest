@@ -10,16 +10,7 @@ using UnityEngine;
 namespace Akashic.Runtime.MonoSystems.Party
 {
     internal sealed class PartyMonoSystem : MonoBehaviour, IPartyMonoSystem
-    {
-        [Header("Party Member Prefabs")]
-        [SerializeField]private PartyMemberController airyPrefab;
-        
-        [SerializeField]private PartyMemberController benoitPrefab;
-        
-        [SerializeField]private PartyMemberController conradPrefab;
-        
-        [SerializeField]private PartyMemberController lenaPrefab;
-        		
+    {        		
         private List<PartyMember> partyMembers = new List<PartyMember>();
 
 		private IConfigMonoSystem configMonoSystem;
@@ -33,7 +24,7 @@ namespace Akashic.Runtime.MonoSystems.Party
 
 		public void CreateNewParty()
 		{
-            partyMembers = new List<PartyMember>();
+			partyMembers = PartyMemberConverter.ConvertPartyMemberDataListToParyMemberList(configMonoSystem.GetDefaultParty());
 		}
 
         public List<PartyMember> GetPartyMembers()
