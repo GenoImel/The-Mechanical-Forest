@@ -7,5 +7,7 @@ namespace Akashic.Runtime.StateMachines.StoryStates
         public void SetInactiveState();
 
         public void SetActiveState();
+
+        public IFiniteState CurrentState { get; }
     }
 }

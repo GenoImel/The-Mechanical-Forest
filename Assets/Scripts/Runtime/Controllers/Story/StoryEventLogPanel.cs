@@ -5,6 +5,8 @@ using Akashic.Runtime.MonoSystems.Story;
 using UnityEngine.UI;
 using Akashic.Core;
 
+using Akashic.Runtime.StateMachines.StoryStates;
+
 namespace Akashic.Runtime.Controllers.Story
 {
     internal sealed class StoryEventLogPanel : OverlayController
@@ -35,6 +37,8 @@ namespace Akashic.Runtime.Controllers.Story
 
         public void ShowStoryEventLog()
         {
+            var test = GameManager.GetStateMachine<IStoryStateMachine>();
+            Debug.Log(test.CurrentState);
             Show();
             GameManager.Publish(new StoryEventLogOpened());
         }
