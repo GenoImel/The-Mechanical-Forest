@@ -9,6 +9,8 @@ namespace Akashic.Core.StateMachines
         private IFiniteState currentState;
         private IFiniteState prevState;
 
+        public IFiniteState CurrentState => currentState;
+
         /// <summary>
         /// Sets the next state of the State Machine and publishes a State Changed Message.
         /// Used to enforce specific state change pattern across the application.

@@ -555,7 +555,7 @@ namespace Akashic.Core.StateMachines
 
 ### StateChangedMessage
 
-`Message Events` are essential for communicating `state` changes within our individual `StateMachines`. The `StateChangedMessage` serves as a specialized `Message Event` for any `state` changes, and establishes a specific pattern for `state` transitions that is uniform across the game, ensuring clarity and reducing chances unexpected game behaviour.
+`Message Events` are essential for communicating `state` changes within our individual `StateMachines`. The `StateChangedMessage` serves as a specialized `Message Event` for any `state` changes, and establishes a specific pattern for `state` transitions that is uniform across the game, ensuring clarity and reducing chances of unexpected game behaviour.
 
 ```csharp
 using Akashic.Core.Messages;

@@ -118,4 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e5bbb5caa8b45a698f818e84fee945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyEventBaseData: {fileID: 11400000, guid: 067e259dd1909486ca5e4fbacabc75b2, type: 2}
+  storyEventData: {fileID: 11400000, guid: 067e259dd1909486ca5e4fbacabc75b2, type: 2}
