@@ -11,6 +11,7 @@ using Akashic.Runtime.MonoSystems.Story;
 using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.StateMachines.BattleStates;
 using Akashic.Runtime.StateMachines.ExplorationStates;
+using Akashic.Runtime.StateMachines.StoryStates;
 using UnityEngine;
 
 namespace Akashic.Runtime
@@ -28,6 +29,7 @@ namespace Akashic.Runtime
         [SerializeField] private GameStateMachine gameStateMachine;
         [SerializeField] private BattleStateMachine battleStateMachine;
         [SerializeField] private ExplorationStateMachine explorationStateMachine;
+        [SerializeField] private StoryStateMachine storyStateMachine;
 
         [Header("MonoSystems")]
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
@@ -58,6 +60,7 @@ namespace Akashic.Runtime
             AddStateMachine<GameStateMachine, IGameStateMachine>(gameStateMachine);
             AddStateMachine<BattleStateMachine, IBattleStateMachine>(battleStateMachine);
             AddStateMachine<ExplorationStateMachine, IExplorationStateMachine>(explorationStateMachine);
+            AddStateMachine<StoryStateMachine, IStoryStateMachine>(storyStateMachine);
         }
         
         protected override void InitializeGameMonoSystems()
