@@ -51,9 +51,9 @@ namespace Akashic.Runtime.Converters
 				partyMemberData.relic.itemId,
 				partyMemberData.baseLevel,
 				partyMemberData.baseExp,
-				0, // ?
+				partyMemberData.baseExp,
 				partyMemberData.baseHealth,
-				0, // ?
+				partyMemberData.baseHealth,
 				partyMemberData.basePhysicalAttack,
 				partyMemberData.baseMagicalAttack,
 				partyMemberData.baseAccuracy,
