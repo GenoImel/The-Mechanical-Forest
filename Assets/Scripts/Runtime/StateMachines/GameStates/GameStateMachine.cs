@@ -14,27 +14,27 @@ namespace Akashic.Runtime.StateMachines.GameStates
         {
             SetState(new GameFiniteState.MainMenu());
         }
-        
+
         public void SetExplorationState()
         {
             SetState(new GameFiniteState.Exploration());
         }
-        
+
         public void SetBattleState()
         {
             SetState(new GameFiniteState.Battle());
         }
-        
+
         public void SetDialogueState()
         {
             SetState(new GameFiniteState.Dialogue());
         }
-        
+
         public void SetPausedState()
         {
             SetState(new GameFiniteState.Paused());
         }
-        
+
         protected override void SetInitialState()
         {
             SetState(new GameFiniteState.MainMenu());
