@@ -27,6 +27,7 @@ namespace Akashic.Runtime.MonoSystems.Story
             {
                 return;
             }
+
             storyState.SetActiveState();
             GameManager.Publish(new NewStoryEventMessage(storyEventData));
         }

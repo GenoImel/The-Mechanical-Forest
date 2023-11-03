@@ -10,10 +10,16 @@ namespace Akashic.Runtime.StateMachines.StoryStates
             return typeof(StoryState);
         }
 
+        /// <summary>
+        /// Used when determining if a story event is currently inactive.
+        /// </summary>
         internal sealed class Inactive : StoryFiniteState
         {
         }
 
+        /// <summary>
+        /// Used when determining if a story event is currently active.
+        /// </summary>
         internal sealed class Active : StoryFiniteState
         {
         }
