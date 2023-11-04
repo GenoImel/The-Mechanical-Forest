@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Akashic.Runtime.Serializers
+namespace Akashic.Runtime.Serializers.Party
 {
     [Serializable]
     internal sealed class PartyMember
@@ -11,7 +11,7 @@ namespace Akashic.Runtime.Serializers
         public string PartyMemberName { private set; get; }
 
 		[JsonProperty("skills")]
-		public List<string> Skills { private set; get; }
+		public List<string> SkillIds { private set; get; }
 
 		[JsonProperty("accessory")]
 		public string Accessory { private set; get; }
@@ -72,7 +72,7 @@ namespace Akashic.Runtime.Serializers
         )
 		{
 			PartyMemberName = partyMemberName;
-			Skills = skills;
+			SkillIds = skills;
 			Accessory = accessory;
 			Relic = relic;
 			Level = level;

@@ -1,15 +1,14 @@
-using Akashic.ScriptableObjects.Inventory;
-using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-namespace Akashic
+namespace Akashic.ScriptableObjects.Inventory
 {
 	[CreateAssetMenu(menuName = "Akashic/Inventory/New Inventory")]
 	internal sealed class InventoryData : ScriptableObject
 	{
 		/// <summary>
-		/// 
+		/// A list of the items in the inventory, paired with their count.
 		/// </summary>
-		public List<ItemBaseData> items = new List<ItemBaseData>();
+		public SerializedDictionary<ItemBaseData, int> items;
 	}
 }

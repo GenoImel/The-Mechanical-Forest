@@ -2,10 +2,7 @@ using Akashic.Core;
 using Akashic.Runtime.Converters;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.Debugger;
-using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.Serializers;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Inventory
@@ -25,7 +22,9 @@ namespace Akashic.Runtime.MonoSystems.Inventory
 
 		public void CreateNewInventory()
 		{
-			currentInventory = PartyInventoryConverter.ConvertItemDataListToPartyInventory(configMonoSystem.GetDefaultInventory());
+			var inventoryData = configMonoSystem.GetDefaultInventory();
+			var inventoryItems = ItemConverter.ConvertInventoryDataToPartyInventory(inventoryData);
+			currentInventory = new PartyInventory(inventoryItems);
 		}
 
 		public PartyInventory GetInventory()

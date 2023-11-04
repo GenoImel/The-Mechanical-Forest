@@ -1,8 +1,7 @@
-using Akashic.ScriptableObjects.PartyMember;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Akashic
+namespace Akashic.ScriptableObjects.PartyMember
 {
 	[CreateAssetMenu(menuName = "Akashic/Party Member/New Party")]
 	internal sealed class PartyData : ScriptableObject

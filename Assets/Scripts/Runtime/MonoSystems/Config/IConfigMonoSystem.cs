@@ -14,6 +14,6 @@ namespace Akashic.Runtime.MonoSystems.Config
 	{
 		public SaveConfigSettings GetSaveConfigSettings();
 		public List<PartyMemberData> GetDefaultParty();
-		public List<ItemBaseData> GetDefaultInventory();
+		public InventoryData GetDefaultInventory();
 	}
 }

@@ -30,9 +30,9 @@ namespace Akashic.Runtime.MonoSystems.Config
 			return partyData.partyMembers;
 		}
 
-		public List<ItemBaseData> GetDefaultInventory()
+		public InventoryData GetDefaultInventory()
 		{
-			return inventoryData.items;
+			return inventoryData;
 		}
 
 		private void InitializeConfigSettings()

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Akashic.Runtime.Controllers.PartyMemberBattle;
-using Akashic.Runtime.Serializers;
-using Akashic.ScriptableObjects.Inventory;
+using Akashic.Runtime.Serializers.Party;
 using Akashic.ScriptableObjects.PartyMember;
 
 namespace Akashic.Runtime.Converters
@@ -11,6 +10,7 @@ namespace Akashic.Runtime.Converters
 	{
 		public static PartyMember ConvertControllerToPartyMember(PartyMemberController partyMemberController)
 		{
+			// TODO: Add skills, accessory, relic... these need to be pulled from the ResourceMonoSystem.
 			var partyMember = new PartyMember(
 				partyMemberController.PartyMemberName,
 				new List<string>(),
