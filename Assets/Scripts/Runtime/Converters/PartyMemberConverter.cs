@@ -1,29 +1,29 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Controllers.PartyMemberBattle;
+using Akashic.Runtime.Controllers.BattlePartyMember;
 using Akashic.Runtime.Serializers;
 
 namespace Akashic.Runtime.Converters
 {
     internal static class PartyMemberConverter
     {
-        public static PartyMember ConvertControllerToPartyMember(PartyMemberController partyMemberController)
+        public static PartyMember ConvertControllerToPartyMember(BattlePartyMemberController battlePartyMemberController)
         {
             var partyMember = new PartyMember(
-                partyMemberController.PartyMemberName,
+                battlePartyMemberController.PartyMemberName,
 				new List<string>(),
                 null,
                 null,
-				partyMemberController.partyMemberStatHandler.CurrentLevel,
-                partyMemberController.partyMemberResourceHandler.CurrentExperience,
-                partyMemberController.partyMemberResourceHandler.MaxExperience,
-                partyMemberController.partyMemberResourceHandler.CurrentHealth,
-                partyMemberController.partyMemberResourceHandler.MaxHealth,
-                partyMemberController.partyMemberStatHandler.BaseAttackStats.PhysicalAttack,
-                partyMemberController.partyMemberStatHandler.BaseAttackStats.MagicalAttack,
-                partyMemberController.partyMemberStatHandler.BaseAttackStats.Accuracy,
-                partyMemberController.partyMemberStatHandler.BaseDefenseStats.PhysicalDefense,
-                partyMemberController.partyMemberStatHandler.BaseDefenseStats.MagicalDefense,
-                partyMemberController.partyMemberStatHandler.BaseDefenseStats.Evade
+				battlePartyMemberController.partyMemberStatHandler.CurrentLevel,
+                battlePartyMemberController.partyMemberResourceHandler.CurrentExperience,
+                battlePartyMemberController.partyMemberResourceHandler.MaxExperience,
+                battlePartyMemberController.partyMemberResourceHandler.CurrentHealth,
+                battlePartyMemberController.partyMemberResourceHandler.MaxHealth,
+                battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.PhysicalAttack,
+                battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.MagicalAttack,
+                battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.Accuracy,
+                battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.PhysicalDefense,
+                battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.MagicalDefense,
+                battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.Evade
                 );
 
             return partyMember;

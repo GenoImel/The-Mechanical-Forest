@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Controllers.PartyMemberBattle;
+using Akashic.Runtime.Controllers.BattlePartyMember;
 using Akashic.Runtime.Serializers;
 using UnityEngine;
 
@@ -8,15 +8,15 @@ namespace Akashic.Runtime.MonoSystems.Party
     internal sealed class PartyMonoSystem : MonoBehaviour, IPartyMonoSystem
     {
         [Header("Party Member Prefabs")]
-        [SerializeField]private PartyMemberController airyPrefab;
+        [SerializeField]private BattlePartyMemberController airyPrefab;
         
-        [SerializeField]private PartyMemberController benoitPrefab;
+        [SerializeField]private BattlePartyMemberController benoitPrefab;
         
-        [SerializeField]private PartyMemberController conradPrefab;
+        [SerializeField]private BattlePartyMemberController conradPrefab;
         
-        [SerializeField]private PartyMemberController lenaPrefab;
+        [SerializeField]private BattlePartyMemberController lenaPrefab;
         
-        private ICollection<PartyMemberController> partyMembers = new List<PartyMemberController>();
+        private ICollection<BattlePartyMemberController> partyMembers = new List<BattlePartyMemberController>();
 
         public void CreateNewParty()
         {
@@ -36,9 +36,9 @@ namespace Akashic.Runtime.MonoSystems.Party
             
         }
 
-        private void AddNewPartyMember(PartyMemberController partyMemberControllerPrefab)
+        private void AddNewPartyMember(BattlePartyMemberController battlePartyMemberControllerPrefab)
         {
-            var partyMember = Instantiate(partyMemberControllerPrefab, transform);
+            var partyMember = Instantiate(battlePartyMemberControllerPrefab, transform);
             partyMember.InitializeNewPartyMemberFromScriptableObject();
             partyMembers.Add(partyMember);
         }
