@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Akashic.Runtime.Serializers.Party;
 using Newtonsoft.Json;
 
 namespace Akashic.Runtime.Serializers
