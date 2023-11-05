@@ -1,10 +1,8 @@
-using UnityEngine;
 using System.Threading.Tasks;
-using Akashic.Runtime.Common;
 using Akashic.Runtime.Utilities.Canvas;
+using UnityEngine;
 
-
-namespace Akashic.Runtime.Controllers.LoadingCurtain
+namespace Akashic.Runtime.Common
 {
     internal class CurtainController : OverlayController
     {
