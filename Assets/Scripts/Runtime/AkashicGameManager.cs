@@ -12,6 +12,7 @@ using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.StateMachines.BattleStates;
 using Akashic.Runtime.StateMachines.ExplorationStates;
 using UnityEngine;
+using Akashic.Runtime.MonoSystems.Resource;
 
 namespace Akashic.Runtime
 {
@@ -39,6 +40,7 @@ namespace Akashic.Runtime
         [SerializeField] private StoryMonoSystem storyMonoSystem;
 		[SerializeField] private DebugMonoSystem debugMonoSystem;
 		[SerializeField] private InventoryMonoSystem inventoryMonoSystem;
+		[SerializeField] private ResourceMonoSystem resourceMonoSystem;
 
 		protected override string GetApplicationName()
         {
@@ -71,6 +73,7 @@ namespace Akashic.Runtime
             AddMonoSystem<StoryMonoSystem, IStoryMonoSystem>(storyMonoSystem);
 			AddMonoSystem<DebugMonoSystem, IDebugMonoSystem>(debugMonoSystem);
 			AddMonoSystem<InventoryMonoSystem, IInventoryMonoSystem>(inventoryMonoSystem);
+			AddMonoSystem<ResourceMonoSystem, IResourceMonoSystem>(resourceMonoSystem);
 		}
 
         protected override void SetParentsActive()
