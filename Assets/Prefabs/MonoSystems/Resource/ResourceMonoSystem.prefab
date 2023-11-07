@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2877191040304026929
 MonoBehaviour:
@@ -44,6 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812251d2e935cf4f832464a5678a04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumablesFilePath: Items/Consumables
-  accessoriesFilePath: Items/Accessories
-  relicsFilePath: Items/Relics
+  consumablesFilePath:
+  - Assets/Resources/Items/Consumables/GreenHerbData
+  - Assets/Resources/Items/Consumables/SmellingSaltData
+  - Assets/Resources/Items/Consumables/SweetDewData
+  - Assets/Resources/Items/Consumables/WardingBellData
+  accessoriesFilePath:
+  - Assets/Resources/Items/Accessories/BraceletData
+  - Assets/Resources/Items/Accessories/EaringsData
+  - Assets/Resources/Items/Accessories/NecklaceData
+  relicsFilePath:
+  - Assets/Resources/Items/Relics/CrystalizedFourLeafCloverData
+  - Assets/Resources/Items/Relics/GoldenSpoonData
+  - Assets/Resources/Items/Relics/InvisibleHandBuzzerData
+  - Assets/Resources/Items/Relics/StoneFeatherData

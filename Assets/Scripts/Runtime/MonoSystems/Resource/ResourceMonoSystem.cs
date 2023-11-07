@@ -1,13 +1,7 @@
 using Akashic.Core;
-using Akashic.Runtime.Converters;
-using Akashic.Runtime.MonoSystems.Config;
-using Akashic.Runtime.MonoSystems.Debugger;
-using Akashic.Runtime.Serializers;
 using Akashic.ScriptableObjects.Inventory;
-using DG.Tweening.Plugins.Core.PathCore;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -16,55 +10,54 @@ namespace Akashic.Runtime.MonoSystems.Resource
 {
 	internal sealed class ResourceMonoSystem : MonoBehaviour, IResourceMonoSystem
 	{
-		[SerializeField] private string consumablesFilePath;
-		[SerializeField] private string accessoriesFilePath;
-		[SerializeField] private string relicsFilePath;
+		[SerializeField] private List<string> consumablesFilePath;
+		[SerializeField] private List<string> accessoriesFilePath;
+		[SerializeField] private List<string> relicsFilePath;
 
-		private ICollection<ConsumableData> consumables;
-		private ICollection<AccessoryData> accessories;
-		private ICollection<RelicData> relics;
+		private ICollection<ConsumableData> consumables = new List<ConsumableData>();
+		private ICollection<AccessoryData> accessories = new List<AccessoryData>();
+		private ICollection<RelicData> relics = new List<RelicData>();
 
-		private void Start()
+		private void Awake()
 		{
-			LoadResources();
+			Task.Run(() => LoadResourcesAsync());
 		}
 
-		private void LoadResources()
+		private void LoadResourcesAsync()
 		{
-			LoadConsumablesAsync();
-			LoadAccessoriesAsync();
-			LoadRelicsAsync();
+			LoadConsumables();
+			LoadAccessories();
+			LoadRelics();
+
+			GameManager.Publish(new ResourcesLoadedMessage());
 		}
 
-		private IEnumerator LoadConsumablesAsync()
+		private IEnumerator LoadConsumables()
 		{
-			consumables = new List<ConsumableData>();
-			foreach (string resourceToLoad in Directory.GetFiles(consumablesFilePath))
+			foreach (string consumableFilePath in consumablesFilePath)
 			{
-				ResourceRequest resourceRequest = Resources.LoadAsync<ConsumableData>(resourceToLoad);
-				yield return resourceRequest;
+				ResourceRequest resourceRequest = Resources.LoadAsync<ConsumableData>(consumableFilePath);
+				while (!resourceRequest.isDone) yield return null;
 				consumables.Add(resourceRequest.asset as ConsumableData);
 			}
 		}
 
-		private IEnumerator LoadAccessoriesAsync()
+		private IEnumerator LoadAccessories()
 		{
-			accessories = new List<AccessoryData>();
-			foreach (string resourceToLoad in Directory.GetFiles(accessoriesFilePath))
+			foreach (string accessoryFilePath in accessoriesFilePath)
 			{
-				ResourceRequest resourceRequest = Resources.LoadAsync<AccessoryData>(resourceToLoad);
-				yield return resourceRequest;
+				ResourceRequest resourceRequest = Resources.LoadAsync<AccessoryData>(accessoryFilePath);
+				while (!resourceRequest.isDone) yield return null;
 				accessories.Add(resourceRequest.asset as AccessoryData);
 			}
 		}
 
-		private IEnumerator LoadRelicsAsync()
+		private IEnumerator LoadRelics()
 		{
-			relics = new List<RelicData>();
-			foreach (string resourceToLoad in Directory.GetFiles(relicsFilePath))
+			foreach (string relicFilePath in relicsFilePath)
 			{
-				ResourceRequest resourceRequest = Resources.LoadAsync<RelicData>(resourceToLoad);
-				yield return resourceRequest;
+				ResourceRequest resourceRequest = Resources.LoadAsync<RelicData>(relicFilePath);
+				while (!resourceRequest.isDone) yield return null;
 				relics.Add(resourceRequest.asset as RelicData);
 			}
 		}
