@@ -165,6 +165,7 @@ MonoBehaviour:
   storyMonoSystem: {fileID: 6779981694486630361}
   debugMonoSystem: {fileID: 6500119256986761759}
   inventoryMonoSystem: {fileID: 2042186701031581475}
+  resourceMonoSystem: {fileID: 2877191040304026929, guid: b79b35a3d065bd944b2081e5bcdf2d78, type: 3}
 --- !u!1 &8178008670094862158
 GameObject:
   m_ObjectHideFlags: 0
