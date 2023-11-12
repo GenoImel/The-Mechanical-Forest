@@ -6,6 +6,8 @@ using Akashic.Runtime.StateMachines.GameStates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Akashic.Runtime.Common;
+using Akashic.Runtime.Controllers.BattleCurtain;
 
 
 namespace Akashic.Runtime.MonoSystems.Scene
