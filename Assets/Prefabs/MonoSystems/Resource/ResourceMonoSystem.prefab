@@ -44,17 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812251d2e935cf4f832464a5678a04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consumablesFilePath:
-  - Assets/Resources/Items/Consumables/GreenHerbData
-  - Assets/Resources/Items/Consumables/SmellingSaltData
-  - Assets/Resources/Items/Consumables/SweetDewData
-  - Assets/Resources/Items/Consumables/WardingBellData
-  accessoriesFilePath:
-  - Assets/Resources/Items/Accessories/BraceletData
-  - Assets/Resources/Items/Accessories/EaringsData
-  - Assets/Resources/Items/Accessories/NecklaceData
-  relicsFilePath:
-  - Assets/Resources/Items/Relics/CrystalizedFourLeafCloverData
-  - Assets/Resources/Items/Relics/GoldenSpoonData
-  - Assets/Resources/Items/Relics/InvisibleHandBuzzerData
-  - Assets/Resources/Items/Relics/StoneFeatherData
+  consumablesDatabase: {fileID: 11400000, guid: c3d82b13ddbd8e948b9c6afec0328779, type: 2}
+  accessoriesDatabase: {fileID: 11400000, guid: 8158fd1841761b343a12bc7d3dc9217b, type: 2}
+  relicsDatabase: {fileID: 11400000, guid: 75813d39d2795d14db5ed0f246588650, type: 2}
