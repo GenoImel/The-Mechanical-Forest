@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1acddb953b4662f47bb85bebb1b6d05d, type: 3}
-  m_Name: ConsumableDatabaseData
+  m_Name: ConsumableDatabase
   m_EditorClassIdentifier: 
   consumables:
   - {fileID: 11400000, guid: 16e606c9a1b075748a4fba321b358801, type: 2}

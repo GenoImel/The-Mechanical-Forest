@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Akashic.ScriptableObjects.Database
 {
 	[CreateAssetMenu(menuName = "Akashic/Database/New Consumable Database")]
-	internal sealed class ConsumableDatabaseData : ScriptableObject
+	internal sealed class ConsumableDatabase : ScriptableObject
 	{
 		public List<ConsumableData> consumables = new List<ConsumableData>();
 	}

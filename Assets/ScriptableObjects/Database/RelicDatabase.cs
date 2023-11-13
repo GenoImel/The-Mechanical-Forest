@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Akashic.ScriptableObjects.Database
 {
 	[CreateAssetMenu(menuName = "Akashic/Database/New Relic Database")]
-	internal sealed class RelicDatabaseData : ScriptableObject
+	internal sealed class RelicDatabase : ScriptableObject
 	{
 		public List<RelicData> relics = new List<RelicData>();
 	}
