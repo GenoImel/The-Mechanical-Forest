@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Core.MonoSystems;
-using Akashic.Runtime.Controllers.PartyMemberBattle;
 using Akashic.Runtime.Serializers;
 
 namespace Akashic.Runtime.MonoSystems.Inventory

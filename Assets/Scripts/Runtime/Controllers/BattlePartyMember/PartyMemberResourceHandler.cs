@@ -1,7 +1,7 @@
 using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
-namespace Akashic.Runtime.Controllers.PartyMemberBattle
+namespace Akashic.Runtime.Controllers.BattlePartyMember
 {
     internal sealed class PartyMemberResourceHandler : MonoBehaviour
     {
