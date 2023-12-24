@@ -16,12 +16,12 @@ namespace Akashic.Runtime.Controllers.Story
         private StoryPoint currentStoryPoint;
 
         private IStoryMonoSystem storyMonoSystem;
-        private IStoryStateMachine storyState;
+        private IStoryStateMachine storyStateMachine;
 
         private void Awake()
         {
             storyMonoSystem = GameManager.GetMonoSystem<IStoryMonoSystem>();
-            storyState = GameManager.GetStateMachine<IStoryStateMachine>();
+            storyStateMachine = GameManager.GetStateMachine<IStoryStateMachine>();
         }
 
         private void OnEnable()
@@ -63,7 +63,7 @@ namespace Akashic.Runtime.Controllers.Story
             Hide();
             dialoguePanel.Hide();
             storyEventLogPanel.DestroyDialogueEntries();
-            storyState.SetInactiveState();
+            storyStateMachine.SetInactiveState();
         }
 
         private void ProgressDialogue(object sender, EventArgs e)

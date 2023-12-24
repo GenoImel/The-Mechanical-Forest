@@ -599,6 +599,10 @@ namespace Akashic.Core.StateMachines
         // All StateMachines must have fields for the current state and a previous state.
         private IFiniteState currentState;
         private IFiniteState prevState;
+
+        // Provides an auto-property that can be used to expose the CurrentState
+        // via the StateMachine's interface.
+        public IFiniteState CurrentState => currentState;
         
         // The SetState(IFiniteState nextState) method is used to enforce adherence 
         // of a state change pattern within a particular StateMachine. 

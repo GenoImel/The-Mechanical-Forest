@@ -19,6 +19,7 @@ namespace Akashic.Runtime.StateMachines.StoryStates
         {
             SetState(new StoryFiniteState.Active());
         }
+        
         protected override void SetInitialState()
         {
             SetState(new StoryFiniteState.Inactive());
