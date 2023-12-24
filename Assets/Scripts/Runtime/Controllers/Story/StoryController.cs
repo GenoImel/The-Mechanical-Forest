@@ -3,6 +3,7 @@ using UnityEngine;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
 using System;
+using Akashic.Runtime.StateMachines.StoryStates;
 
 namespace Akashic.Runtime.Controllers.Story
 {
@@ -15,10 +16,12 @@ namespace Akashic.Runtime.Controllers.Story
         private StoryPoint currentStoryPoint;
 
         private IStoryMonoSystem storyMonoSystem;
+        private IStoryStateMachine storyStateMachine;
 
         private void Awake()
         {
             storyMonoSystem = GameManager.GetMonoSystem<IStoryMonoSystem>();
+            storyStateMachine = GameManager.GetStateMachine<IStoryStateMachine>();
         }
 
         private void OnEnable()
@@ -60,6 +63,7 @@ namespace Akashic.Runtime.Controllers.Story
             Hide();
             dialoguePanel.Hide();
             storyEventLogPanel.DestroyDialogueEntries();
+            storyStateMachine.SetInactiveState();
         }
 
         private void ProgressDialogue(object sender, EventArgs e)

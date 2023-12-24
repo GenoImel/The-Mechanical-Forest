@@ -36,7 +36,6 @@ namespace Akashic.Runtime.Controllers.Story
         public void ShowStoryEventLog()
         {
             Show();
-            GameManager.Publish(new StoryEventLogOpened());
         }
 
         public void AddDialogueEntry(DialogueEntryAvailableMessage message)
@@ -59,7 +58,6 @@ namespace Akashic.Runtime.Controllers.Story
         private void OnBackButtonClicked()
         {
             Hide();
-            GameManager.Publish(new StoryEventLogClosed());
         }
 
         private void AddListeners()
