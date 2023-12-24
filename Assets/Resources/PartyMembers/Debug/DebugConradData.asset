@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
+  m_Name: DebugConradData
+  m_EditorClassIdentifier: 
+  partyMemberName: Conrad
+  baseHealth: 120
+  baseLevel: 9
+  baseExp: 0
+  basePhysicalAttack: 2
+  baseMagicalAttack: 2
+  baseAccuracy: 1.2
+  basePhysicalDefense: 2
+  baseMagicalDefense: 2
+  baseEvade: 0.4
+  skills:
+  - {fileID: 11400000, guid: 654da730b48f4f44f95d90d926766892, type: 2}
+  - {fileID: 11400000, guid: e47f11d9f35fcb547bdb70905a74d22c, type: 2}
+  - {fileID: 11400000, guid: c2f00765c75224c4580dfcf15dfdbcb5, type: 2}
+  - {fileID: 11400000, guid: 8f55da00b8106a7469fa9bcc6e11e9bd, type: 2}
+  relic: {fileID: 11400000, guid: ee99575d78beb7740baa57774a69636e, type: 2}
+  Accessory: {fileID: 11400000, guid: 4c09026c9977c654c904b67258463dc4, type: 2}

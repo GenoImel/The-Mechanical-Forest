@@ -1,6 +1,6 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Config;
-using Akashic.Runtime.MonoSystems.Debugger;
+using Akashic.Runtime.MonoSystems.GameDebug;
 using Akashic.Runtime.StateMachines.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.PlayerPrefs;
@@ -13,6 +13,7 @@ using Akashic.Runtime.StateMachines.BattleStates;
 using Akashic.Runtime.StateMachines.ExplorationStates;
 using Akashic.Runtime.StateMachines.StoryStates;
 using UnityEngine;
+using Akashic.Runtime.MonoSystems.Resource;
 
 namespace Akashic.Runtime
 {
@@ -39,8 +40,9 @@ namespace Akashic.Runtime
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
         [SerializeField] private SaveMonoSystem saveMonoSystem;
         [SerializeField] private StoryMonoSystem storyMonoSystem;
-		[SerializeField] private DebuggerMonoSystem debuggerMonoSystem;
+		[SerializeField] private DebugMonoSystem debugMonoSystem;
 		[SerializeField] private InventoryMonoSystem inventoryMonoSystem;
+		[SerializeField] private ResourceMonoSystem resourceMonoSystem;
 
 		protected override string GetApplicationName()
         {
@@ -72,8 +74,9 @@ namespace Akashic.Runtime
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);
             AddMonoSystem<SaveMonoSystem, ISaveMonoSystem>(saveMonoSystem);
             AddMonoSystem<StoryMonoSystem, IStoryMonoSystem>(storyMonoSystem);
-			AddMonoSystem<DebuggerMonoSystem, IDebuggerMonoSystem>(debuggerMonoSystem);
+			AddMonoSystem<DebugMonoSystem, IDebugMonoSystem>(debugMonoSystem);
 			AddMonoSystem<InventoryMonoSystem, IInventoryMonoSystem>(inventoryMonoSystem);
+			AddMonoSystem<ResourceMonoSystem, IResourceMonoSystem>(resourceMonoSystem);
 		}
 
         protected override void SetParentsActive()

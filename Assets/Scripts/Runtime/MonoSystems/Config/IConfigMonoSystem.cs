@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Akashic.Core;
 using Akashic.Core.MonoSystems;
 using Akashic.Runtime.MonoSystems.Config.Settings;
+using Akashic.ScriptableObjects.Inventory;
+using Akashic.ScriptableObjects.PartyMember;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {
@@ -10,7 +11,9 @@ namespace Akashic.Runtime.MonoSystems.Config
     /// ConfigBaseData ScriptableObject.
     /// </summary>
     internal interface IConfigMonoSystem : IMonoSystem
-    {
-        public SaveConfigSettings GetSaveConfigSettings();
-    }
+	{
+		public SaveConfigSettings GetSaveConfigSettings();
+		public List<PartyMemberData> GetDefaultParty();
+		public InventoryData GetDefaultInventory();
+	}
 }

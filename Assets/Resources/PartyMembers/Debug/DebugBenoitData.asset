@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3cf60cf2b194d418c9d65944677c73, type: 3}
+  m_Name: DebugBenoitData
+  m_EditorClassIdentifier: 
+  partyMemberName: Benoit
+  baseHealth: 100
+  baseLevel: 10
+  baseExp: 0
+  basePhysicalAttack: 2
+  baseMagicalAttack: 2
+  baseAccuracy: 1.2
+  basePhysicalDefense: 2
+  baseMagicalDefense: 2
+  baseEvade: 0.7
+  skills:
+  - {fileID: 11400000, guid: 09f4161cca0f8714fbaf4346e5081af5, type: 2}
+  - {fileID: 11400000, guid: 22df0162ee8f0ac44ae383839d9dd67f, type: 2}
+  - {fileID: 11400000, guid: e4896322d466d4f4b8cbd36de9331e0c, type: 2}
+  - {fileID: 11400000, guid: 7eb26ba57af409f45a4fc7c49f6407b2, type: 2}
+  relic: {fileID: 11400000, guid: a0af1ed55a04fc443bb572d0c66a3e7a, type: 2}
+  Accessory: {fileID: 11400000, guid: 1ede5148964a5c044b99f0924457bed0, type: 2}
