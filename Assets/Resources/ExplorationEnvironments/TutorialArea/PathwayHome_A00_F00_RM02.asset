@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d784d0297724394a7ad33a1639fc617, type: 3}
-  m_Name: BedroomHome_A00_F01
+  m_Name: PathwayHome_A00_F00_RM02
   m_EditorClassIdentifier: 
-  roomName: Bedroom home
-  roomDescription: Bedroom in the home for the tutorial area
-  roomId: A00_F01
-  environment: {fileID: 3939387437052007133, guid: 4f4f380d78f783444aff828559cea906, type: 3}
+  roomName: Pathway Home
+  roomDescription: Pathway leading up to the home in the tutorial area outside
+  roomId: A00_F00_RM02
+  explorationEnvironment: {fileID: 4510545084201265324, guid: 2a0e3d46289cbbf4aa373651bbd19574, type: 3}

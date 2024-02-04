@@ -1,4 +1,4 @@
-using Akashic.Runtime.Builders.Exploration;
+using Akashic.Runtime.Controllers.Exploration;
 using UnityEngine;
 
 namespace Akashic.ScriptableObjects.Exploration
@@ -9,6 +9,6 @@ namespace Akashic.ScriptableObjects.Exploration
         public string roomName;
         public string roomDescription;
         public string roomId;
-        public Environment environment;
+        public ExplorationEnvironment explorationEnvironment;
     }
 }

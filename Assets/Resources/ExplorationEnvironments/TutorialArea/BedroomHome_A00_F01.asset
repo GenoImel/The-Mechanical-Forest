@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d784d0297724394a7ad33a1639fc617, type: 3}
-  m_Name: KitchenHome_A00_F00_RM01
+  m_Name: BedroomHome_A00_F01
   m_EditorClassIdentifier: 
-  roomName: Kitchen Home
-  roomDescription: Cozy kitchen inside the tutorial area
-  roomId: A00_F00_RM01
-  environment: {fileID: -6003628689767515223, guid: 503daa32e33272a498200916da09c324, type: 3}
+  roomName: Bedroom home
+  roomDescription: Bedroom in the home for the tutorial area
+  roomId: A00_F01_RM00
+  explorationEnvironment: {fileID: 3939387437052007133, guid: 4f4f380d78f783444aff828559cea906, type: 3}

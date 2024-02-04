@@ -15,4 +15,4 @@ MonoBehaviour:
   roomName: Stairway Home
   roomDescription: The stairway down from the bedroom
   roomId: A00_F00_RM00
-  environment: {fileID: -3670263890808425982, guid: 341187d5627e1074bba13859ad6e7c07, type: 3}
+  explorationEnvironment: {fileID: -3670263890808425982, guid: 341187d5627e1074bba13859ad6e7c07, type: 3}
