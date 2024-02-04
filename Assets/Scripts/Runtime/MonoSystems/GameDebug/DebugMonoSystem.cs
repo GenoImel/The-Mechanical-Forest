@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Akashic.Runtime.Builders.Exploration;
+using Akashic.ScriptableObjects.Exploration;
 using Akashic.ScriptableObjects.Inventory;
 using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
@@ -10,6 +12,8 @@ namespace Akashic.Runtime.MonoSystems.GameDebug
         [SerializeField] private PartyData debugPartyData;
 
         [SerializeField] private InventoryData debugInventoryData;
+
+        [SerializeField] private ExplorationEnvironmentData debugEnvironment;
 
         [SerializeField] private bool isDebugMode = false;
         
@@ -23,6 +27,11 @@ namespace Akashic.Runtime.MonoSystems.GameDebug
         public InventoryData GetDebugInventory()
         {
             return debugInventoryData;
+        }
+        
+        public ExplorationEnvironmentData GetDebugEnvironment()
+        {
+            return debugEnvironment;
         }
     }
 }

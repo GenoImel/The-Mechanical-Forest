@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d784d0297724394a7ad33a1639fc617, type: 3}
+  m_Name: PathwayHome_A00_F00_RM02
+  m_EditorClassIdentifier: 
+  roomName: Pathway Home
+  roomDescription: Pathway leading up to the home in the tutorial area outside
+  roomId: A00_F00_RM02
+  environment: {fileID: 4510545084201265324, guid: 2a0e3d46289cbbf4aa373651bbd19574, type: 3}

@@ -10,6 +10,13 @@ namespace Akashic.Runtime.Actors.Player
         
         [SerializeField] private InputActionReference moveInputActionReference;
 
+        private Camera mainCamera;
+        
+        private void Awake()
+        {
+            mainCamera = Camera.main;
+        }
+
         private void OnEnable()
         {
             AddListeners();
@@ -19,12 +26,25 @@ namespace Akashic.Runtime.Actors.Player
         {
             RemoveListeners();
         }
-        
+
         private void OnMoveInputActionPerformed(InputAction.CallbackContext context)
         {
             var axis = context.ReadValue<Vector2>();
-            var absoluteMoveDirection = new Vector3(axis.x, 0.0f, axis.y).normalized;
-            playerMovementHandler.UpdatePlayerMoveDirection(absoluteMoveDirection);
+            
+            var cameraTransform = mainCamera.transform;
+            
+            var forward = cameraTransform.forward;
+            var right = cameraTransform.right;
+            
+            forward.y = 0f;
+            right.y = 0f;
+            
+            forward.Normalize();
+            right.Normalize();
+            
+            var relativeMoveDirection = (forward * axis.y + right * axis.x).normalized;
+
+            playerMovementHandler.UpdatePlayerMoveDirection(relativeMoveDirection);
         }
         
         private void OnMoveInputActionCanceled(InputAction.CallbackContext context)
