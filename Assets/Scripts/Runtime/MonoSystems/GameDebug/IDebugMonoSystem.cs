@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Akashic.Core.MonoSystems;
+using Akashic.ScriptableObjects.Exploration;
 using Akashic.ScriptableObjects.Inventory;
 using Akashic.ScriptableObjects.PartyMember;
 
@@ -17,5 +18,8 @@ namespace Akashic.Runtime.MonoSystems.GameDebug
         
         /// <returns>Returns the debug <see cref="InventoryData"/>.</returns>
         public InventoryData GetDebugInventory();
+        
+        /// <returns>Returns the debug <see cref="ExplorationEnvironmentData"/>.</returns>
+        public ExplorationEnvironmentData GetDebugEnvironment();
     }
 }

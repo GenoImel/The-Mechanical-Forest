@@ -8,7 +8,7 @@ namespace Akashic.Runtime.Actors.Player
         [SerializeField] private float moveSpeed = 1.0f; 
 
         [SerializeField] private Transform playerActorTransform;
-        
+
         private Vector3 playerMoveDirection;
 
         private void FixedUpdate()

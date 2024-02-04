@@ -3523,8 +3523,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 249414351256489653, guid: a597ca6c4c33d0e429acab145350e257, type: 3}
       propertyPath: isDebugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 249414351256489653, guid: a597ca6c4c33d0e429acab145350e257, type: 3}
+      propertyPath: debugEnvironment
+      value: 
+      objectReference: {fileID: 11400000, guid: b7417838e73ccd14ab57a2448d06a630, type: 2}
     - target: {fileID: 1477822335617925907, guid: a597ca6c4c33d0e429acab145350e257, type: 3}
       propertyPath: m_RootOrder
       value: 0
