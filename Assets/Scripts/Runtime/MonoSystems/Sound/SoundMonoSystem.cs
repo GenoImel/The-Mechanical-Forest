@@ -19,6 +19,8 @@ namespace Akashic.Runtime.MonoSystems.Sound
         [Range(0, 1)]
         [SerializeField] private float musicVolume = 0.75f;
         
+        private AudioClip currentMusicClip;
+        
         private IPlayerPreferencesMonoSystem playerPreferencesMonoSystem;
 
         private void Awake()
@@ -38,6 +40,11 @@ namespace Akashic.Runtime.MonoSystems.Sound
         
         public void PlayMusic(AudioClip clip, bool loop = true) 
         {
+            if(clip == currentMusicClip) 
+            {
+                return;
+            }
+            
             if (musicAudioSource.isPlaying)
             {
                 musicAudioSource.Stop();
