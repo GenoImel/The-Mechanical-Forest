@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Builders.Exploration;
 using Akashic.ScriptableObjects.Exploration;
 using Akashic.ScriptableObjects.Inventory;
 using Akashic.ScriptableObjects.PartyMember;
