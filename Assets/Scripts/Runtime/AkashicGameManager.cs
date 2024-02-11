@@ -1,4 +1,5 @@
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.Audio;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.GameDebug;
 using Akashic.Runtime.StateMachines.GameStates;
@@ -6,7 +7,6 @@ using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Scene;
-using Akashic.Runtime.MonoSystems.Sound;
 using Akashic.Runtime.MonoSystems.Story;
 using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.StateMachines.BattleStates;
@@ -34,7 +34,7 @@ namespace Akashic.Runtime
 
         [Header("MonoSystems")]
         [SerializeField] private SceneMonoSystem sceneMonoSystem;
-        [SerializeField] private SoundMonoSystem soundMonoSystem;
+        [SerializeField] private AudioMonoSystem audioMonoSystem;
         [SerializeField] private PartyMonoSystem partyMonoSystem;
         [SerializeField] private ConfigMonoSystem configMonoSystem;
         [SerializeField] private PlayerPreferencesMonoSystem playerPreferencesMonoSystem;
@@ -68,7 +68,7 @@ namespace Akashic.Runtime
         protected override void InitializeGameMonoSystems()
         {
             AddMonoSystem<SceneMonoSystem, ISceneMonoSystem>(sceneMonoSystem);
-            AddMonoSystem<SoundMonoSystem, ISoundMonoSystem>(soundMonoSystem);
+            AddMonoSystem<AudioMonoSystem, IAudioMonoSystem>(audioMonoSystem);
             AddMonoSystem<PartyMonoSystem, IPartyMonoSystem>(partyMonoSystem);
             AddMonoSystem<ConfigMonoSystem, IConfigMonoSystem>(configMonoSystem);
             AddMonoSystem<PlayerPreferencesMonoSystem, IPlayerPreferencesMonoSystem>(playerPreferencesMonoSystem);

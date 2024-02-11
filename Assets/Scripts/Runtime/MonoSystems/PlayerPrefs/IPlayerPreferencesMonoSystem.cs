@@ -8,7 +8,12 @@ namespace Akashic.Runtime.MonoSystems.PlayerPrefs
         /// <summary>
         /// Updates the players volume preferences for music and effects.
         /// </summary>
-        public void UpdateSoundPreferences(float musicVolume, float effectsVolume);
+        public void UpdateSoundPreferences(float masterVolume, float musicVolume, float effectsVolume);
+        
+        /// <summary>
+        /// Returns the players master volume preference.
+        /// </summary>
+        public float GetMasterVolume();
         
         /// <summary>
         /// Returns the players music volume preference.

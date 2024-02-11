@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 957728239}
   - component: {fileID: 957728238}
-  - component: {fileID: 957728237}
+  - component: {fileID: 957728240}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -141,14 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &957728237
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957728236}
-  m_Enabled: 1
 --- !u!20 &957728238
 Camera:
   m_ObjectHideFlags: 0
@@ -207,14 +199,32 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957728236}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &957728240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957728236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 1302931433}
+--- !u!1 &1302931433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5050633529153310415, guid: 7960fd5a9fdc5aa4c9ddf0c3d944d8ee, type: 3}
+  m_PrefabInstance: {fileID: 3144754778366780309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3144754778366780309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1607,3 +1617,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53b1e5eba88b3e44970e8184235600b, type: 3}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 957728239}
+  - {fileID: 3144754778366780309}
+  - {fileID: 3464447398394861473}
+  - {fileID: 8181144382190770800}
+  - {fileID: 8871339918025388945}
