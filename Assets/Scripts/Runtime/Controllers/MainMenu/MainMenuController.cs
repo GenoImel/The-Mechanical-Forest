@@ -1,8 +1,6 @@
-using System;
 using Akashic.Core;
 using Akashic.Runtime.Controllers.OptionsMenu;
 using Akashic.Runtime.Controllers.SaveMenu;
-using Akashic.Runtime.MonoSystems.Sound;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,23 +10,9 @@ namespace Akashic.Runtime.Controllers.MainMenu
     {
         [Header("Buttons")]
         [SerializeField] private Button newGameButton;
+        [SerializeField] private Button loadButton;
         [SerializeField] private Button optionsButton;
         [SerializeField] private Button quitButton;
-        
-        [Header("Main Theme")]
-        [SerializeField] private AudioClip mainTheme;
-
-        private ISoundMonoSystem soundMonoSystem;
-
-        private void Awake()
-        {
-            soundMonoSystem = GameManager.GetMonoSystem<ISoundMonoSystem>();
-        }
-
-        private void Start()
-        {
-            soundMonoSystem.PlayMusic(mainTheme);
-        }
 
         private void OnEnable()
         {
@@ -43,6 +27,11 @@ namespace Akashic.Runtime.Controllers.MainMenu
         private void OnNewGameButtonClicked()
         {
             GameManager.Publish(new ShowSaveMenuMessage());
+        }
+        
+        private void OnLoadButtonClicked()
+        {
+            //GameManager.Publish(new ShowLoadMenuMessage());
         }
 
         private void OnOptionsButtonClicked()
@@ -62,6 +51,7 @@ namespace Akashic.Runtime.Controllers.MainMenu
         private void AddListeners()
         {
             newGameButton.onClick.AddListener(OnNewGameButtonClicked);
+            loadButton.onClick.AddListener(OnLoadButtonClicked);
             optionsButton.onClick.AddListener(OnOptionsButtonClicked);
             quitButton.onClick.AddListener(OnQuitButtonClicked);
         }
@@ -69,6 +59,7 @@ namespace Akashic.Runtime.Controllers.MainMenu
         private void RemoveListeners()
         {
             newGameButton.onClick.RemoveListener(OnNewGameButtonClicked);
+            loadButton.onClick.RemoveListener(OnLoadButtonClicked);
             optionsButton.onClick.RemoveListener(OnOptionsButtonClicked);
             quitButton.onClick.RemoveListener(OnQuitButtonClicked);
         }
