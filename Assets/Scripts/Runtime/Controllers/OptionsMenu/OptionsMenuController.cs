@@ -5,7 +5,7 @@ using Akashic.Runtime.Common;
 
 namespace Akashic.Runtime.Controllers.OptionsMenu
 {
-    internal sealed class SettingsMenuController : OverlayController
+    internal sealed class OptionsMenuController : OverlayController
     {
         [Header("Buttons")]
         [SerializeField] private Button backButton;

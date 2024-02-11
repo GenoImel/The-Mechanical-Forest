@@ -1,9 +1,7 @@
 using System.IO;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Akashic.Core;
-using Akashic.Runtime.Controllers.OptionsMenu;
-using Akashic.Runtime.Serializers;
+using Akashic.Runtime.Serializers.PlayerPrefs;
 using Akashic.Runtime.Utilities.FileStream;
 using UnityEngine;
 
@@ -22,8 +20,6 @@ namespace Akashic.Runtime.MonoSystems.PlayerPrefs
 
         private FileStreamer fileStreamer;
 
-        private bool savingInProgress;
-        
         private void Awake()
         {
             preferencesFilePath = Path.Combine(Application.persistentDataPath, preferencesFolderName);
@@ -32,20 +28,18 @@ namespace Akashic.Runtime.MonoSystems.PlayerPrefs
             InitializeExistingPreferencesData();
         }
 
-        private void OnEnable()
-        { 
-            AddListeners();
-        }
-
-        private void OnDisable()
+        public void UpdateSoundPreferences(float masterVolume, float musicVolume, float effectsVolume)
         {
-            RemoveListeners();
-        }
-
-        public void UpdateSoundPreferences(float musicVolume, float effectsVolume)
-        {
+            playerPreferences.SetMasterVolume(masterVolume);
             playerPreferences.SetMusicVolume(musicVolume);
             playerPreferences.SetSfxVolume(effectsVolume);
+
+            SavePreferencesAsync();
+        }
+        
+        public float GetMasterVolume()
+        {
+            return playerPreferences.MasterVolume;
         }
         
         public float GetMusicVolume()
@@ -60,21 +54,14 @@ namespace Akashic.Runtime.MonoSystems.PlayerPrefs
         
         private async void SavePreferencesAsync()
         {
-            savingInProgress = true;
-
-            if (savingInProgress)
-            {
-                await Task.Yield();
-            }
-            
+            Debug.Log("Saving player preferences.");
             var preferencesText = JsonConvert.SerializeObject(playerPreferences);
             await fileStreamer.WriteFileAsync(preferencesText);
-            
-            savingInProgress = false;
         }
         
         private async void LoadPreferencesAsync()
         {
+            Debug.Log("Loading player preferences.");
             var preferencesText = await fileStreamer.ReadFileAsync();
             playerPreferences = JsonConvert.DeserializeObject<PlayerPreferences>(preferencesText);
             
@@ -89,24 +76,9 @@ namespace Akashic.Runtime.MonoSystems.PlayerPrefs
             }
             else
             {
-                playerPreferences = new PlayerPreferences(0.5f, 0.5f);
+                playerPreferences = new PlayerPreferences(0.5f,0.5f, 0.5f);
                 SavePreferencesAsync();
             }
-        }
-
-        private void OnSettingsMenuClosedMessage(OptionsMenuClosedMessage message)
-        {
-            SavePreferencesAsync();
-        }
-
-        private void AddListeners()
-        {
-            GameManager.AddListener<OptionsMenuClosedMessage>(OnSettingsMenuClosedMessage);
-        }
-
-        private void RemoveListeners()
-        {
-            GameManager.RemoveListener<OptionsMenuClosedMessage>(OnSettingsMenuClosedMessage);
         }
     }
 }
