@@ -9,7 +9,6 @@ using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Scene;
 using Akashic.Runtime.MonoSystems.Story;
 using Akashic.Runtime.MonoSystems.Inventory;
-using Akashic.Runtime.StateMachines.ExplorationStates;
 using Akashic.Runtime.StateMachines.StoryStates;
 using UnityEngine;
 using Akashic.Runtime.MonoSystems.Resource;
@@ -19,17 +18,16 @@ namespace Akashic.Runtime
     internal sealed class AkashicGameManager : GameManager
     {
         [Header("Management")] 
-        [SerializeField] private Transform stateMachinesParentTransform;
-        
-        [SerializeField] private Transform monoSystemsParentTransform;
-
         [SerializeField] private Transform actorsParentTransform;
         
         [SerializeField] private Transform controllersParentTransform;
         
+        [SerializeField] private Transform monoSystemsParentTransform;
+        
+        [SerializeField] private Transform stateMachinesParentTransform;
+
         [Header("StateMachines")]
         [SerializeField] private GameStateMachine gameStateMachine;
-        [SerializeField] private ExplorationStateMachine explorationStateMachine;
         [SerializeField] private StoryStateMachine storyStateMachine;
 
         [Header("MonoSystems")]
@@ -60,7 +58,6 @@ namespace Akashic.Runtime
         protected override void InitializeGameStateMachines()
         {
             AddStateMachine<GameStateMachine, IGameStateMachine>(gameStateMachine);
-            AddStateMachine<ExplorationStateMachine, IExplorationStateMachine>(explorationStateMachine);
             AddStateMachine<StoryStateMachine, IStoryStateMachine>(storyStateMachine);
         }
         

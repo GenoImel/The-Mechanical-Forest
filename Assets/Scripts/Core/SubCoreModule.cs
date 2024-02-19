@@ -6,6 +6,15 @@ namespace Akashic.Core
 {
     internal abstract class SubCoreModule : MonoBehaviour
     {
+        [Header("Management")] 
+        [SerializeField] protected Transform actorsParentTransform;
+        
+        [SerializeField] protected Transform controllersParentTransform;
+        
+        [SerializeField] protected Transform monoSystemsParentTransform;
+        
+        [SerializeField] protected Transform stateMachinesParentTransform;
+
         protected readonly StateMachineManager stateMachineManager = new ();
         protected readonly MonoSystemManager monoSystemManager = new ();
         

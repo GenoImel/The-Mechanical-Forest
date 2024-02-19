@@ -1,36 +1,37 @@
 using Akashic.Core;
-using Akashic.Runtime.StateMachines.BattleStates;
+using Akashic.Runtime.StateMachines.ExplorationStates;
 using UnityEngine;
 
-namespace Akashic.Runtime.SubCoreModules.Battle
+namespace Akashic.Runtime.SubCoreModules.Exploration
 {
-    internal sealed class BattleSubCoreModule : SubCoreModule
+    internal sealed class ExplorationSubCoreModule : SubCoreModule
     {
         [Header("StateMachines")]
-        [SerializeField] private BattleStateMachine battleStateMachine;
-
+        [SerializeField] private ExplorationStateMachine explorationStateMachine;
+        
         public override void OnLoaded()
         {
             SetSubCoreParentsActive();
-            Debug.Log($"{nameof(BattleSubCoreModule)} sub core module has been loaded.");
+            Debug.Log($"{nameof(ExplorationSubCoreModule)} sub core module has been loaded.");
         }
 
         public override void OnUnloaded()
         {
-            Debug.Log($"{nameof(BattleSubCoreModule)} sub core module has been unloaded.");
+            Debug.Log($"{nameof(ExplorationSubCoreModule)} sub core module has been unloaded.");
             SetSubCoreParentsInactive();
         }
 
         protected override void InitializeSubCoreStateMachines()
         {
-            stateMachineManager.AddStateMachine<BattleStateMachine, IBattleStateMachine>(battleStateMachine);
+            stateMachineManager.AddStateMachine
+                <ExplorationStateMachine, IExplorationStateMachine>(explorationStateMachine);
         }
 
         protected override void InitializeSubCoreMonoSystems()
         {
-            
+
         }
-        
+
         protected override void SetSubCoreParentsActive()
         {
             stateMachinesParentTransform.gameObject.SetActive(true);
@@ -38,7 +39,7 @@ namespace Akashic.Runtime.SubCoreModules.Battle
             actorsParentTransform.gameObject.SetActive(true);
             controllersParentTransform.gameObject.SetActive(true);
         }
-        
+
         protected override void SetSubCoreParentsInactive()
         {
             stateMachinesParentTransform.gameObject.SetActive(false);
