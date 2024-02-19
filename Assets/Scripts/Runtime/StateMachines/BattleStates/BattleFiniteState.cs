@@ -18,6 +18,13 @@ namespace Akashic.Runtime.StateMachines.BattleStates
         }
         
         /// <summary>
+        /// Used when the battle is in progress.
+        /// </summary>
+        internal sealed class BattleActive : BattleFiniteState
+        {
+        }
+        
+        /// <summary>
         /// Used when displaying battle loot.
         /// </summary>
         internal sealed class Loot : BattleFiniteState

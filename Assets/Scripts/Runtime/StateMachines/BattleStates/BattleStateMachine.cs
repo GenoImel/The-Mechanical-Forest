@@ -15,6 +15,11 @@ namespace Akashic.Runtime.StateMachines.BattleStates
             SetState(new BattleFiniteState.Initializing());
         }
         
+        public void SetBattleActiveState()
+        {
+            SetState(new BattleFiniteState.BattleActive());
+        }
+        
         public void SetLootState()
         {
             SetState(new BattleFiniteState.Loot());
