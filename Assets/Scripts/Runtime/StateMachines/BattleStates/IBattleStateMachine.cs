@@ -11,6 +11,11 @@ namespace Akashic.Runtime.StateMachines.BattleStates
         /// Set the <see cref="BattleState"/> to <see cref="BattleFiniteState.Initializing"/>
         /// </summary>
         public void SetInitializingState();
+
+        /// <summary>
+        /// Set the <see cref="BattleState"/> to <see cref="BattleFiniteState.BattleActive"/>
+        /// </summary>
+        public void SetBattleActiveState();
         
         /// <summary>
         /// Set the <see cref="BattleState"/> to <see cref="BattleFiniteState.Loot"/>

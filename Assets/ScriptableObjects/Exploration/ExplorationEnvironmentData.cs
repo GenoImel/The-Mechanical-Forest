@@ -1,4 +1,4 @@
-using Akashic.Runtime.Controllers.Exploration;
+using Akashic.Runtime.Actors.Exploration;
 using UnityEngine;
 
 namespace Akashic.ScriptableObjects.Exploration

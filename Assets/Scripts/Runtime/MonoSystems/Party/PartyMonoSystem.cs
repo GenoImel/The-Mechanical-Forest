@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.Converters;
@@ -19,6 +20,14 @@ namespace Akashic.Runtime.MonoSystems.Party
 		{
 			configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
 			debugMonoSystem = GameManager.GetMonoSystem<IDebugMonoSystem>();
+		}
+
+		private void Start()
+		{
+			if(debugMonoSystem.IsDebugMode)
+			{
+				CreateNewParty();
+			}
 		}
 
 		public void CreateNewParty()

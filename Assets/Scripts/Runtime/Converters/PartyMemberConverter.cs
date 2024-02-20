@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Akashic.Runtime.Controllers.BattlePartyMember;
+using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Serializers.Party;
 using Akashic.ScriptableObjects.PartyMember;
 
@@ -8,25 +8,25 @@ namespace Akashic.Runtime.Converters
 {
     internal static class PartyMemberConverter
 	{
-		public static PartyMember ConvertControllerToPartyMember(BattlePartyMemberController battlePartyMemberController)
+		public static PartyMember ConvertControllerToPartyMember(PartyBattleActor partyBattleActor)
 		{
 			// TODO: Add skills, accessory, relic... these need to be pulled from the ResourceMonoSystem.
 			var partyMember = new PartyMember(
-				battlePartyMemberController.PartyMemberName,
+				partyBattleActor.PartyMemberName,
 				new List<string>(),
 				null,
 				null,
-				battlePartyMemberController.partyMemberStatHandler.CurrentLevel,
-				battlePartyMemberController.partyMemberResourceHandler.CurrentExperience,
-				battlePartyMemberController.partyMemberResourceHandler.MaxExperience,
-				battlePartyMemberController.partyMemberResourceHandler.CurrentHealth,
-				battlePartyMemberController.partyMemberResourceHandler.MaxHealth,
-				battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.PhysicalAttack,
-				battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.MagicalAttack,
-				battlePartyMemberController.partyMemberStatHandler.BaseAttackStats.Accuracy,
-				battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.PhysicalDefense,
-				battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.MagicalDefense,
-				battlePartyMemberController.partyMemberStatHandler.BaseDefenseStats.Evade
+				partyBattleActor.partyMemberStatHandler.CurrentLevel,
+				partyBattleActor.partyMemberResourceHandler.CurrentExperience,
+				partyBattleActor.partyMemberResourceHandler.MaxExperience,
+				partyBattleActor.partyMemberResourceHandler.CurrentHealth,
+				partyBattleActor.partyMemberResourceHandler.MaxHealth,
+				partyBattleActor.partyMemberStatHandler.BaseAttackStats.PhysicalAttack,
+				partyBattleActor.partyMemberStatHandler.BaseAttackStats.MagicalAttack,
+				partyBattleActor.partyMemberStatHandler.BaseAttackStats.Accuracy,
+				partyBattleActor.partyMemberStatHandler.BaseDefenseStats.PhysicalDefense,
+				partyBattleActor.partyMemberStatHandler.BaseDefenseStats.MagicalDefense,
+				partyBattleActor.partyMemberStatHandler.BaseDefenseStats.Evade
 				);
 
 			return partyMember;

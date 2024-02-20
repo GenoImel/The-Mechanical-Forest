@@ -36,7 +36,7 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Adds a new message listener.
+        /// Adds a listener for a message event.
         /// </summary>
         public static void AddListener<TMessage>(Action<TMessage> listener) where TMessage : IMessage
         {
@@ -44,7 +44,7 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Removes a message listener.
+        /// Removes a listener for a message event.
         /// </summary>
         public static void RemoveListener<TMessage>(Action<TMessage> listener) where TMessage : IMessage
         {
@@ -52,7 +52,7 @@ namespace Akashic.Core
         }
 
         /// <summary>
-        /// Publishes a message to the monoSystems in the game.
+        /// Publishes a message event over the message bus.
         /// </summary>
         public static void Publish<TMessage>(TMessage message) where TMessage : IMessage
         {
@@ -60,7 +60,7 @@ namespace Akashic.Core
         }
         
         /// <returns>
-        /// Returns an existing state in the game.
+        /// Returns an existing State Machine in the game.
         /// </returns>
         public static TStateMachine GetStateMachine<TStateMachine>()
         {
@@ -68,16 +68,25 @@ namespace Akashic.Core
         }
         
         /// <summary>
-        /// Adds a State to the game.
+        /// Adds a State Machine to the game.
         /// </summary>
         protected void AddStateMachine<TStateMachine, TBindTo>(TStateMachine stateMachine) 
             where TStateMachine : IStateMachine, TBindTo
         {
             stateMachineManager.AddStateMachine<TStateMachine, TBindTo>(stateMachine);
         }
+        
+        /// <summary>
+        /// Removes a State Machine from the game.
+        /// </summary>
+        protected void RemoveStateMachine<TStateMachine, TBindTo>(TStateMachine stateMachine)
+        where TStateMachine : IStateMachine, TBindTo
+        {
+            stateMachineManager.RemoveStateMachine<TStateMachine, TBindTo>(stateMachine);
+        }
 
         /// <returns>
-        /// Returns an existing monoSystem in the game.
+        /// Returns an existing MonoSystem in the game.
         /// </returns>
         public static TMonoSystem GetMonoSystem<TMonoSystem>()
         {
@@ -85,13 +94,60 @@ namespace Akashic.Core
         }
         
         /// <summary>
-        /// Adds a monoSystem to the game.
+        /// Adds a MonoSystem to the game.
         /// </summary>
-        protected void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem) where TMonoSystem : IMonoSystem, TBindTo
+        protected void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem) 
+            where TMonoSystem : IMonoSystem, TBindTo
         {
             monoSystemManager.AddMonoSystem<TMonoSystem, TBindTo>(monoSystem);
         }
         
+        /// <summary>
+        /// Removes a MonoSystem to the game.
+        /// </summary>
+        protected void RemoveMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem) 
+            where TMonoSystem : IMonoSystem, TBindTo
+        {
+            monoSystemManager.RemoveMonoSystem<TMonoSystem, TBindTo>(monoSystem);
+        }
+        
+        /// <summary>
+        /// Loads a sub core module into the game.
+        /// </summary>
+        public static void LoadSubCoreModule(SubCoreModule subCoreModule)
+        {
+            foreach (var (bindToType, stateMachine) in subCoreModule.StateMachineManager.StateMachines)
+            {
+                instance.stateMachineManager.AddStateMachine(stateMachine, bindToType);
+            }
+            
+            foreach (var (bindToType, monoSystem) in subCoreModule.MonoSystemManager.MonoSystems)
+            {
+                instance.monoSystemManager.AddMonoSystem(monoSystem, bindToType);
+            }
+            
+            subCoreModule.OnLoaded();
+        }
+        
+        
+        /// <summary>
+        /// Unloads a sub core module from the game.
+        /// </summary>
+        public static void UnloadSubCoreModule(SubCoreModule subCoreModule)
+        {
+            foreach (var (bindToType, stateMachine) in subCoreModule.StateMachineManager.StateMachines)
+            {
+                instance.stateMachineManager.RemoveStateMachine(stateMachine, bindToType);
+            }
+            
+            foreach (var (bindToType, monoSystem) in subCoreModule.MonoSystemManager.MonoSystems)
+            {
+                instance.monoSystemManager.RemoveMonoSystem(monoSystem, bindToType);
+            }
+            
+            subCoreModule.OnUnloaded();
+        }
+
         /// <returns>
         /// Name of the application or game.
         /// </returns>

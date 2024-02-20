@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Akashic.Runtime.Actors.Battle;
+using Akashic.ScriptableObjects.Battle;
 using Akashic.ScriptableObjects.Exploration;
 using Akashic.ScriptableObjects.Inventory;
 using Akashic.ScriptableObjects.PartyMember;
@@ -12,7 +14,11 @@ namespace Akashic.Runtime.MonoSystems.GameDebug
 
         [SerializeField] private InventoryData debugInventoryData;
 
-        [SerializeField] private ExplorationEnvironmentData debugEnvironment;
+        [SerializeField] private ExplorationEnvironmentData debugExplorationEnvironment;
+        
+        [SerializeField] private EncounterData debugEncounterData;
+        
+        [SerializeField] private BattleEnvironment debugBattleEnvironment;
 
         [SerializeField] private bool isDebugMode = false;
         
@@ -28,9 +34,19 @@ namespace Akashic.Runtime.MonoSystems.GameDebug
             return debugInventoryData;
         }
         
-        public ExplorationEnvironmentData GetDebugEnvironment()
+        public ExplorationEnvironmentData GetDebugExplorationEnvironment()
         {
-            return debugEnvironment;
+            return debugExplorationEnvironment;
+        }
+        
+        public EncounterData GetDebugEncounterData()
+        {
+            return debugEncounterData;
+        }
+        
+        public BattleEnvironment GetDebugBattleEnvironment()
+        {
+            return debugBattleEnvironment;
         }
     }
 }
