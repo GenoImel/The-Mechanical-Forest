@@ -1,6 +1,6 @@
 # The Mechanical Forest
 
-Visual Novel Side scrolling Dungeon exploration role-playing game where the player controls a party of four exploring newly discovered ancient ruins.
+Visual Novel dungeon exploration role-playing game where the player controls a party of four exploring newly discovered ancient ruins.
 
 
 ## Requirements
