@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7239693110947323540}
-  - component: {fileID: 8413033738672669210}
+  - component: {fileID: 1195165227728986147}
   m_Layer: 0
   m_Name: StatHandler
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8097675771911377134}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8413033738672669210
+--- !u!114 &1195165227728986147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,26 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 81809740709155500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009af11e64f843a89ff122d6d4d7c01e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2118eaea77cdb674ba08920734664f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  currentAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  currentDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
-  baseAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  baseDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
+  baseAbilityPoints: 0
+  bufferHitPoints: 0
+  actionPips: 0
 --- !u!1 &2521213706750228457
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,52 +180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad16c3d1636d4cf39b7c34e58b790305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6114409160530044301
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1457016670955141822}
-  - component: {fileID: 5887332124514857769}
-  m_Layer: 0
-  m_Name: ResourceHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1457016670955141822
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114409160530044301}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8097675771911377134}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5887332124514857769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114409160530044301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75edc7ab769499cb9a4dc3594ea4db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentExperience: 0
 --- !u!1 &6177463686163112826
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +302,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7239693110947323540}
-  - {fileID: 1457016670955141822}
   - {fileID: 5800131064492369956}
   - {fileID: 1853989544593257588}
   - {fileID: 5522239736028610213}
@@ -382,12 +322,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyMemberName: Airy
-  partyMemberStatHandler: {fileID: 8413033738672669210}
-  partyMemberResourceHandler: {fileID: 5887332124514857769}
+  statHandler: {fileID: 1195165227728986147}
   partyMemberSkillsHandler: {fileID: 5639728466524925750}
   partyMemberAnimationHandler: {fileID: 6444313145027825761}
   partyMemberEffectHandler: {fileID: 6813837788526260446}
   partyMemberSoundHandler: {fileID: 8112620807275485119}
+  partyMemberData: {fileID: 0}
 --- !u!65 &6785110164781857498
 BoxCollider:
   m_ObjectHideFlags: 0

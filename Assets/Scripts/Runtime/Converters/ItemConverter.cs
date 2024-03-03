@@ -1,6 +1,7 @@
-﻿using Akashic.Runtime.Serializers;
-using Akashic.ScriptableObjects.Inventory;
+﻿using Akashic.ScriptableObjects.Inventory;
 using System.Collections.Generic;
+using Akashic.Runtime.Serializers;
+using Akashic.Runtime.Serializers.Save;
 
 namespace Akashic.Runtime.Converters
 {
@@ -8,12 +9,14 @@ namespace Akashic.Runtime.Converters
 	{
 		public static List<InventoryItem> ConvertInventoryDataToPartyInventory(InventoryData inventoryData)
 		{
-			List<InventoryItem> inventoryItems = new List<InventoryItem>();
+			var inventoryItems = new List<InventoryItem>();
+			
 			foreach (var keyValuePair in inventoryData.items)
 			{
 				var inventoryItem = ConvertItemDataToInventoryItem(keyValuePair.Key, keyValuePair.Value);
 				inventoryItems.Add(inventoryItem);
 			}
+			
 			return inventoryItems;
 		}
 
@@ -22,10 +25,18 @@ namespace Akashic.Runtime.Converters
 			InventoryItem inventoryItem = null;
 			switch (itemData)
 			{
-				case RelicData relicData:
+				case WeaponData weaponData:
 					{
-						inventoryItem = new RelicItem(
-							relicData.itemId,
+						inventoryItem = new WeaponItem(
+							weaponData.itemId,
+							count
+							);
+						break;
+					}
+				case ArmorData armorData:
+					{
+						inventoryItem = new ArmorItem(
+							armorData.itemId,
 							count
 							);
 						break;
@@ -38,10 +49,34 @@ namespace Akashic.Runtime.Converters
 							);
 						break;
 					}
+				case RelicData relicData:
+					{
+						inventoryItem = new RelicItem(
+							relicData.itemId,
+							count
+							);
+						break;
+					}
 				case ConsumableData consumableData:
 					{
 						inventoryItem = new ConsumableItem(
 							consumableData.itemId,
+							count
+							);
+						break;
+					}
+				case NonConsumableData nonConsumableData:
+					{
+						inventoryItem = new NonConsumableItem(
+							nonConsumableData.itemId,
+							count
+							);
+						break;
+					}
+				case KeyItemData keyItemData:
+					{
+						inventoryItem = new KeyItem(
+							keyItemData.itemId,
 							count
 							);
 						break;

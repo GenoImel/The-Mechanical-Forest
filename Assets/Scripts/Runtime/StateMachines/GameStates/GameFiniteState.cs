@@ -5,9 +5,9 @@ namespace Akashic.Runtime.StateMachines.GameStates
 {
     internal class GameFiniteState : IFiniteState
     {
-        public Type GetStateType()
+        public Type GetFiniteStateType()
         {
-            return typeof(GameState);
+            return typeof(GameFiniteState);
         }
 
         /// <summary>

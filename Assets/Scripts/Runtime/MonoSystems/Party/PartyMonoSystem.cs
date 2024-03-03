@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.Converters;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.GameDebug;
-using Akashic.Runtime.Serializers.Party;
+using Akashic.Runtime.Serializers.Save;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Party
@@ -33,7 +32,7 @@ namespace Akashic.Runtime.MonoSystems.Party
 		public void CreateNewParty()
 		{
 			partyMembers = PartyMemberConverter.
-				ConvertPartyMemberDataListToParyMemberList(
+				ConvertPartyMemberDataListToPartyMemberList(
 					debugMonoSystem.IsDebugMode ? 
 						debugMonoSystem.GetDebugParty() : configMonoSystem.GetDefaultParty()
 						);

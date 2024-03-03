@@ -1,9 +1,10 @@
-using Akashic.Core.Messages;
 using Akashic.Core.StateMachines;
 
 namespace Akashic.Runtime.StateMachines.BattleStates
 {
-    internal sealed class BattleStateMachine : BaseStateMachine, IBattleStateMachine
+    internal sealed class BattleStateMachine : 
+        BaseStateMachine<BattleStateChangedMessage>, 
+        IBattleStateMachine
     {
         private void Awake()
         {
@@ -45,7 +46,11 @@ namespace Akashic.Runtime.StateMachines.BattleStates
             SetState(new BattleFiniteState.None());
         }
         
-        protected override IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState)
+        protected override BattleStateChangedMessage CreateStateChangedMessage
+        (
+            IFiniteState prevState, 
+            IFiniteState nextState
+        )
         {
             return new BattleStateChangedMessage(
                 prevState as BattleFiniteState,

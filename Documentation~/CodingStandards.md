@@ -423,37 +423,8 @@ In short, `MonoSystems` are essential components that facilitate the sharing of 
 
 ## States
 
-Provided with the game architecture are core scripts for creating `States`, or finite state machines (FSMs). These state machines require the implementation of specific pieces of the core architecture in order to enforce adherence to a specific state change pattern, ensuring that `State Change Events` always happen in a specific order in every single FSM. Let's step through an `ExampleStateMachine` to better illustrate this, lets start by defining an overall `IState` definition specific to our `ExampleStateMachine`:
+Provided with the game architecture are core scripts for creating finite state machines (FSMs). These state machines require the implementation of specific pieces of the core architecture in order to enforce adherence to a specific state change pattern, ensuring that `State Change Events` always happen in a specific order in every single FSM. Let's step through an `ExampleStateMachine` to better illustrate this, lets start by defining an overall `IFiniteState` definition specific to our `ExampleStateMachine`:
 
-```csharp
-// - System is needed for returning the typeof FiniteStates within our State definition.
-//
-// - Akashic.Core.StateMachines is required for inheriting from the IState interface.
-//   This allows us to generically type our different States, enforcing type-safety
-//   and allowing us to define State definitions with FiniteStates.
-//
-//   In short, we are creating class-based states, rather than using enums.
-using System; 
-using Akashic.Core.StateMachines; 
-
-// The namespace of any scripts for a State Machine should always match its file/folder location.
-namespace Akashic.Runtime.States.ExampleStates
-{
-    // All State definitions must inherit from the IState interface for type-safety.
-    // This prevents us from mixing up different States from other State Machines.
-    internal sealed class ExampleState : IState
-    {
-        // We must provide a method for returning the type of FiniteState that this State uses.
-        // This enforces type-safety for our class-based States.
-        public Type GetFiniteStateType()
-        {
-            return typeof(ExampleFiniteState);
-        }
-    }
-}
-```
-
-Now that we have a parent type defined for our `IFiniteStates`, lets go on to define some class-based finite states for our `ExampleStateMachine`. To do this, create a separate script called `ExampleFiniteStates`:
 
 ```csharp
 // - System is needed for returning the typeof State for an individual FiniteState.
@@ -469,15 +440,15 @@ namespace Akashic.Runtime.States.ExampleStates
 {
     // All State definitions must inherit from the IFiniteState interface for type-safety.
     // This prevents us from mixing up different States from other State Machines.
-    internal abstract class ExampleFiniteStates : IFiniteState
+    internal abstract class ExampleFiniteState : IFiniteState
     {
 
         // We must provide a method for returning the type of State that this FiniteState belongs to.
         // This concludes the enforcement of type-safety for our State Machine
         // within our class-based State definition.
-        public Type GetStateType()
+        public Type GetFiniteStateType()
         {
-            return typeof(ExampleState);
+            return typeof(ExampleFiniteState);
         }
         
         // Now we can define some FiniteStates for our State Machine!
@@ -498,7 +469,7 @@ namespace Akashic.Runtime.States.ExampleStates
 }
 ```
 
-Now we need to a create a `StateChangedMessage` that is specific to our `State Machine`'s `IState` and `IFiniteState` types for overall type-safety. This will allow us to communicate the `StateChangedMessage` `Event` without the risk of mixing types between different `State Machines`:
+Now we need to a create a `StateChangedMessage` that is specific to our `State Machine`'s `IFiniteState` types for overall type-safety. This will allow us to communicate the `StateChangedMessage` `Event` without the risk of mixing types between different `State Machines`:
 
 ```csharp
 // We need to use the Akashic.Core.StateMachines namespace to inherit from the StateChangedMessage<T> class.
@@ -596,8 +567,12 @@ namespace Akashic.Runtime.States.ExampleStates
     // - Inherit from BaseStateMachine, which contains MonoBehaviour, so that we can add the
     //   State Machine to a GameObject as a component. This also enforces the use of specific abstract
     //   methods that are required for a StateChanged Event to work properly.
+    // - Specify the StateChangedMessage as a type parameter for the BaseStateMachine, so that the
+    //   overlying type is preserved when it is published over the message bus.
     // - Inherit from the companion interface, in this case IExampleStateMachine.
-    internal sealed class ExampleStateMachine : BaseStateMachine, IExampleStateMachine
+    internal sealed class ExampleStateMachine : 
+    BaseStateMachine<ExampleStateChangedMessage>, 
+    IExampleStateMachine
     {
         // We must use the MonoBehaviour Lifecycle method, Awake(), and use it to set the initial state.
         private void Awake()
@@ -655,7 +630,7 @@ namespace Akashic.Runtime.States.ExampleStates
         // The use of this method is enforced by the BaseStateMachine class. We must override it in order to 
         // return the specific StateChangedMessage that we created for our ExampleStateMachine.
         // In this case, we will be returning the ExampleStateChangedMessage that we created earlier.
-        protected override IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState)
+        protected override ExampleStateChangedMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState)
         {
             // We enforce that the constructor parameters for prevState and nextState
             // must be types of ExampleFiniteState.
@@ -697,7 +672,7 @@ namespace Akashic.Runtime.States.ExampleStates
 }
 ```
 
-To summarize the above templates and commentary, `States` represent Finite State Machines (FSMs). They mandate specific implementation patterns to ensure that state transitions, known as `State Change Events`, occur in a designated sequence. Through the provided core scripts, the FSMs are designed to be class-based rather than reliant on enums, offering a more flexible and type-safe approach. This method of state management requires the use of `interfaces` and companion scripts such as `IState` and `IFiniteState`, to define and manage the FSMs. The sample provided, `ExampleStateMachine`, illustrates this by defining class-based states like `RedState`, `BlueState`, and `GreenState`. Additionally, `Message Events` like `StateChangedMessage` enable communication between different FSMs, allowing for a hierarchical structure of states. The use of `interfaces` and base classes, such as `BaseStateMachine`, ensure a consistent state change pattern across the game, whereas the use of `IStateMachine` facilitates runtime bootstrapping and the use of the service locator pattern through generic typing.
+To summarize the above templates and commentary, `States` represent Finite State Machines (FSMs). They mandate specific implementation patterns to ensure that state transitions, known as `State Change Events`, occur in a designated sequence. Through the provided core scripts, the FSMs are designed to be class-based rather than reliant on enums, offering a more flexible and type-safe approach. This method of state management requires the use of `interfaces` and companion scripts such as  `IFiniteState` to define and manage the FSMs. The sample provided, `ExampleStateMachine`, illustrates this by defining class-based states like `RedState`, `BlueState`, and `GreenState`. Additionally, `Message Events` like `StateChangedMessage` enable communication between different FSMs, allowing for a hierarchical structure of states. The use of `interfaces` and base classes, such as `BaseStateMachine`, ensure a consistent state change pattern across the game, whereas the use of `IStateMachine` facilitates runtime bootstrapping and the use of the service locator pattern through generic typing.
 
 ## Message Events
 

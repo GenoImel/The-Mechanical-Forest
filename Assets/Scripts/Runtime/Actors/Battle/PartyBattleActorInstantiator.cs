@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.Serializers.Party;
+using Akashic.Runtime.MonoSystems.PartyResources;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle
@@ -14,17 +14,18 @@ namespace Akashic.Runtime.Actors.Battle
         [Header("Instantiation")]
         [SerializeField] private List<Transform> partyBattleActorSpawnPoints;
         
-        private List<PartyMember> currentPartyMembers;
         private IPartyMonoSystem partyMonoSystem;
+        private IPartyBattleMonoSystem partyBattleMonoSystem;
         
         private void Awake()
         {
             partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
+            partyBattleMonoSystem = GameManager.GetMonoSystem<IPartyBattleMonoSystem>();
         }
 
         public void InstantiatePartyBattleActors()
         {
-            currentPartyMembers = partyMonoSystem.GetPartyMembers();
+            var currentPartyMembers = partyMonoSystem.GetPartyMembers();
             
             for (var i = 0; i < currentPartyMembers.Count; i++)
             {
@@ -35,8 +36,11 @@ namespace Akashic.Runtime.Actors.Battle
                 var instantiatedPartyBattleActor = Instantiate(partyBattleActor, transform);
 
                 instantiatedPartyBattleActor.transform.position = partyBattleActorSpawnPoints[i].position;
-                partyBattleActor.InitializePartyMemberFromSaveData(partyMember);
+                partyBattleActor.InitializePartyBattleActor(partyMember);
+                partyBattleMonoSystem.AddPartyBattleActor(instantiatedPartyBattleActor);
             }
+            
+            partyBattleMonoSystem.InitializeAbilityPoints();
         }
     }
 }

@@ -16,3 +16,7 @@ MonoBehaviour:
   itemId: necklace
   description: 
   icon: {fileID: 0}
+  might: 3
+  deftness: 3
+  tenacity: 3
+  resolve: 3

@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6947738117682167858}
-  - {fileID: 6590610400544592838}
   - {fileID: 65950613351753574}
   - {fileID: 5780293282602613848}
   - {fileID: 410663470594869776}
@@ -54,12 +53,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partyMemberName: Lena
-  partyMemberStatHandler: {fileID: 5019241346625645944}
-  partyMemberResourceHandler: {fileID: 3236292292613072333}
+  statHandler: {fileID: 511664780099253833}
   partyMemberSkillsHandler: {fileID: 7795412911546050061}
   partyMemberAnimationHandler: {fileID: 3041900439773580229}
   partyMemberEffectHandler: {fileID: 4465319090699610081}
   partyMemberSoundHandler: {fileID: 977340300945531368}
+  partyMemberData: {fileID: 0}
 --- !u!65 &3446931092266747192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -161,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6947738117682167858}
-  - component: {fileID: 5019241346625645944}
+  - component: {fileID: 511664780099253833}
   m_Layer: 0
   m_Name: StatHandler
   m_TagString: Untagged
@@ -184,7 +183,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1365369433852282900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5019241346625645944
+--- !u!114 &511664780099253833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,26 +192,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2028635063436260079}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009af11e64f843a89ff122d6d4d7c01e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2118eaea77cdb674ba08920734664f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  currentAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  currentDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
-  baseAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  baseDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
+  baseAbilityPoints: 0
+  bufferHitPoints: 0
+  actionPips: 0
 --- !u!1 &2085716278858002874
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,52 +327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6409085e2c46f5a3f12db21d3c2ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6438609596675322073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6590610400544592838}
-  - component: {fileID: 3236292292613072333}
-  m_Layer: 0
-  m_Name: ResourceHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6590610400544592838
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6438609596675322073}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1365369433852282900}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3236292292613072333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6438609596675322073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75edc7ab769499cb9a4dc3594ea4db4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentExperience: 0
 --- !u!1 &6697231282856678197
 GameObject:
   m_ObjectHideFlags: 0

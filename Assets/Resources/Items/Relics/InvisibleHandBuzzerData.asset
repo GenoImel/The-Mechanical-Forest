@@ -17,3 +17,7 @@ MonoBehaviour:
   description: On hit of the attack ability of the attacking character, theres a
     5% to inflict an attack down debuff.
   icon: {fileID: 0}
+  might: 3
+  deftness: 3
+  tenacity: 3
+  resolve: 3

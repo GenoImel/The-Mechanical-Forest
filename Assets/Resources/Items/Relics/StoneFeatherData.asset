@@ -16,3 +16,7 @@ MonoBehaviour:
   itemId: stonefeather
   description: Increase Accuracy by 10% but decreases evade by 10%.
   icon: {fileID: 0}
+  might: 4
+  deftness: 4
+  tenacity: 4
+  resolve: 4

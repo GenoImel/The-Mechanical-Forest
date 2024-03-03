@@ -58,7 +58,7 @@ namespace Akashic.Runtime.Utilities.FileStream
             var fileText = "";
             try
             {
-                using (StreamReader reader = new StreamReader(fullFilePath))
+                using (var reader = new StreamReader(fullFilePath))
                 {
                     fileText = await reader.ReadToEndAsync();
                 }

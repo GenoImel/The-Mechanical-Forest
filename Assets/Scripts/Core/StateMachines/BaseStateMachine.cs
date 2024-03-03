@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Akashic.Core.StateMachines
 {
-    internal abstract class BaseStateMachine : MonoBehaviour, IStateMachine
+    internal abstract class BaseStateMachine<TMessage> : MonoBehaviour, IStateMachine
+    where TMessage : IMessage
     {
         private IFiniteState currentState;
         private IFiniteState prevState;
@@ -29,7 +30,7 @@ namespace Akashic.Core.StateMachines
                 return;
             }
             
-            if (currentState != null && currentState.GetStateType() != nextState.GetStateType())
+            if (currentState != null && currentState.GetFiniteStateType() != nextState.GetFiniteStateType())
             {
                 throw new Exception($"Invalid state transition from \"{currentState}\" to \"{nextState}\".");
             }
@@ -54,6 +55,6 @@ namespace Akashic.Core.StateMachines
         /// Creates a State Changed Message while enforcing adherence of a state change pattern
         /// that communicates specifically <paramref name="prevState"/> and <paramref name="nextState"/>.
         /// </summary>
-        protected abstract IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState);
+        protected abstract TMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState);
     }
 }

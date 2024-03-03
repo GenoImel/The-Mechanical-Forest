@@ -1,4 +1,5 @@
-using Akashic.Runtime.Serializers.Party;
+using Akashic.Runtime.Serializers.Save;
+using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle
@@ -9,9 +10,7 @@ namespace Akashic.Runtime.Actors.Battle
         [SerializeField] private string partyMemberName;
 
         [Header("Handlers")]
-        [SerializeField] public PartyMemberStatHandler partyMemberStatHandler;
-
-        [SerializeField] public PartyMemberResourceHandler partyMemberResourceHandler;
+        [SerializeField] public PartyBattleActorStatHandler statHandler;
 
         [SerializeField] public PartyMemberSkillsHandler partyMemberSkillsHandler;
 
@@ -20,13 +19,14 @@ namespace Akashic.Runtime.Actors.Battle
         [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
 
         [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
+        
+        public PartyMemberData partyMemberData;
 
         public string PartyMemberName => partyMemberName;
 
-        public void InitializePartyMemberFromSaveData(PartyMember partyMember)
+        public void InitializePartyBattleActor(PartyMember partyMember)
         {
-            //partyMemberStatHandler.InitializePartyMemberFromSaveData();
-            //partyMemberResourceHandler.InitializePartyMemberFromSaveData();
+            statHandler.InitializePartyBattleActorStats(partyMember);
         }
     }
 }

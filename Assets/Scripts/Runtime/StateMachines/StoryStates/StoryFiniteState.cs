@@ -5,9 +5,9 @@ namespace Akashic.Runtime.StateMachines.StoryStates
 {
     internal class StoryFiniteState : IFiniteState
     {
-        public Type GetStateType()
+        public Type GetFiniteStateType()
         {
-            return typeof(StoryState);
+            return typeof(StoryFiniteState);
         }
 
         /// <summary>

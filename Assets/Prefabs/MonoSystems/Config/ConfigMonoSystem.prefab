@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2245875501120074731}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8301797884974361307
 MonoBehaviour:
@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f76c6afa5a4ea0a78bb7b771f2f2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configData: {fileID: 11400000, guid: 4a361950d1c87be47a0c590d293771cb, type: 2}
+  saveConfigData: {fileID: 11400000, guid: 4a361950d1c87be47a0c590d293771cb, type: 2}
   inventoryData: {fileID: 11400000, guid: 3add62a54773d584bb25db3f074f6de2, type: 2}
   partyData: {fileID: 11400000, guid: 2211ebc6f2ae0df44b0beb77bc4c429a, type: 2}
+  explorationEnvironmentData: {fileID: 11400000, guid: b7417838e73ccd14ab57a2448d06a630, type: 2}
+  battleConfigData: {fileID: 11400000, guid: 1b791f9e960088849ba9c9d377225d69, type: 2}

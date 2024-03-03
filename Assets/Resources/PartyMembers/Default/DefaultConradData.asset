@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: DefaultConradData
   m_EditorClassIdentifier: 
   partyMemberName: Conrad
-  baseHealth: 240
-  baseLevel: 21
+  baseLevel: 1
   baseExp: 0
-  basePhysicalAttack: 5
-  baseMagicalAttack: 5
-  baseAccuracy: 1.2
-  basePhysicalDefense: 5
-  baseMagicalDefense: 5
-  baseEvade: 0.4
+  baseMight: 2
+  baseDeftness: 2
+  baseTenacity: 2
+  baseResolve: 2
   skills:
   - {fileID: 11400000, guid: 654da730b48f4f44f95d90d926766892, type: 2}
   - {fileID: 11400000, guid: e47f11d9f35fcb547bdb70905a74d22c, type: 2}
   - {fileID: 11400000, guid: c2f00765c75224c4580dfcf15dfdbcb5, type: 2}
   - {fileID: 11400000, guid: 8f55da00b8106a7469fa9bcc6e11e9bd, type: 2}
   relic: {fileID: 11400000, guid: ee99575d78beb7740baa57774a69636e, type: 2}
-  Accessory: {fileID: 11400000, guid: 4c09026c9977c654c904b67258463dc4, type: 2}
+  accessory: {fileID: 0}

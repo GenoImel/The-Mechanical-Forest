@@ -1,4 +1,3 @@
-using System;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.GameDebug;
 using Akashic.Runtime.StateMachines.BattleStates;

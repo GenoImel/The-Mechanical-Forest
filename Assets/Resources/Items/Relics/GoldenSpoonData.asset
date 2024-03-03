@@ -16,3 +16,7 @@ MonoBehaviour:
   itemId: goldenspoon
   description: Healing output is increased by 5%.
   icon: {fileID: 0}
+  might: 2
+  deftness: 2
+  tenacity: 2
+  resolve: 2

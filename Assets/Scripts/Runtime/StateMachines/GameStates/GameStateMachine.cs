@@ -1,9 +1,10 @@
-using Akashic.Core.Messages;
 using Akashic.Core.StateMachines;
 
 namespace Akashic.Runtime.StateMachines.GameStates
 {
-    internal sealed class GameStateMachine : BaseStateMachine, IGameStateMachine
+    internal sealed class GameStateMachine : 
+        BaseStateMachine<GameStateChangedMessage>, 
+        IGameStateMachine
     {
         private void Awake()
         {
@@ -40,7 +41,11 @@ namespace Akashic.Runtime.StateMachines.GameStates
             SetState(new GameFiniteState.MainMenu());
         }
 
-        protected override IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState)
+        protected override GameStateChangedMessage CreateStateChangedMessage
+        (
+            IFiniteState prevState, 
+            IFiniteState nextState
+        )
         {
             return new GameStateChangedMessage(
                 prevState as GameFiniteState,

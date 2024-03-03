@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using Akashic.Core;
 using Akashic.Core.MonoSystems;
-using Akashic.Runtime.Serializers;
+using Akashic.Runtime.Serializers.Save;
 
 namespace Akashic.Runtime.MonoSystems.Inventory
 {

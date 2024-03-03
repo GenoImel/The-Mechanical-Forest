@@ -10,12 +10,12 @@ namespace Akashic.Runtime.MonoSystems.Config.Settings
         public readonly List<string> saveFileNames;
         public readonly int saveSlotNameCharacterLimit;
 
-        public SaveConfigSettings(ConfigData config)
+        public SaveConfigSettings(SaveConfigData saveConfig)
         {
-            parentSaveFolderName = config.parentSaveFolderName;
-            saveFolderNames = config.saveFolderNames;
-            saveFileNames = config.saveFileNames;
-            saveSlotNameCharacterLimit = config.saveSlotNameCharacterLimit;
+            parentSaveFolderName = saveConfig.parentSaveFolderName;
+            saveFolderNames = saveConfig.saveFolderNames;
+            saveFileNames = saveConfig.saveFileNames;
+            saveSlotNameCharacterLimit = saveConfig.saveSlotNameCharacterLimit;
         }
     }
 }
