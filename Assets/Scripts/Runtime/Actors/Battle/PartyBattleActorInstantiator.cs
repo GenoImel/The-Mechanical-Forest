@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.MonoSystems.PartyResources;
+using Akashic.Runtime.MonoSystems.PartyBattle;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle

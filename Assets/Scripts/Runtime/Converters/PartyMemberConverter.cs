@@ -48,13 +48,23 @@ namespace Akashic.Runtime.Converters
 			return partyMembers;
 		}
 
-		public static PartyMember ConvertPartyMemberDataToPartyMember(PartyMemberData partyMemberData)
+		private static PartyMember ConvertPartyMemberDataToPartyMember(PartyMemberData partyMemberData)
 		{
+			var weaponId = partyMemberData.weapon?.itemId ?? ""; // Assuming 0 is an invalid or "no item" ID
+			var armorId = partyMemberData.armor?.itemId ?? "";
+			var relicId = partyMemberData.relic?.itemId ?? "";
+
+			// Safe handling for accessories: Filter out any null accessories before selecting itemId
+			var accessoryIds = partyMemberData.accessories
+				?.Where(accessory => accessory != null) // Ensure accessory is not null
+				.Select(accessory => accessory.itemId)
+				.ToList() ?? new List<string>(); // Provide an empty list if accessories are null
+
 			var partyMemberEquipment = new PartyMemberEquipment(
-				partyMemberData.weapon.itemId,
-				partyMemberData.armor.itemId,
-				partyMemberData.relic.itemId,
-				partyMemberData.accessories.Select(accessory => accessory.itemId).ToList()
+				weaponId,
+				armorId,
+				relicId,
+				accessoryIds
 			);
 
 			var calculatedHitPoints = StatsMath.CalculateMaxHitPoints(partyMemberData);

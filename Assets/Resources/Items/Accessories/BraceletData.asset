@@ -16,7 +16,25 @@ MonoBehaviour:
   itemId: bracelet
   description: 
   icon: {fileID: 0}
-  might: 1
-  deftness: 1
-  tenacity: 1
-  resolve: 1
+  might:
+    value: 0
+    modifierType: 1
+  deftness:
+    value: 0
+    modifierType: 0
+  tenacity:
+    value: 0
+    modifierType: 0
+  resolve:
+    value: 0
+    modifierType: 0
+  baseAbilityPoints:
+    value: 0
+    modifierType: 0
+  baseAbilityPointsRegen:
+    value: 0
+    modifierType: 0
+  maxHitPoints:
+    value: 0
+    modifierType: 0
+  criticalHitPercentIncrease: 0

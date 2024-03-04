@@ -3,9 +3,9 @@ using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using UnityEngine;
 
-namespace Akashic.Runtime.MonoSystems.PartyResources
+namespace Akashic.Runtime.MonoSystems.PartyBattle
 {
-    internal sealed class PartyBattleMonoSystem : IPartyBattleMonoSystem
+    internal sealed class PartyBattleMonoSystem : MonoBehaviour, IPartyBattleMonoSystem
     {
         [Header("Battle Actors")]
         [SerializeField] private List<PartyBattleActor> partyBattleActors;

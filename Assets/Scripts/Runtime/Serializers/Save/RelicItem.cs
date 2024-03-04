@@ -1,16 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using Akashic.Runtime.Serializers.Save;
+﻿using System;
 
-namespace Akashic.Runtime.Serializers
+namespace Akashic.Runtime.Serializers.Save
 {
 	[Serializable]
 	internal sealed class RelicItem : InventoryItem
 	{
-		public RelicItem(
-			[JsonProperty("itemId")] string itemId, 
-			[JsonProperty("itemCount")] int itemCount
-			) : base(itemId, itemCount)
+		public RelicItem(string itemId, int itemCount) : base(itemId, itemCount)
 		{
 
 		}

@@ -12,5 +12,6 @@ namespace Akashic.ScriptableObjects.Inventory
 		public StatModifier baseAbilityPoints;
 		public StatModifier baseAbilityPointsRegen;
 		public StatModifier maxHitPoints;
+		public int criticalHitPercentIncrease;
 	}
 }

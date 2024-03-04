@@ -83,68 +83,6 @@ namespace Akashic.Runtime.Utilities.GameMath.Stats
                 armor => armor.baseAbilityPointsRegen
             );
         }
-
-        private static int CalculateTotalStat(
-            PartyMemberData partyMemberData, 
-            Func<AccessoryData, StatModifier> accessoryStatSelector, 
-            Func<ArmorData, StatModifier> armorStatSelector, 
-            int baseStat)
-        {
-            var flatBonus = partyMemberData.accessories
-                                .Sum(accessory => 
-                                    accessoryStatSelector(accessory).modifierType == StatModifierType.Flat 
-                                    ? accessoryStatSelector(accessory).value 
-                                    : 0)
-                            + (armorStatSelector(partyMemberData.armor).modifierType == StatModifierType.Flat 
-                                ? armorStatSelector(partyMemberData.armor).value 
-                                : 0);
-            
-            var percentBonus = partyMemberData.accessories
-                                   .Sum(accessory => 
-                                       accessoryStatSelector(accessory).modifierType == StatModifierType.Percent 
-                                       ? accessoryStatSelector(accessory).value 
-                                       : 0)
-                               + (armorStatSelector(partyMemberData.armor).modifierType == StatModifierType.Percent 
-                                   ? armorStatSelector(partyMemberData.armor).value 
-                                   : 0);
-
-            var totalStat = baseStat + flatBonus;
-            totalStat += (int)(totalStat * (percentBonus / 100.0));
-            return totalStat;
-        }
-
-        private static int CalculateTotalStat(
-            PartyMemberData partyMemberData, 
-            Func<AccessoryData, StatModifier> accessorySelector, 
-            Func<ArmorData, StatModifier> armorSelector)
-        {
-            var flatBonus = partyMemberData.accessories
-                                .Sum(accessory => 
-                                    accessorySelector(accessory).modifierType == StatModifierType.Flat 
-                                        ? accessorySelector(accessory).value 
-                                        : 0)
-                            + (armorSelector(partyMemberData.armor).modifierType == StatModifierType.Flat 
-                                ? armorSelector(partyMemberData.armor).value 
-                                : 0);
-            
-            var percentBonus = partyMemberData.accessories
-                                   .Sum(accessory => 
-                                       accessorySelector(accessory).modifierType == StatModifierType.Percent 
-                                           ? accessorySelector(accessory).value 
-                                           : 0)
-                               + (armorSelector(partyMemberData.armor).modifierType == StatModifierType.Percent 
-                                   ? armorSelector(partyMemberData.armor).value 
-                                   : 0);
-
-            var totalBonus = flatBonus;
-            
-            if (percentBonus > 0)
-            {
-                totalBonus += (int)(flatBonus * (percentBonus / 100.0));
-            }
-
-            return totalBonus;
-        }
         
         private static int CalculateEquipmentMaxHitPointBonus(PartyMemberData partyMemberData)
         {
@@ -154,6 +92,90 @@ namespace Akashic.Runtime.Utilities.GameMath.Stats
                 armor => armor.maxHitPoints, 
                 0
             );
+        }
+
+        private static int CalculateTotalStat(
+            PartyMemberData partyMemberData, 
+            Func<AccessoryData, StatModifier> accessoryStatSelector, 
+            Func<ArmorData, StatModifier> armorStatSelector, 
+            int baseStat)
+        {
+            var flatBonus = CalculateFlatBonus(partyMemberData, accessoryStatSelector, armorStatSelector);
+            var percentBonus = CalculatePercentBonus(partyMemberData, accessoryStatSelector, armorStatSelector);
+
+            var totalStat = baseStat + flatBonus;
+            totalStat *= (int)(1 + percentBonus / 100.0);
+            return totalStat;
+        }
+
+        private static int CalculateTotalStat(
+            PartyMemberData partyMemberData, 
+            Func<AccessoryData, StatModifier> accessoryStatSelector, 
+            Func<ArmorData, StatModifier> armorStatSelector)
+        {
+
+            var flatBonus = CalculateFlatBonus(partyMemberData, accessoryStatSelector, armorStatSelector);
+            var percentBonus = CalculatePercentBonus(partyMemberData, accessoryStatSelector, armorStatSelector);
+            
+            var totalStat = flatBonus;
+            totalStat *= (int)(1 + percentBonus / 100.0);
+            return totalStat;
+        }
+
+        private static int CalculateFlatBonus(
+            PartyMemberData partyMemberData,
+            Func<AccessoryData, StatModifier> accessoryStatSelector,
+            Func<ArmorData, StatModifier> armorStatSelector)
+        {
+            var flatBonus = 0;
+            
+            if (partyMemberData.accessories != null)
+            {
+                flatBonus += partyMemberData.accessories
+                    .Where(accessory => accessory != null)
+                    .Sum(accessory => accessoryStatSelector(accessory).modifierType == StatModifierType.Flat 
+                        ? accessoryStatSelector(accessory).value 
+                        : 0);
+            }
+
+            if (partyMemberData.armor != null)
+            {
+                var armorStat = armorStatSelector(partyMemberData.armor);
+                if (armorStat.modifierType == StatModifierType.Flat)
+                {
+                    flatBonus += armorStat.value;
+                }
+            }
+
+            return flatBonus;
+        }
+
+        private static int CalculatePercentBonus(
+            PartyMemberData partyMemberData,
+            Func<AccessoryData, StatModifier> accessoryStatSelector,
+            Func<ArmorData, StatModifier> armorStatSelector)
+        {
+            var percentBonus = 0;
+            
+            if (partyMemberData.accessories != null)
+            {
+                percentBonus += partyMemberData.accessories
+                    .Where(accessory => accessory != null)
+                    .Sum(accessory => accessoryStatSelector(accessory).modifierType == StatModifierType.Percent 
+                        ? accessoryStatSelector(accessory).value 
+                        : 0);
+            }
+
+            if (partyMemberData.armor != null)
+            {
+                var armorStat = armorStatSelector(partyMemberData.armor);
+                if (armorStat.modifierType == StatModifierType.Percent)
+                {
+                    percentBonus += armorStat.value;
+                }
+            }
+            
+            return percentBonus;
         }
     }
 }

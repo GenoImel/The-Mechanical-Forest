@@ -13,7 +13,7 @@ namespace Akashic.Runtime.Serializers.Save
 		public int ItemCount { private set; get; }
 
 		[JsonConstructor]
-		public InventoryItem(
+		protected InventoryItem(
 			[JsonProperty("itemId")] string itemId,
 			[JsonProperty("itemCount")] int itemCount
 			)

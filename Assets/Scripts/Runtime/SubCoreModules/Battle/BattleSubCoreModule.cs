@@ -1,4 +1,5 @@
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.PartyBattle;
 using Akashic.Runtime.StateMachines.BattleStates;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace Akashic.Runtime.SubCoreModules.Battle
 {
     internal sealed class BattleSubCoreModule : SubCoreModule
     {
+        [Header("MonoSystems")]
+        [SerializeField] private PartyBattleMonoSystem partyBattleMonoSystem;
+        
         [Header("StateMachines")]
         [SerializeField] private BattleStateMachine battleStateMachine;
 
@@ -28,7 +32,7 @@ namespace Akashic.Runtime.SubCoreModules.Battle
 
         protected override void InitializeSubCoreMonoSystems()
         {
-            
+            monoSystemManager.AddMonoSystem<PartyBattleMonoSystem, IPartyBattleMonoSystem>(partyBattleMonoSystem);
         }
         
         protected override void SetSubCoreParentsActive()

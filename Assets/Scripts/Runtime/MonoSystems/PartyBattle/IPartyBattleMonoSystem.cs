@@ -1,7 +1,7 @@
 using Akashic.Core.MonoSystems;
 using Akashic.Runtime.Actors.Battle;
 
-namespace Akashic.Runtime.MonoSystems.PartyResources
+namespace Akashic.Runtime.MonoSystems.PartyBattle
 {
     internal interface IPartyBattleMonoSystem : IMonoSystem
     {
