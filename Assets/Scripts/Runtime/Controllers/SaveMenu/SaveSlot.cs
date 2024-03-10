@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using Akashic.Core;
-using Akashic.Runtime.Converters;
+using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.StateMachines.GameStates;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Save;
 using Akashic.Runtime.MonoSystems.Inventory;
-using Akashic.Runtime.Serializers;
+using Akashic.Runtime.Serializers.Save;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,6 +28,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
         private ISaveMonoSystem saveMonoSystem;
 		private IPartyMonoSystem partyMonoSystem;
 		private IInventoryMonoSystem inventoryMonoSystem;
+        private IConfigMonoSystem configMonoSystem;
 
 		private bool isAwaitingNewSlotName = false;
         
@@ -37,6 +37,7 @@ namespace Akashic.Runtime.Controllers.SaveMenu
             saveMonoSystem = GameManager.GetMonoSystem<ISaveMonoSystem>();
 			partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
 			inventoryMonoSystem = GameManager.GetMonoSystem<IInventoryMonoSystem>();
+            configMonoSystem = GameManager.GetMonoSystem<IConfigMonoSystem>();
 		}
 
         private void Start()
@@ -72,10 +73,16 @@ namespace Akashic.Runtime.Controllers.SaveMenu
 
             inventoryMonoSystem.CreateNewInventory();
 
+            var saveLocation = new PartyLocation(
+                configMonoSystem.GetRoomId(),
+                configMonoSystem.GetSpawnPointId()
+                );
+
 			var saveFile = new SaveFile(
 				saveSlotNameText.text,
 				partyMonoSystem.GetPartyMembers(),
-				inventoryMonoSystem.GetInventory());
+				inventoryMonoSystem.GetInventory(),
+                saveLocation);
             saveMonoSystem.InitializeNewFile(saveFile,this.saveFileName);
             
             GameManager.Publish(new HideSaveMenuMessage());

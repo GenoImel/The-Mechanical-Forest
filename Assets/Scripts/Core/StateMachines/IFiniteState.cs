@@ -9,6 +9,6 @@ namespace Akashic.Core.StateMachines
     /// </summary>
     internal interface IFiniteState
     {
-        Type GetStateType();
+        Type GetFiniteStateType();
     }
 }

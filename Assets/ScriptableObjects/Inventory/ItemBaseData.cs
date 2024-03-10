@@ -10,15 +10,15 @@ namespace Akashic.ScriptableObjects.Inventory
 		/// <summary>
 		/// Item name displayed to the player
 		/// </summary>
-		public string itemName = string.Empty;
+		public string itemName;
 		/// <summary>
 		/// Internal identifier of the item
 		/// </summary>
-		public string itemId = string.Empty;
+		public string itemId;
 		/// <summary>
 		/// Description of the item
 		/// </summary>
-		public string description = string.Empty;
+		public string description;
 		/// <summary>
 		/// Icon of the item
 		/// </summary>

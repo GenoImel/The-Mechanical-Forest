@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Serializers.Party;
 using Newtonsoft.Json;
 
-namespace Akashic.Runtime.Serializers
+namespace Akashic.Runtime.Serializers.Save
 {
     internal sealed class SaveFile
     {
@@ -14,17 +13,23 @@ namespace Akashic.Runtime.Serializers
 
 		[JsonProperty("inventory")]
 		public PartyInventory PartyInventory { private set; get; }
+		
+		[JsonProperty("location")]
+		public PartyLocation PartyLocation { private set; get; }
 
 		[JsonConstructor]
-        public SaveFile(
+        public SaveFile
+        (
             [JsonProperty("saveFileName")] string saveFileName,
 			[JsonProperty("party")] List<PartyMember> partyMembers,
-			[JsonProperty("inventory")] PartyInventory partyInventory
+			[JsonProperty("inventory")] PartyInventory partyInventory,
+	        [JsonProperty("location")] PartyLocation partyLocation
 			)
         {
             SaveFileName = saveFileName;
 			PartyMembers = partyMembers;
 			PartyInventory = partyInventory;
+			PartyLocation = partyLocation;
 		}
     }
 }

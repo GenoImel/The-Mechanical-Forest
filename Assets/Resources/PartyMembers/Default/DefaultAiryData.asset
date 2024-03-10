@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: DefaultAiryData
   m_EditorClassIdentifier: 
   partyMemberName: Airy
-  baseHealth: 190
-  baseLevel: 21
+  baseLevel: 9
   baseExp: 0
-  basePhysicalAttack: 5
-  baseMagicalAttack: 5
-  baseAccuracy: 1
-  basePhysicalDefense: 5
-  baseMagicalDefense: 5
-  baseEvade: 0.5
+  baseMight: 2
+  baseDeftness: 2
+  baseTenacity: 2
+  baseResolve: 2
   skills:
   - {fileID: 11400000, guid: d4e65adbcdb462b4fa826f07cd5bf01b, type: 2}
   - {fileID: 11400000, guid: a3964db8c3f402640ab5f1e097d0beb1, type: 2}
   - {fileID: 11400000, guid: 8d517f31b97972648a762e4c384ee7a1, type: 2}
   - {fileID: 11400000, guid: fb17fee5140b9274689f8b370bdf818a, type: 2}
-  relic: {fileID: 11400000, guid: e31b029573a5d11469fb47ea5883cf73, type: 2}
-  Accessory: {fileID: 11400000, guid: b21b7bb94bf139142b09355a6497c806, type: 2}
+  weapon: {fileID: 11400000, guid: 1cf34c5f5a4be134b9896113facacd09, type: 2}
+  armor: {fileID: 11400000, guid: 3a8a20e9d0fbecb488ad59a84daddbe8, type: 2}
+  relic: {fileID: 11400000, guid: 0223129e31a879146a986a3d3b93ab05, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: 843e8808a73db134eab0da51a4329871, type: 2}
+  - {fileID: 11400000, guid: 843e8808a73db134eab0da51a4329871, type: 2}
+  - {fileID: 11400000, guid: 06a72f736964c9c4eae84cbe751ffa9e, type: 2}

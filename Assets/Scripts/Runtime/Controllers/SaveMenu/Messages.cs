@@ -1,4 +1,3 @@
-using Akashic.Core;
 using Akashic.Core.Messages;
 
 namespace Akashic.Runtime.Controllers.SaveMenu

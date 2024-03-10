@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.Serializers.Party;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle
@@ -14,29 +14,33 @@ namespace Akashic.Runtime.Actors.Battle
         [Header("Instantiation")]
         [SerializeField] private List<Transform> partyBattleActorSpawnPoints;
         
-        private List<PartyMember> currentPartyMembers;
         private IPartyMonoSystem partyMonoSystem;
+        private IPartyBattleMonoSystem partyBattleMonoSystem;
         
         private void Awake()
         {
             partyMonoSystem = GameManager.GetMonoSystem<IPartyMonoSystem>();
+            partyBattleMonoSystem = GameManager.GetMonoSystem<IPartyBattleMonoSystem>();
         }
 
         public void InstantiatePartyBattleActors()
         {
-            currentPartyMembers = partyMonoSystem.GetPartyMembers();
+            var currentPartyMembers = partyMonoSystem.GetPartyMembers();
             
             for (var i = 0; i < currentPartyMembers.Count; i++)
             {
                 var partyMember = currentPartyMembers[i];
                 var partyBattleActor = partyBattleActors
-                    .Find(x => x.PartyMemberName == partyMember.PartyMemberName);
+                    .Find(x => x.ActorName == partyMember.PartyMemberName);
 
                 var instantiatedPartyBattleActor = Instantiate(partyBattleActor, transform);
-
                 instantiatedPartyBattleActor.transform.position = partyBattleActorSpawnPoints[i].position;
-                partyBattleActor.InitializePartyMemberFromSaveData(partyMember);
+                
+                partyBattleActor.InitializePartyBattleActor(partyMember);
+                partyBattleMonoSystem.AddPartyBattleActor(instantiatedPartyBattleActor);
             }
+            
+            partyBattleMonoSystem.InitializeAbilityPoints();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Akashic.Core.MonoSystems
     {
         private readonly IDictionary<Type, IMonoSystem> monoSystems =
             new Dictionary<Type, IMonoSystem>();
+        
         public IDictionary<Type, IMonoSystem> MonoSystems => monoSystems;
 
         public void AddMonoSystem<TMonoSystem, TBindTo>(TMonoSystem monoSystem)

@@ -9,30 +9,24 @@ namespace Akashic.ScriptableObjects.PartyMember
     {
         [Header("Info")] 
         public string partyMemberName;
-    
-        [Header("Health")]
-        [Range(0, 999)] public int baseHealth;
 
         [Header("Leveling")]
         [Range(0, 99)] public int baseLevel;
-        [Range(0, 99)] public int baseExp;
+        [Range(0, 1)] public float baseExp;
 
-        [Header("Attack")]
-        [Range(0, 99)] public int basePhysicalAttack;
-        [Range(0, 99)] public int baseMagicalAttack;
-        [Range(0, 10)] public float baseAccuracy;
-
-        [Header("Defenses")]
-        [Range(0, 99)] public int basePhysicalDefense;
-        [Range(0, 99)] public int baseMagicalDefense;
-        [Range(0, 10)] public float baseEvade;
+        [Header("Stats")]
+        public int maxMight;
+        public int maxDeftness;
+        public int maxTenacity;
+        public int maxResolve;
 
 		[Header("Skills")]
 		public List<SkillData> skills;
 
-		[Header("Items")]
+		[Header("Equipment")]
+		public WeaponData weapon;
+		public ArmorData armor;
 		public RelicData relic;
-		public AccessoryData Accessory;
-
-	}
+		public List<AccessoryData> accessories;
+    }
 }

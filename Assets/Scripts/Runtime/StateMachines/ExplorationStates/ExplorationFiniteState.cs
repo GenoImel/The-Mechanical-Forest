@@ -5,9 +5,9 @@ namespace Akashic.Runtime.StateMachines.ExplorationStates
 {
     internal class ExplorationFiniteState : IFiniteState
     {
-        public Type GetStateType()
+        public Type GetFiniteStateType()
         {
-            return typeof(ExplorationState);
+            return typeof(ExplorationFiniteState);
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2487331217803163665}
-  - component: {fileID: 2877191040304026929}
+  - component: {fileID: 9044363687603756994}
   m_Layer: 0
   m_Name: ResourceMonoSystem
   m_TagString: Untagged
@@ -24,15 +24,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5048924740016319352}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2877191040304026929
+--- !u!114 &9044363687603756994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5048924740016319352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e812251d2e935cf4f832464a5678a04a, type: 3}
+  m_Script: {fileID: 11500000, guid: c4f0f953bf9542b0b1d602fa7030ff9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   consumablesDatabase: {fileID: 11400000, guid: c3d82b13ddbd8e948b9c6afec0328779, type: 2}
+  nonConsumablesDatabase: {fileID: 11400000, guid: 2dded69b412b5014986fd101e2b96345, type: 2}
+  weaponsDatabase: {fileID: 11400000, guid: ecf8896f9c1e5b3458f0ba156ce42a89, type: 2}
+  armorDatabase: {fileID: 11400000, guid: 45049e9efeb934a4a95e888b023ce121, type: 2}
+  relicsDatabase: {fileID: 11400000, guid: b89d01d75ca635c408656fc334bbea14, type: 2}
   accessoriesDatabase: {fileID: 11400000, guid: 8158fd1841761b343a12bc7d3dc9217b, type: 2}
-  relicsDatabase: {fileID: 11400000, guid: 75813d39d2795d14db5ed0f246588650, type: 2}
+  explorationEnvironmentDatabase: {fileID: 11400000, guid: 66dcccdd0de11f949afd86dd5988abde, type: 2}
+  enemiesDatabase: {fileID: 11400000, guid: 27526657a906dba4abce1874347280e0, type: 2}
+  encountersDatabase: {fileID: 11400000, guid: d2e41b90011a26249a07449abb31c4f4, type: 2}

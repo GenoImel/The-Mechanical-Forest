@@ -5,9 +5,9 @@ namespace Akashic.Runtime.StateMachines.BattleStates
 {
     internal class BattleFiniteState : IFiniteState
     {
-        public Type GetStateType()
+        public Type GetFiniteStateType()
         {
-            return typeof(BattleState);
+            return typeof(BattleFiniteState);
         }
 
         /// <summary>

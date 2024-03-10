@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System;
+using Akashic.Runtime.Serializers.Save;
 
 namespace Akashic.Runtime.Serializers.Settings
 {

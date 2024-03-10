@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2455300066516405132
+--- !u!1 &3372854522953843870
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1494355345652604241}
-  - component: {fileID: 5485465468232913828}
+  - component: {fileID: 2740409348131551619}
+  - component: {fileID: 2489821463494990239}
   m_Layer: 0
-  m_Name: ResourceHandler
+  m_Name: EquipmentHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1494355345652604241
+--- !u!4 &2740409348131551619
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2455300066516405132}
+  m_GameObject: {fileID: 3372854522953843870}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7189784708794275828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5485465468232913828
+--- !u!114 &2489821463494990239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2455300066516405132}
+  m_GameObject: {fileID: 3372854522953843870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75edc7ab769499cb9a4dc3594ea4db4, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d596c46c0a4287945ff98fd0c30fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentExperience: 0
 --- !u!1 &4390249848274728167
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474186573231274128}
-  - component: {fileID: 6973155717955860317}
+  - component: {fileID: 5906304064077343205}
   m_Layer: 0
   m_Name: StatHandler
   m_TagString: Untagged
@@ -78,7 +76,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7189784708794275828}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6973155717955860317
+--- !u!114 &5906304064077343205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,26 +85,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4390249848274728167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009af11e64f843a89ff122d6d4d7c01e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2118eaea77cdb674ba08920734664f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  currentAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  currentDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
-  baseAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  baseDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
+  baseAbilityPoints: 0
+  bufferHitPoints: 0
+  actionPips: 0
 --- !u!1 &5124278643173769330
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +125,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1474186573231274128}
-  - {fileID: 1494355345652604241}
+  - {fileID: 2740409348131551619}
   - {fileID: 6635914605807814137}
   - {fileID: 8583472011706632404}
   - {fileID: 4894829521821822242}
@@ -160,13 +145,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f44b84589d4dd4a203363de7a84fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyMemberName: Conrad
-  partyMemberStatHandler: {fileID: 6973155717955860317}
-  partyMemberResourceHandler: {fileID: 5485465468232913828}
+  actorName: Conrad
+  statHandler: {fileID: 5906304064077343205}
   partyMemberSkillsHandler: {fileID: 4466328955909323786}
   partyMemberAnimationHandler: {fileID: 6960909382570885649}
   partyMemberEffectHandler: {fileID: 4564720935392657563}
   partyMemberSoundHandler: {fileID: 236433041544143484}
+  equipmentHandler: {fileID: 2489821463494990239}
 --- !u!65 &958807687918853409
 BoxCollider:
   m_ObjectHideFlags: 0

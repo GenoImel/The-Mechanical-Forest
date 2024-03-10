@@ -8,8 +8,7 @@ using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.Inventory;
 using Akashic.Runtime.MonoSystems.Party;
 using Akashic.Runtime.MonoSystems.Scene;
-using Akashic.Runtime.Serializers;
-using Akashic.Runtime.Serializers.Party;
+using Akashic.Runtime.Serializers.Save;
 using Akashic.Runtime.Serializers.Settings;
 using Akashic.Runtime.Utilities.FileStream;
 using Newtonsoft.Json;
@@ -104,6 +103,26 @@ namespace Akashic.Runtime.MonoSystems.Save
 
 			return currentSaveData.PartyInventory;
 		}
+		
+		public string GetRoomId()
+		{
+			if (currentSaveData == null)
+			{
+				throw new NullReferenceException("Save file is null");
+			}
+
+			return currentSaveData.PartyLocation.RoomId;
+		}
+		
+		public string GetSpawnPointId()
+		{
+			if (currentSaveData == null)
+			{
+				throw new NullReferenceException("Save file is null");
+			}
+
+			return currentSaveData.PartyLocation.SpawnPointId;
+		}
 
 		public async void SaveFileAsync()
         {
@@ -177,8 +196,8 @@ namespace Akashic.Runtime.MonoSystems.Save
         {
             for (var i = 0; i < saveSlotFolderNames.Count; i++)
             {
-                string path = Path.Combine(Application.persistentDataPath, saveFolderParentName, saveSlotFolderNames[i]);
-                FileStreamer fileStreamer = new FileStreamer(path, saveSlotFileNames[i]);
+                var path = Path.Combine(Application.persistentDataPath, saveFolderParentName, saveSlotFolderNames[i]);
+                var fileStreamer = new FileStreamer(path, saveSlotFileNames[i]);
                 fileStreamers.Add(fileStreamer);
             }
             

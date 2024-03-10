@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Akashic.Editor
 {
-    [CustomEditor(typeof(ConfigData))]
+    [CustomEditor(typeof(SaveConfigData))]
     internal sealed class ConfigBaseDataEditor : UnityEditor.Editor
     {
         private SerializedProperty parentSaveFolderNameProp;

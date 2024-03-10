@@ -78,7 +78,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 88948232898811367}
-  - {fileID: 4663344131209804449}
+  - {fileID: 6218241652574521913}
   - {fileID: 3187764479718877933}
   - {fileID: 6025891023095640801}
   - {fileID: 1893680745708219521}
@@ -98,13 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f44b84589d4dd4a203363de7a84fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyMemberName: Default
-  partyMemberStatHandler: {fileID: 5135943436835859516}
-  partyMemberResourceHandler: {fileID: 3758772528919185700}
+  actorName: Default
+  statHandler: {fileID: 8073906925877053189}
   partyMemberSkillsHandler: {fileID: 4174739281250329170}
   partyMemberAnimationHandler: {fileID: 7674649098652316895}
   partyMemberEffectHandler: {fileID: 4133824752911662418}
   partyMemberSoundHandler: {fileID: 620591085503006774}
+  equipmentHandler: {fileID: 8482195855237451941}
 --- !u!65 &1707644337087242329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5adc78b1f7a4a4685bee6777988a766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5389413732273669551
+--- !u!1 &5209040166788120509
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,44 +293,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4663344131209804449}
-  - component: {fileID: 3758772528919185700}
+  - component: {fileID: 6218241652574521913}
+  - component: {fileID: 8482195855237451941}
   m_Layer: 0
-  m_Name: ResourceHandler
+  m_Name: EquipmentHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4663344131209804449
+--- !u!4 &6218241652574521913
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389413732273669551}
+  m_GameObject: {fileID: 5209040166788120509}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7514744229762458420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3758772528919185700
+--- !u!114 &8482195855237451941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5389413732273669551}
+  m_GameObject: {fileID: 5209040166788120509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a75edc7ab769499cb9a4dc3594ea4db4, type: 3}
+  m_Script: {fileID: 11500000, guid: 68d596c46c0a4287945ff98fd0c30fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentExperience: 0
 --- !u!1 &5582505067051636539
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 88948232898811367}
-  - component: {fileID: 5135943436835859516}
+  - component: {fileID: 8073906925877053189}
   m_Layer: 0
   m_Name: StatHandler
   m_TagString: Untagged
@@ -491,7 +489,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7514744229762458420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5135943436835859516
+--- !u!114 &8073906925877053189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -500,23 +498,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8871426088501743250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009af11e64f843a89ff122d6d4d7c01e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2118eaea77cdb674ba08920734664f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 0
-  currentAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  currentDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
-  baseAttackStats:
-    physicalAttack: 0
-    magicalAttack: 0
-    accuracy: 0
-  baseDefenseStats:
-    physicalDefense: 0
-    magicalDefense: 0
-    evade: 0
+  baseAbilityPoints: 0
+  bufferHitPoints: 0
+  actionPips: 0

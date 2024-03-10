@@ -505,50 +505,26 @@ namespace Akashic.Core.MonoSystems
 
 In the heart of the Akashic core architecture we have `StateMachines`. These constructs are used for orchestrating the distinct phases, behaviors, or operational modes of various game components. Their intricate design allows for a robust and type-safe approach to manage `state` transitions without leaning on less robust methods such as `enums`. Let's take an in-depth look into how `StateMachines` are implemented in our core architecture:
 
-### IState
-
-The `IState` `interface` offers generic typing of specific `state` types, tailored for each individual `StateMachine`. By returning its type, it ensures type-safety and clear differentiation between `states` belonging to specific `StateMachines`.
-
-```csharp
-using System;
-
-namespace Akashic.Core.StateMachines
-{
-    // The IState interface is used to generically type all
-    // States, and is the beginning of our class-based State
-    // definitions for individual StateMachines.
-
-    /// <summary>
-    /// For generic typing of specific state types on a per-State Machine basis.
-    /// Returns the type of IState for type safety.
-    /// </summary>
-    internal interface IState
-    {
-        Type GetFiniteStateType();
-    }
-}
-```
 
 ### IFiniteState
 
-In tandem with `IState`, the `IFiniteState` `interface` takes a more granular approach. It is designed to specify `finite states` within an `IState`. Through this `interface`, we eliminate the need for `enums` and instead rely on class-based `state` definitions, again ensuring type-safe operation.
+The `IFiniteState` `interface` allows us to specify `finite states`. Through this `interface`, we eliminate the need for `enums` and instead rely on class-based `state` definitions, again ensuring type-safe operation.
 
 ```csharp
 using System;
 
 namespace Akashic.Core.StateMachines
 {
-    // IFiniteStates allow us to define specific finite states within an IState
+    // IFiniteStates allow us to define specific finite states
     // using class-based definitions for IFiniteStates rather than enums.
     
     /// <summary>
-    /// Allows us to define specific finite states within an <see cref="IState"/>.
     /// This enables us to define state machines without enums.
     /// Interface returns the type of <see cref="IFiniteState"/> for type safety.
     /// </summary>
     internal interface IFiniteState
     {
-        Type GetStateType();
+        Type GetFiniteStateType();
     }
 }
 ```
@@ -594,7 +570,8 @@ using UnityEngine;
 namespace Akashic.Core.StateMachines
 {
     // All StateMachines will inherit from our BaseStateMachine abstract class.
-    internal abstract class BaseStateMachine : MonoBehaviour, IStateMachine
+    internal abstract class BaseStateMachine<TMessage> : MonoBehaviour, IStateMachine
+    where TMessage : IMessage
     {
         // All StateMachines must have fields for the current state and a previous state.
         private IFiniteState currentState;
@@ -629,10 +606,10 @@ namespace Akashic.Core.StateMachines
                 return;
             }
             
-            if (currentState != null && currentState.GetStateType() != nextState.GetStateType())
+            if (currentState != null && currentState.GetFiniteStateType() != nextState.GetFiniteStateType())
             {
-                // If we have somehow received a state that is not the same type as the IState 
-                // for a particular StateMachine, we throw an Exception.
+                // If we have somehow received two IFiniteStates that are not of the same overlying type 
+                // we throw an Exception.
                 throw new Exception($"Invalid state transition from \"{currentState}\" to \"{nextState}\".");
             }
 
@@ -667,7 +644,7 @@ namespace Akashic.Core.StateMachines
         /// Creates a State Changed Message while enforcing adherence of a state change pattern
         /// that communicates specifically <paramref name="prevState"/> and <paramref name="nextState"/>.
         /// </summary>
-        protected abstract IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState);
+        protected abstract TMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState);
     }
 }
 ```

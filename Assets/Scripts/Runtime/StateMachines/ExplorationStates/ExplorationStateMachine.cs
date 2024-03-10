@@ -1,9 +1,10 @@
-using Akashic.Core.Messages;
 using Akashic.Core.StateMachines;
 
 namespace Akashic.Runtime.StateMachines.ExplorationStates
 {
-    internal sealed class ExplorationStateMachine : BaseStateMachine, IExplorationStateMachine
+    internal sealed class ExplorationStateMachine : 
+        BaseStateMachine<ExplorationStateChangedMessage>,
+        IExplorationStateMachine
     {
         private void Awake()
         {
@@ -40,7 +41,11 @@ namespace Akashic.Runtime.StateMachines.ExplorationStates
             SetState(new ExplorationFiniteState.None());
         }
         
-        protected override IMessage CreateStateChangedMessage(IFiniteState prevState, IFiniteState nextState)
+        protected override ExplorationStateChangedMessage CreateStateChangedMessage
+        (
+            IFiniteState prevState, 
+            IFiniteState nextState
+        )
         {
             return new ExplorationStateChangedMessage(
                 prevState as ExplorationFiniteState,
