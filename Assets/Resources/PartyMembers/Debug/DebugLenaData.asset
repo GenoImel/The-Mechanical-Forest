@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: DebugLenaData
   m_EditorClassIdentifier: 
   partyMemberName: Lena
-  baseHealth: 110
   baseLevel: 10
   baseExp: 0
-  basePhysicalAttack: 2
-  baseMagicalAttack: 2
-  baseAccuracy: 1
-  basePhysicalDefense: 2
-  baseMagicalDefense: 2
-  baseEvade: 0.4
+  baseMight: 5
+  baseDeftness: 5
+  baseTenacity: 5
+  baseResolve: 5
   skills:
   - {fileID: 11400000, guid: accfa39422b057949b9f5f77a83ca444, type: 2}
   - {fileID: 11400000, guid: e52aede1145b615419e7ef6ea892e85c, type: 2}
   - {fileID: 11400000, guid: 0f50fa25a69b093458128cf0d0bc356d, type: 2}
   - {fileID: 11400000, guid: e89d2a1252b140a4fb6f38f252e69b55, type: 2}
-  relic: {fileID: 11400000, guid: 37b64218cf6bc82479d86203fe2058cd, type: 2}
-  Accessory: {fileID: 11400000, guid: 1ede5148964a5c044b99f0924457bed0, type: 2}
+  weapon: {fileID: 11400000, guid: 1cf34c5f5a4be134b9896113facacd09, type: 2}
+  armor: {fileID: 11400000, guid: 3a8a20e9d0fbecb488ad59a84daddbe8, type: 2}
+  relic: {fileID: 11400000, guid: 0223129e31a879146a986a3d3b93ab05, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: 3f412491bcdf0854ba3153b45364e474, type: 2}
+  - {fileID: 11400000, guid: 3f412491bcdf0854ba3153b45364e474, type: 2}
+  - {fileID: 11400000, guid: 06a72f736964c9c4eae84cbe751ffa9e, type: 2}

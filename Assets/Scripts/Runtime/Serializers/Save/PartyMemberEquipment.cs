@@ -8,23 +8,23 @@ namespace Akashic.Runtime.Serializers.Save
     internal sealed class PartyMemberEquipment
     {
         [JsonProperty("weaponSlot")]
-        public string WeaponSlot { private set; get; }
+        public WeaponItem WeaponSlot { private set; get; }
         
         [JsonProperty("armorSlot")]
-        public string ArmorSlot { private set; get; }
+        public ArmorItem ArmorSlot { private set; get; }
 
         [JsonProperty("relicSlot")]
-        public string RelicSlot { private set; get; }
+        public RelicItem RelicSlot { private set; get; }
         
         [JsonProperty("accessorySlots")]
-        public List<string> AccessorySlots { private set; get; }
+        public List<AccessoryItem> AccessorySlots { private set; get; }
 
         [JsonConstructor]
         public PartyMemberEquipment(
-            [JsonProperty("weaponSlot")] string weaponSlot,
-            [JsonProperty("armorSlot")] string armorSlot,
-            [JsonProperty("relic")] string relicSlot,
-            [JsonProperty("accessory")] List<string> accessories 
+            [JsonProperty("weaponSlot")] WeaponItem weaponSlot,
+            [JsonProperty("armorSlot")] ArmorItem armorSlot,
+            [JsonProperty("relic")] RelicItem relicSlot,
+            [JsonProperty("accessory")] List<AccessoryItem> accessories 
         )
         {
             WeaponSlot = weaponSlot;

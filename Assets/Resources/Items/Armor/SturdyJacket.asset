@@ -17,24 +17,24 @@ MonoBehaviour:
   description: A well-fitted doublet.
   icon: {fileID: 0}
   might:
-    value: 0
+    value: 1
     modifierType: 0
   deftness:
-    value: 0
+    value: 1
     modifierType: 0
   tenacity:
-    value: 0
+    value: 1
     modifierType: 0
   resolve:
-    value: 0
+    value: 1
     modifierType: 0
   baseAbilityPoints:
-    value: 0
+    value: 1
     modifierType: 0
   baseAbilityPointsRegen:
-    value: 0
+    value: 1
     modifierType: 0
   maxHitPoints:
-    value: 0
+    value: 1
     modifierType: 0
   bufferHitPointIncrease: 1

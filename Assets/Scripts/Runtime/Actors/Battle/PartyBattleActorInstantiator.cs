@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Akashic.Core;
+using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.MonoSystems.Party;
-using Akashic.Runtime.MonoSystems.PartyBattle;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle
@@ -31,11 +31,11 @@ namespace Akashic.Runtime.Actors.Battle
             {
                 var partyMember = currentPartyMembers[i];
                 var partyBattleActor = partyBattleActors
-                    .Find(x => x.PartyMemberName == partyMember.PartyMemberName);
+                    .Find(x => x.ActorName == partyMember.PartyMemberName);
 
                 var instantiatedPartyBattleActor = Instantiate(partyBattleActor, transform);
-
                 instantiatedPartyBattleActor.transform.position = partyBattleActorSpawnPoints[i].position;
+                
                 partyBattleActor.InitializePartyBattleActor(partyMember);
                 partyBattleMonoSystem.AddPartyBattleActor(instantiatedPartyBattleActor);
             }

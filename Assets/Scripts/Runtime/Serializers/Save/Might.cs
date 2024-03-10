@@ -19,5 +19,15 @@ namespace Akashic.Runtime.Serializers.Save
             BaseMight = baseMight;
             CalculatedMight = calculatedMight;
         }
+        
+        public void SetBaseMight(int baseMight)
+        {
+            BaseMight = baseMight;
+        }
+        
+        public void SetCalculatedMight(int calculatedMight)
+        {
+            CalculatedMight = calculatedMight;
+        }
     }
 }

@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: DefaultBenoitData
   m_EditorClassIdentifier: 
   partyMemberName: Benoit
-  baseLevel: 1
+  baseLevel: 10
   baseExp: 0
-  baseMight: 2
-  baseDeftness: 2
-  baseTenacity: 2
-  baseResolve: 2
+  baseMight: 3
+  baseDeftness: 3
+  baseTenacity: 3
+  baseResolve: 3
   skills:
   - {fileID: 11400000, guid: 09f4161cca0f8714fbaf4346e5081af5, type: 2}
   - {fileID: 11400000, guid: 22df0162ee8f0ac44ae383839d9dd67f, type: 2}
   - {fileID: 11400000, guid: e4896322d466d4f4b8cbd36de9331e0c, type: 2}
   - {fileID: 11400000, guid: 7eb26ba57af409f45a4fc7c49f6407b2, type: 2}
-  relic: {fileID: 11400000, guid: a0af1ed55a04fc443bb572d0c66a3e7a, type: 2}
-  accessory: {fileID: 0}
+  weapon: {fileID: 11400000, guid: 818753ac7747f014aaf3956862c6d85d, type: 2}
+  armor: {fileID: 11400000, guid: 3a8a20e9d0fbecb488ad59a84daddbe8, type: 2}
+  relic: {fileID: 11400000, guid: 0223129e31a879146a986a3d3b93ab05, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: 06a72f736964c9c4eae84cbe751ffa9e, type: 2}
+  - {fileID: 11400000, guid: 843e8808a73db134eab0da51a4329871, type: 2}
+  - {fileID: 11400000, guid: 18a99c19be0523e42b60b4bc5aff6214, type: 2}

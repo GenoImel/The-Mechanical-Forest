@@ -81,6 +81,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8192164231810207437}
+  - {fileID: 3552161460317878555}
   - {fileID: 6329612547416309703}
   - {fileID: 2192681265786551585}
   - {fileID: 3503536450010826032}
@@ -100,13 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f44b84589d4dd4a203363de7a84fc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partyMemberName: Benoit
+  actorName: Benoit
   statHandler: {fileID: 8343476906263886178}
   partyMemberSkillsHandler: {fileID: 1614950811973809732}
   partyMemberAnimationHandler: {fileID: 6922817067145331897}
   partyMemberEffectHandler: {fileID: 6870416685687853639}
   partyMemberSoundHandler: {fileID: 5344863781728577247}
-  partyMemberData: {fileID: 0}
+  equipmentHandler: {fileID: 6796780063862970095}
 --- !u!65 &6897856083366437577
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -330,6 +331,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b6409085e2c46f5a3f12db21d3c2ba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6618802995621553331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3552161460317878555}
+  - component: {fileID: 6796780063862970095}
+  m_Layer: 0
+  m_Name: EquipmentHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3552161460317878555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618802995621553331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 522657411675573556}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6796780063862970095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6618802995621553331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d596c46c0a4287945ff98fd0c30fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7511753692806177384

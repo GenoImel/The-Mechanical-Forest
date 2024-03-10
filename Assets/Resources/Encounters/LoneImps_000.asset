@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   encounterName: Lone Imps
   encounterId: E000
-  encounterDescription: An encounter where you fight some imps.
+  encounterDescription: An encounter where you fight some fodder imps.
+  scaledEncounterLevel: 1
   enemiesAndQuantities:
   - enemyData: {fileID: 11400000, guid: 0c57086d4aba7e342a3db303c3bdf976, type: 2}
     minQuantity: 2

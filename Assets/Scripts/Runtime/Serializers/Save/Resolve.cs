@@ -19,5 +19,15 @@ namespace Akashic.Runtime.Serializers.Save
             BaseResolve = baseResolve;
             CalculatedResolve = calculatedResolve;
         }
+        
+        public void SetBaseResolve(int baseResolve)
+        {
+            BaseResolve = baseResolve;
+        }
+        
+        public void SetCalculatedResolve(int calculatedResolve)
+        {
+            CalculatedResolve = calculatedResolve;
+        }
     }
 }

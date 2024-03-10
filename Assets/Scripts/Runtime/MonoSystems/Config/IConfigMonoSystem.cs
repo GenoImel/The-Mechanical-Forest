@@ -12,39 +12,39 @@ namespace Akashic.Runtime.MonoSystems.Config
     /// ConfigBaseData ScriptableObject.
     /// </summary>
     internal interface IConfigMonoSystem : IMonoSystem
-	{
-		/// <summary>
-		/// Returns the configuration settings for saving and loading game data.
-		/// </summary>
-		/// <returns><see cref="SaveConfigSettings"/></returns>
-		public SaveConfigSettings GetSaveConfigSettings();
+    {
+        /// <summary>
+        /// Returns the configuration settings for saving and loading game data.
+        /// </summary>
+        /// <returns><see cref="SaveConfigSettings"/></returns>
+        public SaveConfigSettings GetSaveConfigSettings();
 		
-		/// <summary>
-		/// Returns the default party members for a new game.
-		/// </summary>
-		/// <returns><see cref="PartyMemberData"/></returns>
-		public List<PartyMemberData> GetDefaultParty();
+        /// <summary>
+        /// Returns the default party members for a new game.
+        /// </summary>
+        /// <returns><see cref="PartyMemberData"/></returns>
+        public List<PartyMemberData> GetDefaultParty();
 		
-		/// <summary>
-		/// Returns the default inventory for a new game.
-		/// </summary>
-		/// <returns><see cref="InventoryData"/></returns>
-		public InventoryData GetDefaultInventory();
+        /// <summary>
+        /// Returns the default inventory for a new game.
+        /// </summary>
+        /// <returns><see cref="InventoryData"/></returns>
+        public InventoryData GetDefaultInventory();
 
-		/// <summary>
-		/// Returns the room ID for the starting exploration scene.
-		/// </summary>
-		public string GetRoomId();
+        /// <summary>
+        /// Returns the room ID for the starting exploration scene.
+        /// </summary>
+        public string GetRoomId();
 
-		/// <summary>
-		/// Returns the spawn point ID for the starting exploration scene.
-		/// </summary>
-		public string GetSpawnPointId();
+        /// <summary>
+        /// Returns the spawn point ID for the starting exploration scene.
+        /// </summary>
+        public string GetSpawnPointId();
 
-		/// <summary>
-		/// Returns the base battle settings for the game.
-		/// </summary>
-		/// <returns><see cref="GameConfigData"/></returns>
-		public GameConfigData GetBattleConfigData();
-	}
+        /// <summary>
+        /// Returns the base battle settings for the game.
+        /// </summary>
+        /// <returns><see cref="GameConfigData"/></returns>
+        public GameConfigData GetBattleConfigData();
+    }
 }

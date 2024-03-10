@@ -12,13 +12,13 @@ namespace Akashic.ScriptableObjects.PartyMember
 
         [Header("Leveling")]
         [Range(0, 99)] public int baseLevel;
-        [Range(0, 1)] public float baseExp; // float for percent experience to next level
+        [Range(0, 1)] public float baseExp;
 
         [Header("Stats")]
-        public int baseMight;
-        public int baseDeftness;
-        public int baseTenacity;
-        public int baseResolve;
+        public int maxMight;
+        public int maxDeftness;
+        public int maxTenacity;
+        public int maxResolve;
 
 		[Header("Skills")]
 		public List<SkillData> skills;

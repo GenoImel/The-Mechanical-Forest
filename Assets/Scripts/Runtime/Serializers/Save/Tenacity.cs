@@ -19,5 +19,15 @@ namespace Akashic.Runtime.Serializers.Save
             BaseTenacity = baseTenacity;
             CalculatedTenacity = calculatedTenacity;
         }
+        
+        public void SetBaseTenacity(int baseTenacity)
+        {
+            BaseTenacity = baseTenacity;
+        }
+        
+        public void SetCalculatedTenacity(int calculatedTenacity)
+        {
+            CalculatedTenacity = calculatedTenacity;
+        }
     }
 }

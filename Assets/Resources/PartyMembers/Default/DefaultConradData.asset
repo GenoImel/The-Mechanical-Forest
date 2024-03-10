@@ -13,16 +13,21 @@ MonoBehaviour:
   m_Name: DefaultConradData
   m_EditorClassIdentifier: 
   partyMemberName: Conrad
-  baseLevel: 1
+  baseLevel: 9
   baseExp: 0
-  baseMight: 2
-  baseDeftness: 2
-  baseTenacity: 2
-  baseResolve: 2
+  baseMight: 4
+  baseDeftness: 4
+  baseTenacity: 4
+  baseResolve: 4
   skills:
   - {fileID: 11400000, guid: 654da730b48f4f44f95d90d926766892, type: 2}
   - {fileID: 11400000, guid: e47f11d9f35fcb547bdb70905a74d22c, type: 2}
   - {fileID: 11400000, guid: c2f00765c75224c4580dfcf15dfdbcb5, type: 2}
   - {fileID: 11400000, guid: 8f55da00b8106a7469fa9bcc6e11e9bd, type: 2}
-  relic: {fileID: 11400000, guid: ee99575d78beb7740baa57774a69636e, type: 2}
-  accessory: {fileID: 0}
+  weapon: {fileID: 11400000, guid: 1cf34c5f5a4be134b9896113facacd09, type: 2}
+  armor: {fileID: 11400000, guid: 3a8a20e9d0fbecb488ad59a84daddbe8, type: 2}
+  relic: {fileID: 11400000, guid: 0223129e31a879146a986a3d3b93ab05, type: 2}
+  accessories:
+  - {fileID: 11400000, guid: 18a99c19be0523e42b60b4bc5aff6214, type: 2}
+  - {fileID: 11400000, guid: 18a99c19be0523e42b60b4bc5aff6214, type: 2}
+  - {fileID: 11400000, guid: 18a99c19be0523e42b60b4bc5aff6214, type: 2}

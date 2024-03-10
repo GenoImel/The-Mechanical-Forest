@@ -1,68 +1,35 @@
-using System;
-using Akashic.Runtime.MonoSystems.Config;
-using Akashic.Runtime.Serializers.Save;
-using Akashic.ScriptableObjects.Config;
-using UnityEngine;
+using Akashic.Runtime.Utilities.GameMath.Resources;
 
 namespace Akashic.Runtime.Actors.Battle
 {
-    internal sealed class PartyBattleActorStatHandler : MonoBehaviour
+    internal sealed class PartyBattleActorStatHandler : BattleActorStatHandler
     {
-        [SerializeField] private int currentLevel;
+        private PartyBattleActor partyBattleActor;
 
-        private HitPoints hitPoints;
-        private Might might;
-        private Deftness deftness;
-        private Tenacity tenacity;
-        private Resolve resolve;
-        
-        [Header("Resources")]
-        [SerializeField] private int baseAbilityPoints;
-        
-        [SerializeField] private int bufferHitPoints;
-        
-        [SerializeField] private int actionPips;
-
-        public int CurrentLevel => currentLevel;
-        public int CurrentHitPoints => hitPoints.CurrentHitPoints;
-        public int BaseAbilityPoints => baseAbilityPoints;
-        public int CurrentMight => might.CalculatedMight;
-        public int CurrentDeftness => deftness.CalculatedDeftness;
-        public int CurrentTenacity => tenacity.CalculatedTenacity;
-        public int CurrentResolve => resolve.CalculatedResolve;
-        
-        public int ActionPips => actionPips;
-        public int BufferHitPoints => bufferHitPoints;
-
-        private GameConfigData gameConfigData;
-        
-        private IConfigMonoSystem configMonoSystem;
-
-        private void Awake()
+        public override void InitializeBattleActorStats(BattleActorInitializationParameters parameters)
         {
-            configMonoSystem = FindObjectOfType<ConfigMonoSystem>();
-            gameConfigData = configMonoSystem.GetBattleConfigData();
-        }
-
-        public void InitializePartyBattleActorStats(PartyMember partyMember)
-        {
-            currentLevel = partyMember.PartyMemberStats.Level;
-            hitPoints = partyMember.PartyMemberStats.HitPoints;
-            baseAbilityPoints = partyMember.PartyMemberStats.BaseAbilityPoints;
-            might = partyMember.PartyMemberStats.Might;
-            deftness = partyMember.PartyMemberStats.Deftness;
-            tenacity = partyMember.PartyMemberStats.Tenacity;
-            resolve = partyMember.PartyMemberStats.Resolve;
-        }
-
-        private void RefreshBufferHitPoints()
-        {
+            currentLevel = parameters.PartyMember.PartyMemberStats.Level;
+            hitPoints = parameters.PartyMember.PartyMemberStats.HitPoints;
+            baseAbilityPoints = parameters.PartyMember.PartyMemberStats.BaseAbilityPoints;
+            might = parameters.PartyMember.PartyMemberStats.Might;
+            deftness = parameters.PartyMember.PartyMemberStats.Deftness;
+            tenacity = parameters.PartyMember.PartyMemberStats.Tenacity;
+            resolve = parameters.PartyMember.PartyMemberStats.Resolve;
             
+            SetBattleActorReference(parameters.PartyBattleActor);
+            RegeneratePips();
+            RefreshBufferHitPoints();
         }
         
-        private void RegeneratePips()
+        private void SetBattleActorReference(PartyBattleActor battleActor)
         {
-            actionPips = gameConfigData.basePips;
+            partyBattleActor = battleActor;
+        }
+
+        protected override void RefreshBufferHitPoints()
+        {
+            //TO DO: Only generate these when defend action is chosen
+            bufferHitPoints = ResourcesMath.CalculateBufferHitPoints(partyBattleActor);
         }
     }
 }

@@ -6,6 +6,8 @@ namespace Akashic.ScriptableObjects.Config
     public class GameConfigData : ScriptableObject
     {
         public int maximumNumberAccessorySlots;
+
+        public int maximumLevel;
         
         /// <summary>
         /// The default number of pips a character starts with at the beginning of battle.

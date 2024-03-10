@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bcbe5e1de1349ef8de0d1c1c71363e3, type: 3}
   m_Name: DefaultBattleConfigData
   m_EditorClassIdentifier: 
-  maximumNumberAccessorySlots: 0
+  maximumNumberAccessorySlots: 3
+  maximumLevel: 30
   basePips: 3

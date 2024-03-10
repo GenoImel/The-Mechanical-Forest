@@ -19,5 +19,15 @@ namespace Akashic.Runtime.Serializers.Save
             BaseDeftness = baseDeftness;
             CalculatedDeftness = calculatedDeftness;
         }
+        
+        public void SetBaseDeftness(int baseDeftness)
+        {
+            BaseDeftness = baseDeftness;
+        }
+        
+        public void SetCalculatedDeftness(int calculatedDeftness)
+        {
+            CalculatedDeftness = calculatedDeftness;
+        }
     }
 }

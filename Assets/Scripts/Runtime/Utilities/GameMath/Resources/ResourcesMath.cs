@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Utilities.GameMath.Stats;
+using Akashic.ScriptableObjects.Battle;
 using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
@@ -18,6 +19,17 @@ namespace Akashic.Runtime.Utilities.GameMath.Resources
             var baseAbilityPoints = partyMemberData.baseLevel + (2 * totalDeftness) + (2 * totalResolve);
 
             baseAbilityPoints += StatsMath.CalculateEquipmentAbilityPointsBonus(partyMemberData);
+
+            return baseAbilityPoints;
+        }
+        
+        public static int CalculateAbilityPoints(EnemyData enemyData, int scaledLevel)
+        {
+            var totalDeftness = StatsMath.CalculateTotalDeftness(enemyData, scaledLevel);
+            
+            var totalResolve = StatsMath.CalculateTotalResolve(enemyData, scaledLevel);
+
+            var baseAbilityPoints = scaledLevel + (2 * totalDeftness) + (2 * totalResolve);
 
             return baseAbilityPoints;
         }
@@ -49,18 +61,34 @@ namespace Akashic.Runtime.Utilities.GameMath.Resources
             return partyBattleActors.Sum(battleActor => battleActor.statHandler.BaseAbilityPoints);
         }
         
+        public static int CalculateTotalPooledAbilityPoints(List<EnemyBattleActor> enemyBattleActors)
+        {
+            return enemyBattleActors.Sum(battleActor => battleActor.statHandler.BaseAbilityPoints);
+        }
+        
         public static int CalculateBufferHitPoints(PartyBattleActor partyBattleActor)
         {
             var calculatedBufferHitPoints = 
                 (2 * partyBattleActor.statHandler.CurrentTenacity)
                 + partyBattleActor.statHandler.CurrentDeftness
                 + UnityEngine.Random.Range(3, (3 + partyBattleActor.statHandler.CurrentLevel));
-            
-            calculatedBufferHitPoints += partyBattleActor.partyMemberData.armor.bufferHitPointIncrease;
 
+            if (partyBattleActor.equipmentHandler.ArmorData != null)
+            {
+                calculatedBufferHitPoints += partyBattleActor.equipmentHandler.ArmorData.bufferHitPointIncrease;
+            }
+            
             return calculatedBufferHitPoints;
         }
 
-
+        public static int CalculateBufferHitPoints(EnemyBattleActor enemyBattleActor)
+        {
+            var calculatedBufferHitPoints = 
+                (2 * enemyBattleActor.statHandler.CurrentTenacity)
+                + enemyBattleActor.statHandler.CurrentDeftness
+                + UnityEngine.Random.Range(3, (3 + enemyBattleActor.statHandler.CurrentLevel));
+            
+            return calculatedBufferHitPoints;
+        }
     }
 }

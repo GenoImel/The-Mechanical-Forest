@@ -50,21 +50,20 @@ namespace Akashic.Runtime.Converters
 
 		private static PartyMember ConvertPartyMemberDataToPartyMember(PartyMemberData partyMemberData)
 		{
-			var weaponId = partyMemberData.weapon?.itemId ?? ""; // Assuming 0 is an invalid or "no item" ID
-			var armorId = partyMemberData.armor?.itemId ?? "";
-			var relicId = partyMemberData.relic?.itemId ?? "";
-
-			// Safe handling for accessories: Filter out any null accessories before selecting itemId
+			var weaponId = partyMemberData.weapon != null ? partyMemberData.weapon.itemId ?? "" : ""; 
+			var armorId = partyMemberData.armor != null ? partyMemberData.armor.itemId ?? "" : "";
+			var relicId = partyMemberData.relic != null ? partyMemberData.relic.itemId ?? "" : "";
+			
 			var accessoryIds = partyMemberData.accessories
-				?.Where(accessory => accessory != null) // Ensure accessory is not null
+				?.Where(accessory => accessory != null)
 				.Select(accessory => accessory.itemId)
-				.ToList() ?? new List<string>(); // Provide an empty list if accessories are null
+				.ToList() ?? new List<string>();
 
 			var partyMemberEquipment = new PartyMemberEquipment(
-				weaponId,
-				armorId,
-				relicId,
-				accessoryIds
+				new WeaponItem(weaponId, 1),
+				new ArmorItem(armorId, 1),
+				new RelicItem(relicId, 1),
+				accessoryIds.Select(accessoryId => new AccessoryItem(accessoryId, 1)).ToList()
 			);
 
 			var calculatedHitPoints = StatsMath.CalculateMaxHitPoints(partyMemberData);
@@ -77,22 +76,22 @@ namespace Akashic.Runtime.Converters
 			var abilityPoints = ResourcesMath.CalculateAbilityPoints(partyMemberData);
 
 			var might = new Might(
-				partyMemberData.baseMight,
+				partyMemberData.maxMight,
 				StatsMath.CalculateTotalMight(partyMemberData)
 			);
 			
 			var deftness = new Deftness(
-				partyMemberData.baseDeftness,
+				partyMemberData.maxDeftness,
 				StatsMath.CalculateTotalDeftness(partyMemberData)
 			);
 			
 			var tenacity = new Tenacity(
-				partyMemberData.baseTenacity,
+				partyMemberData.maxTenacity,
 				StatsMath.CalculateTotalTenacity(partyMemberData)
 			);
 			
 			var resolve = new Resolve(
-				partyMemberData.baseResolve,
+				partyMemberData.maxResolve,
 				StatsMath.CalculateTotalResolve(partyMemberData)
 			);
 

@@ -9,6 +9,7 @@ namespace Akashic.ScriptableObjects.Battle
         public string encounterName;
         public string encounterId;
         public string encounterDescription;
+        public int scaledEncounterLevel;
         public List<EnemyQuantityRange> enemiesAndQuantities;
     }
 }
