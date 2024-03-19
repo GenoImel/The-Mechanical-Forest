@@ -13,5 +13,7 @@ namespace Akashic.Runtime.MonoSystems.Battle
         public void AddEnemyBattleActor(EnemyBattleActor enemyBattleActor);
         
         public void InitializeAbilityPoints();
+
+        public void SortEnemyBattleActorsBySpeed();
     }
 }

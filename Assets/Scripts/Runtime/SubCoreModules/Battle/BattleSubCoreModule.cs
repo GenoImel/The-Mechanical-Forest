@@ -1,6 +1,7 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.StateMachines.BattleStates;
+using Akashic.Runtime.StateMachines.TurnStates;
 using UnityEngine;
 
 namespace Akashic.Runtime.SubCoreModules.Battle
@@ -13,6 +14,7 @@ namespace Akashic.Runtime.SubCoreModules.Battle
         
         [Header("StateMachines")]
         [SerializeField] private BattleStateMachine battleStateMachine;
+        [SerializeField] private TurnStateMachine turnStateMachine;
 
         public override void OnLoaded()
         {
@@ -29,6 +31,7 @@ namespace Akashic.Runtime.SubCoreModules.Battle
         protected override void InitializeSubCoreStateMachines()
         {
             stateMachineManager.AddStateMachine<BattleStateMachine, IBattleStateMachine>(battleStateMachine);
+            stateMachineManager.AddStateMachine<TurnStateMachine, ITurnStateMachine>(turnStateMachine);
         }
 
         protected override void InitializeSubCoreMonoSystems()

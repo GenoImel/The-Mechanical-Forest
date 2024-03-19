@@ -1,6 +1,7 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.GameDebug;
 using Akashic.Runtime.StateMachines.BattleStates;
+using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Akashic.Runtime.Actors.Battle
         private IDebugMonoSystem debugMonoSystem;
         
         private IBattleStateMachine battleStateMachine;
+        private ITurnStateMachine turnStateMachine;
 
         private void Awake()
         {
@@ -22,6 +24,7 @@ namespace Akashic.Runtime.Actors.Battle
 
             debugMonoSystem = GameManager.GetMonoSystem<IDebugMonoSystem>();
             battleStateMachine = GameManager.GetStateMachine<IBattleStateMachine>();
+            turnStateMachine = GameManager.GetStateMachine<ITurnStateMachine>();
         }
         
         private void Start()
@@ -60,6 +63,7 @@ namespace Akashic.Runtime.Actors.Battle
                 .InitializeEnemyBattleActorsFromEncounterData(currentEncounterData);
             
             battleStateMachine.SetBattleActiveState();
+            turnStateMachine.SetPromiseState();
         }
         
         private void UnloadEnvironment()

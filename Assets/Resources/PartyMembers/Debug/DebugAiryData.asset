@@ -15,10 +15,10 @@ MonoBehaviour:
   partyMemberName: Airy
   baseLevel: 9
   baseExp: 0
-  baseMight: 2
-  baseDeftness: 2
-  baseTenacity: 2
-  baseResolve: 2
+  maxMight: 60
+  maxDeftness: 60
+  maxTenacity: 120
+  maxResolve: 120
   skills:
   - {fileID: 11400000, guid: d4e65adbcdb462b4fa826f07cd5bf01b, type: 2}
   - {fileID: 11400000, guid: a3964db8c3f402640ab5f1e097d0beb1, type: 2}

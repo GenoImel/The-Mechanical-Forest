@@ -15,10 +15,10 @@ MonoBehaviour:
   partyMemberName: Conrad
   baseLevel: 9
   baseExp: 0
-  baseMight: 4
-  baseDeftness: 4
-  baseTenacity: 4
-  baseResolve: 4
+  maxMight: 90
+  maxDeftness: 30
+  maxTenacity: 150
+  maxResolve: 60
   skills:
   - {fileID: 11400000, guid: 654da730b48f4f44f95d90d926766892, type: 2}
   - {fileID: 11400000, guid: e47f11d9f35fcb547bdb70905a74d22c, type: 2}

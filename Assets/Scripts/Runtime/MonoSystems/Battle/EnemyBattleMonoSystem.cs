@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using Akashic.ScriptableObjects.Battle;
@@ -34,6 +35,11 @@ namespace Akashic.Runtime.MonoSystems.Battle
         {
             maxAbilityPoints = ResourcesMath.CalculateTotalPooledAbilityPoints(enemyBattleActors);
             currentAbilityPoints = maxAbilityPoints;
+        }
+        
+        public void SortEnemyBattleActorsBySpeed()
+        {
+            enemyBattleActors = enemyBattleActors.OrderByDescending(actor => actor.EnemyData.enemyClass.speedStat).ToList();
         }
     }
 }

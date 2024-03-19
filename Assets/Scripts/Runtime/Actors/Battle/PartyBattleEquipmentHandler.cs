@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Resource;

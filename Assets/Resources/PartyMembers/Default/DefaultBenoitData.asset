@@ -15,10 +15,10 @@ MonoBehaviour:
   partyMemberName: Benoit
   baseLevel: 10
   baseExp: 0
-  baseMight: 3
-  baseDeftness: 3
-  baseTenacity: 3
-  baseResolve: 3
+  maxMight: 30
+  maxDeftness: 90
+  maxTenacity: 60
+  maxResolve: 120
   skills:
   - {fileID: 11400000, guid: 09f4161cca0f8714fbaf4346e5081af5, type: 2}
   - {fileID: 11400000, guid: 22df0162ee8f0ac44ae383839d9dd67f, type: 2}

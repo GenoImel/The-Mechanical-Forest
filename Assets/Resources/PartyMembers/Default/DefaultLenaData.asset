@@ -15,10 +15,10 @@ MonoBehaviour:
   partyMemberName: Lena
   baseLevel: 10
   baseExp: 0
-  baseMight: 5
-  baseDeftness: 5
-  baseTenacity: 5
-  baseResolve: 5
+  maxMight: 60
+  maxDeftness: 150
+  maxTenacity: 60
+  maxResolve: 60
   skills:
   - {fileID: 11400000, guid: accfa39422b057949b9f5f77a83ca444, type: 2}
   - {fileID: 11400000, guid: e52aede1145b615419e7ef6ea892e85c, type: 2}
