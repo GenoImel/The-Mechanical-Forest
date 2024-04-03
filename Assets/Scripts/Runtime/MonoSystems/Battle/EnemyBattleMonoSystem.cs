@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Akashic.Runtime.Actors.Battle;
+using Akashic.Core;
+using Akashic.Runtime.Actors.Battle.Enemy;
+using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
@@ -20,7 +23,17 @@ namespace Akashic.Runtime.MonoSystems.Battle
         private EncounterData encounterData;
         
         public EncounterData EncounterData => encounterData;
+
+        private void OnEnable()
+        {
+            AddListeners();
+        }
         
+        private void OnDisable()
+        {
+            RemoveListeners();
+        }
+
         public void SetEncounterData(EncounterData data)
         {
             encounterData = data;
@@ -39,7 +52,27 @@ namespace Akashic.Runtime.MonoSystems.Battle
         
         public void SortEnemyBattleActorsBySpeed()
         {
-            enemyBattleActors = enemyBattleActors.OrderByDescending(actor => actor.EnemyData.enemyClass.speedStat).ToList();
+            enemyBattleActors = enemyBattleActors
+                .OrderByDescending(actor => actor.EnemyData.enemyClass.speedStat)
+                .ToList();
+        }
+        
+        private void OnTurnStateChangedMessage(TurnStateChangedMessage message)
+        {
+            if (message.NextState is TurnFiniteState.EnemyPlanning)
+            {
+                
+            }
+        }
+        
+        private void AddListeners()
+        {
+            GameManager.AddListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
+        }
+        
+        private void RemoveListeners()
+        {
+            GameManager.RemoveListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
         }
     }
 }

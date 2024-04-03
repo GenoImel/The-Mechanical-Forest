@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Akashic.Core.MonoSystems;
-using Akashic.Runtime.Actors.Battle;
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Party;
 
 namespace Akashic.Runtime.MonoSystems.Battle
 {
@@ -8,5 +10,7 @@ namespace Akashic.Runtime.MonoSystems.Battle
         public void AddPartyBattleActor(PartyBattleActor partyBattleActor);
 
         public void InitializeAbilityPoints();
+
+        public List<BattleActor> GetBattleActors();
     }
 }

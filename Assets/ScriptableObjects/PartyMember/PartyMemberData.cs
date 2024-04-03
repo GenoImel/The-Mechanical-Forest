@@ -1,5 +1,6 @@
 using Akashic.ScriptableObjects.Inventory;
 using System.Collections.Generic;
+using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 
 namespace Akashic.ScriptableObjects.PartyMember

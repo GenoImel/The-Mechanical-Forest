@@ -1,11 +1,13 @@
 using Akashic.Core;
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.Serializers.Save;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using Akashic.Runtime.Utilities.GameMath.Stats;
 using Akashic.ScriptableObjects.Battle;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Enemy
 {
     internal sealed class EnemyBattleActorStatHandler : BattleActorStatHandler
     {

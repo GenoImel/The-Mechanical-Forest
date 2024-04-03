@@ -6,7 +6,7 @@ using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Environment
 {
     internal sealed class EnemyBattleActorInstantiator : MonoBehaviour
     {

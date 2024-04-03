@@ -1,5 +1,7 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Actors.Battle;
+using System.Linq;
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using UnityEngine;
 
@@ -24,6 +26,11 @@ namespace Akashic.Runtime.MonoSystems.Battle
         {
             maxAbilityPoints = ResourcesMath.CalculateTotalPooledAbilityPoints(partyBattleActors);
             currentAbilityPoints = maxAbilityPoints;
+        }
+        
+        public List<BattleActor> GetBattleActors()
+        {
+            return partyBattleActors.Cast<BattleActor>().ToList();
         }
     }
 }

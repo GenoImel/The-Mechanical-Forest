@@ -1,21 +1,22 @@
-using Akashic.Runtime.Skills;
+using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.StatusEffects;
 using UnityEngine;
 
-namespace Akashic.ScriptableObjects.PartyMember
+namespace Akashic.ScriptableObjects.Battle
 {
     [CreateAssetMenu(menuName = "Akashic/Skills/New Skill")]
     internal sealed class SkillData : ScriptableObject
     {
         [Header("Info")]
-		public string skillId;
 		public string skillName;
+        public string skillId;
         public string description;
-        public SkillElement skillElement;
+        public ISkill scripting;
 
         [Header("Stats")]
         [Range(1, 10)] public int apCost;
-        [Range(0, 999)] public int baseDamage;
+        [Range(0, 999)] public int damageModifier;
+        public bool canCrit;
 
         [Header("Status Info")]
         public Status statusEffect;

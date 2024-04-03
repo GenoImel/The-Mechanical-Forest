@@ -1,6 +1,7 @@
+using Akashic.Runtime.Actors.Battle.Party;
 using UnityEngine;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Base
 {
     internal class BattleActor : MonoBehaviour
     {

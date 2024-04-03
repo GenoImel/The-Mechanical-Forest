@@ -15,7 +15,7 @@ namespace Akashic.ScriptableObjects.Battle
         public int maxTenacity;
         public int maxResolve;
         
-        public EnemyType enemyType;
+        public DamageType damageType;
         public SpeedStat speedStat;
     }
 }

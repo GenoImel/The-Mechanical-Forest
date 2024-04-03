@@ -5,7 +5,7 @@ using Akashic.Runtime.Serializers.Save;
 using Akashic.ScriptableObjects.Inventory;
 using UnityEngine;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Party
 {
     internal sealed class PartyBattleEquipmentHandler : MonoBehaviour
     {

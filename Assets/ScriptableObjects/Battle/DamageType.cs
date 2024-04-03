@@ -1,6 +1,6 @@
 namespace Akashic.ScriptableObjects.Battle
 {
-    internal enum EnemyType
+    internal enum DamageType
     {
         Physical,
         Magical

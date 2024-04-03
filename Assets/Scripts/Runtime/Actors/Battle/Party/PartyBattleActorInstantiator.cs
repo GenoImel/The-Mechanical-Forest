@@ -4,7 +4,7 @@ using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.MonoSystems.Party;
 using UnityEngine;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Party
 {
     internal sealed class PartyBattleActorInstantiator : MonoBehaviour
     {

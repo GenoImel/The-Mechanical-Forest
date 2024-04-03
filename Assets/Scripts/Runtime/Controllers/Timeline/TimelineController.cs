@@ -1,5 +1,7 @@
+using System;
+using System.Linq;
 using Akashic.Core;
-using Akashic.Runtime.StateMachines.TurnStates;
+using Akashic.Runtime.MonoSystems.Timeline;
 using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.Timeline
@@ -7,7 +9,14 @@ namespace Akashic.Runtime.Controllers.Timeline
     internal sealed class TimelineController : MonoBehaviour
     {
         [SerializeField] private TimelineContainer timelineContainer;
-        
+
+        private ITimelineMonoSystem timelineMonoSystem;
+
+        private void Awake()
+        {
+            timelineMonoSystem = GameManager.GetMonoSystem<ITimelineMonoSystem>();
+        }
+
         private void OnEnable()
         {
             AddListeners();
@@ -18,22 +27,21 @@ namespace Akashic.Runtime.Controllers.Timeline
             RemoveListeners();
         }
 
-        private void OnTurnStateChangedMessage(TurnStateChangedMessage message)
+        private void OnReserveTimelineSlotsForPartyMessage(SlotsReservedForPartyMessage message)
         {
-            if (message.NextState is TurnFiniteState.Promise)
-            {
-                timelineContainer.ReserveSlotsForParty();
-            }
+            var timelineMoves = timelineMonoSystem.TimelineMoves;
+            
+            timelineContainer.ReserveSlotsForParty(timelineMoves);
         }
         
         private void AddListeners()
         {
-            GameManager.AddListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
+            GameManager.AddListener<SlotsReservedForPartyMessage>(OnReserveTimelineSlotsForPartyMessage);
         }
         
         private void RemoveListeners()
         {
-            GameManager.RemoveListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
+            GameManager.RemoveListener<SlotsReservedForPartyMessage>(OnReserveTimelineSlotsForPartyMessage);
         }
     }
 }

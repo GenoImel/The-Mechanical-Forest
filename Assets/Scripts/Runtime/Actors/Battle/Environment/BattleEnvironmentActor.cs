@@ -5,7 +5,7 @@ using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Environment
 {
     internal sealed class BattleEnvironmentActor : MonoBehaviour
     {

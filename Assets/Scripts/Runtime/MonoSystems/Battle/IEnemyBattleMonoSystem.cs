@@ -1,5 +1,6 @@
 using Akashic.Core.MonoSystems;
 using Akashic.Runtime.Actors.Battle;
+using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.ScriptableObjects.Battle;
 
 namespace Akashic.Runtime.MonoSystems.Battle

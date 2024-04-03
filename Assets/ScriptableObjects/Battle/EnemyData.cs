@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Actors.Battle;
-using Akashic.ScriptableObjects.PartyMember;
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Enemy;
 using UnityEngine;
 
 namespace Akashic.ScriptableObjects.Battle
@@ -20,8 +20,8 @@ namespace Akashic.ScriptableObjects.Battle
         public int tenacityModifier;
         public int resolveModifier;
 
-        [Header("Skills")]
-        public List<SkillData> skills;
+        [Header("Behaviour")]
+        public IEnemyBehaviour behaviour;
         
         public EnemyBattleActor enemyBattleActor;
     }

@@ -1,6 +1,8 @@
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.ScriptableObjects.Battle;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Enemy
 {
     internal sealed class EnemyBattleActor : BattleActor
     {

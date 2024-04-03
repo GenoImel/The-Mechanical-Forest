@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Akashic.Runtime.Actors.Battle;
+using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.ScriptableObjects.Battle;
 using Akashic.ScriptableObjects.Exploration;
 using Akashic.ScriptableObjects.Inventory;

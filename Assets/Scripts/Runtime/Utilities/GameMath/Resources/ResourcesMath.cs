@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Akashic.Runtime.Actors.Battle;
+using Akashic.Runtime.Actors.Battle.Enemy;
+using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.Utilities.GameMath.Stats;
 using Akashic.ScriptableObjects.Battle;
 using Akashic.ScriptableObjects.PartyMember;

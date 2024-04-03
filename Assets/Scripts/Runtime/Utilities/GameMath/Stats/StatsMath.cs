@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Akashic.Core;
 using Akashic.Runtime.Actors.Battle;
+using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.ScriptableObjects.Battle;
 using Akashic.ScriptableObjects.Inventory;

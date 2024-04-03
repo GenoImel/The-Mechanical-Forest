@@ -1,6 +1,8 @@
+using Akashic.Runtime.Actors.Battle.Base;
+using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Party
 {
     internal sealed class PartyBattleActorStatHandler : BattleActorStatHandler
     {

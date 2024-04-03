@@ -1,10 +1,11 @@
 using Akashic.Core;
+using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.Serializers.Save;
 using Akashic.ScriptableObjects.Config;
 using UnityEngine;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Base
 {
     internal abstract class BattleActorStatHandler : MonoBehaviour
     {
