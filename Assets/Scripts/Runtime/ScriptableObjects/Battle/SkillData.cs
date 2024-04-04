@@ -11,7 +11,7 @@ namespace Akashic.Runtime.ScriptableObjects.Battle
 		public string skillName;
         public string skillId;
         public string description;
-        [SerializeReference] public BaseSkill scripting;
+        public BaseSkill scripting;
 
         [Header("Stats")]
         [Range(1, 10)] public int apCost;
@@ -31,7 +31,8 @@ namespace Akashic.Runtime.ScriptableObjects.Battle
         public BaseSkill GetSkillScript()
         {
             scripting.SetSkillData(this);
-            return scripting;
+            var instantiatedSkill = Instantiate(scripting);
+            return instantiatedSkill;
         }
     }
 }

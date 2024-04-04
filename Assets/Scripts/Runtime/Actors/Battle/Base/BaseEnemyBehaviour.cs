@@ -26,6 +26,11 @@ namespace Akashic.Runtime.Actors.Battle.Base
             resourceMonoSystem = GameManager.GetMonoSystem<IResourceMonoSystem>();
         }
 
+        private void Start()
+        {
+            SetBaseSkills();
+        }
+
         public abstract void ChooseAction();
 
         public void SetSourceBattleActor(BattleActor source)
@@ -37,9 +42,11 @@ namespace Akashic.Runtime.Actors.Battle.Base
         {
             var attackSkillData = resourceMonoSystem.GetSkillById("attack");
             attackSkill = attackSkillData.GetSkillScript();
+            attackSkill.transform.SetParent(transform);
 
             var defendSkillData = resourceMonoSystem.GetSkillById("defend");
             defendSkill = defendSkillData.GetSkillScript();
+            defendSkill.transform.SetParent(transform);
         }
     }
 }

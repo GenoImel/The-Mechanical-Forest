@@ -20,7 +20,7 @@ namespace Akashic.Runtime.ScriptableObjects.Battle
         public int resolveModifier;
 
         [Header("Behaviour")]
-        public IEnemyBehaviour behaviour;
+        public BaseEnemyBehaviour enemyBehaviour;
         
         public EnemyBattleActor enemyBattleActor;
     }

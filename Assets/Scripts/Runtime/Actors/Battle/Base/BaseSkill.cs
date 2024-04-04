@@ -1,8 +1,9 @@
 using Akashic.Runtime.ScriptableObjects.Battle;
+using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Base
 {
-    internal abstract class BaseSkill
+    internal abstract class BaseSkill : MonoBehaviour
     {
         protected SkillData SkillData { get; set; }
         
