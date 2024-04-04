@@ -1,20 +1,13 @@
-using System.Collections.Generic;
-using Akashic.Core;
+using System.Linq;
 using Akashic.Runtime.Actors.Battle.Base;
-using Akashic.Runtime.MonoSystems.Battle;
+using Akashic.Runtime.MonoSystems.Timeline;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
 {
     internal sealed class ImpFodderBehaviour : BaseEnemyBehaviour, IEnemyBehaviour
     {
-        private IPartyBattleMonoSystem PartyMonoSystem => 
-            GameManager.GetMonoSystem<IPartyBattleMonoSystem>();
-        
-        private IEnemyBattleMonoSystem EnemyBattleMonoSystem => 
-            GameManager.GetMonoSystem<IEnemyBattleMonoSystem>();
-        
-        public void ChooseAction()
+        public override void ChooseAction()
         {
             var coinFlip = CoinFlip();
 
@@ -24,29 +17,44 @@ namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
             }
             else
             {
-                
+                ChooseToDefend();
             }
         }
 
         private void ChooseToDefend()
         {
+            var targetBattleActor = ChooseTarget();
+
+            var moveIndex = ChooseRandomMove();
+
+            var moveToSet = new TimelineMove()
+                .SetSourceBattleActor(sourceBattleActor)
+                .SetTargetBattleActor(targetBattleActor)
+                .SetSkill(defendSkill)
+                .Occupy();
             
+            timelineMonoSystem.SetMove(moveIndex, moveToSet);
         }
 
         private void ChooseToAttack()
         {
-            var battleActors = PartyMonoSystem.GetBattleActors();
+            var targetBattleActor = ChooseTarget();
 
-            var chosenBattleActor = ChooseRandomBattleActor(battleActors);
+            var moveIndex = ChooseRandomMove();
+
+            var moveToSet = new TimelineMove()
+                .SetSourceBattleActor(sourceBattleActor)
+                .SetTargetBattleActor(targetBattleActor)
+                .SetSkill(attackSkill)
+                .Occupy();
+            
+            timelineMonoSystem.SetMove(moveIndex, moveToSet);
         }
 
-        private int CoinFlip()
+        private BattleActor ChooseTarget()
         {
-            return UnityEngine.Random.Range(0, 2);
-        }
-        
-        public BattleActor ChooseRandomBattleActor(List<BattleActor> battleActors)
-        {
+            var battleActors = partyBattleMonoSystem.GetBattleActors();
+
             if (battleActors.Count == 0)
             {
                 Debug.LogError("No battle actors found");
@@ -55,6 +63,19 @@ namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
 
             var randomIndex = Random.Range(0, battleActors.Count);
             return battleActors[randomIndex];
+        }
+
+        private int ChooseRandomMove()
+        {
+            var moves = timelineMonoSystem.TimelineMoves
+                .Where(move => !move.isOccupied && !move.isReservedForParty).ToList();
+
+            return Random.Range(0, moves.Count);
+        }
+
+        private int CoinFlip()
+        {
+            return Random.Range(0, 2);
         }
     }
 }

@@ -1,5 +1,5 @@
 using Akashic.Core.Messages;
-using Akashic.ScriptableObjects.Story;
+using Akashic.Runtime.ScriptableObjects.Story;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {

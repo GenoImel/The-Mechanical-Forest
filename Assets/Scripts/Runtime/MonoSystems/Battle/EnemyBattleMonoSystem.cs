@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Enemy;
+using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.Runtime.Utilities.GameMath.Resources;
-using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Battle

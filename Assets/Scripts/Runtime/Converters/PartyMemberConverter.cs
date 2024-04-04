@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Akashic.Runtime.ScriptableObjects.PartyMember;
 using Akashic.Runtime.Serializers.Save;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using Akashic.Runtime.Utilities.GameMath.Stats;
-using Akashic.ScriptableObjects.PartyMember;
 
 namespace Akashic.Runtime.Converters
 {

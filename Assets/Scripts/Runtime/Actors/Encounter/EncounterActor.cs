@@ -1,6 +1,5 @@
-using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Actors.Battle.Environment;
-using Akashic.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Battle;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Encounter

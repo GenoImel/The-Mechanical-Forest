@@ -1,5 +1,5 @@
-using UnityEngine;
 using Akashic.Runtime.Utilities.Canvas;
+using UnityEngine;
 
 namespace Akashic.Runtime.Common
 {

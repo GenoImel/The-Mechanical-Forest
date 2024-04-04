@@ -14,4 +14,9 @@ namespace Akashic.Runtime.MonoSystems.Timeline
     {
         
     }
+
+    internal sealed class EnemyMovesChosenMessage : IMessage
+    {
+        
+    }
 }

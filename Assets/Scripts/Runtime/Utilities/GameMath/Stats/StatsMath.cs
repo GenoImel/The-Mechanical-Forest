@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
 using Akashic.Core;
-using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.MonoSystems.Config;
-using Akashic.ScriptableObjects.Battle;
-using Akashic.ScriptableObjects.Inventory;
-using Akashic.ScriptableObjects.PartyMember;
+using Akashic.Runtime.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Inventory;
+using Akashic.Runtime.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Utilities.GameMath.Stats

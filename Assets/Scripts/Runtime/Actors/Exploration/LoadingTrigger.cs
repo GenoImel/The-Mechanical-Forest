@@ -1,5 +1,5 @@
 using Akashic.Core;
-using Akashic.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Exploration;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

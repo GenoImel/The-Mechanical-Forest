@@ -1,5 +1,5 @@
 using Akashic.Core.Messages;
-using Akashic.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Exploration;
 
 namespace Akashic.Runtime.Actors.Exploration
 {

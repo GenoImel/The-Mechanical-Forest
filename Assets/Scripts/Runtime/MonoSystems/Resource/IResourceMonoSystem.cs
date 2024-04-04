@@ -1,8 +1,8 @@
-using Akashic.Core.MonoSystems;
-using Akashic.ScriptableObjects.Inventory;
 using System.Collections.Generic;
-using Akashic.ScriptableObjects.Battle;
-using Akashic.ScriptableObjects.Exploration;
+using Akashic.Core.MonoSystems;
+using Akashic.Runtime.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Inventory;
 
 namespace Akashic.Runtime.MonoSystems.Resource
 {
@@ -106,5 +106,19 @@ namespace Akashic.Runtime.MonoSystems.Resource
 		/// </summary>
 		/// <returns><see cref="EncounterData"/></returns>
 		public EncounterData GetEncounterById(string encounterId);
+
+		/// <summary>
+		/// Get a skill using the skill id.
+		/// </summary>
+		/// <param name="skillId"></param>
+		/// <returns></returns>
+		public SkillData GetSkillById(string skillId);
+
+		/// <summary>
+		/// Get a list of skills by their skill ids.
+		/// </summary>
+		/// <param name="skillIds"></param>
+		/// <returns></returns>
+		public List<SkillData> GetSkillsById(List<string> skillIds);
 	}
 }

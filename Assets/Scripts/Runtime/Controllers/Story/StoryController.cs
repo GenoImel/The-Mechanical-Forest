@@ -1,9 +1,9 @@
+using System;
 using Akashic.Core;
-using UnityEngine;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
-using System;
 using Akashic.Runtime.StateMachines.StoryStates;
+using UnityEngine;
 
 namespace Akashic.Runtime.Controllers.Story
 {

@@ -6,7 +6,7 @@ namespace Akashic.Runtime.MonoSystems.Timeline
     {
         public BattleActor SourceBattleActor { get; private set; }
         public BattleActor TargetBattleActor { get; private set; }
-        public ISkill Skill { get; private set; }
+        public BaseSkill Skill { get; private set; }
         public bool isReservedForParty;
         public bool isOccupied;
 
@@ -22,7 +22,7 @@ namespace Akashic.Runtime.MonoSystems.Timeline
             return this;
         }
         
-        public TimelineMove SetSkill(ISkill skill)
+        public TimelineMove SetSkill(BaseSkill skill)
         {
             Skill = skill;
             return this;

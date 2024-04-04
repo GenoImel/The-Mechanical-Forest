@@ -1,7 +1,7 @@
 using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.Actors.Battle.Party;
+using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.Serializers.Save;
-using Akashic.ScriptableObjects.Battle;
 
 namespace Akashic.Runtime.Actors.Battle.Environment
 {

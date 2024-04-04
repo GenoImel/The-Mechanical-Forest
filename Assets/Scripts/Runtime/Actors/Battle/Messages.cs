@@ -1,6 +1,6 @@
 using Akashic.Core.Messages;
 using Akashic.Runtime.Actors.Battle.Environment;
-using Akashic.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Battle;
 
 namespace Akashic.Runtime.Actors.Battle
 {

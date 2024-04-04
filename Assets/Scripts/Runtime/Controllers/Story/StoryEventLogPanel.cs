@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Akashic.Core;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
+using UnityEngine;
 using UnityEngine.UI;
-using Akashic.Core;
 
 namespace Akashic.Runtime.Controllers.Story
 {

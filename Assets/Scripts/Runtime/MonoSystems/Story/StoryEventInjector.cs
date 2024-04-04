@@ -1,8 +1,8 @@
+using Akashic.Core;
+using Akashic.Runtime.ScriptableObjects.Story;
+using Akashic.Runtime.StateMachines.StoryStates;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Akashic.Core;
-using Akashic.ScriptableObjects.Story;
-using Akashic.Runtime.StateMachines.StoryStates;
 
 namespace Akashic.Runtime.MonoSystems.Story
 {

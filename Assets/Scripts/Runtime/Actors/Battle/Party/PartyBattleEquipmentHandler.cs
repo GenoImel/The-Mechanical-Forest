@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Resource;
+using Akashic.Runtime.ScriptableObjects.Inventory;
 using Akashic.Runtime.Serializers.Save;
-using Akashic.ScriptableObjects.Inventory;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Party

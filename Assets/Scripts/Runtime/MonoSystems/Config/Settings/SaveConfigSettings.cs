@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Akashic.ScriptableObjects.Config;
+using Akashic.Runtime.ScriptableObjects.Config;
 
 namespace Akashic.Runtime.MonoSystems.Config.Settings
 {

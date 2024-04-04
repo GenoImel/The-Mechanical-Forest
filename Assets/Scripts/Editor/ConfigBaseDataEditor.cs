@@ -1,4 +1,4 @@
-using Akashic.ScriptableObjects.Config;
+using Akashic.Runtime.ScriptableObjects.Config;
 using UnityEditor;
 
 namespace Akashic.Editor

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.Actors.Battle.Party;
+using Akashic.Runtime.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.PartyMember;
 using Akashic.Runtime.Utilities.GameMath.Stats;
-using Akashic.ScriptableObjects.Battle;
-using Akashic.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.Utilities.GameMath.Resources

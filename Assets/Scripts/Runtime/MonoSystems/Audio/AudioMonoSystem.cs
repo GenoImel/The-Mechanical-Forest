@@ -3,8 +3,8 @@ using Akashic.Core;
 using Akashic.Runtime.Controllers.OptionsMenu;
 using Akashic.Runtime.MonoSystems.PlayerPrefs;
 using FMOD.Studio;
-using UnityEngine;
 using FMODUnity;
+using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Audio 
 {

@@ -39,6 +39,11 @@ namespace Akashic.Runtime.MonoSystems.Timeline
         {
             RemoveListeners();
         }
+
+        public void SetMove(int moveIndex, TimelineMove moveToSet)
+        {
+            timelineMoves[moveIndex] = moveToSet;
+        }
         
         private void ReserveMovesForParty()
         {

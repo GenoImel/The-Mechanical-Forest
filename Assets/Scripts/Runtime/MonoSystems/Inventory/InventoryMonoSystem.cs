@@ -2,8 +2,8 @@ using Akashic.Core;
 using Akashic.Runtime.Converters;
 using Akashic.Runtime.MonoSystems.Config;
 using Akashic.Runtime.MonoSystems.GameDebug;
+using Akashic.Runtime.ScriptableObjects.Inventory;
 using Akashic.Runtime.Serializers.Save;
-using Akashic.ScriptableObjects.Inventory;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Inventory

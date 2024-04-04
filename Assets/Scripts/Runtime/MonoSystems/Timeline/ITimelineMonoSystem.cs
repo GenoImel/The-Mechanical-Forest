@@ -6,5 +6,7 @@ namespace Akashic.Runtime.MonoSystems.Timeline
     internal interface ITimelineMonoSystem : IMonoSystem
     {
         public List<TimelineMove> TimelineMoves { get; }
+
+        public void SetMove(int moveIndex, TimelineMove moveToSet);
     }
 }

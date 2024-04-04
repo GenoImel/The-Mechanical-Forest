@@ -1,7 +1,7 @@
+using System;
 using Akashic.Core;
 using Akashic.Runtime.Common;
 using Akashic.Runtime.MonoSystems.Story;
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;

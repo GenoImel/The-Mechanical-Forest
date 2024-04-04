@@ -1,9 +1,9 @@
-using Akashic.ScriptableObjects.Database;
-using Akashic.ScriptableObjects.Inventory;
 using System.Collections.Generic;
 using System.Linq;
-using Akashic.ScriptableObjects.Battle;
-using Akashic.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Database;
+using Akashic.Runtime.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Inventory;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Resource
@@ -26,6 +26,7 @@ namespace Akashic.Runtime.MonoSystems.Resource
 		[Header("Battle")]
 		[SerializeField] private EnemyDatabase enemiesDatabase;
 		[SerializeField] private EncounterDatabase encountersDatabase;
+		[SerializeField] private SkillsDatabase skillsDatabase;
 
 		public AccessoryData GetAccessoryById(string itemId)
 		{
@@ -105,6 +106,16 @@ namespace Akashic.Runtime.MonoSystems.Resource
 		public EncounterData GetEncounterById(string encounterId)
 		{
 			return encountersDatabase.encounters.First(encounter => encounter.encounterId == encounterId);
+		}
+
+		public SkillData GetSkillById(string skillId)
+		{
+			return skillsDatabase.skills.First(skill => skill.skillId == skillId);
+		}
+
+		public List<SkillData> GetSkillsById(List<string> skillIds)
+		{
+			return skillsDatabase.skills.Where(skill => skillIds.Any(it => it == skill.skillId)).ToList();
 		}
 	}
 }

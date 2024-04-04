@@ -3,7 +3,7 @@ using Akashic.Core;
 using Akashic.Runtime.Actors.Player;
 using Akashic.Runtime.MonoSystems.GameDebug;
 using Akashic.Runtime.MonoSystems.Scene;
-using Akashic.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Exploration;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Exploration

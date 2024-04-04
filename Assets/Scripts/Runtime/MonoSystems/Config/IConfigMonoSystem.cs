@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Akashic.Core.MonoSystems;
 using Akashic.Runtime.MonoSystems.Config.Settings;
-using Akashic.ScriptableObjects.Config;
-using Akashic.ScriptableObjects.Inventory;
-using Akashic.ScriptableObjects.PartyMember;
+using Akashic.Runtime.ScriptableObjects.Config;
+using Akashic.Runtime.ScriptableObjects.Inventory;
+using Akashic.Runtime.ScriptableObjects.PartyMember;
 
 namespace Akashic.Runtime.MonoSystems.Config
 {

@@ -1,8 +1,8 @@
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.GameDebug;
+using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.StateMachines.BattleStates;
 using Akashic.Runtime.StateMachines.TurnStates;
-using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Environment

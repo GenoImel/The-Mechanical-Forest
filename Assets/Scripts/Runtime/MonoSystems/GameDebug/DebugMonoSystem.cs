@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Akashic.Runtime.Actors.Battle;
 using Akashic.Runtime.Actors.Battle.Environment;
-using Akashic.ScriptableObjects.Battle;
-using Akashic.ScriptableObjects.Exploration;
-using Akashic.ScriptableObjects.Inventory;
-using Akashic.ScriptableObjects.PartyMember;
+using Akashic.Runtime.ScriptableObjects.Battle;
+using Akashic.Runtime.ScriptableObjects.Exploration;
+using Akashic.Runtime.ScriptableObjects.Inventory;
+using Akashic.Runtime.ScriptableObjects.PartyMember;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.GameDebug

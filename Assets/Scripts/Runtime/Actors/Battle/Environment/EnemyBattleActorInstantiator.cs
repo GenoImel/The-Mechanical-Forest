@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Battle;
+using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.Utilities.Random;
-using Akashic.ScriptableObjects.Battle;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

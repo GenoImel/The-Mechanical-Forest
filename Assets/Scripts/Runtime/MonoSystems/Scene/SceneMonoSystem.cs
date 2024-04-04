@@ -1,14 +1,13 @@
 using System;
-using NaughtyAttributes;
+using System.Threading.Tasks;
 using Akashic.Core;
+using NaughtyAttributes;
+using Akashic.Runtime.Common;
+using Akashic.Runtime.Controllers.BattleCurtain;
 using Akashic.Runtime.Controllers.LoadingCurtain;
 using Akashic.Runtime.StateMachines.GameStates;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
-using Akashic.Runtime.Common;
-using Akashic.Runtime.Controllers.BattleCurtain;
-
 
 namespace Akashic.Runtime.MonoSystems.Scene
 {

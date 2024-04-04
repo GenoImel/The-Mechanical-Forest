@@ -1,7 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
 using Akashic.Core;
 using Akashic.Runtime.Common;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Akashic.Runtime.Controllers.OptionsMenu
 {

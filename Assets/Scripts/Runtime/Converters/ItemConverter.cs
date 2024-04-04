@@ -1,6 +1,5 @@
-﻿using Akashic.ScriptableObjects.Inventory;
-using System.Collections.Generic;
-using Akashic.Runtime.Serializers;
+﻿using System.Collections.Generic;
+using Akashic.Runtime.ScriptableObjects.Inventory;
 using Akashic.Runtime.Serializers.Save;
 
 namespace Akashic.Runtime.Converters
