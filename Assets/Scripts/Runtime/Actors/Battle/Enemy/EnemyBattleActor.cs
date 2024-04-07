@@ -1,6 +1,7 @@
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.ScriptableObjects.Battle;
+using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Enemy
 {
@@ -9,6 +10,8 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
         private EnemyData enemyData;
         
         public EnemyData EnemyData => enemyData;
+
+        public BaseEnemyBehaviour enemyBehaviour;
         
         public void InitializeEnemyBattleActor(EnemyData enemyData)
         {
@@ -19,6 +22,14 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
             parameters.SetEnemyBattleActor(this);
             
             statHandler.InitializeBattleActorStats(parameters);
+            InitializeEnemyBehaviour();
+        }
+
+        private void InitializeEnemyBehaviour()
+        {
+            enemyBehaviour = Instantiate(EnemyData.enemyBehaviour, transform);
+            enemyBehaviour.SetSourceBattleActor(this);
+            enemyBehaviour.SetBaseSkills();
         }
     }
 }

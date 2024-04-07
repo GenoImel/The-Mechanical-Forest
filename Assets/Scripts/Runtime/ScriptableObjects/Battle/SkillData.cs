@@ -30,9 +30,7 @@ namespace Akashic.Runtime.ScriptableObjects.Battle
 
         public BaseSkill GetSkillScript()
         {
-            scripting.SetSkillData(this);
-            var instantiatedSkill = Instantiate(scripting);
-            return instantiatedSkill;
+            return scripting;
         }
     }
 }

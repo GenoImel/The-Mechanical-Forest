@@ -1,23 +1,34 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.MonoSystems.Timeline;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
 {
-    internal sealed class ImpFodderBehaviour : BaseEnemyBehaviour, IEnemyBehaviour
+    internal sealed class ImpFodderBehaviour : BaseEnemyBehaviour
     {
-        public override void ChooseAction()
+        public override async Task ChooseActionAsync()
         {
-            var coinFlip = CoinFlip();
+            while (sourceBattleActor.statHandler.ActionPips > 0
+                   && timelineMonoSystem.TimelineMoves
+                       .Any(moves => !moves.isOccupied && !moves.isReservedForParty))
+            {
+                var coinFlip = CoinFlip();
 
-            if (coinFlip == 0)
-            {
-                ChooseToAttack();
-            }
-            else
-            {
-                ChooseToDefend();
+                if (coinFlip == 0)
+                {
+                    ChooseToAttack();
+                }
+                else
+                {
+                    ChooseToDefend();
+                }
+                
+                if (sourceBattleActor.statHandler.ActionPips <= 0)
+                {
+                    break;
+                }
             }
         }
 
@@ -25,30 +36,38 @@ namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
         {
             var targetBattleActor = ChooseTarget();
 
-            var moveIndex = ChooseRandomMove();
+            var moveToSet = ChooseRandomMove();
 
-            var moveToSet = new TimelineMove()
-                .SetSourceBattleActor(sourceBattleActor)
+            if (moveToSet == null)
+            {
+                return;
+            }
+
+            moveToSet.SetSourceBattleActor(sourceBattleActor)
                 .SetTargetBattleActor(targetBattleActor)
                 .SetSkill(defendSkill)
                 .Occupy();
             
-            timelineMonoSystem.SetMove(moveIndex, moveToSet);
+            sourceBattleActor.statHandler.RemoveActionPips(defendSkill.SkillData.pipCost);
         }
 
         private void ChooseToAttack()
         {
             var targetBattleActor = ChooseTarget();
 
-            var moveIndex = ChooseRandomMove();
+            var moveToSet = ChooseRandomMove();
 
-            var moveToSet = new TimelineMove()
-                .SetSourceBattleActor(sourceBattleActor)
+            if (moveToSet == null)
+            {
+                return;
+            }
+
+            moveToSet.SetSourceBattleActor(sourceBattleActor)
                 .SetTargetBattleActor(targetBattleActor)
                 .SetSkill(attackSkill)
                 .Occupy();
             
-            timelineMonoSystem.SetMove(moveIndex, moveToSet);
+            sourceBattleActor.statHandler.RemoveActionPips(attackSkill.SkillData.pipCost);
         }
 
         private BattleActor ChooseTarget()
@@ -65,12 +84,20 @@ namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
             return battleActors[randomIndex];
         }
 
-        private int ChooseRandomMove()
+        private TimelineMove ChooseRandomMove()
         {
-            var moves = timelineMonoSystem.TimelineMoves
-                .Where(move => !move.isOccupied && !move.isReservedForParty).ToList();
+            var availableMoves = timelineMonoSystem.TimelineMoves
+                .Where(move => !move.isOccupied && !move.isReservedForParty)
+                .ToList();
 
-            return Random.Range(0, moves.Count);
+            if (availableMoves.Count == 0)
+            {
+                Debug.LogError("No available moves found");
+                return null; 
+            }
+
+            var randomIndex = Random.Range(0, availableMoves.Count);
+            return availableMoves[randomIndex];
         }
 
         private int CoinFlip()

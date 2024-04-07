@@ -1,3 +1,4 @@
+using System;
 using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.MonoSystems.Config;
@@ -27,6 +28,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
         public int CurrentLevel => currentLevel;
         
         public int CurrentHitPoints => hitPoints.CurrentHitPoints;
+        public int MaxHitPoints => hitPoints.MaxHitPoints;
         public int BaseAbilityPoints => baseAbilityPoints;
         
         public int CurrentMight => might.CalculatedMight;
@@ -51,6 +53,16 @@ namespace Akashic.Runtime.Actors.Battle.Base
         public abstract void InitializeBattleActorStats(BattleActorInitializationParameters parameters);
 
         protected abstract void RefreshBufferHitPoints();
+
+        public void RemoveActionPips(int actionPipsToRemove)
+        {
+            if (actionPipsToRemove > actionPips)
+            {
+                throw new Exception($"You cannot remove more action pips than the {typeof(BattleActor)} has.");
+            }
+            
+            actionPips -= actionPipsToRemove;
+        }
 
         protected virtual void RegeneratePips()
         {

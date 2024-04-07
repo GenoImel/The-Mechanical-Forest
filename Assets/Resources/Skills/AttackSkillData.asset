@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8ca8d23c616e646bb3150264ca7d52, type: 3}
   m_Name: AttackSkillData
   m_EditorClassIdentifier: 
-  skillName: 
-  skillId: 
-  description: 
+  skillName: Attack
+  skillId: attack
+  description: A regular attack
+  scripting: {fileID: 8923506879703930596, guid: 927458f79eaca424f9cc0fb7ce2fc8ca, type: 3}
   apCost: 0
-  pipCost: 0
+  pipCost: 1
   damageModifier: 0
   canCrit: 0
   statusEffect: 0

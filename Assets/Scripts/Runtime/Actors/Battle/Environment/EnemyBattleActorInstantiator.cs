@@ -38,6 +38,7 @@ namespace Akashic.Runtime.Actors.Battle.Environment
                 for (var i = 0; i < enemyQuantity; i++)
                 {
                     var enemyData = enemyQuantityRange.enemyData;
+                    
                     var instantiatedEnemyBattleActor = Instantiate(enemyData.enemyBattleActor, transform);
                     instantiatedEnemyBattleActor.transform.position = battleActorSpawnPoints[i].position;
                     

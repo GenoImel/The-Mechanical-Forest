@@ -182,7 +182,7 @@ namespace Akashic.Runtime.Utilities.GameMath.Stats
             return totalStat;
         }
 
-        private static int CalculateTotalState(
+        private static int CalculateTotalStat(
             PartyBattleActor partyBattleActor,
             Func<AccessoryData, StatModifier> accessoryStatSelector,
             Func<ArmorData, StatModifier> armorStatSelector,

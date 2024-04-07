@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8ca8d23c616e646bb3150264ca7d52, type: 3}
   m_Name: DefendSkillData
   m_EditorClassIdentifier: 
-  skillName: 
-  skillId: 
-  description: 
+  skillName: Defend
+  skillId: defend
+  description: Defend self or an ally.
+  scripting: {fileID: 2411825041916082686, guid: 4480a43cd3e17fd448cb40a2efd4c5f3, type: 3}
   apCost: 0
-  pipCost: 0
+  pipCost: 1
   damageModifier: 0
   canCrit: 0
   statusEffect: 0

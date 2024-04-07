@@ -3,7 +3,7 @@ using Akashic.Runtime.Actors.Battle.Base;
 
 namespace Akashic.Runtime.Actors.Battle.Skills
 {
-    internal sealed class DefendSkill : BaseSkill, ISkill
+    internal sealed class DefendSkill : BaseSkill
     {
         public void Execute(BattleActor source, List<BattleActor> target)
         {

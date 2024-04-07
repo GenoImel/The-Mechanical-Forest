@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Enemy;
+using Akashic.Runtime.MonoSystems.Timeline;
 using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.Runtime.Utilities.GameMath.Resources;
@@ -58,10 +60,23 @@ namespace Akashic.Runtime.MonoSystems.Battle
         
         private void OnTurnStateChangedMessage(TurnStateChangedMessage message)
         {
-            if (message.NextState is TurnFiniteState.EnemyPlanning)
+            if (message.NextState is not TurnFiniteState.EnemyPlanning)
             {
-                
+                return;
             }
+            
+            var enemyDecisionTasks = enemyBattleActors
+                .Select(enemy => enemy.enemyBehaviour.ChooseActionAsync())
+                .ToList();
+
+            HandleEnemyDecisionsAsync(enemyDecisionTasks);
+            
+            GameManager.Publish(new EnemyMovesChosenMessage());
+        }
+
+        private async void HandleEnemyDecisionsAsync(List<Task> enemyDecisionTasks)
+        {
+            await Task.WhenAll(enemyDecisionTasks);
         }
         
         private void AddListeners()

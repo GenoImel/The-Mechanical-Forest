@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Akashic.Core;
 using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.MonoSystems.Resource;
@@ -26,27 +27,22 @@ namespace Akashic.Runtime.Actors.Battle.Base
             resourceMonoSystem = GameManager.GetMonoSystem<IResourceMonoSystem>();
         }
 
-        private void Start()
-        {
-            SetBaseSkills();
-        }
-
-        public abstract void ChooseAction();
+        public abstract Task ChooseActionAsync();
 
         public void SetSourceBattleActor(BattleActor source)
         {
             sourceBattleActor = source;
         }
 
-        private void SetBaseSkills()
+        public void SetBaseSkills()
         {
             var attackSkillData = resourceMonoSystem.GetSkillById("attack");
-            attackSkill = attackSkillData.GetSkillScript();
-            attackSkill.transform.SetParent(transform);
+            attackSkill = Instantiate(attackSkillData.GetSkillScript(), transform);
+            attackSkill.SetSkillData(attackSkillData);
 
             var defendSkillData = resourceMonoSystem.GetSkillById("defend");
-            defendSkill = defendSkillData.GetSkillScript();
-            defendSkill.transform.SetParent(transform);
+            defendSkill = Instantiate(defendSkillData.GetSkillScript(), transform);
+            defendSkill.SetSkillData(defendSkillData);
         }
     }
 }

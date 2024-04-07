@@ -23,5 +23,19 @@ namespace Akashic.Runtime.Controllers.Timeline
                 i++;
             }
         }
+
+        public void OccupySlotsWithEnemy(List<TimelineMove> timelineMoves)
+        {
+            var i = 0;
+            foreach (var move in timelineMoves)
+            {
+                if (move.isOccupied)
+                {
+                    timelineSlots[i].SetOccupiedByEnemy();
+                }
+
+                i++;
+            }
+        }
     }
 }

@@ -31,15 +31,24 @@ namespace Akashic.Runtime.Controllers.Timeline
             
             timelineContainer.ReserveSlotsForParty(timelineMoves);
         }
+
+        private void OnEnemyMovesChosenMessage(EnemyMovesChosenMessage message)
+        {
+            var timeLineMoves = timelineMonoSystem.TimelineMoves;
+
+            timelineContainer.OccupySlotsWithEnemy(timeLineMoves);
+        }
         
         private void AddListeners()
         {
             GameManager.AddListener<SlotsReservedForPartyMessage>(OnReserveTimelineSlotsForPartyMessage);
+            GameManager.AddListener<EnemyMovesChosenMessage>(OnEnemyMovesChosenMessage);
         }
         
         private void RemoveListeners()
         {
             GameManager.RemoveListener<SlotsReservedForPartyMessage>(OnReserveTimelineSlotsForPartyMessage);
+            GameManager.RemoveListener<EnemyMovesChosenMessage>(OnEnemyMovesChosenMessage);
         }
     }
 }

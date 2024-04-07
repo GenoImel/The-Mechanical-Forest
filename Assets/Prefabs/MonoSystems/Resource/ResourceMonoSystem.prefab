@@ -53,3 +53,4 @@ MonoBehaviour:
   explorationEnvironmentDatabase: {fileID: 11400000, guid: 66dcccdd0de11f949afd86dd5988abde, type: 2}
   enemiesDatabase: {fileID: 11400000, guid: 27526657a906dba4abce1874347280e0, type: 2}
   encountersDatabase: {fileID: 11400000, guid: d2e41b90011a26249a07449abb31c4f4, type: 2}
+  skillsDatabase: {fileID: 11400000, guid: dc9753ae9c88e7d4691e3971d2927f33, type: 2}

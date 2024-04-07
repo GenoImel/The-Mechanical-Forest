@@ -38,6 +38,7 @@ namespace Akashic.Runtime.Actors.Battle.Party
                 
                 partyBattleActor.InitializePartyBattleActor(partyMember);
                 partyBattleMonoSystem.AddPartyBattleActor(instantiatedPartyBattleActor);
+                GameManager.Publish(new PartyBattleActorAddedMessage(partyBattleActor));
             }
             
             partyBattleMonoSystem.InitializeAbilityPoints();

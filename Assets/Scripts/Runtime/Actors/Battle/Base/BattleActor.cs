@@ -20,5 +20,25 @@ namespace Akashic.Runtime.Actors.Battle.Base
         [SerializeField] public PartyMemberSoundHandler partyMemberSoundHandler;
         
         public string ActorName => actorName;
+
+        protected virtual void OnEnable()
+        {
+            
+        }
+
+        protected virtual void OnDisable()
+        {
+            
+        }
+
+        protected virtual void AddListeners()
+        {
+            
+        }
+
+        protected virtual void RemoveListeners()
+        {
+            
+        }
     }
 }

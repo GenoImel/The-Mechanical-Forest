@@ -1,4 +1,5 @@
 using Akashic.Core.StateMachines;
+using NaughtyAttributes;
 
 namespace Akashic.Runtime.StateMachines.TurnStates
 {

@@ -20,5 +20,5 @@ MonoBehaviour:
   deftnessModifier: 1
   tenacityModifier: 1
   resolveModifier: 1
-  skills: []
+  enemyBehaviour: {fileID: 7070499902034611502, guid: f847ac0c704b2a04bba4108f9c0c9ab6, type: 3}
   enemyBattleActor: {fileID: 4167476700045308322, guid: 367c287e5f32f7d428a2cea9af2215e6, type: 3}
