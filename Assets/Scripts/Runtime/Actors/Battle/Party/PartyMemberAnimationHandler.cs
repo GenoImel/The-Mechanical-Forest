@@ -1,17 +1,18 @@
+using Akashic.Runtime.Actors.Battle.Base;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Party
 {
-    internal sealed class PartyMemberAnimationHandler : MonoBehaviour
+    internal sealed class PartyMemberAnimationHandler : BattleActorAnimationHandler
     {
-        [SerializeField] private PipsContainer pipsContainer;
-
-        public void SpendPips(int numberToSpend)
+        protected override void SetSelected(int numberOfPips)
         {
-            for (int i = 0; i < numberToSpend; i++)
-            {
-                pipsContainer.SpendPip();
-            }
+            selector.SetSelected(numberOfPips);
+        }
+
+        protected override void SelectedAsTarget()
+        {
+            selector.SetSelectedAsTarget();
         }
     }
 }

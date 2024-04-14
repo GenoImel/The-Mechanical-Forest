@@ -2,7 +2,6 @@ using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.Serializers.Save;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Akashic.Runtime.Actors.Battle.Party
 {

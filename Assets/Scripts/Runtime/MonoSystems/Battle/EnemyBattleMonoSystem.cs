@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Akashic.Core;
+using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.MonoSystems.Timeline;
 using Akashic.Runtime.ScriptableObjects.Battle;
@@ -56,6 +57,16 @@ namespace Akashic.Runtime.MonoSystems.Battle
             enemyBattleActors = enemyBattleActors
                 .OrderByDescending(actor => actor.EnemyData.enemyClass.speedStat)
                 .ToList();
+        }
+        
+        public List<BattleActor> GetBattleActorsAsBase()
+        {
+            return enemyBattleActors.Cast<BattleActor>().ToList();
+        }
+        
+        public List<EnemyBattleActor> GetBattleActors()
+        {
+            return enemyBattleActors.ToList();
         }
         
         private void OnTurnStateChangedMessage(TurnStateChangedMessage message)

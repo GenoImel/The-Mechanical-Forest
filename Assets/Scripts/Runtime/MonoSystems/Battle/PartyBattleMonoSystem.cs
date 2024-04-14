@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Party;
+using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.Runtime.Utilities.GameMath.Resources;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Akashic.Runtime.MonoSystems.Battle
 {
@@ -28,9 +32,14 @@ namespace Akashic.Runtime.MonoSystems.Battle
             currentAbilityPoints = maxAbilityPoints;
         }
         
-        public List<BattleActor> GetBattleActors()
+        public List<BattleActor> GetBattleActorsAsBase()
         {
             return partyBattleActors.Cast<BattleActor>().ToList();
+        }
+        
+        public List<PartyBattleActor> GetBattleActors()
+        {
+            return partyBattleActors.ToList();
         }
     }
 }

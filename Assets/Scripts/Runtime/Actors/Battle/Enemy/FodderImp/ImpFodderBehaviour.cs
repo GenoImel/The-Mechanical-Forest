@@ -72,7 +72,7 @@ namespace Akashic.Runtime.Actors.Battle.Enemy.FodderImp
 
         private BattleActor ChooseTarget()
         {
-            var battleActors = partyBattleMonoSystem.GetBattleActors();
+            var battleActors = partyBattleMonoSystem.GetBattleActorsAsBase();
 
             if (battleActors.Count == 0)
             {

@@ -1,4 +1,5 @@
 using Akashic.Core.StateMachines;
+using UnityEngine.InputSystem;
 
 namespace Akashic.Runtime.StateMachines.BattleStates
 {

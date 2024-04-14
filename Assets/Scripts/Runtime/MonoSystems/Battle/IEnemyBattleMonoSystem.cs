@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Akashic.Core.MonoSystems;
+using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.ScriptableObjects.Battle;
 
@@ -15,5 +17,9 @@ namespace Akashic.Runtime.MonoSystems.Battle
         public void InitializeAbilityPoints();
 
         public void SortEnemyBattleActorsBySpeed();
+        
+        public List<BattleActor> GetBattleActorsAsBase();
+        
+        public List<EnemyBattleActor> GetBattleActors();
     }
 }

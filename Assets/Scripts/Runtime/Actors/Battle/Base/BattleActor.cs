@@ -1,9 +1,11 @@
+using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Party;
+using Akashic.Runtime.Actors.Battle.Planning;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Base
 {
-    internal class BattleActor : MonoBehaviour
+    internal abstract class BattleActor : MonoBehaviour
     {
         [Header("Party Member Info")]
         [SerializeField] protected string actorName;
@@ -13,7 +15,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
         
         [SerializeField] public PartyMemberSkillsHandler partyMemberSkillsHandler;
         
-        [SerializeField] public PartyMemberAnimationHandler partyMemberAnimationHandler;
+        [SerializeField] public BattleActorAnimationHandler battleActorAnimationHandler;
         
         [SerializeField] public PartyMemberEffectHandler partyMemberEffectHandler;
         
@@ -30,6 +32,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
         {
             
         }
+        
 
         protected virtual void AddListeners()
         {

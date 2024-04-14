@@ -7,6 +7,8 @@ namespace Akashic.Runtime.StateMachines.TurnStates
     /// </summary>
     internal interface ITurnStateMachine : IStateMachine
     {
+        public IFiniteState CurrentState { get; }
+        
         /// <summary>
         /// Sets the state to Initializing.
         /// </summary>

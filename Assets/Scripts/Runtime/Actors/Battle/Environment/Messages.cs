@@ -1,8 +1,7 @@
 using Akashic.Core.Messages;
-using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.ScriptableObjects.Battle;
 
-namespace Akashic.Runtime.Actors.Battle
+namespace Akashic.Runtime.Actors.Battle.Environment
 {
     internal sealed class LoadBattleEnvironmentFromTriggerMessage : IMessage
     {

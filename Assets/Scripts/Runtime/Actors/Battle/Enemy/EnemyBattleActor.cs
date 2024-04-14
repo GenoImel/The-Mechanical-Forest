@@ -22,6 +22,7 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
             parameters.SetEnemyBattleActor(this);
             
             statHandler.InitializeBattleActorStats(parameters);
+            battleActorAnimationHandler.InitializeAnimationHandler(this);
             InitializeEnemyBehaviour();
         }
 

@@ -11,6 +11,8 @@ namespace Akashic.Runtime.MonoSystems.Battle
 
         public void InitializeAbilityPoints();
 
-        public List<BattleActor> GetBattleActors();
+        public List<BattleActor> GetBattleActorsAsBase();
+
+        public List<PartyBattleActor> GetBattleActors();
     }
 }
