@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using Akashic.Runtime.Actors.Battle.Base;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Akashic.Runtime.Actors.Battle.Party
 {
@@ -13,9 +11,12 @@ namespace Akashic.Runtime.Actors.Battle.Party
 
         public override void SetSelected(int numberOfPips)
         {
-            pipSelectors.FirstOrDefault(x => x.Value == numberOfPips)
-                .Key
-                .enabled = true;
+            var selectedRenderer = pipSelectors.FirstOrDefault(x => x.Value == numberOfPips).Key;
+    
+            if (selectedRenderer != null)
+            {
+                selectedRenderer.enabled = true;
+            }
         }
 
         public override void SetDeselected()

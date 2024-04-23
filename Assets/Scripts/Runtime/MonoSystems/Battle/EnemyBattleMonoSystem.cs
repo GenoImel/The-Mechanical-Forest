@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,6 +26,13 @@ namespace Akashic.Runtime.MonoSystems.Battle
         private EncounterData encounterData;
         
         public EncounterData EncounterData => encounterData;
+
+        private ITurnStateMachine turnStateMachine;
+
+        private void Awake()
+        {
+            turnStateMachine = GameManager.GetStateMachine<ITurnStateMachine>();
+        }
 
         private void OnEnable()
         {
@@ -83,6 +91,7 @@ namespace Akashic.Runtime.MonoSystems.Battle
             HandleEnemyDecisionsAsync(enemyDecisionTasks);
             
             GameManager.Publish(new EnemyMovesChosenMessage());
+            turnStateMachine.SetPartyPlanningState();
         }
 
         private async void HandleEnemyDecisionsAsync(List<Task> enemyDecisionTasks)

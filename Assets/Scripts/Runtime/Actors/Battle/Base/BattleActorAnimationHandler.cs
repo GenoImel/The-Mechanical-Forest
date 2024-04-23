@@ -1,5 +1,3 @@
-using Akashic.Core;
-using Akashic.Runtime.Actors.Battle.Planning;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Base
@@ -7,8 +5,6 @@ namespace Akashic.Runtime.Actors.Battle.Base
     internal abstract class BattleActorAnimationHandler : MonoBehaviour
     {
         [SerializeField] protected BattleActorSelector selector;
-
-        private BattleActor battleActor;
         
         protected virtual void OnEnable()
         {
@@ -20,59 +16,31 @@ namespace Akashic.Runtime.Actors.Battle.Base
             RemoveListeners();
         }
         
-        public virtual void InitializeAnimationHandler(BattleActor battleActor)
+        public virtual void InitializeAnimationHandler()
         {
             selector.SetDeselected();
-            this.battleActor = battleActor;
-        }
-        
-        protected virtual void SetSelected(int numberOfPips)
-        {
-            selector.SetSelected(numberOfPips);
         }
 
-        protected virtual void SetSelected()
+        public virtual void SetSelected(BattleActor battleActor)
         {
             
         }
 
-        protected abstract void SelectedAsTarget();
+        public abstract void SetSelectedAsTarget();
         
-        protected virtual void SetDeselected()
+        public virtual void SetDeselected()
         {
             selector.SetDeselected();
         }
         
-        protected virtual void OnSetBattleActorSelectedMessage(SetBattleActorSelectedMessage message)
-        {
-            if (message.selectedBattleActor == battleActor)
-            {
-                SetSelected();
-            }
-            else
-            {
-                SetDeselected();
-            }
-        }
-        
-        protected virtual void OnSetBattleActorSelectedAsTargetMessage(SetBattleActorSelectedAsTargetMessage message)
-        {
-            if (message.targetedBattleActor == battleActor)
-            {
-                SelectedAsTarget();
-            }
-        }
-        
         protected virtual void AddListeners()
         {
-            GameManager.AddListener<SetBattleActorSelectedMessage>(OnSetBattleActorSelectedMessage);
-            GameManager.AddListener<SetBattleActorSelectedAsTargetMessage>(OnSetBattleActorSelectedAsTargetMessage);
+
         }
 
         protected virtual void RemoveListeners()
         {
-            GameManager.RemoveListener<SetBattleActorSelectedMessage>(OnSetBattleActorSelectedMessage);
-            GameManager.RemoveListener<SetBattleActorSelectedAsTargetMessage>(OnSetBattleActorSelectedAsTargetMessage);
+
         }
     }
 }

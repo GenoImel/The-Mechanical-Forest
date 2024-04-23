@@ -1,7 +1,6 @@
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Environment;
 using Akashic.Runtime.ScriptableObjects.Battle;
-using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Enemy
 {
@@ -22,7 +21,7 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
             parameters.SetEnemyBattleActor(this);
             
             statHandler.InitializeBattleActorStats(parameters);
-            battleActorAnimationHandler.InitializeAnimationHandler(this);
+            battleActorAnimationHandler.InitializeAnimationHandler();
             InitializeEnemyBehaviour();
         }
 
@@ -31,6 +30,11 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
             enemyBehaviour = Instantiate(EnemyData.enemyBehaviour, transform);
             enemyBehaviour.SetSourceBattleActor(this);
             enemyBehaviour.SetBaseSkills();
+        }
+
+        protected override void SetSelected()
+        {
+            battleActorAnimationHandler.SetSelected(this);
         }
     }
 }

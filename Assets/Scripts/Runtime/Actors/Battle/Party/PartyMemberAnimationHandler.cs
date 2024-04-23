@@ -1,16 +1,15 @@
 using Akashic.Runtime.Actors.Battle.Base;
-using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Party
 {
     internal sealed class PartyMemberAnimationHandler : BattleActorAnimationHandler
     {
-        protected override void SetSelected(int numberOfPips)
+        public override void SetSelected(BattleActor battleActor)
         {
-            selector.SetSelected(numberOfPips);
+            selector.SetSelected(battleActor.statHandler.ActionPips);
         }
 
-        protected override void SelectedAsTarget()
+        public override void SetSelectedAsTarget()
         {
             selector.SetSelectedAsTarget();
         }

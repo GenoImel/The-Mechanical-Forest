@@ -18,6 +18,12 @@ namespace Akashic.Runtime.Actors.Battle.Party
             parameters.SetPartyBattleActor(this);
             
             statHandler.InitializeBattleActorStats(parameters);
+            battleActorAnimationHandler.InitializeAnimationHandler();
+        }
+        
+        protected override void SetSelected()
+        {
+            battleActorAnimationHandler.SetSelected(this);
         }
     }
 }

@@ -38,11 +38,11 @@ namespace Akashic.Core.StateMachines
             prevState = currentState;
             
             var stateChangedMessage = CreateStateChangedMessage(prevState, nextState);
-            GameManager.Publish(stateChangedMessage);
             
             currentState = nextState;
-            
             Debug.Log($"State Machine is now in \"{nextState}\" state.");
+            
+            GameManager.Publish(stateChangedMessage);
         }
 
         /// <summary>

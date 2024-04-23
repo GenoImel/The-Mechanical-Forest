@@ -30,6 +30,8 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         private static List<BattleActor> allBattleActors = new();
         
         private static int partyIndex;
+        
+        private static int enemyIndex;
 
         private static int entityIndex;
 
@@ -37,7 +39,7 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         
         private static float delayCounterSeconds;
         
-        private PlannerActorFiniteState currentState;
+        private PlannerActorFiniteState currentState = new Inactive();
         private PlannerActorFiniteState prevState;
 
         private IPartyBattleMonoSystem partyBattleMonoSystem;
@@ -49,11 +51,6 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             partyBattleMonoSystem = GameManager.GetMonoSystem<IPartyBattleMonoSystem>();
             enemyBattleMonoSystem = GameManager.GetMonoSystem<IEnemyBattleMonoSystem>();
             turnStateMachine = GameManager.GetStateMachine<ITurnStateMachine>();
-        }
-
-        public void Start()
-        {
-            currentState = new Inactive();
         }
 
         private void OnEnable()
@@ -89,6 +86,8 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         
         private int GetAxisValueAsInt(float value)
         {
+
+            
             if (value == 0f)
             {
                 return 0;
@@ -117,7 +116,7 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         {
             public override void Execute()
             {
-                
+                PartyIndexChanged(axesDirection);
             }
         }
         
@@ -125,7 +124,7 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         {
             public override void Execute()
             {
-                
+                EnemyIndexChanged(axesDirection);
             }
         }
 
@@ -137,11 +136,37 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             }
         }
         
+        private class AwaitingAction : PlannerActorFiniteState
+        {
+            public override void Execute()
+            {
+                
+            }
+        }
+        
         private static void EntityIndexChanged(int direction)
         {
             entityIndex = (entityIndex + direction + allBattleActors.Count) % allBattleActors.Count;
             
             SelectEntity(entityIndex);
+            
+            delayCounterSeconds = 0;
+        }
+        
+        private static void PartyIndexChanged(int direction)
+        {
+            partyIndex = (partyIndex + direction + partyBattleActors.Count) % partyBattleActors.Count;
+            
+            SelectEntity(partyIndex);
+            
+            delayCounterSeconds = 0;
+        }
+        
+        private static void EnemyIndexChanged(int direction)
+        {
+            enemyIndex = (enemyIndex + direction + enemyBattleActors.Count) % enemyBattleActors.Count;
+            
+            SelectEntity(enemyIndex);
             
             delayCounterSeconds = 0;
         }
@@ -163,6 +188,11 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             {
                 return;
             }
+            
+            if(currentState is AwaitingAction)
+            {
+                return;
+            }
 
             CleanUp();
 
@@ -178,7 +208,7 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             
             if (nextState is AllEntitiesSelectable)
             {
-                
+                SelectEntity(entityIndex);
             }
 
             prevState = currentState;
@@ -195,12 +225,12 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         {
             if (message.NextState is not TurnFiniteState.PartyPlanning)
             {
-                currentState = new Inactive();
+                SetState(new Inactive());
             }
             
             if (message.NextState is TurnFiniteState.PartyPlanning)
             {
-                currentState = new AllEntitiesSelectable();
+                SetState(new AllEntitiesSelectable());
                 return;
             }
 

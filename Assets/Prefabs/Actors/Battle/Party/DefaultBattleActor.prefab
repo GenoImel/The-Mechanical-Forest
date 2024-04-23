@@ -546,13 +546,13 @@ MonoBehaviour:
   pipSelectors:
     _serializedList:
     - Key: {fileID: 2479075844334735227}
-      Value: 3
-    - Key: {fileID: 2911323342845552965}
-      Value: 2
-    - Key: {fileID: 8450772976651344454}
-      Value: 1
-    - Key: {fileID: 3237841952636058210}
       Value: 0
+    - Key: {fileID: 2911323342845552965}
+      Value: 1
+    - Key: {fileID: 8450772976651344454}
+      Value: 2
+    - Key: {fileID: 3237841952636058210}
+      Value: 3
 --- !u!1 &1617770244497363610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4175516266968212076}
   m_Layer: 0
-  m_Name: ActionRadialMenu
+  m_Name: FourOptionRadialMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -123,7 +123,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286965959205103942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1179,7 +1179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3142012377063298923}
   m_Layer: 0
-  m_Name: ActionRadialMenu
+  m_Name: FourOptionRadialMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1472,13 +1472,13 @@ MonoBehaviour:
   pipSelectors:
     _serializedList:
     - Key: {fileID: 6574437165519930466}
-      Value: 3
-    - Key: {fileID: 3763055372588981340}
-      Value: 2
-    - Key: {fileID: 7547357725508889113}
-      Value: 1
-    - Key: {fileID: 4540615257319258169}
       Value: 0
+    - Key: {fileID: 3763055372588981340}
+      Value: 1
+    - Key: {fileID: 7547357725508889113}
+      Value: 2
+    - Key: {fileID: 4540615257319258169}
+      Value: 3
 --- !u!1 &4595277813528225615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef28b27a9554f8fb8c54124057ec8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookTarget: {fileID: 1697097613495180457}
+  lookTarget: {fileID: 0}
 --- !u!1 &7311891706609552142
 GameObject:
   m_ObjectHideFlags: 0

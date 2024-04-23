@@ -25,23 +25,59 @@ namespace Akashic.Runtime.Actors.Battle.Base
 
         protected virtual void OnEnable()
         {
-            
+            AddListeners();
         }
 
         protected virtual void OnDisable()
         {
-            
+            RemoveListeners();
         }
         
+        protected virtual void SetSelected()
+        {
+            
+        }
+
+        protected virtual void SetSelectedAsTarget()
+        {
+            battleActorAnimationHandler.SetSelectedAsTarget();
+        }
+        
+        protected virtual void SetDeselected()
+        {
+            battleActorAnimationHandler.SetDeselected();
+        }
+        
+        protected virtual void OnSetBattleActorSelectedMessage(SetBattleActorSelectedMessage message)
+        {
+            if (message.selectedBattleActor == this)
+            {
+                SetSelected();
+            }
+            else
+            {
+                SetDeselected();
+            }
+        }
+        
+        protected virtual void OnSetBattleActorSelectedAsTargetMessage(SetBattleActorSelectedAsTargetMessage message)
+        {
+            if (message.targetedBattleActor == this)
+            {
+                SetSelectedAsTarget();
+            }
+        }
 
         protected virtual void AddListeners()
         {
-            
+            GameManager.AddListener<SetBattleActorSelectedMessage>(OnSetBattleActorSelectedMessage);
+            GameManager.AddListener<SetBattleActorSelectedAsTargetMessage>(OnSetBattleActorSelectedAsTargetMessage);
         }
 
         protected virtual void RemoveListeners()
         {
-            
+            GameManager.RemoveListener<SetBattleActorSelectedMessage>(OnSetBattleActorSelectedMessage);
+            GameManager.RemoveListener<SetBattleActorSelectedAsTargetMessage>(OnSetBattleActorSelectedAsTargetMessage);
         }
     }
 }

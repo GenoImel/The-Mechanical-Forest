@@ -1589,7 +1589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3598544050535720892}
   m_Layer: 0
-  m_Name: ActionRadialMenu
+  m_Name: FourOptionRadialMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2618,13 +2618,13 @@ MonoBehaviour:
   pipSelectors:
     _serializedList:
     - Key: {fileID: 5595322000531567544}
-      Value: 3
-    - Key: {fileID: 6072032508628604342}
-      Value: 2
-    - Key: {fileID: 3438742293129840132}
-      Value: 1
-    - Key: {fileID: 5276876739101872121}
       Value: 0
+    - Key: {fileID: 6072032508628604342}
+      Value: 1
+    - Key: {fileID: 3438742293129840132}
+      Value: 2
+    - Key: {fileID: 5276876739101872121}
+      Value: 3
 --- !u!1 &8960798624564772686
 GameObject:
   m_ObjectHideFlags: 0

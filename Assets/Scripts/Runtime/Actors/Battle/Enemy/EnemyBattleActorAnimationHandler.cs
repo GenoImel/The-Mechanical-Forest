@@ -4,12 +4,12 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
 {
     internal sealed class EnemyBattleActorAnimationHandler : BattleActorAnimationHandler
     {
-        protected override void SetSelected()
+        public override void SetSelected(BattleActor battleActor)
         {
             selector.SetSelected();
         }
         
-        protected override void SelectedAsTarget()
+        public override void SetSelectedAsTarget()
         {
             selector.SetSelectedAsTarget();
         }
