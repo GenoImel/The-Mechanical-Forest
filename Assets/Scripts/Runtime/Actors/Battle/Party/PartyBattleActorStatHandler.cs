@@ -1,6 +1,6 @@
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Environment;
-using Akashic.Runtime.Utilities.GameMath.Resources;
+using Akashic.Runtime.Utilities.GameMath;
 
 namespace Akashic.Runtime.Actors.Battle.Party
 {

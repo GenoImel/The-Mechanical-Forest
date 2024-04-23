@@ -23,7 +23,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
 
         public virtual void SetSelected(BattleActor battleActor)
         {
-            
+
         }
 
         public abstract void SetSelectedAsTarget();

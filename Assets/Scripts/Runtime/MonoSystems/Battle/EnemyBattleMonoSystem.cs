@@ -8,7 +8,7 @@ using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.MonoSystems.Timeline;
 using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.StateMachines.TurnStates;
-using Akashic.Runtime.Utilities.GameMath.Resources;
+using Akashic.Runtime.Utilities.GameMath;
 using UnityEngine;
 
 namespace Akashic.Runtime.MonoSystems.Battle

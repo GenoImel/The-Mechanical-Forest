@@ -8,6 +8,7 @@ using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.MonoSystems.Battle;
 using Akashic.Runtime.StateMachines.TurnStates;
+using Akashic.Runtime.Utilities.GameMath;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -73,7 +74,9 @@ namespace Akashic.Runtime.Actors.Battle.Planning
                     return;
                 }
                 
-                axesDirection = GetAxisValueAsInt(navigateInputAction.action.ReadValue<Vector2>().x);
+                axesDirection = InputMath.GetAxisValueAsInt(
+                    navigateInputAction.action.ReadValue<Vector2>().x
+                    );
 
                 if (axesDirection == 0)
                 {
@@ -82,18 +85,6 @@ namespace Akashic.Runtime.Actors.Battle.Planning
                 
                 currentState.Execute();
             }
-        }
-        
-        private int GetAxisValueAsInt(float value)
-        {
-
-            
-            if (value == 0f)
-            {
-                return 0;
-            }
-            
-            return value < 0 ? -1 : 1;
         }
         
         private sealed class Inactive : PlannerActorFiniteState
@@ -244,9 +235,21 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             }
         }
         
+        private void OnRadialActionMenuActiveMessage(RadialActionMenuActiveMessage message)
+        {
+            SetState(new Hold());
+        }
+        
+        private void OnRadialActionMenuInactiveMessage(RadialActionMenuInactiveMessage message)
+        {
+            SetState(prevState);
+        }
+        
         private void AddListeners()
         {
             GameManager.AddListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
+            GameManager.AddListener<RadialActionMenuActiveMessage>(OnRadialActionMenuActiveMessage);
+            GameManager.AddListener<RadialActionMenuInactiveMessage>(OnRadialActionMenuInactiveMessage);
             
             navigateInputAction.action.Enable();
         }
@@ -254,6 +257,8 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         private void RemoveListeners()
         {
             GameManager.RemoveListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
+            GameManager.RemoveListener<RadialActionMenuActiveMessage>(OnRadialActionMenuActiveMessage);
+            GameManager.RemoveListener<RadialActionMenuInactiveMessage>(OnRadialActionMenuInactiveMessage);
             
             navigateInputAction.action.Disable();
         }

@@ -27,4 +27,14 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             targetedBattleActor = battleActorToTarget;
         }
     }
+
+    internal sealed class RadialActionMenuActiveMessage : IMessage
+    {
+        
+    }
+    
+    internal sealed class RadialActionMenuInactiveMessage : IMessage
+    {
+        
+    }
 }

@@ -5,7 +5,7 @@ using Akashic.Core;
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.StateMachines.TurnStates;
-using Akashic.Runtime.Utilities.GameMath.Resources;
+using Akashic.Runtime.Utilities.GameMath;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

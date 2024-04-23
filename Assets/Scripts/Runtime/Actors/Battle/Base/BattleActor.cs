@@ -43,7 +43,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
             battleActorAnimationHandler.SetSelectedAsTarget();
         }
         
-        protected virtual void SetDeselected()
+        public virtual void SetDeselected()
         {
             battleActorAnimationHandler.SetDeselected();
         }

@@ -1589,7 +1589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3598544050535720892}
   m_Layer: 0
-  m_Name: FourOptionRadialMenu
+  m_Name: RadialActionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

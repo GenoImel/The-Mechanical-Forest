@@ -4,10 +4,9 @@ using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.ScriptableObjects.Battle;
 using Akashic.Runtime.ScriptableObjects.PartyMember;
-using Akashic.Runtime.Utilities.GameMath.Stats;
 using UnityEngine;
 
-namespace Akashic.Runtime.Utilities.GameMath.Resources
+namespace Akashic.Runtime.Utilities.GameMath
 {
     internal static class ResourcesMath
     {

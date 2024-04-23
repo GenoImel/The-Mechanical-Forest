@@ -8,7 +8,7 @@ using Akashic.Runtime.ScriptableObjects.Inventory;
 using Akashic.Runtime.ScriptableObjects.PartyMember;
 using UnityEngine;
 
-namespace Akashic.Runtime.Utilities.GameMath.Stats
+namespace Akashic.Runtime.Utilities.GameMath
 {
     internal static class StatsMath
     {
