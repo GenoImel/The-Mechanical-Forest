@@ -37,4 +37,36 @@ namespace Akashic.Runtime.Actors.Battle.Planning
     {
         
     }
+    
+    internal sealed class ChooseTimelinePlacementMessage : IMessage
+    {
+        
+    }
+    
+    internal sealed class TimelinePlacementEscapedMessage : IMessage
+    {
+        
+    }
+
+    internal sealed class PartyMemberActionChosenMessage : IMessage
+    {
+        public readonly BattleActor SourceActor;
+        public readonly BaseSkill ChosenSkill;
+        
+        public PartyMemberActionChosenMessage(BattleActor sourceActor, BaseSkill ChosenSkill)
+        {
+            SourceActor = sourceActor;
+            ChosenSkill = ChosenSkill;
+        }
+    }
+    
+    internal sealed class TimelineMovePlacedMessage : IMessage
+    {
+        public int TimelinePosition;
+        
+        public TimelineMovePlacedMessage(int timelinePosition)
+        {
+            TimelinePosition = timelinePosition;
+        }
+    }
 }

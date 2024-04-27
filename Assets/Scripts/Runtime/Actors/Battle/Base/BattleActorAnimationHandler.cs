@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Akashic.Runtime.Actors.Battle.Base
@@ -5,7 +6,7 @@ namespace Akashic.Runtime.Actors.Battle.Base
     internal abstract class BattleActorAnimationHandler : MonoBehaviour
     {
         [SerializeField] protected BattleActorSelector selector;
-        
+
         protected virtual void OnEnable()
         {
             AddListeners();
@@ -21,7 +22,12 @@ namespace Akashic.Runtime.Actors.Battle.Base
             selector.SetDeselected();
         }
 
-        public virtual void SetSelected(BattleActor battleActor)
+        public virtual void SetSelected(int numberOfPips)
+        {
+
+        }
+        
+        public virtual void SetSelected()
         {
 
         }

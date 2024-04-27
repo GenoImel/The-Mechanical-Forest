@@ -34,7 +34,7 @@ namespace Akashic.Runtime.Actors.Battle.Enemy
 
         protected override void SetSelected()
         {
-            battleActorAnimationHandler.SetSelected(this);
+            battleActorAnimationHandler.SetSelected();
         }
     }
 }

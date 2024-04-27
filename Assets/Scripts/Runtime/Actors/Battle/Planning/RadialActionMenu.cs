@@ -1,6 +1,4 @@
 using System;
-using Akashic.Core;
-using Akashic.Runtime.Utilities.GameMath;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,70 +10,152 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         [SerializeField] private InputActionReference selectInputAction;
         [SerializeField] private InputActionReference navigateInputAction;
         
+        [Header("Primary Sprite")]
+        [SerializeField] private GameObject primarySprite;
+
+        [Header("Menu Items")]
+        [SerializeField] private HighlightSprite upAction;
+        [SerializeField] private HighlightSprite downAction;
+        [SerializeField] private HighlightSprite leftAction;
+        [SerializeField] private HighlightSprite rightAction;
+
+        private HighlightSprite[] menuItems;
+        private int currentItemIndex = -1;
         private bool isWaitingForInput;
         private bool isShown;
 
-        private void OnEnable()
+        public Action OnAttackActionSelected;
+        public Action OnDefendActionSelected;
+        public Action OnSkillActionSelected;
+        public Action OnItemActionSelected;
+
+        private void Awake()
         {
-            throw new NotImplementedException();
-        }
-        
-        private void OnDisable()
-        {
-            throw new NotImplementedException();
+            menuItems = new HighlightSprite[] { upAction, downAction, leftAction, rightAction };
         }
 
-        private void FixedUpdate()
+        private void OnEnable()
         {
-            if (isWaitingForInput)
+            AddListeners();
+        }
+
+        private void OnDisable()
+        {
+            RemoveListeners();
+        }
+
+        private void Update()
+        {
+            if (!isShown || !isWaitingForInput)
             {
-                var axesDirection = InputMath.GetAxisValueAsInt(
-                    navigateInputAction.action.ReadValue<Vector2>().x
-                );
-                
-                //then do something with it i guess
+                return;
+            }
+            
+            var inputVector = navigateInputAction.action.ReadValue<Vector2>();
+            UpdateHighlightedAction(inputVector);
+        }
+
+        private void UpdateHighlightedAction(Vector2 direction)
+        {
+            var newIndex = -1;
+            
+            if (direction.y > 0.5) newIndex = 0; // Up
+            else if (direction.y < -0.5) newIndex = 1; // Down
+            else if (direction.x < -0.5) newIndex = 2; // Left
+            else if (direction.x > 0.5) newIndex = 3; // Right
+
+            if (newIndex == currentItemIndex)
+            {
+                return;
+            }
+
+            if (currentItemIndex >= 0)
+            {
+                menuItems[currentItemIndex].SetHighlighted(false);
+            }
+            
+            currentItemIndex = newIndex;
+
+            if (currentItemIndex >= 0)
+            {
+                menuItems[currentItemIndex].SetHighlighted(true);
             }
         }
 
         public void SetWaitForInput(bool waitingForInput)
         {
             isWaitingForInput = waitingForInput;
+            
+            if (!isWaitingForInput)
+            {
+                primarySprite.SetActive(false);
+            }
         }
-        
+
         private void OnSelectStarted(InputAction.CallbackContext context)
         {
-            if (!isWaitingForInput)
-            {
-                return;
-            }
-
             isShown = true;
-            GameManager.Publish(new RadialActionMenuActiveMessage());
+            primarySprite.SetActive(true);
         }
-        
+
         private void OnSelectCanceled(InputAction.CallbackContext context)
         {
-            if (!isWaitingForInput)
+            if (isShown && currentItemIndex >= 0)
             {
-                return;
+                menuItems[currentItemIndex].InvokeAction();
             }
             
+            primarySprite.SetActive(false);
+            isWaitingForInput = false;
             isShown = false;
-            GameManager.Publish(new RadialActionMenuInactiveMessage());
+        }
+
+        private void OnAttackActionInvoked()
+        {
+            OnAttackActionSelected?.Invoke();
+        }
+
+        private void OnDefendActionInvoked()
+        {
+            OnDefendActionSelected?.Invoke();
+        }
+        
+        private void OnSkillActionInvoked()
+        {
+            OnSkillActionSelected?.Invoke();
+        }
+        
+        private void OnItemActionInvoked()
+        {
+            OnItemActionSelected?.Invoke();
         }
         
         private void AddListeners()
         {
+            upAction.OnSelectAction += OnAttackActionInvoked;
+            downAction.OnSelectAction += OnDefendActionInvoked;
+            leftAction.OnSelectAction += OnSkillActionInvoked;
+            rightAction.OnSelectAction += OnItemActionInvoked;
+            
             selectInputAction.action.started += OnSelectStarted;
             selectInputAction.action.canceled += OnSelectCanceled;
             selectInputAction.action.Enable();
+            
+            navigateInputAction.action.Enable();
         }
-        
+
         private void RemoveListeners()
         {
+            upAction.OnSelectAction -= OnAttackActionInvoked;
+            downAction.OnSelectAction -= OnDefendActionInvoked;
+            leftAction.OnSelectAction -= OnSkillActionInvoked;
+            rightAction.OnSelectAction -= OnItemActionInvoked;
+            
             selectInputAction.action.started -= OnSelectStarted;
             selectInputAction.action.canceled -= OnSelectCanceled;
             selectInputAction.action.Disable();
+            
+            navigateInputAction.action.Disable();
         }
     }
 }

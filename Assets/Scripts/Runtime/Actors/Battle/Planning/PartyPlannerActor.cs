@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Akashic.Core;
-using Akashic.Core.StateMachines;
 using Akashic.Runtime.Actors.Battle.Base;
 using Akashic.Runtime.Actors.Battle.Enemy;
 using Akashic.Runtime.Actors.Battle.Party;
 using Akashic.Runtime.MonoSystems.Battle;
+using Akashic.Runtime.MonoSystems.Timeline;
 using Akashic.Runtime.StateMachines.TurnStates;
 using Akashic.Runtime.Utilities.GameMath;
 using UnityEngine;
@@ -18,40 +18,44 @@ namespace Akashic.Runtime.Actors.Battle.Planning
     {
         [Header("Player Input")]
         [SerializeField] private InputActionReference navigateInputAction;
-
         [SerializeField] private InputActionReference selectInputAction;
+        [SerializeField] private InputActionReference backInputAction;
         
         [Header("Settings")]
         [SerializeField] private float inputDelaySeconds = 0.25f;
+
+        private static TimelineMove currentMove;
         
         private static List<PartyBattleActor> partyBattleActors;
-        
         private static List<EnemyBattleActor> enemyBattleActors;
-        
         private static List<BattleActor> allBattleActors = new();
         
         private static int partyIndex;
-        
         private static int enemyIndex;
-
         private static int entityIndex;
 
         private static int axesDirection;
-        
         private static float delayCounterSeconds;
+
+        private bool isSelectAsTarget;
         
-        private PlannerActorFiniteState currentState = new Inactive();
-        private PlannerActorFiniteState prevState;
+        private static PlannerActorFiniteState currentPlanningState = new Inactive();
+        private PlannerActorFiniteState prevPlanningState;
+        
+        private static TargetingFiniteState currentTargetingState = new NoneSelectable();
+        private TargetingFiniteState prevTargetingState;
 
         private IPartyBattleMonoSystem partyBattleMonoSystem;
         private IEnemyBattleMonoSystem enemyBattleMonoSystem;
         private ITurnStateMachine turnStateMachine;
+        private ITimelineMonoSystem timelineMonoSystem;
 
         private void Awake()
         {
             partyBattleMonoSystem = GameManager.GetMonoSystem<IPartyBattleMonoSystem>();
             enemyBattleMonoSystem = GameManager.GetMonoSystem<IEnemyBattleMonoSystem>();
             turnStateMachine = GameManager.GetStateMachine<ITurnStateMachine>();
+            timelineMonoSystem = GameManager.GetMonoSystem<ITimelineMonoSystem>();
         }
 
         private void OnEnable()
@@ -83,39 +87,16 @@ namespace Akashic.Runtime.Actors.Battle.Planning
                     return;
                 }
                 
-                currentState.Execute();
+                currentPlanningState.Execute();
             }
         }
         
+        #region Planning States
         private sealed class Inactive : PlannerActorFiniteState
         {
             public override void Execute()
             {
 
-            }
-        }
-        
-        private sealed class AllEntitiesSelectable : PlannerActorFiniteState
-        {
-            public override void Execute()
-            {
-                EntityIndexChanged(axesDirection);
-            }
-        }
-        
-        private sealed class PartyMembersSelectable : PlannerActorFiniteState
-        {
-            public override void Execute()
-            {
-                PartyIndexChanged(axesDirection);
-            }
-        }
-        
-        private class EnemiesSelectable : PlannerActorFiniteState
-        {
-            public override void Execute()
-            {
-                EnemyIndexChanged(axesDirection);
             }
         }
 
@@ -127,13 +108,76 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             }
         }
         
-        private class AwaitingAction : PlannerActorFiniteState
+        private class SelectingSource : PlannerActorFiniteState
         {
             public override void Execute()
+            {
+                currentTargetingState.ExecuteTargetSelection();
+            }
+        }
+        
+        private class SelectingTarget : PlannerActorFiniteState
+        {
+            public override void Execute()
+            {
+                currentTargetingState.ExecuteTargetSelection();
+            }
+        }
+        #endregion
+        
+        #region Targeting States    
+        private class NoneSelectable : TargetingFiniteState
+        {
+            public override void ExecuteTargetSelection()
+            {
+                
+            }
+
+            public override void ExecuteTargetConfirmation()
             {
                 
             }
         }
+        
+        private class AllEntitiesSelectable : TargetingFiniteState
+        {
+            public override void ExecuteTargetSelection()
+            {
+                EntityIndexChanged(axesDirection);
+            }
+            
+            public override void ExecuteTargetConfirmation()
+            {
+                currentMove.SetTargetBattleActor(allBattleActors.ElementAt(entityIndex));
+            }
+        }
+        
+        private class PartyMembersSelectable : TargetingFiniteState
+        {
+            public override void ExecuteTargetSelection()
+            {
+                PartyIndexChanged(axesDirection);
+            }
+            
+            public override void ExecuteTargetConfirmation()
+            {
+                currentMove.SetTargetBattleActor(partyBattleActors.ElementAt(partyIndex));
+            }
+        }
+        
+        private class EnemiesSelectable : TargetingFiniteState
+        {
+            public override void ExecuteTargetSelection()
+            {
+                EnemyIndexChanged(axesDirection);
+            }
+            
+            public override void ExecuteTargetConfirmation()
+            {
+                currentMove.SetTargetBattleActor(enemyBattleActors.ElementAt(enemyIndex));
+            }
+        }
+        #endregion 
         
         private static void EntityIndexChanged(int direction)
         {
@@ -168,46 +212,45 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             GameManager.Publish(new SetBattleActorSelectedMessage(selectedEntity));
         }
 
-        private void SetState(PlannerActorFiniteState nextState)
+        private void SetPlanningState(PlannerActorFiniteState nextState)
         {
             if(nextState is null)
             {
                 throw new ArgumentException("Invalid state type");
             }
             
-            if (currentState is Hold)
+            if (currentPlanningState is Hold)
             {
                 return;
             }
             
-            if(currentState is AwaitingAction)
+            if(currentPlanningState is SelectingSource)
             {
+                SetTargetingState(new AllEntitiesSelectable());
                 return;
             }
 
             CleanUp();
 
-            if (nextState is PartyMembersSelectable)
-            {
-                
-            }
-            
-            if (nextState is EnemiesSelectable)
-            {
-                
-            }
-            
-            if (nextState is AllEntitiesSelectable)
-            {
-                SelectEntity(entityIndex);
-            }
+            prevPlanningState = currentPlanningState;
+            currentPlanningState = nextState;
+        }
 
-            prevState = currentState;
-            currentState = nextState;
+        private void SetTargetingState(TargetingFiniteState nextState)
+        {
+            if(nextState is null)
+            {
+                throw new ArgumentException("Invalid state type");
+            }
+            
+            prevTargetingState = currentTargetingState;
+            currentTargetingState = nextState;
         }
 
         private void CleanUp()
         {
+            isSelectAsTarget = false;
+            currentMove = new TimelineMove();
             GameManager.Publish(new DeselectAllBattleActorsMessage());
             //reset selection index?
         }
@@ -216,12 +259,12 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         {
             if (message.NextState is not TurnFiniteState.PartyPlanning)
             {
-                SetState(new Inactive());
+                SetPlanningState(new Inactive());
             }
             
             if (message.NextState is TurnFiniteState.PartyPlanning)
             {
-                SetState(new AllEntitiesSelectable());
+                SetPlanningState(new SelectingSource());
                 return;
             }
 
@@ -237,12 +280,48 @@ namespace Akashic.Runtime.Actors.Battle.Planning
         
         private void OnRadialActionMenuActiveMessage(RadialActionMenuActiveMessage message)
         {
-            SetState(new Hold());
+            SetPlanningState(new Hold());
         }
         
         private void OnRadialActionMenuInactiveMessage(RadialActionMenuInactiveMessage message)
         {
-            SetState(prevState);
+            SetPlanningState(prevPlanningState);
+        }
+        
+        private void OnPartyMemberActionChosenMessage(PartyMemberActionChosenMessage message)
+        {
+            isSelectAsTarget = true;
+
+            currentMove = new TimelineMove()
+                .SetSourceBattleActor(message.SourceActor)
+                .SetSkill(message.ChosenSkill)
+                .Occupy();
+            
+            SetTargetingState(new AllEntitiesSelectable());
+        }
+        
+        private void OnChooseTimelinePlacementMessage(ChooseTimelinePlacementMessage message)
+        {
+            SetPlanningState(new Hold());
+            isSelectAsTarget = false;
+        }
+        
+        private void OnTimelineMenuInactiveMessage(TimelinePlacementEscapedMessage message)
+        {
+            SetPlanningState(prevPlanningState);
+        }
+        
+        private void OnSelectPerformed(InputAction.CallbackContext context)
+        {
+            currentTargetingState.ExecuteTargetConfirmation();
+
+            SetPlanningState(new Hold()); // holding for timeline selection
+            GameManager.Publish(new ChooseTimelinePlacementMessage());
+        }
+
+        private void OnBackPerformed(InputAction.CallbackContext context)
+        {
+            
         }
         
         private void AddListeners()
@@ -250,6 +329,17 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             GameManager.AddListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
             GameManager.AddListener<RadialActionMenuActiveMessage>(OnRadialActionMenuActiveMessage);
             GameManager.AddListener<RadialActionMenuInactiveMessage>(OnRadialActionMenuInactiveMessage);
+            
+            GameManager.AddListener<PartyMemberActionChosenMessage>(OnPartyMemberActionChosenMessage);
+            
+            GameManager.AddListener<ChooseTimelinePlacementMessage>(OnChooseTimelinePlacementMessage);
+            GameManager.AddListener<TimelinePlacementEscapedMessage>(OnTimelineMenuInactiveMessage);
+
+            selectInputAction.action.performed += OnSelectPerformed;
+            selectInputAction.action.Enable();
+            
+            backInputAction.action.performed += OnBackPerformed;
+            backInputAction.action.Enable();
             
             navigateInputAction.action.Enable();
         }
@@ -259,6 +349,17 @@ namespace Akashic.Runtime.Actors.Battle.Planning
             GameManager.RemoveListener<TurnStateChangedMessage>(OnTurnStateChangedMessage);
             GameManager.RemoveListener<RadialActionMenuActiveMessage>(OnRadialActionMenuActiveMessage);
             GameManager.RemoveListener<RadialActionMenuInactiveMessage>(OnRadialActionMenuInactiveMessage);
+            
+            GameManager.RemoveListener<PartyMemberActionChosenMessage>(OnPartyMemberActionChosenMessage);
+            
+            GameManager.RemoveListener<ChooseTimelinePlacementMessage>(OnChooseTimelinePlacementMessage);
+            GameManager.RemoveListener<TimelinePlacementEscapedMessage>(OnTimelineMenuInactiveMessage);
+            
+            selectInputAction.action.performed -= OnSelectPerformed;
+            selectInputAction.action.Disable();
+            
+            backInputAction.action.performed -= OnBackPerformed;
+            backInputAction.action.Disable();
             
             navigateInputAction.action.Disable();
         }
